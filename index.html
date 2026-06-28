@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EgzaminFiR — Trener V2</title>
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Fullscreen animated background -->
+    <canvas id="hero-canvas"></canvas>
+
+    <div class="app-container">
+        <!-- Sidebar / Bottom Nav -->
+        <nav class="glass-nav">
+            <div class="nav-brand"><span class="brand-glow">FiR</span> Trener</div>
+            <div class="nav-links">
+                <button class="nav-btn active" data-view="learn" title="Ucz mnie">
+                    <span class="icon">🎓</span><span class="label">Ucz mnie</span>
+                </button>
+                <button class="nav-btn" data-view="tasks" title="Zadania">
+                    <span class="icon">✍️</span><span class="label">Zadania</span>
+                </button>
+                <button class="nav-btn" data-view="dashboard" title="Pulpit">
+                    <span class="icon">📊</span><span class="label">Pulpit</span>
+                </button>
+                <button class="nav-btn" data-view="flashcards" title="Fiszki">
+                    <span class="icon">📇</span><span class="label">Fiszki</span>
+                </button>
+                <button class="nav-btn" data-view="quiz" title="Quiz">
+                    <span class="icon">❓</span><span class="label">Quiz</span>
+                </button>
+                <button class="nav-btn" data-view="match" title="Pary">
+                    <span class="icon">🔗</span><span class="label">Pary</span>
+                </button>
+                <button class="nav-btn" data-view="reader" title="Czytaj">
+                    <span class="icon">📖</span><span class="label">Czytaj</span>
+                </button>
+                <button class="nav-btn" data-view="commission" title="Komisja">
+                    <span class="icon">⚠️</span><span class="label">Komisja</span>
+                </button>
+                <button class="nav-btn" data-view="analytics" title="Analityka">
+                    <span class="icon">📈</span><span class="label">Analityka</span>
+                </button>
+                <button class="nav-btn" data-view="formulas" title="Wzory">
+                    <span class="icon">∑</span><span class="label">Wzory</span>
+                </button>
+                <button class="nav-btn" data-view="search" title="Szukaj">
+                    <span class="icon">🔍</span><span class="label">Szukaj</span>
+                </button>
+                <button class="nav-btn" data-view="settings" title="Ustawienia">
+                    <span class="icon">⚙️</span><span class="label">Ustawienia</span>
+                </button>
+            </div>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Przełącz motyw">
+                <span class="icon light-icon">☀️</span>
+                <span class="icon dark-icon">🌙</span>
+            </button>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Hero / Splash -->
+            <section id="hero-section" class="hero-section flex-center">
+                <div class="hero-content">
+                    <h1 class="hero-title">EGZAMIN <br><span class="gradient-text">FiR</span></h1>
+                    <p class="hero-subtitle">Trener Premium 2026. Zdobądź licencję.</p>
+                </div>
+            </section>
+
+            <div id="loading" class="view-container active flex-center">
+                <div class="spinner-2026"></div>
+                <p class="glow-text">Wczytywanie architektury...</p>
+            </div>
+            
+            <div id="error" class="view-container flex-center" style="display:none;">
+                <div class="glass-card error-card">
+                    <h3>❌ Awaria Systemu</h3>
+                    <p>Brak pliku `data/content.json` lub blokada CORS. Użyj pliku `data/content.js`.</p>
+                </div>
+            </div>
+
+            <!-- View: Learn (Ucz mnie) -->
+            <section id="view-learn" class="view-container">
+                <header class="view-header">
+                    <h1 class="view-title">Ucz mnie</h1>
+                    <div class="header-controls">
+                        <!-- Mastery per chapter / Dropdown -->
+                        <select id="learn-chapter-filter" class="glass-input">
+                            <option value="all">Wszystkie działy</option>
+                        </select>
+                    </div>
+                </header>
+                <div id="learn-modebar" class="mode-bar"></div>
+                <div id="learn-container" class="learn-layout flex-center">
+                    <!-- Dynamic lesson content will be injected here -->
+                </div>
+                <div id="learn-controls" class="flashcard-controls" style="display: none;">
+                    <!-- Filled dynamically based on step type -->
+                </div>
+                <div id="modes-stage" class="flex-center" style="display:none;flex-direction:column"></div>
+            </section>
+
+            <!-- View: Match (Pary) -->
+            <section id="view-match" class="view-container">
+                <header class="view-header">
+                    <h1 class="view-title">Połącz w pary</h1>
+                    <div class="header-controls">
+                        <select id="match-chapter-filter" class="glass-input">
+                            <option value="all">Wszystkie działy</option>
+                        </select>
+                    </div>
+                </header>
+                <p id="match-status" class="text-muted" style="text-align:center;margin-bottom:1rem"></p>
+                <div id="match-container" class="flex-center" style="flex-direction:column"></div>
+                <div id="match-controls" class="flashcard-controls" style="display:none;justify-content:center;margin-top:1rem"></div>
+            </section>
+
+            <!-- View: Tasks (Zadania) -->
+            <section id="view-tasks" class="view-container">
+                <header class="view-header">
+                    <h1 class="view-title">Rozwiązywanie Zadań</h1>
+                    <div class="header-controls">
+                        <select id="tasks-chapter-filter" class="glass-input">
+                            <option value="all">Wszystkie działy</option>
+                        </select>
+                    </div>
+                </header>
+                <div id="tasks-container" class="tasks-layout flex-center">
+                    <!-- Dynamic task content will be injected here -->
+                </div>
+                <div id="tasks-controls" class="flashcard-controls" style="display: none;">
+                    <input type="number" id="task-answer-input" class="glass-input" placeholder="Twój wynik..." step="any">
+                    <button id="task-submit-btn" class="btn primary ripple">Sprawdź</button>
+                </div>
+            </section>
+
+            <!-- View: Dashboard -->
+            <section id="view-dashboard" class="view-container">
+                <header class="view-header split">
+                    <div>
+                        <h1 class="view-title">Pulpit</h1>
+                        <div class="countdown-badge">⏳ Egzamin za: <span id="days-to-exam">...</span></div>
+                    </div>
+                </header>
+                
+                <div class="bento-grid">
+                    <!-- Progress Ring -->
+                    <div class="glass-card flex-center">
+                        <div class="progress-ring-container">
+                            <svg class="progress-ring" width="160" height="160">
+                                <circle class="progress-ring__circle bg" stroke="rgba(255,255,255,0.1)" stroke-width="8" fill="transparent" r="70" cx="80" cy="80"/>
+                                <circle id="main-progress-ring" class="progress-ring__circle fg" stroke="var(--primary)" stroke-width="8" fill="transparent" r="70" cx="80" cy="80" stroke-dasharray="439.8" stroke-dashoffset="439.8"/>
+                            </svg>
+                            <div class="progress-ring-text">
+                                <span id="progress-percent" class="huge-number">0%</span>
+                            </div>
+                        </div>
+                        <h3>Opanowanie</h3>
+                    </div>
+
+                    <!-- Pomodoro Card -->
+                    <div class="glass-card pomodoro-card">
+                        <h2>Tryb Skupienia</h2>
+                        <div class="pomodoro-timer glow-text" id="pomodoro-time">25:00</div>
+                        <div class="pomodoro-controls">
+                            <button id="pomodoro-start" class="btn primary ripple">Start</button>
+                            <button id="pomodoro-reset" class="btn secondary ripple">Reset</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Streak & Heatmap -->
+                    <div class="glass-card span-2">
+                        <h2>Aktywność 🔥 <span id="streak-counter" class="gradient-text">0</span> dni</h2>
+                        <div id="heatmap" class="heatmap-grid"></div>
+                    </div>
+
+                    <!-- Today's Plan -->
+                    <div class="glass-card span-full">
+                        <h2>Dziś uczysz się:</h2>
+                        <div id="today-plan" class="plan-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Boss -->
+            <section id="view-boss" class="view-container">
+                <header class="view-header">
+                    <h1 class="view-title gradient-text" style="color: var(--danger); text-shadow: 0 0 10px var(--danger);">OSTATECZNE STARCIE (BOSS)</h1>
+                </header>
+                <div id="boss-container" class="flex-center" style="min-height: 50vh; flex-direction: column; gap: 2rem;"></div>
+                <div id="boss-controls" style="display: flex; gap: 10px; margin-top: 2rem; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto;"></div>
+            </section>
+
+            <!-- View: Reader -->
+            <section id="view-reader" class="view-container">
+                <header class="view-header">
+                    <h1 class="view-title">Baza Wiedzy</h1>
+                </header>
+                <div class="reader-layout">
+                    <aside class="chapters-list glass-card scroll-area" id="chapters-list"></aside>
+                    <article class="chapter-content glass-card scroll-area" id="chapter-content">
+                        <div class="placeholder-text">Wybierz rozdział.</div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- View: Flashcards -->
+            <section id="view-flashcards" class="view-container">
+                <header class="view-header">
+                    <h1 class="view-title">Fiszki <span class="badge" id="fc-queue-count">0</span></h1>
+                    <div class="flashcards-filters">
+                        <select id="flashcard-chapter-filter" class="glass-input">
+                            <option value="all">Wszystkie działy</option>
+                        </select>
+                        <select id="flashcard-mode-filter" class="glass-input">
+                            <option value="today">Algorytm SM-2 (Na Dziś)</option>
+                            <option value="all">Tryb Przeglądu (Wszystkie)</option>
+                        </select>
+                    </div>
+                </header>
+                <div class="flashcards-layout flex-center">
+                    <div class="flashcard-container swipe-area" id="flashcard-container">
+                        <div class="placeholder-text">Brak fiszek na teraz. Świetna robota!</div>
+                    </div>
+                    <div class="flashcard-controls" id="flashcard-controls" style="display:none;">
+                        <button id="fc-btn-flip" class="btn secondary wide-btn ripple">Odkryj [Spacja]</button>
+                        <div class="fc-judge-buttons" id="fc-judge-buttons" style="display:none;">
+                            <button id="fc-btn-hard" class="btn danger ripple">Nie znam [1]</button>
+                            <button id="fc-btn-good" class="btn warning ripple">Prawie [2]</button>
+                            <button id="fc-btn-easy" class="btn success ripple">Znam [3]</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Quiz -->
+            <section id="view-quiz" class="view-container">
+                <header class="view-header split">
+                    <h1 class="view-title">Quiz</h1>
+                    <button id="quiz-exam-mode" class="btn primary ripple">🔥 Symulacja Egzaminu</button>
+                </header>
+                <div class="quiz-controls-top glass-card">
+                    <select id="quiz-chapter-filter" class="glass-input">
+                        <option value="all">Cały materiał</option>
+                    </select>
+                    <button id="quiz-start" class="btn secondary ripple">Trening (Bez presji)</button>
+                </div>
+                <div id="exam-timer" class="exam-timer glass-card" style="display:none;">
+                    Czas: <span id="exam-time" class="glow-text">00:00</span>
+                </div>
+                <div class="quiz-layout">
+                    <div class="quiz-card" id="quiz-container">
+                        <div class="glass-card placeholder-text">Kliknij przycisk powyżej, by rozpocząć.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Commission (Gdzie dociska) -->
+            <section id="view-commission" class="view-container">
+                <header class="view-header">
+                    <h1 class="view-title warning-text">⚠️ Gdzie komisja dociska</h1>
+                    <p>Zestawienie najtrudniejszych pułapek i haków egzaminacyjnych.</p>
+                </header>
+                <div class="commission-grid" id="commission-list"></div>
+            </section>
+
+            <!-- View: Analytics -->
+            <section id="view-analytics" class="view-container">
+                <header class="view-header">
+                    <h1 class="view-title">Analityka</h1>
+                </header>
+                <div class="bento-grid">
+                    <div class="glass-card span-full">
+                        <h2>Opanowanie SM-2</h2>
+                        <div id="analytics-bars"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Formulas -->
+            <section id="view-formulas" class="view-container">
+                <header class="view-header split">
+                    <h1 class="view-title">Wzory i Stopy</h1>
+                    <input type="text" id="formula-search" class="glass-input search-small" placeholder="Szukaj wzoru...">
+                </header>
+                <div class="formulas-grid">
+                    <div class="glass-card formulas-column">
+                        <h2>Kluczowe Wzory</h2>
+                        <ul class="formulas-list scroll-area" id="formulas-list"></ul>
+                    </div>
+                    <div class="glass-card rates-column">
+                        <h2>Stopy i Stawki</h2>
+                        <ul class="rates-list scroll-area" id="rates-list"></ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Search -->
+            <section id="view-search" class="view-container">
+                <header class="view-header">
+                    <h1 class="view-title">Szukaj</h1>
+                    <div class="search-box full-width">
+                        <input type="text" id="global-search" class="glass-input massive-input" placeholder="Szukaj..." autofocus>
+                    </div>
+                </header>
+                <div class="search-results glass-card scroll-area" id="search-results">
+                    <div class="placeholder-text">Wpisz co najmniej 2 znaki.</div>
+                </div>
+            </section>
+
+            <!-- View: Settings -->
+            <section id="view-settings" class="view-container">
+                <header class="view-header">
+                    <h1 class="view-title">Ustawienia</h1>
+                </header>
+                <div class="bento-grid">
+                    <div class="glass-card">
+                        <h2>Eksport / Import postępu</h2>
+                        <p class="small-text">Zapisz lub wczytaj swój stan nauki (fiszki, streak, plan).</p>
+                        <div style="margin-top:1rem; display:flex; gap:1rem;">
+                            <button id="btn-export" class="btn secondary">Eksportuj (JSON)</button>
+                            <button id="btn-import" class="btn primary">Importuj</button>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <h2>Reset aplikacji</h2>
+                        <p class="small-text warning-text">Ta akcja nieodwracalnie skasuje cały Twój postęp.</p>
+                        <button id="btn-reset" class="btn danger" style="margin-top:1rem;">Wyczyść wszystko</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- PWA Install Prompt -->
+    <div id="pwa-prompt" class="glass-card pwa-prompt" style="display:none;">
+        <div>Zainstaluj jako PWA (Działa Offline)</div>
+        <button id="pwa-install-btn" class="btn primary btn-sm">Zainstaluj</button>
+    </div>
+
+    <!-- Scripts CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Data (Fallback) -->
+    <script src="data/content.js"></script>
+    <script src="data/lessons.js"></script>
+    <script src="data/problems.js"></script>
+    <script src="data/exam.js"></script>
+
+    <!-- App Scripts -->
+    <script src="js/anim.js"></script>
+    <script src="js/fsrs.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/gamify.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/learn.js"></script>
+    <script src="js/problems_ui.js"></script>
+    <script src="js/reader.js"></script>
+    <script src="js/flashcards.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/commission.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/formulas.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/ui_select.js"></script>
+    <script src="js/match.js"></script>
+    <script src="js/boss.js"></script>
+    <script src="js/learn_modes.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js').catch(err => console.log('SW Fail:', err));
+            });
+        }
+    </script>
+</body>
+</html>

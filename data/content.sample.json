@@ -1,0 +1,114 @@
+{
+  "meta": {
+    "title": "EgzaminFiR — Trener",
+    "exam": "Licencjat Finanse i Rachunkowość",
+    "days": 7,
+    "exam_date": "[zweryfikuj]"
+  },
+  "plan": [
+    {
+      "day": 1,
+      "date": "23.06",
+      "hours": "1,5–2 h",
+      "note": "Fundament + baza ilościowa",
+      "items": [
+        "fundament",
+        "stopy",
+        "k5"
+      ]
+    },
+    {
+      "day": 5,
+      "date": "27.06",
+      "hours": "~2,5 h",
+      "note": "Finanse i Bankowość — ilościowe",
+      "items": [
+        "t1",
+        "t2",
+        "t5",
+        "t11"
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "id": "t1",
+      "group": "fib",
+      "num": 1,
+      "title": "VaR i ryzyko rynkowe",
+      "day": 5,
+      "minutes": 30,
+      "sections": [
+        {
+          "h": "1. Intuicja",
+          "html": "<p>VaR to maksymalna oczekiwana strata przy danym poziomie ufności.</p>"
+        }
+      ],
+      "probes": [
+        "Gdzie komisja dociska: nie myl z=1,65 (95%) z 2,33 (99%)."
+      ]
+    },
+    {
+      "id": "k1",
+      "group": "kier",
+      "num": 1,
+      "title": "Rachunkowość: zasady nadrzędne",
+      "day": 2,
+      "minutes": 22,
+      "sections": [
+        {
+          "h": "1. Intuicja",
+          "html": "<p>Rachunkowość to język biznesu; zasady nadrzędne to jego gramatyka.</p>"
+        }
+      ],
+      "probes": [
+        "Gdzie komisja dociska: ciągłość (metody rok do roku) ≠ kontynuacja działania."
+      ]
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "f_t1_1",
+      "chapter": "t1",
+      "front": "Co to VaR?",
+      "back": "Maksymalna oczekiwana strata w horyzoncie przy danej ufności (kwantyl strat).",
+      "tag": "pojęcie"
+    },
+    {
+      "id": "f_k1_1",
+      "chapter": "k1",
+      "front": "Zasada memoriału?",
+      "back": "Ujmuj zdarzenia w okresie wystąpienia, nie wpływu gotówki.",
+      "tag": "pojęcie"
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q_t1_1",
+      "chapter": "t1",
+      "q": "Po co Expected Shortfall skoro jest VaR?",
+      "a": "VaR podaje próg, ES — średnią stratę w ogonie; ES jest koherentny.",
+      "type": "open"
+    }
+  ],
+  "formulas": [
+    {
+      "name": "VaR parametryczny",
+      "latex": "VaR = z_{\u0007lpha}\\cdot\\sigma\\cdot V",
+      "legend": "z — kwantyl (2,33 dla 99%), σ — zmienność, V — wartość pozycji",
+      "chapter": "t1"
+    }
+  ],
+  "rates": [
+    {
+      "name": "Stopa referencyjna NBP",
+      "value": "~5,75% [zweryfikuj]",
+      "note": "główna stopa polityki pieniężnej"
+    },
+    {
+      "name": "VAT podstawowy",
+      "value": "23%",
+      "note": "obniżone 8%/5%/0%"
+    }
+  ]
+}
