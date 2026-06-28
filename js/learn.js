@@ -845,26 +845,18 @@ window.Learn = {
         }
     },
 
-    // Archetypy scen (14) wspoldzielone przez 26 biomow — wrzuc assets/biomes/<scena>.jpg by uzyskac glebie FOTO
-    SCENES: {
-        fundament:'temple', stopy:'vault', k2:'vault', t3:'vault', k5:'river', k7:'river',
-        k1:'library', t9:'library', k3:'observatory', k4:'forge', t12:'forge',
-        k6:'tower', k8:'tower', t5:'tower', k9:'market', t6:'market', t10:'market',
-        k10:'hall', k11:'hall', k12:'landscape', t7:'landscape', t1:'storm',
-        t2:'court', t4:'candles', t8:'cockpit', t11:'bridge'
-    },
-    // Probe: jesli plik sceny istnieje, podloz go pod gradient-tint biomu; brak pliku => zostaje sam gradient (0 bledow 404 w UI)
+    // Probe FOTO: KAZDY rozdzial ma WLASNE, inne assets/biomes/<id>.jpg.
+    // Gdy plik istnieje => podklada sie pod gradient-tint biomu; brak pliku => zostaje sam gradient (0 bledow 404 w UI).
     applyScene(view, chapter, b) {
-        const scene = this.SCENES[chapter];
-        if (!view || !scene) return;
-        const tint = `radial-gradient(135% 95% at 50% 113%, rgba(${b.glow},.30) 0%, rgba(${b.glow},.10) 36%, transparent 62%), linear-gradient(177deg, ${b.sky[0]}e6 0%, ${b.sky[1]}cc 48%, ${b.sky[2]}cc 100%)`;
+        if (!view) return;
+        const tint = `radial-gradient(135% 95% at 50% 113%, rgba(${b.glow},.28) 0%, rgba(${b.glow},.08) 38%, transparent 64%), linear-gradient(177deg, ${b.sky[0]}e6 0%, ${b.sky[1]}cc 48%, ${b.sky[2]}cc 100%)`;
         const img = new Image();
         img.onload = () => {
             if (view.dataset.biome === chapter) {
-                view.style.background = `${tint}, url('assets/biomes/${scene}.jpg?v=19') center/cover no-repeat`;
+                view.style.background = `${tint}, url('assets/biomes/${chapter}.jpg?v=21') center/cover no-repeat`;
             }
         };
-        img.src = `assets/biomes/${scene}.jpg?v=19`;
+        img.src = `assets/biomes/${chapter}.jpg?v=21`;
     },
 
     toggleCharacterPanel() {
