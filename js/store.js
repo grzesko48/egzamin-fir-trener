@@ -177,16 +177,18 @@ const Store = {
     updateLesson(lessonId, quality) {
         let state = this.getLessonState(lessonId);
         const prevMastery = (state.mastery == null) ? 0 : state.mastery;
+        const MIN = 60 * 1000, HOUR = 60 * MIN, DAY = 24 * HOUR;
 
-        // Harmonogram: FSRS (model DSR), fallback prosty
-        if (typeof FSRS !== 'undefined') {
-            state = FSRS.schedule(state, quality, Date.now());
-        } else {
-            state.interval = quality >= 3 ? Math.max(1, Math.round((state.interval || 1) * 2)) : 1;
-            state.nextReview = Date.now() + state.interval * 24 * 60 * 60 * 1000;
-        }
-
-        // Mastery 0-100% (zachowane dla UI/Pulpitu)
+        // Krotkoterminowy SRS pod 7-dniowy sprint egzaminacyjny (zamiast wielomiesiecznego FSRS).
+        // Mikro-interwaly (15min/8h) przeplatane makro (1d/3d/6d) wg krzywej Ebbinghausa.
+        let reps = state.sprintReps || 0;
+        let interval;
+        if (quality <= 2) { reps = 0; interval = 15 * MIN; }                 // Zapomnialem -> 15 min
+        else if (quality === 3) { interval = 8 * HOUR; }                     // Z mgla -> 8 h
+        else { reps += 1; interval = reps <= 1 ? DAY : (reps === 2 ? 3 * DAY : 6 * DAY); } // Solidnie -> 1d -> 3d -> 6d
+        state.sprintReps = reps;
+        state.interval = +(interval / DAY).toFixed(3);
+        state.nextReview = Date.now() + interval;
         state.mastery = quality >= 3 ? Math.min(100, prevMastery + 20) : Math.max(0, prevMastery - 15);
 
         this._data.lessons[lessonId] = state;

@@ -264,6 +264,43 @@
      "type": "recall",
      "prompt": "Wymień składniki WACC i wyjaśnij, dlaczego przy koszcie długu pojawia się czynnik $(1-T)$.",
      "model": "WACC = średni ważony koszt kapitału: $WACC=\\frac{E}{V}r_e+\\frac{D}{V}r_d(1-T)$, gdzie $E$ to kapitał własny, $D$ dług, $V=E+D$, $r_e$ koszt kapitału własnego, $r_d$ koszt długu, $T$ stawka podatku; $\\frac{E}{V}$ i $\\frac{D}{V}$ to wagi udziału każdego źródła. Czynnik $(1-T)$ to tarcza podatkowa: odsetki od długu są kosztem uzyskania przychodu, więc obniżają podatek, przez co efektywny koszt długu jest niższy niż nominalny $r_d$. Tarcza działa tylko przy długu — dywidendy z kapitału własnego nie są kosztem podatkowym, więc tam jej nie ma."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Fundament finansow</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "stopą dyskontową",
+      "Metody proste",
+      "Metody dyskontowe",
+      "większe",
+      "Zwrot",
+      "Ryzyko",
+      "odchyleniem standardowym",
+      "Rynkowe",
+      "Kredytowe",
+      "Płynności"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Proszę wyjaśnić koncepcję wartości pieniądza w czasie oraz omówić metody oceny opłacalności inwestycji (NPV, IRR, okres zwrotu).",
+     "model": "<p><b>Wartość pieniądza w czasie (TVM)</b> to zasada, że <b>złotówka dziś jest warta więcej niż złotówka jutro</b> — bo dziś można ją zainwestować i zarobić, a do tego zżera ją inflacja i ryzyko. To rdzeń całych finansów.</p><p><b>Wartość przyszła (kapitalizacja):</b> $FV = PV \\cdot (1+r)^n$ — gdzie $FV$ to wartość przyszła (zł), $PV$ to wartość dziś (zł), $r$ to stopa za okres (ułamek), $n$ to liczba okresów. <b>Wartość obecna (dyskontowanie):</b> $PV = \\frac{FV}{(1+r)^n}$ — „cofamy” przyszłe pieniądze do dziś.</p><p>Rozróżniamy <b>procent prosty</b> (zawsze naliczany od kwoty początkowej) i <b>składany</b> (procent od procentu — kapitał rośnie szybciej). <b>Renta</b> to seria równych płatności (raty, kupony); jej PV to suma zdyskontowanych rat.</p><p><b>Metody oceny inwestycji:</b></p><ul><li><b>Proste (bez dyskonta):</b> <b>okres zwrotu</b> (po ilu latach nakład się zwróci) i <b>ARR</b> (księgowa stopa zwrotu). Łatwe, ale ignorują wartość pieniądza w czasie i przepływy po okresie zwrotu.</li><li><b>NPV (wartość bieżąca netto):</b> $NPV = \\sum \\frac{CF_t}{(1+r)^t} - I_0$ — gdzie $CF_t$ to przepływ w roku $t$ (zł), $r$ to stopa dyskonta (koszt kapitału), $I_0$ to nakład początkowy (zł). <b>Reguła: NPV > 0 → inwestycja opłacalna</b> (tworzy wartość).</li><li><b>IRR (wewnętrzna stopa zwrotu):</b> stopa, przy której $NPV = 0$. <b>Reguła: IRR > koszt kapitału → opłacalna.</b></li></ul><p><b>Przykład:</b> nakład $I_0 = 1000$, jeden przepływ $CF_1 = 1100$ za rok, $r = 5\\%$. $NPV = \\frac{1100}{1{,}05} - 1000 = 1047{,}6 - 1000 = 47{,}6 > 0$ → opłacalna. IRR tu = 10% (bo $\\frac{1100}{1{,}10} = 1000$), a 10% > 5% → potwierdza.</p><p><b>Po co:</b> NPV i IRR uwzględniają wartość pieniądza w czasie, dlatego są lepsze od metod prostych przy decyzjach inwestycyjnych.</p>",
+     "checklist": [
+      "Stwierdzić: złotówka dziś > złotówka jutro (możliwość inwestowania)",
+      "Podać wzór FV = PV·(1+r)^n i wyjaśnić symbole",
+      "Podać wzór PV = FV/(1+r)^n (dyskontowanie)",
+      "Rozróżnić procent prosty vs składany",
+      "Podać wzór NPV = Σ CF_t/(1+r)^t − I_0 i wyjaśnić symbole",
+      "Podać regułę decyzyjną: NPV > 0 → opłacalna",
+      "Zdefiniować IRR jako stopę przy której NPV = 0 i regułę IRR > koszt kapitału",
+      "Wymienić metody proste (okres zwrotu, ARR) i ich wadę (ignorują TVM)"
+     ],
+     "traps": [
+      "Pomylenie kierunku: kapitalizacja mnoży przez (1+r)^n, dyskontowanie dzieli",
+      "Mówienie, że IRR > 0 oznacza opłacalność — porównuje się IRR z KOSZTEM KAPITAŁU, nie z zerem",
+      "Twierdzenie, że okres zwrotu uwzględnia wartość pieniądza w czasie (nie uwzględnia w wersji prostej)",
+      "Mylenie stopy dyskonta z IRR — stopa dyskonta to dany koszt kapitału, IRR to wynik liczenia"
+     ]
     }
    ]
   },
@@ -543,6 +580,44 @@
      "type": "recall",
      "prompt": "Podaj trzy kwantyle normalne z oraz zasadę skalowania VaR w czasie.",
      "model": "z: 1,65 (95%), 2,33 (99%), 1,96 (97,5% / dwustronnie 95%). VaR skaluje się pierwiastkiem czasu: VaR_t = VaR_dzienny · √t (NIE ×t), bo zmienność/odchylenie standardowe rośnie z √t. To stałe na zawsze, bez flagi [zweryfikuj]."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Stopy i liczby na pamiec</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "nie",
+      "stałe teoretyczne",
+      "[zweryfikuj]",
+      "stóp procentowych NBP",
+      "Rada Polityki Pieniężnej",
+      "stopa referencyjna",
+      "5,75%",
+      "korytarz stóp",
+      "Stopa lombardowa",
+      "+ 1 pp"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Proszę omówić stopy procentowe NBP: kto je ustala, czym są stopa referencyjna, lombardowa i depozytowa oraz jak działa korytarz stóp procentowych. Czym różni się stopa rezerwy obowiązkowej?",
+     "model": "<p><b>Kto ustala:</b> Stopy procentowe NBP ustala <b>Rada Polityki Pieniężnej (RPP)</b> — organ Narodowego Banku Polskiego. To narzędzie <b>polityki pieniężnej</b> służące głównie utrzymaniu stabilności cen (cel inflacyjny NBP to 2,5% +/- 1 pp).</p><p><b>Stopa referencyjna</b> — główna stopa NBP; określa minimalną rentowność <b>7-dniowych operacji otwartego rynku</b> (emisja bonów pieniężnych NBP). To „cena pieniądza\" w gospodarce; jej zmiana przekłada się na stawki rynkowe i oprocentowanie kredytów/depozytów. Orientacyjnie ~5,75% (wartość do zweryfikowania na dzień egzaminu).</p><p><b>Stopa lombardowa</b> — <b>górny pułap</b> korytarza; po niej NBP udziela bankom komercyjnym kredytu <b>pod zastaw papierów wartościowych</b> (kredyt lombardowy). Najdroższy sposób pozyskania płynności z NBP. Orientacyjnie: referencyjna + 1 pp.</p><p><b>Stopa depozytowa</b> — <b>dolny pułap</b> korytarza; oprocentowanie jednodniowych <b>depozytów banków składanych w NBP</b> (gdzie banki lokują nadwyżki płynności). Orientacyjnie: referencyjna − 1 pp.</p><p><b>Korytarz stóp procentowych</b> — zachodzi nierówność:</p><p>$r_{dep} \\leq r_{ref} \\leq r_{lom}$</p><p>gdzie $r_{dep}$ — stopa depozytowa, $r_{ref}$ — referencyjna, $r_{lom}$ — lombardowa. To „widełki\", w których NBP utrzymuje rynkową stawkę <b>overnight</b> (jednodniową). Bank nie pożyczy taniej niż depozytowa (bo tyle dostanie w NBP) ani nie zapłaci więcej niż lombardowa (bo tyle kosztuje go NBP). Symetria korytarza (+/- 1 pp) stabilizuje stawkę overnight wokół referencyjnej.</p><p><b>Stopa rezerwy obowiązkowej</b> — to <b>nie</b> stopa procentowa w sensie ceny pieniądza, lecz <b>% depozytów</b>, który bank musi utrzymywać jako rezerwę w NBP (~3,5%). Wpływa na zdolność banków do kreacji pieniądza (mnożnik kreacji pieniądza). Stopa redyskontowa/dyskontowa weksli dotyczy (re)dyskonta weksli przez NBP.</p><p><b>Po co to:</b> Podnosząc stopy RPP schładza gospodarkę i zbija inflację (drożeją kredyty, rośnie skłonność do oszczędzania); obniżając — pobudza popyt. To główny kanał transmisji polityki pieniężnej.</p><p><b>WIBOR -> WIRON:</b> stawki międzybankowe to WIBOR (wskaźnik wygaszany w ramach reformy wskaźników referencyjnych), zastępowany przez <b>WIRON</b> (harmonogram do zweryfikowania).</p>",
+     "checklist": [
+      "Stopy ustala Rada Polityki Pieniężnej (RPP) jako organ NBP",
+      "Stopa referencyjna = rentowność 7-dniowych operacji otwartego rynku / główna stopa",
+      "Lombardowa = górny pułap, kredyt pod zastaw papierów",
+      "Depozytowa = dolny pułap, depozyt banków w NBP",
+      "Nierówność korytarza: depozytowa <= referencyjna <= lombardowa",
+      "Korytarz stabilizuje stawkę overnight wokół referencyjnej",
+      "Rezerwa obowiązkowa to % depozytów w NBP, nie cena pieniądza (~3,5%)",
+      "Cel: polityka pieniężna / stabilność cen / cel inflacyjny",
+      "WIBOR wygaszany, zastępowany przez WIRON"
+     ],
+     "traps": [
+      "Mylenie stopy rezerwy obowiązkowej ze stopą procentową — to procent depozytów, nie cena pieniądza",
+      "Odwrócenie korytarza: lombardowa jest GÓRNYM, depozytowa DOLNYM pułapem",
+      "Twierdzenie, że stopy ustala Zarząd NBP lub Prezes NBP — ustala je RPP",
+      "Mówienie, że referencyjna to stopa kredytu — to rentowność operacji otwartego rynku (bonów NBP)"
+     ]
     }
    ]
   },
@@ -719,6 +794,38 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: dlaczego NPV jest uznawane za metode nadrzedna wobec IRR i okresu zwrotu?",
      "model": "NPV mierzy realny przyrost majatku w zlotowkach po zdyskontowaniu wszystkich przeplywow kosztem kapitalu; kryterium $NPV \\geq 0$. Jest addytywne (mozna sumowac projekty) i jednoznaczne. IRR moze miec wiele rozwiazan przy zmiennych znakach przeplywow, zaklada nierealna reinwestycje po stopie IRR i myli przy roznej skali projektow. Okres zwrotu mierzy tylko plynnosc, pomija przeplywy po zwrocie, ryzyko i (prosto) TVM. Dlatego przy wyborze miedzy projektami rozstrzyga NPV."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Wartosc pieniadza w czasie + ocena inwestycji (NPV/IRR)</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "procent skladany",
+      "Przyklad — FV",
+      "Przyklad — PV",
+      "Kryterium",
+      "IRR"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym jest wartość pieniądza w czasie (TVM)? Proszę wyjaśnić mechanizm kapitalizacji i dyskontowania oraz podać i objaśnić wzory na wartość przyszłą (FV) i wartość bieżącą (PV), w tym dla rent.",
+     "model": "<p><b>Definicja.</b> Wartość pieniądza w czasie (TVM, <i>time value of money</i>) to zasada, że ta sama kwota dziś jest warta więcej niż w przyszłości. Powody: dziś pieniądz można zainwestować i pomnożyć (zarobkowanie), przyszła kwota jest obarczona <b>ryzykiem</b>, a <b>inflacja</b> obniża siłę nabywczą. Dlatego kwot z różnych momentów nie wolno bezpośrednio sumować — trzeba je najpierw sprowadzić do wspólnego momentu.</p><p><b>Dwie operacje.</b> <b>Kapitalizacja</b> przesuwa kwotę w przyszłość (procent składany — odsetki naliczane od odsetek). <b>Dyskontowanie</b> sprowadza przyszłą kwotę do teraźniejszości. To operacje odwrotne.</p><p><b>Wartość przyszła:</b> $FV = PV \\cdot (1+r)^{n}$, gdzie: $PV$ — kwota dziś (zł); $r$ — stopa procentowa za okres (ułamek); $n$ — liczba okresów; $FV$ — wartość przyszła (zł).</p><p><b>Wartość bieżąca:</b> $PV = \\frac{FV}{(1+r)^{n}}$ — odwrotność kapitalizacji; mianownik $(1+r)^{n}$ to czynnik dyskontujący.</p><p><b>Renta zwykła</b> (ciąg $n$ równych płatności $A$): $PV = A \\cdot \\frac{1-(1+r)^{-n}}{r}$, gdzie $A$ — rata (zł). <b>Renta wieczysta</b> (horyzont nieskończony): $PV = A / r$.</p><p><b>Przykład.</b> 100 zł, $r = 10\\%$, $n = 2$: $FV = 100 \\cdot 1{,}1^{2} = 121$ zł. Odwrotnie: $PV = 121 / 1{,}1^{2} = 100$ zł.</p><p><b>Po co.</b> TVM jest fundamentem każdej oceny inwestycji — pozwala uczciwie porównać nakłady ponoszone dziś z wpływami w przyszłości, sprowadzając wszystko do wspólnego momentu (zwykle teraźniejszości).</p>",
+     "checklist": [
+      "Zdefiniować TVM: złotówka dziś > złotówka jutro",
+      "Podać 3 przyczyny: zarobkowanie, ryzyko, inflacja",
+      "Wyjaśnić kapitalizację jako procent składany (odsetki od odsetek)",
+      "Wyjaśnić dyskontowanie jako operację odwrotną do kapitalizacji",
+      "Podać wzór FV = PV·(1+r)^n i objaśnić symbole",
+      "Podać wzór PV = FV/(1+r)^n",
+      "Podać wzór na PV renty zwykłej i wieczystej (A/r)",
+      "Krótki przykład liczbowy (np. FV i PV dla 121 zł)"
+     ],
+     "traps": [
+      "Mylenie stopy procentowej (kapitalizacja) ze stopą dyskontową — to ta sama 'cena pieniądza', różny kierunek",
+      "Niespójność stopy z okresem: stopa roczna do okresów rocznych; przy kapitalizacji śródrocznej dzielić stopę i mnożyć liczbę okresów",
+      "Mylenie PV renty z FV renty oraz renty zwykłej z wieczystą",
+      "Bezpośrednie sumowanie kwot z różnych lat bez dyskontowania"
+     ]
     }
    ],
    "order": 3
@@ -880,6 +987,45 @@
      "type": "recall",
      "prompt": "Wymien 8 nadrzednych zasad rachunkowosci i jednym zdaniem opisz, jak zasady pomagaja osiagnac cel rachunkowosci (rzetelny i wierny obraz).",
      "model": "Osiem zasad: (1) memorialu — ujmuj zdarzenia w okresie ich wystapienia; (2) wspolmiernosci — przypisuj koszty do przychodow, ktore je wywolaly; (3) ostroznosci — ujmuj przewidywane straty, nie ujmuj niezrealizowanych zyskow; (4) kontynuacji dzialania — zakladaj dalsze trwanie firmy (min. 12 mies.); (5) istotnosci — istotne osobno, nieistotne mozna uproscic; (6) wyzszosci tresci nad forma — licz sie z trescia ekonomiczna, nie tylko forma prawna; (7) ciaglosci — te same metody rok do roku dla porownywalnosci; (8) indywidualnej wyceny — kazdy skladnik osobno, zakaz kompensat. Razem sluza celowi: memorial i wspolmiernosc daja poprawny wynik, ostroznosc chroni przed zawyzaniem, ciaglosc i indywidualna wycena zapewniaja porownywalnosc i przejrzystosc — czyli rzetelny i wierny obraz firmy."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Rachunkowosc: istota, funkcje i zasady nadrzedne</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "dowodach ksiegowych",
+      "nadrzedne zasady rachunkowosci",
+      "porownywalne i wiarygodne",
+      "Informacyjna",
+      "Kontrolna",
+      "Sprawozdawcza",
+      "Dowodowa",
+      "Zasada memorialu",
+      "nastapily",
+      "ujecie kasowe"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym jest rachunkowosc? Prosze omowic jej istote oraz funkcje, jakie pelni w jednostce gospodarczej.",
+     "model": "<p><b>Definicja (prosto):</b> Rachunkowosc to <b>system informacyjny</b>, ktory mierzy, ewidencjonuje i komunikuje — zawsze <b>w pieniadzu</b> — zdarzenia gospodarcze jednostki, na podstawie <b>dowodow ksiegowych</b>. Potocznie nazywa sie ja <b>jezykiem biznesu</b>: dzieki niej inwestor, bank czy urzad rozumieja te same liczby tak samo.</p><p><b>Cel nadrzedny:</b> dostarczyc <b>rzetelnego i wiernego obrazu</b> sytuacji majatkowej, finansowej oraz wyniku jednostki — tzw. <i>true and fair view</i>. Koncowym produktem jest <b>sprawozdanie finansowe (SF)</b>: bilans, rachunek zyskow i strat (RZiS) oraz informacja dodatkowa.</p><p><b>Zadania rachunkowosci (lancuch):</b> identyfikacja zdarzenia, jego pomiar, ewidencja (zapis), grupowanie i wreszcie komunikowanie danych uzytkownikom.</p><p><b>Funkcje rachunkowosci:</b></p><ul><li><b>Informacyjna</b> — dostarcza dane do decyzji uzytkownikom wewnetrznym (zarzad) i zewnetrznym (inwestor, bank).</li><li><b>Kontrolna</b> — chroni majatek i wykrywa nieprawidlowosci (ewidencja, inwentaryzacja).</li><li><b>Sprawozdawcza</b> — sporzadza sprawozdania finansowe dla otoczenia.</li><li><b>Dowodowa</b> — ksiegi i dowody sluza jako material dowodowy (np. w sporach, kontrolach US).</li><li>(czesto wymieniane tez: <b>analityczna</b> i <b>statystyczna</b>).</li></ul><p><b>Fundamentalne rownanie</b> (na nim opiera sie bilans): $A = K_{w} + Z$, gdzie $A$ — aktywa (majatek, w zl), $K_{w}$ — kapital wlasny (w zl), $Z$ — zobowiazania, czyli kapital obcy (w zl). Czyta sie: majatek jest zawsze rowny zrodlom jego finansowania.</p><p><b>Zrodlo prawne:</b> zasady rachunkowosci w Polsce wynikaja z <b>Ustawy o Rachunkowosci (UoR)</b>, a w jednostkach stosujacych standardy miedzynarodowe — z <b>MSR/MSSF</b>.</p>",
+     "checklist": [
+      "Definicja: system informacyjny mierzacy w PIENIADZU zdarzenia gospodarcze",
+      "Podstawa zapisu: dowody ksiegowe",
+      "Cel nadrzedny: rzetelny i wierny obraz (true and fair view)",
+      "Wymienic produkt koncowy: sprawozdanie finansowe (bilans, RZiS, info dodatkowa)",
+      "Funkcja informacyjna + opis",
+      "Funkcja kontrolna + opis (ochrona majatku, inwentaryzacja)",
+      "Funkcja sprawozdawcza + opis",
+      "Funkcja dowodowa + opis (material dowodowy, US)",
+      "Podac rownanie bilansowe A = Kw + Z i wyjasnic symbole",
+      "Zrodlo prawne: UoR (oraz MSR/MSSF)"
+     ],
+     "traps": [
+      "Nie mylic 'rachunkowosci' (system pomiaru/komunikacji) z 'ksiegowoscia' (sama ewidencja) — rachunkowosc jest pojeciem szerszym",
+      "Wszystko musi byc wyrazone w PIENIADZU — pominiecie tego to czesty brak",
+      "Nie sprowadzac funkcji tylko do 'liczenia zysku' — komisja chce minimum 4 funkcji z opisem",
+      "Pamietac, ze rownanie bilansowe to A = Kw + Z, a nie A = Kw - Z; aktywa = pasywa (zrodla)"
+     ]
     }
    ],
    "order": 4
@@ -1053,6 +1199,46 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: na czym polega zasada ostroznosci i jej asymetria?",
      "model": "Zasada ostroznosci nakazuje wyceniac tak, by nie zawyzac aktywow i przychodow ani nie zanizac zobowiazan i kosztow — czyli pokazywac firme raczej skromniej niz na wyrost. Jej kluczowa cecha jest asymetria: przewidywane straty i koszty ujmuje sie juz w momencie ich przewidywania, a zyski dopiero gdy zostana zrealizowane. Straty wczesnie, zyski pozno. Cel: chronic czytelnika sprawozdania (banki, inwestorow) przed zbyt optymistycznym obrazem firmy. W praktyce stosujemy ja np. wyceniajac aktyw po nizszej z dwoch wartosci: $W_b = \\min(C_n, W_r)$, a roznice ujmujemy jako odpis aktualizujacy."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Wycena aktywow i pasywow + sprawozdanie finansowe</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "Podać podstawę prawną (UoR z 29.09.1994) i moment wyceny (dzień bilansowy)",
+      "Wymienić cel wyceny: rzetelny i jasny obraz",
+      "Podać wzór ceny nabycia $C_n = C_z + K_d - R$ i wyjaśnić symbole",
+      "Rozróżnić cenę nabycia (kupione) od kosztu wytworzenia (wyprodukowane)",
+      "Powiedzieć, że koszt wytworzenia NIE obejmuje kosztów zarządu i sprzedaży",
+      "Zdefiniować wartość godziwą i zaznaczyć, że jest stosowana wybiórczo",
+      "Wyjaśnić zasadę ostrożności i jej asymetrię (straty od razu, zyski po realizacji)",
+      "Podać regułę niższej wyceny $W_b = \\min(C_n, W_r)$ i pojęcie odpisu aktualizującego",
+      "Wymienić zasady: memoriałowa, kontynuacji, wyższości treści nad formą",
+      "Wymienić 3 zawsze obowiązkowe elementy: bilans, RZiS, informacja dodatkowa",
+      "Wskazać, że rachunek przepływów i zestawienie zmian w kapitale dotyczą TYLKO jednostek badanych",
+      "Podać równanie bilansowe $A = K_w + Z$ z wyjaśnieniem symboli"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Na czym polega wycena aktywów i pasywów w bilansie? Omów metody wyceny (koszt historyczny, cena nabycia, koszt wytworzenia, wartość godziwa) oraz zasadę ostrożności wraz z nadrzędnymi zasadami rachunkowości.",
+     "model": "<p><b>Definicja.</b> Wycena to przypisanie pozycjom bilansu wartości w złotówkach według ustalonych, ostrożnych zasad, tak aby sprawozdanie dawało <b>rzetelny i jasny obraz</b> sytuacji jednostki. Podstawą prawną w Polsce jest <b>UoR</b> (ustawa o rachunkowości z 29.09.1994). Wyceny dokonuje się na <b>dzień bilansowy</b> (zwykle 31.12).</p><p><b>Metody wyceny:</b></p><ul><li><b>Koszt historyczny</b> — wycena według ceny z momentu nabycia/wytworzenia, niezmienianej mimo wahań cen rynkowych. To dominująca zasada w UoR.</li><li><b>Cena nabycia</b> — dla składników <b>kupionych</b>. Wzór: $C_{n} = C_{z} + K_{d} - R$, gdzie $C_{n}$ — cena nabycia (PLN); $C_{z}$ — cena zakupu (PLN); $K_{d}$ — koszty bezpośrednie zakupu, np. transport, cło, montaż (PLN); $R$ — rabaty/upusty (PLN).</li><li><b>Koszt wytworzenia</b> — dla składników <b>wyprodukowanych</b> we własnym zakresie: koszty bezpośrednie produktu plus uzasadniona część kosztów pośrednich produkcji (<b>bez</b> kosztów zarządu i sprzedaży).</li><li><b>Wartość godziwa</b> — kwota, za jaką składnik mógłby być wymieniony między zainteresowanymi, dobrze poinformowanymi stronami w transakcji rynkowej. Stosowana <b>wybiórczo</b> (np. niektóre inwestycje, połączenia jednostek), nie uniwersalnie.</li></ul><p><b>Zasada ostrożności.</b> Wycena nie może zawyżać aktywów/przychodów ani zaniżać zobowiązań/kosztów. Przewidywane straty ujmuje się <b>od razu</b>, a zyski dopiero po <b>zrealizowaniu</b> (asymetria). Praktyczna reguła ostrożnej wyceny aktywu: $W_{b} = \\min(C_{n},\\ W_{r})$, gdzie $W_{b}$ — wartość bilansowa (PLN); $C_{n}$ — koszt nabycia/wytworzenia (PLN); $W_{r}$ — wartość rynkowa/możliwa do uzyskania (PLN).</p><p><b>Przykład.</b> Maszyna: cena zakupu $C_{z}=100\\,000$, transport i montaż $K_{d}=8\\,000$, rabat $R=3\\,000$. Cena nabycia $C_{n}=100\\,000+8\\,000-3\\,000=105\\,000$ PLN. Jeśli na dzień bilansowy wartość możliwa do uzyskania spadła do $W_{r}=98\\,000$, to $W_{b}=\\min(105\\,000,\\ 98\\,000)=98\\,000$ PLN, a różnicę $7\\,000$ PLN ujmuje się jako <b>odpis aktualizujący</b> (trwała utrata wartości).</p><p><b>Nadrzędne zasady rachunkowości.</b></p><ul><li><b>Memoriałowa</b> — przychody i koszty ujmuje się w okresie ich powstania, nie w momencie wpływu/wypływu gotówki.</li><li><b>Kontynuacji działalności (going concern)</b> — domniemanie, że firma będzie działać dalej; warunkuje sposób wyceny.</li><li><b>Wyższości treści nad formą</b> — operacje ujmuje się zgodnie z treścią ekonomiczną, nie tylko formą prawną.</li><li><b>Ostrożności</b> — jw.</li></ul><p><b>Po co to.</b> Spójne i ostrożne zasady wyceny chronią odbiorcę sprawozdania (inwestora, bank, kontrahenta) przed zawyżonym, mylącym obrazem majątku firmy.</p>",
+     "checklist": [
+      "Podać podstawę prawną (UoR z 29.09.1994) i moment wyceny (dzień bilansowy)",
+      "Wymienić cel wyceny: rzetelny i jasny obraz",
+      "Podać wzór ceny nabycia $C_n = C_z + K_d - R$ i wyjaśnić symbole",
+      "Rozróżnić cenę nabycia (kupione) od kosztu wytworzenia (wyprodukowane)",
+      "Powiedzieć, że koszt wytworzenia NIE obejmuje kosztów zarządu i sprzedaży",
+      "Zdefiniować wartość godziwą i zaznaczyć, że jest stosowana wybiórczo",
+      "Wyjaśnić zasadę ostrożności i jej asymetrię (straty od razu, zyski po realizacji)",
+      "Podać regułę niższej wyceny $W_b = \\min(C_n, W_r)$ i pojęcie odpisu aktualizującego",
+      "Wymienić zasady: memoriałowa, kontynuacji, wyższości treści nad formą"
+     ],
+     "traps": [
+      "Mylenie ceny nabycia (składnik KUPIONY) z kosztem wytworzenia (składnik WYPRODUKOWANY) — komisja tu dociska",
+      "Twierdzenie, że koszt wytworzenia obejmuje koszty zarządu/sprzedaży — NIE obejmuje",
+      "Odwrócenie asymetrii ostrożności — to straty ujmuje się od razu, a zyski dopiero po realizacji, nie na odwrót",
+      "Uznanie wartości godziwej za zasadę uniwersalną — w UoR dominuje koszt historyczny"
+     ]
     }
    ],
    "order": 5
@@ -1245,6 +1431,44 @@
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami: czym jest model Altmana Z-score, co znaczą jego trzy strefy i dlaczego trzeba uważać na wersję modelu.",
      "model": "Model Altmana to funkcja dyskryminacyjna, która łączy kilka wskaźników (płynność, rentowność skumulowaną, zdolność zarobkową EBIT, relację kapitału do długu, sprawność) w jedną liczbę Z, szacującą zagrożenie upadłością. Trzy strefy: Z > 2,99 firma bezpieczna; 1,81 ≤ Z ≤ 2,99 szara strefa (niepewność); Z < 1,81 wysokie zagrożenie upadłością. Im wyższe Z, tym zdrowiej. Na wersję trzeba uważać, bo oryginał z 1968 r. używa w X4 wartości rynkowej kapitału i pasuje do spółek giełdowych; dla nienotowanych stosuje się wariant Z' z wartością księgową, innymi wagami i progami. Pomylenie wersji to błąd metodologiczny."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Analiza finansowa sprawozdania + ryzyko upadlosci</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "Bilans",
+      "Rachunek przepływów pieniężnych",
+      "zasobowa",
+      "strumieniowe",
+      "Analiza pozioma (dynamiki)",
+      "Analiza pionowa (struktury)",
+      "Wzór analizy poziomej",
+      "Płynność",
+      "Zadłużenie / wypłacalność",
+      "Rentowność"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym jest analiza finansowa przedsiębiorstwa? Proszę omówić analizę wstępną (poziomą i pionową) oraz cztery podstawowe grupy wskaźników finansowych wraz z przykładowymi wzorami i ich interpretacją.",
+     "model": "<p><b>Definicja.</b> Analiza finansowa to ocena kondycji ekonomicznej firmy na podstawie sprawozdania finansowego — bilansu (stan na dzień, wielkość <b>zasobowa</b>), rachunku zysków i strat (za okres, wielkość <b>strumieniowa</b>) oraz rachunku przepływów pieniężnych. To \"badanie krwi\" firmy: z liczb wyciągamy diagnozę kondycji.</p><p><b>Analiza wstępna</b> dzieli się na dwie:</p><ul><li><b>Pozioma (analiza dynamiki)</b> — porównuje te same pozycje <b>w czasie</b> (np. rok do roku), liczy zmiany kwotowe i tempo wzrostu: $\\Delta\\% = \\frac{P_{1} - P_{0}}{P_{0}} \\cdot 100\\%$, gdzie $P_{1}$ — wartość pozycji w okresie badanym (zł), $P_{0}$ — wartość w okresie bazowym (zł).</li><li><b>Pionowa (analiza struktury)</b> — pokazuje <b>udział</b> każdej pozycji w sumie (np. udział zapasów w aktywach, suma = 100%).</li></ul><p><b>Cztery grupy wskaźników (filary diagnozy):</b></p><ul><li><b>Płynność</b> — czy firma płaci na czas. Płynność bieżąca $CR = \\frac{\\text{aktywa obrotowe}}{\\text{zobowiązania bieżące}}$ (norma ok. $1{,}2$–$2{,}0$); płynność szybka $QR = \\frac{\\text{aktywa obrotowe} - \\text{zapasy}}{\\text{zobowiązania bieżące}}$ (norma ok. $1{,}0$).</li><li><b>Zadłużenie / wypłacalność</b> — czy firma nie jest przelewarowana. Ogólne zadłużenie $W_{z} = \\frac{\\text{zobowiązania ogółem}}{\\text{aktywa ogółem}}$ (norma ok. $0{,}57$–$0{,}67$).</li><li><b>Rentowność</b> — czy firma zarabia. $ROA = \\frac{\\text{zysk netto}}{\\text{aktywa ogółem}} \\cdot 100\\%$; $ROE = \\frac{\\text{zysk netto}}{\\text{kapitał własny}} \\cdot 100\\%$.</li><li><b>Sprawność (aktywności)</b> — czy firma efektywnie gospodaruje. Rotacja zapasów w dniach $RZ = \\frac{\\text{średni stan zapasów}}{\\text{koszt sprzedanych}} \\cdot 365$ (im mniej dni, tym szybszy obrót).</li></ul><p><b>Przykład liczbowy.</b> Aktywa obrotowe = 600, zapasy = 200, zobowiązania bieżące = 400: $CR = 600/400 = 1{,}5$ (w normie); $QR = (600-200)/400 = 1{,}0$ (dobra); kapitał obrotowy netto $= 600 - 400 = 200$ (dodatni bufor płynności).</p><p><b>Po co to.</b> Wskaźnik ma sens tylko w <b>odniesieniu</b> do normy, branży i trendu w czasie — analiza porównawcza jest kluczowa. Liczba w próżni jest bezwartościowa.</p>",
+     "checklist": [
+      "Wskazać 3 elementy sprawozdania: bilans, RZiS, przepływy pieniężne",
+      "Rozróżnić wielkość zasobową (bilans) od strumieniowej (RZiS, przepływy)",
+      "Pozioma = dynamika w czasie, podać wzór Δ% = (P1-P0)/P0 ·100%",
+      "Pionowa = struktura/udział pozycji w sumie (100%)",
+      "Wymienić 4 grupy: płynność, zadłużenie, rentowność, sprawność",
+      "Podać wzór CR = aktywa obrotowe / zobowiązania bieżące i normę 1,2-2,0",
+      "Podać wzór QR (bez zapasów) i normę ok. 1,0",
+      "Podać ROA = zysk netto/aktywa i ROE = zysk netto/kapitał własny",
+      "Podkreślić konieczność punktu odniesienia (norma, branża, trend)"
+     ],
+     "traps": [
+      "Mylenie analizy poziomej (czas/dynamika) z pionową (struktura/udział %) — klasyczny błąd, komisja dociska",
+      "\"Więcej znaczy lepiej\" — nieprawda: zbyt wysoka płynność = nadpłynność (zamrożony kapitał); zbyt niskie zadłużenie = niewykorzystana dźwignia finansowa",
+      "Interpretacja wskaźnika bez punktu odniesienia (norma/branża/trend) — liczba w próżni jest bezwartościowa",
+      "Mylenie quick ratio: w liczniku odejmuje się zapasy (najmniej płynny składnik), nie zobowiązania"
+     ]
     }
    ],
    "order": 6
@@ -1431,6 +1655,44 @@
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami: czym jest dźwignia operacyjna (DOL) i co oznacza dla firmy wysoki DOL?",
      "model": "DOL to mnożnik pokazujący, jak procentowo zmienia się zysk operacyjny w odpowiedzi na procentową zmianę sprzedaży: $DOL = CM / (CM - KS)$, czyli łączna marża pokrycia podzielona przez zysk operacyjny. Wysoki DOL bierze się z dużego udziału kosztów stałych. Oznacza, że zysk firmy jest bardzo wrażliwy: przy wzroście sprzedaży zysk rośnie nieproporcjonalnie szybko (większa nagroda), ale przy spadku sprzedaży równie szybko maleje, grożąc stratą (większe ryzyko). Niski DOL = stabilniejszy, ale mniej dynamiczny zysk."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Rachunek kosztow: pelny vs zmienny + CVP</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "wydatek",
+      "strata",
+      "Koszty zmienne (KZ)",
+      "Koszty stałe (KS)",
+      "Koszty bezpośrednie",
+      "Koszty pośrednie",
+      "zapasu",
+      "aktywowany w zapasie",
+      "Produkcja > sprzedaż",
+      "wyższy"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Proszę porównać rachunek kosztów pełnych (absorpcyjny) i rachunek kosztów zmiennych. Czym różnią się w traktowaniu kosztów, kiedy dają różny wynik finansowy i który z nich obowiązuje w sprawozdawczości?",
+     "model": "<p><b>Punkt wyjścia — klasyfikacja kosztów.</b> Koszty można ciąć dwoma niezależnymi kryteriami. (1) <b>Zachowanie wobec wolumenu:</b> <b>koszty stałe (KS)</b> nie zmieniają się z produkcją w danym przedziale (czynsz, amortyzacja liniowa), <b>koszty zmienne (KZ)</b> rosną proporcjonalnie do liczby sztuk (materiały bezpośrednie, akord). (2) <b>Przypisywalność do wyrobu:</b> <b>bezpośrednie</b> (wprost na wyrób) vs <b>pośrednie</b> (wspólne, rozliczane kluczem). To DWA niezależne podziały.</p><p><b>Istota różnicy — jedno kryterium.</b> Oba rachunki różni tylko los <b>stałych kosztów produkcji</b>:</p><ul><li><b>Rachunek kosztów pełnych (RKP, absorpcyjny):</b> koszt wytworzenia wyrobu = koszty zmienne <b>oraz</b> stałe koszty produkcji. Stałe koszty „wsiąkają\" w wartość wyrobu i trafiają do <b>zapasu</b> — obciążą wynik dopiero, gdy wyrób zostanie sprzedany.</li><li><b>Rachunek kosztów zmiennych (RKZ):</b> kosztem wyrobu są <b>tylko koszty zmienne</b>; stałe koszty produkcji to <b>koszt okresu</b> — obciążają wynik w całości od razu, niezależnie od sprzedaży.</li></ul><p><b>Kiedy wyniki się różnią.</b> Różnica pojawia się <b>tylko gdy zmienia się zapas</b> (produkcja ≠ sprzedaż):</p><p>$Zysk_{RKP} - Zysk_{RKZ} = ks_j \\cdot \\Delta Q_{zapasu}$</p><p>gdzie: $ks_j$ — stały koszt produkcji na sztukę (zł/szt.); $\\Delta Q_{zapasu}$ — przyrost zapasu (produkcja − sprzedaż, szt.).</p><ul><li><b>Produkcja > sprzedaż</b> (zapas rośnie): $Zysk_{RKP} > Zysk_{RKZ}$ — część stałych kosztów zostaje „uwięziona\" w zapasie i nie obciąża wyniku.</li><li><b>Produkcja < sprzedaż</b> (zapas spada): $Zysk_{RKP} < Zysk_{RKZ}$ — uwolnione stałe koszty z poprzednich okresów obciążają wynik.</li><li><b>Produkcja = sprzedaż</b> (brak zmiany zapasu): <b>oba dają ten sam zysk</b>.</li></ul><p><b>Przykład.</b> $ks_j = 10$ zł/szt., wyprodukowano 1000, sprzedano 800 → $\\Delta Q_{zapasu} = 200$. Wówczas $Zysk_{RKP} - Zysk_{RKZ} = 10 \\cdot 200 = 2000$ zł na korzyść RKP.</p><p><b>Wniosek zarządczy.</b> <b>RKZ</b> jest lepszy do <b>decyzji krótkookresowych</b> (pokazuje marżę pokrycia, nie zniekształca wyniku polityką zapasów). <b>RKP</b> jest <b>wymagany w sprawozdawczości</b> — do bilansu i RZiS wycenia się zapasy po koszcie wytworzenia zgodnie z Ustawą o rachunkowości / MSR 2; RKZ to narzędzie wewnętrzne (zarządcze).</p>",
+     "checklist": [
+      "Wymienić dwa niezależne podziały kosztów: stały/zmienny ORAZ bezpośredni/pośredni",
+      "Podać kryterium różnicy: los STAŁYCH kosztów produkcji (koszt wyrobu vs koszt okresu)",
+      "RKP = koszty zmienne + stałe koszty produkcji w koszcie wyrobu (idą w zapas)",
+      "RKZ = tylko koszty zmienne w wyrobie; stałe = koszt okresu",
+      "Podać warunek różnicy wyników: zmiana zapasu (produkcja ≠ sprzedaż)",
+      "Podać wzór różnicy: $Zysk_{RKP}-Zysk_{RKZ}=ks_j\\cdot\\Delta Q_{zapasu}$",
+      "Określić kierunek: produkcja>sprzedaż → zysk RKP wyższy",
+      "Stwierdzić: produkcja=sprzedaż → oba rachunki dają ten sam zysk",
+      "Wskazać, że w sprawozdawczości obowiązuje RKP (UoR/MSR 2), RKZ jest wewnętrzny"
+     ],
+     "traps": [
+      "Mylenie podziału stały/zmienny z bezpośredni/pośredni — to NIEZALEŻNE kryteria (np. energia wydziałowa: zmienna i pośrednia)",
+      "Twierdzenie, że wyniki zawsze się różnią — różnią się TYLKO przy zmianie zapasu",
+      "Pomylenie kierunku różnicy: przy produkcji > sprzedaży to RKP zawyża zysk, nie odwrotnie",
+      "Powiedzenie, że RKZ obowiązuje w bilansie — do sprawozdań obowiązuje koszt wytworzenia wg RKP"
+     ]
     }
    ],
    "order": 7
@@ -1607,6 +1869,42 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami roznice miedzy ryzykiem operacyjnym a finansowym oraz dlaczego dlug jest tanszy od kapitalu wlasnego.",
      "model": "Ryzyko operacyjne wynika z natury dzialalnosci — zmiennosci sprzedazy i kosztow, czyli wahan EBIT (dzwignia operacyjna). Ryzyko finansowe wynika z poziomu zadluzenia — stalej obslugi odsetek i grozby niewyplacalnosci (dzwignia finansowa). Dlug jest tanszy od kapitalu wlasnego z dwoch powodow: wierzyciel ryzykuje mniej (ma pierwszenstwo splaty i zabezpieczenia, wiec zada nizszej stopy) oraz odsetki daja tarcze podatkowa, ktorej dywidenda nie ma. Wlasciciel jest ostatni w kolejce i ryzykuje najwiecej, wiec wymaga najwyzszej premii: $k_e > r_d$."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Decyzje finansowe: finansowanie, koszt kapitalu, ryzyko</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "aktywa",
+      "pasywa",
+      "Kapital wlasny",
+      "Kapital obcy",
+      "Krotko- czy dlugoterminowe?",
+      "Finansowanie krotkoterminowe",
+      "Finansowanie dlugoterminowe",
+      "zlota regula bilansowa",
+      "koszt kapitalu",
+      "tarcza podatkowa"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Jakie sa zrodla finansowania przedsiebiorstwa i wedlug jakich kryteriow firma dokonuje wyboru zrodla? Prosze dokonac podzialu i omowic kryteria.",
+     "model": "<p><b>Definicja.</b> Firma musi sfinansowac swoj majatek (aktywa). Srodki pochodza albo od <b>wlascicieli</b> (kapital wlasny), albo od <b>wierzycieli</b> (kapital obcy/dlug). Pasywa bilansu pokazuja wlasnie, skad pochodzi finansowanie.</p><p><b>Podzial 1 — wedlug wlasnosci:</b></p><ul><li><b>Kapital wlasny (equity):</b> srodki wlascicieli (emisja akcji/udzialow, zysk zatrzymany). Brak obowiazku zwrotu, ale uprawnia do udzialu w zysku (dywidenda) i decyzji. Drozszy.</li><li><b>Kapital obcy (dlug):</b> pozyczony, zwrotny i oprocentowany (kredyty, obligacje, leasing). Ma <b>pierwszenstwo</b> zaspokojenia przed wlascicielami; tanszy.</li></ul><p><b>Podzial 2 — wedlug zapadalnosci:</b></p><ul><li><b>Krotkoterminowe</b> (zapadalnosc $\\leq 1$ rok): kredyt obrotowy, kredyt kupiecki (handlowy), faktoring — finansuje majatek obrotowy/plynnosc.</li><li><b>Dlugoterminowe</b> (zapadalnosc $> 1$ rok): kredyt inwestycyjny, obligacje, emisja akcji, leasing — finansuje majatek trwaly.</li></ul><p><b>Zlota regula bilansowa:</b> majatek trwaly finansujemy zrodlami dlugoterminowymi, a majatek obrotowy — krotkoterminowymi (dopasowanie zapadalnosci aktywow i pasywow).</p><p><b>Kryteria wyboru zrodla:</b></p><ul><li><b>Koszt</b> kapitalu (oprocentowanie, oczekiwana stopa zwrotu wlascicieli);</li><li><b>Dostepnosc</b> (zdolnosc kredytowa, wielkosc i etap rozwoju firmy);</li><li><b>Ryzyko i wplyw na plynnosc</b> (obowiazek splaty rat i odsetek);</li><li><b>Utrata kontroli</b> (nowi akcjonariusze rozwadniaja wlasnosc);</li><li><b>Wymagane zabezpieczenia</b> (zastaw, hipoteka);</li><li><b>Elastycznosc</b> splaty i warunkow.</li></ul><p><b>Po co:</b> dobor zrodel ksztaltuje strukture kapitalu, koszt finansowania (WACC) i poziom ryzyka — wplywa wiec wprost na wartosc firmy.</p>",
+     "checklist": [
+      "Podzial wlasny vs obcy (equity vs dlug)",
+      "Podzial krotko- vs dlugoterminowe wg zapadalnosci (granica 1 rok)",
+      "Po 1-2 przyklady kazdego rodzaju (np. obligacje, kredyt obrotowy, leasing)",
+      "Pierwszenstwo dlugu przed wlascicielami; equity uprawnia do zysku",
+      "Zlota regula bilansowa (dopasowanie zapadalnosci)",
+      "Kryteria: koszt, dostepnosc, ryzyko/plynnosc, utrata kontroli, zabezpieczenia, elastycznosc",
+      "Powiazanie z pasywami bilansu jako zrodlem finansowania"
+     ],
+     "traps": [
+      "Mylenie kryterium podzialu (wlasnosc) z kryterium zapadalnosci — to dwa NIEZALEZNE podzialy",
+      "Finansowanie majatku trwalego kredytem obrotowym — zlamanie zlotej reguly, groza utraty plynnosci",
+      "Twierdzenie, ze kapital wlasny jest 'darmowy' — ma koszt (oczekiwana stopa zwrotu wlascicieli)",
+      "Pominiecie utraty kontroli / rozwodnienia jako realnego kosztu emisji akcji"
+     ]
     }
    ],
    "order": 8
@@ -1776,6 +2074,44 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: czym jest cykl konwersji gotowki (CCC), jak go liczymy i czym rozni sie od cyklu operacyjnego?",
      "model": "Cykl konwersji gotowki (CCC) to liczba dni, przez ktore gotowka firmy jest zamrozona — od zaplaty za zapasy do inkasa naleznosci od klienta. Liczymy go jako CCC = OZ + ON - OZob, gdzie OZ to okres rotacji zapasow, ON to okres sciagania naleznosci, a OZob to okres splaty zobowiazan (przez ten czas finansuje nas dostawca, wiec go odejmujemy). Rozni sie od cyklu operacyjnego tym, ze cykl operacyjny = OZ + ON (sam proces od zakupu do inkasa, bez odejmowania zobowiazan), a CCC dodatkowo odejmuje OZob. Celem zarzadzania jest skracanie CCC, bo krotszy cykl oznacza mniej wlasnego kapitalu do sfinansowania."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Kapital obrotowy netto i zarzadzanie nim</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "cegielek",
+      "ujecie majatkowe",
+      "ujecie kapitalowe",
+      "plynnoscia finansowa",
+      "wskaznikiem plynnosci biezacej",
+      "bezpieczenstwem a rentownoscia",
+      "Agresywna",
+      "Konserwatywna",
+      "Umiarkowana",
+      "cykl konwersji gotowki"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym jest kapitał obrotowy netto (KON), jak się go mierzy i jaki jest jego związek z płynnością finansową przedsiębiorstwa?",
+     "model": "<p><b>Definicja.</b> Kapitał obrotowy netto (KON) to ta część aktywów obrotowych, która jest finansowana kapitałem stałym (długoterminowym), a nie zobowiązaniami bieżącymi. Stanowi on \"poduszkę bezpieczeństwa\" płynności — bufor między tym, co firma szybko zamieni na gotówkę, a tym, co musi szybko spłacić.</p><p><b>Dwa sposoby pomiaru (dają ten sam wynik):</b></p><ul><li><b>Ujęcie majątkowe (od strony aktywów):</b> $KON = AO - ZK$, gdzie $AO$ — aktywa obrotowe (zł), $ZK$ — zobowiązania krótkoterminowe (zł).</li><li><b>Ujęcie kapitałowe (od strony pasywów):</b> $KON = (KW + ZD) - AT$, gdzie $KW$ — kapitał własny (zł), $ZD$ — zobowiązania długoterminowe (zł) (razem stanowią kapitał stały), $AT$ — aktywa trwałe (zł).</li></ul><p><b>Związek z płynnością.</b> Płynność finansowa to zdolność do terminowego regulowania zobowiązań bieżących. Dodatni KON ($KON > 0$) oznacza nadwyżkę aktywów obrotowych nad zobowiązaniami krótkoterminowymi — czyli bufor bezpieczeństwa. Towarzyszy temu zwykle wskaźnik płynności bieżącej $CR = \\frac{AO}{ZK} > 1$ (norma orientacyjna $1{,}2 \\leq CR \\leq 2{,}0$). Zachodzi: gdy $CR > 1$, to $KON > 0$.</p><p><b>Przykład.</b> $AO = 800$, $ZK = 500$ tys. zł. Wtedy $KON = 800 - 500 = 300$ tys. zł (dodatni — bufor istnieje), a $CR = 800 / 500 = 1{,}6$ (w normie).</p><p><b>Po co to mierzymy.</b> KON pokazuje, w jakim stopniu firma jest zabezpieczona przed utratą płynności i jak finansuje swój majątek obrotowy. Większy KON to większe bezpieczeństwo, ale i wyższy koszt (kapitał stały jest droższy niż krótkoterminowy).</p>",
+     "checklist": [
+      "Definicja: KON to część aktywów obrotowych finansowana kapitałem stałym (bufor płynności)",
+      "Podać wzór majątkowy KON = AO - ZK",
+      "Podać wzór kapitałowy KON = (KW + ZD) - AT",
+      "Zaznaczyć, że oba ujęcia dają ten sam wynik",
+      "Wyjaśnić, że kapitał stały = kapitał własny + zobowiązania długoterminowe",
+      "Wyjaśnić sens: dodatni KON = nadwyżka AO nad ZK = bufor płynności",
+      "Powiązać z current ratio: CR = AO/ZK, gdy CR > 1 to KON > 0",
+      "Podać normę CR (ok. 1,2-2,0)",
+      "Krótki przykład liczbowy KON i CR"
+     ],
+     "traps": [
+      "Mylenie kapitału stałego z samym kapitałem własnym — kapitał stały to kapitał własny PLUS zobowiązania długoterminowe",
+      "Twierdzenie, że oba ujęcia dają różne wyniki — dają identyczny wynik (to ta sama różnica zapisana od strony aktywów lub pasywów)",
+      "Utożsamianie zysku z gotówką — firma rentowna memoriałowo może stracić płynność przy złym zarządzaniu KON",
+      "Mylenie kierunku zależności CR i KON — to CR > 1 implikuje KON > 0 (a nie odwrotnie sformułowane)"
+     ]
     }
    ],
    "order": 9
@@ -1977,6 +2313,44 @@
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami: co mierzy EVA i kiedy firma tworzy wartość?",
      "model": "EVA = NOPAT − WACC·IC, czyli zysk operacyjny po opodatkowaniu pomniejszony o koszt zaangażowanego kapitału (WACC·IC to minimalny zwrot, jakiego oczekują dawcy kapitału). Firma tworzy wartość, gdy EVA > 0 — czyli gdy realny zwrot z kapitału przewyższa jego koszt. Dodatni zysk księgowy nie wystarczy: jeśli EVA < 0, firma niszczy wartość mimo zysku."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Wycena przedsiebiorstw (FCFF/FCFE/EVA)</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "Dlaczego dzielimy?",
+      "Dochodowe",
+      "Majątkowe",
+      "Porównawcze",
+      "Dlaczego tak?",
+      "Reguła dopasowania",
+      "WACC",
+      "kosztem kapitału własnego",
+      "Intuicja",
+      "Kluczowa pułapka egzaminacyjna"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Omów metody wyceny przedsiębiorstwa. Na czym polega podejście dochodowe (DCF) oraz jaką rolę pełni w nim koszt kapitału (WACC) i wartość rezydualna?",
+     "model": "<p><b>Definicja.</b> Wycena przedsiębiorstwa to oszacowanie jego wartości, czyli dzisiejszej (zdyskontowanej) wartości gotówki, jaką firma wygeneruje w przyszłości dla dawców kapitału, z uwzględnieniem ryzyka. Wynik to zwykle <b>przedział</b>, nie jedna liczba, bo opiera się na subiektywnych założeniach. Warto rozróżnić <b>wartość</b> (szacunek analityka) od <b>ceny</b> (wynik transakcji rynkowej).</p><p><b>Trzy grupy metod:</b></p><ul><li><b>Dochodowe</b> (DCF) — ile firma zarobi; nadrzędne dla firm działających (going concern).</li><li><b>Majątkowe</b> — ile wart jest majątek (aktywa netto, wartość skorygowana).</li><li><b>Porównawcze</b> (mnożnikowe) — za ile sprzedają się podobne firmy (P/E, EV/EBITDA).</li></ul><p><b>Podejście dochodowe (DCF).</b> Prognozujemy wolne przepływy pieniężne i dyskontujemy je na dziś: $PV = \\frac{CF}{(1+r)^{t}}$, gdzie $CF$ — przepływ w roku $t$, $r$ — stopa dyskontowa, $t$ — numer roku. Dwa warianty przepływu:</p><ul><li><b>FCFF</b> — przepływ dla wszystkich dawców kapitału (przed spłatą długu), dyskontowany przez <b>WACC</b>. Wzór: $FCFF = EBIT \\cdot (1 - T) + A - \\Delta KON - CAPEX$, gdzie $EBIT$ — zysk operacyjny, $T$ — stopa podatku, $A$ — amortyzacja, $\\Delta KON$ — zmiana kapitału obrotowego netto, $CAPEX$ — nakłady inwestycyjne.</li><li><b>FCFE</b> — przepływ tylko dla właścicieli (po odsetkach i zmianach długu), dyskontowany kosztem kapitału własnego $r_e$.</li></ul><p><b>Koszt kapitału (WACC)</b> to stopa dyskontowa dla FCFF: $WACC = \\frac{E}{E+D} \\cdot r_e + \\frac{D}{E+D} \\cdot r_d \\cdot (1 - T)$, gdzie $E$ — wartość kapitału własnego, $D$ — wartość długu, $r_e$ — koszt kapitału własnego, $r_d$ — koszt długu, $T$ — stopa podatku. Tarcza podatkowa $(1-T)$ obniża tylko koszt długu. $r_e$ szacujemy modelem <b>CAPM</b>: $r_e = r_f + \\beta \\cdot (r_m - r_f)$, gdzie $r_f$ — stopa wolna od ryzyka, $\\beta$ — wrażliwość na ryzyko rynkowe, $(r_m - r_f)$ — premia za ryzyko rynkowe. Koszt kapitału to kluczowy i najbardziej wrażliwy parametr wyceny.</p><p><b>Wartość rezydualna (TV).</b> Wartość przepływów po okresie szczegółowej prognozy, zwykle wg modelu Gordona: $TV = \\frac{FCFF_{n} \\cdot (1+g)}{WACC - g}$, gdzie $FCFF_{n}$ — przepływ ostatniego roku prognozy, $g$ — stała stopa wzrostu (warunek $g < WACC$ oraz $g \\leq$ długookresowy wzrost gospodarki). TV stanowi często 60-80% całej wyceny, dlatego małe zmiany $g$ lub WACC mocno zmieniają wynik — stąd analiza wrażliwości.</p><p><b>Przykład (renta wieczysta rosnąca).</b> $FCFF = 100$ tys. zł, $WACC = 10\\%$, $g = 2\\%$: $EV = \\frac{100 \\cdot 1{,}02}{0{,}10 - 0{,}02} = \\frac{102}{0{,}08} = 1275$ tys. zł. Po odjęciu długu netto (np. 275 tys.) wartość kapitału własnego = 1000 tys. zł.</p><p><b>Po co.</b> Wycena służy transakcjom, sprawozdawczości i celom sądowym; jest też narzędziem zarządzania przez wartość (VBM) — mierzenia, czy firma tworzy wartość dla właścicieli.</p>",
+     "checklist": [
+      "Wymienić trzy grupy metod: dochodowe, majątkowe, porównawcze",
+      "Zaznaczyć, że metody dochodowe są nadrzędne dla firm działających (going concern)",
+      "Podać ideę DCF i wzór dyskontowania $PV = CF/(1+r)^t$",
+      "Rozróżnić FCFF (WACC) i FCFE (koszt kapitału własnego $r_e$)",
+      "Podać wzór WACC i wskazać tarczę podatkową tylko przy koszcie długu",
+      "Podać CAPM dla $r_e$: $r_f + \\beta(r_m - r_f)$",
+      "Podać wzór wartości rezydualnej Gordona i warunek $g < WACC$",
+      "Zaznaczyć, że TV to 60-80% wyceny i stąd analiza wrażliwości",
+      "Krótki przykład liczbowy DCF / renty wieczystej"
+     ],
+     "traps": [
+      "Mylenie stopy dyskontowej: FCFF dyskontuje się WACC, a FCFE kosztem kapitału własnego $r_e$ — pomyłka to błąd metodologiczny",
+      "Stosowanie tarczy podatkowej $(1-T)$ przy koszcie kapitału własnego — występuje TYLKO przy koszcie długu",
+      "Pominięcie warunku $g < WACC$ (inaczej wzór Gordona daje wartość ujemną/nieskończoną)",
+      "Twierdzenie, że wycena to jedna konkretna liczba zamiast przedziału z analizą wrażliwości"
+     ]
     }
    ],
    "order": 10
@@ -2162,6 +2536,43 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: dlaczego cena obligacji o stalym kuponie spada, gdy rosna stopy procentowe?",
      "model": "Wartosc obligacji to suma zdyskontowanych przyszlych kuponow i nominalu. Stopa procentowa (dyskontowa) siedzi w mianowniku wzoru, wiec jej wzrost mocniej dyskontuje przyszle przeplywy i obniza ich wartosc obecna. Dodatkowo, gdy stopy rosna, nowe obligacje oferuja wyzsze kupony, przez co stara obligacja o nizszym, stalym kuponie staje sie mniej atrakcyjna - by ktos chcial ja kupic, jej cena musi spasc. Stad relacja odwrotna miedzy stopami a cena obligacji."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Rynki finansowe i instrumenty</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "miejsce spotkania",
+      "krwiobieg gospodarki",
+      "instrumenty finansowe",
+      "pieniezny",
+      "kapitalowy",
+      "1 rok",
+      "pierwotny",
+      "pozyskuje kapital",
+      "wtorny",
+      "plynnosc"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym jest rynek finansowy, jakie pełni funkcje oraz według jakich kryteriów go dzielimy (m.in. rynek pierwotny vs wtórny, pieniężny vs kapitałowy)?",
+     "model": "<p><b>Definicja.</b> Rynek finansowy to mechanizm (miejsce fizyczne lub elektroniczne) przepływu kapitału od podmiotów posiadających nadwyżki (oszczędzający) do tych, którzy kapitału potrzebują (przedsiębiorstwa, państwo). Przedmiotem obrotu są <b>instrumenty finansowe</b> — kontrakty, które u jednej strony tworzą aktywo finansowe, a u drugiej zobowiązanie lub instrument kapitałowy. Obrazowo: rynek finansowy to krwiobieg gospodarki, kierujący oszczędności tam, gdzie najefektywniej zamieniają się w inwestycje.</p><p><b>Funkcje (wymień 4-5):</b></p><ul><li><b>Mobilizacja kapitału</b> — gromadzi rozproszone oszczędności.</li><li><b>Alokacja</b> — kieruje środki do najbardziej efektywnych zastosowań.</li><li><b>Transformacja</b> terminów i ryzyka (krótkie oszczędności na długie inwestycje).</li><li><b>Wycena aktywów</b> — rynek ustala cenę instrumentów i kapitału.</li><li><b>Zapewnienie płynności</b> — możliwość szybkiej zamiany instrumentu na gotówkę.</li></ul><p><b>Podziały:</b></p><ul><li><b>Wg terminu:</b> rynek <b>pieniężny</b> (instrumenty do 1 roku, wysoka płynność, niskie ryzyko — np. bony skarbowe, lokaty międzybankowe) vs rynek <b>kapitałowy</b> (powyżej 1 roku — akcje, obligacje, finansuje rozwój). Granica to <b>1 rok</b>.</li><li><b>Wg etapu obrotu:</b> rynek <b>pierwotny</b> — emitent sprzedaje instrument po raz pierwszy i POZYSKUJE kapitał (np. IPO); rynek <b>wtórny</b> — inwestorzy handlują już wyemitowanymi instrumentami (np. GPW), co zapewnia płynność, ale <b>emitent NIE dostaje środków</b>.</li><li><b>Dodatkowo:</b> rynek <b>walutowy</b> (FOREX) i <b>terminowy</b> (instrumenty pochodne).</li></ul><p><b>Po co to wszystko.</b> Sprawnie działający rynek finansowy obniża koszt kapitału i wspiera wzrost gospodarczy, bo umożliwia tani i szybki przepływ środków od oszczędzających do inwestujących.</p>",
+     "checklist": [
+      "Definicja: mechanizm przepływu kapitału od oszczędzających do inwestujących",
+      "Instrument finansowy = kontrakt: aktywo u jednej strony, zobowiązanie/kapitał u drugiej",
+      "Wymienić min. 4 funkcje: mobilizacja, alokacja, transformacja, wycena, płynność",
+      "Podział wg terminu: pieniężny (do 1 roku) vs kapitałowy (powyżej 1 roku)",
+      "Granica pieniężny/kapitałowy = 1 rok",
+      "Podział wg etapu: pierwotny (emitent pozyskuje kapitał) vs wtórny (obrót między inwestorami)",
+      "Na wtórnym emitent NIE dostaje środków, rynek zapewnia płynność",
+      "Puenta: obniża koszt kapitału i wspiera wzrost gospodarczy"
+     ],
+     "traps": [
+      "Mylenie pierwotny/wtórny — na wtórnym emitent NIE otrzymuje środków, instrument tylko zmienia właściciela",
+      "Mylenie rynku pieniężnego (krótki termin, płynność) z kapitałowym (długi termin, rozwój) — granica 1 rok",
+      "Wymienienie tylko 1-2 funkcji zamiast pełnego zestawu 4-5",
+      "Mówienie ogólnie 'gdzie handluje się akcjami' zamiast podać kryteria podziału"
+     ]
     }
    ],
    "order": 11
@@ -2355,6 +2766,39 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: jak wzrost stopy rezerwy obowiazkowej wplywa na ilosc pieniadza w gospodarce i dlaczego?",
      "model": "Wzrost rezerwy obowiazkowej zmniejsza mnoznik kreacji pieniadza, bo m = 1/r — wieksze r daje mniejszy mnoznik. Banki musza odkladac wieksza czesc kazdego depozytu na rachunku w NBP, wiec mniej moga pozyczyc dalej. W efekcie powstaje mniej kredytow i depozytow, a podaz pieniadza spada. Dlatego podniesienie rezerwy to narzedzie restrykcyjne (schladzajace gospodarke)."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>System bankowy, NBP, polityka monetarna i fiskalna</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "deficyt budzetowy",
+      "Cel inflacyjny NBP",
+      "stabilność cen",
+      "+/-1 punkt procentowy",
+      "zaciąganie długu",
+      "nie może",
+      "dług publiczny"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Proszę scharakteryzować dwuszczeblowy system bankowy i omówić podstawowe funkcje banku centralnego (NBP). Jakie cele realizuje bank centralny i czym różni się od banków komercyjnych?",
+     "model": "<p><b>System dwuszczeblowy</b> to model bankowości, w którym funkcje rozdzielono na dwa szczeble. <b>I szczebel</b> to jeden <b>bank centralny</b> (w Polsce NBP), niezależny od rządu, który NIE obsługuje zwykłych klientów (Kowalskiego ani firm), lecz dba o wartość pieniądza i stabilność systemu finansowego. <b>II szczebel</b> to <b>banki komercyjne</b>, które obsługują przedsiębiorstwa i ludność (depozyty, kredyty, rozliczenia).</p><p><b>Trzy podstawowe funkcje banku centralnego:</b></p><ul><li><b>Bank emisyjny</b> — ma monopol na emisję pieniądza, czyli wyłączne prawo wprowadzania do obiegu znaków pieniężnych (banknotów i monet).</li><li><b>Bank banków</b> — prowadzi rachunki banków komercyjnych, przyjmuje od nich rezerwę obowiązkową, rozlicza je między sobą i jest <b>pożyczkodawcą ostatniej instancji</b> (lender of last resort) — zasila banki w płynność w razie kryzysu.</li><li><b>Bank państwa</b> — obsługuje budżet państwa, zarządza rezerwami dewizowymi i prowadzi rachunki instytucji rządowych.</li></ul><p><b>Cel nadrzędny NBP:</b> utrzymanie stabilnego poziomu cen (stabilność cen), czyli niska i przewidywalna inflacja, przy wspieraniu polityki gospodarczej rządu, o ile nie koliduje to z celem inflacyjnym. <b>Cel inflacyjny NBP</b> wynosi 2,5% z pasmem odchyleń ±1 pkt proc. [zweryfikuj aktualną wartość].</p><p><b>Organy:</b> stopy procentowe i założenia polityki pieniężnej ustala <b>Rada Polityki Pieniężnej (RPP)</b> — autonomicznie, co gwarantuje wiarygodność antyinflacyjną. Niezależność NBP od rządu jest tu kluczowa: gdyby rząd mógł sterować stopami, kusiłoby go finansowanie deficytu dodrukiem, co napędzałoby inflację.</p><p><b>Różnica od banków komercyjnych:</b> bank centralny nie działa dla zysku i nie obsługuje klientów detalicznych — jest „bankiem banków\". Banki komercyjne działają komercyjnie (dla zysku) i obsługują gospodarkę realną.</p>",
+     "checklist": [
+      "Zdefiniować system dwuszczeblowy: I szczebel = bank centralny, II szczebel = banki komercyjne",
+      "Podkreślić, że NBP nie obsługuje klientów indywidualnych ani firm",
+      "Wymienić funkcję: bank emisyjny (monopol emisji pieniądza)",
+      "Wymienić funkcję: bank banków (rachunki banków, pożyczkodawca ostatniej instancji)",
+      "Wymienić funkcję: bank państwa (obsługa budżetu, rezerwy dewizowe)",
+      "Podać cel nadrzędny: stabilność cen / cel inflacyjny 2,5% ±1 pkt proc.",
+      "Wskazać RPP jako organ ustalający stopy i niezależność NBP od rządu"
+     ],
+     "traps": [
+      "Twierdzenie, że NBP udziela kredytów ludziom/firmom — robią to banki komercyjne, NBP to 'bank banków'",
+      "Pominięcie funkcji 'pożyczkodawcy ostatniej instancji' przy funkcji bank banków",
+      "Mylenie organów: stopy ustala RPP, nie zarząd NBP ani rząd",
+      "Niewymienienie celu nadrzędnego (stabilność cen) — sama lista 3 funkcji bez celu to odpowiedź niepełna"
+     ]
     }
    ],
    "order": 12
@@ -2558,6 +3002,43 @@
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami różnicę między deficytem budżetowym a długiem publicznym, używając analogii.",
      "model": "Deficyt budżetowy to zjawisko roczne (strumień) — różnica między dochodami a wydatkami w danym roku, czyli ile w tym jednym roku zabrakło. Dług publiczny to stan skumulowany (zasób) — suma wszystkich dotychczasowych zadłużeń sektora. Analogia: deficyt to ile w danym miesiącu pożyczyłem od znajomych, a dług to łącznie ile jestem im winien po wszystkich miesiącach. Co roku deficyt dolewa się do długu, a dług publiczny jest konstytucyjnie ograniczony do 60% PKB (art. 216)."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Finanse publiczne, budzet i podatki</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "gospodarka pieniężna państwa",
+      "Intuicja",
+      "Dlaczego to ważne",
+      "Sektor publiczny",
+      "SFP",
+      "JST",
+      "Analogia",
+      "Klucz",
+      "Budżet",
+      "Dlaczego ustawa"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym są finanse publiczne i budżet państwa? Proszę odróżnić sektor publiczny od sektora finansów publicznych, a w ramach budżetu — dochody od przychodów, oraz omówić etapy procedury budżetowej.",
+     "model": "<p><b>Finanse publiczne</b> to gospodarka pieniężna państwa, czyli procesy <b>gromadzenia</b> środków publicznych (głównie z podatków) i ich <b>wydatkowania</b> na realizację zadań publicznych (administracja, obrona, zdrowie, transfery socjalne). Są instrumentem polityki fiskalnej państwa.</p><p><b>Sektor publiczny vs. sektor finansów publicznych (SFP):</b></p><ul><li><b>Sektor publiczny</b> — szerokie pojęcie: wszystkie podmioty kontrolowane przez państwo, w tym <b>spółki Skarbu Państwa</b> działające na zasadach rynkowych.</li><li><b>Sektor finansów publicznych (SFP)</b> — węższy, <b>ustawowo zamknięty katalog</b> podmiotów: organy władzy publicznej, jednostki samorządu terytorialnego (JST), ZUS, KRUS, NFZ, uczelnie publiczne, jednostki i zakłady budżetowe. <b>Spółki Skarbu Państwa NIE należą do SFP</b> (działają rynkowo).</li></ul><p><b>Budżet</b> to <b>roczny plan dochodów i wydatków</b> państwa, uchwalany w formie <b>ustawy budżetowej</b> i obowiązkowy do wykonania.</p><p><b>Dochody vs. przychody (kluczowe rozróżnienie):</b></p><ul><li><b>Dochody budżetowe</b> — wpływy <b>bezzwrotne i definitywne</b> (podatki, cła, opłaty); nie trzeba ich oddawać.</li><li><b>Przychody budżetowe</b> — wpływy <b>zwrotne</b> (emisja obligacji, kredyty, prywatyzacja); służą <b>finansowaniu deficytu</b>, nie zwiększają trwale zasobów państwa.</li></ul><p><b>Wynik budżetu:</b> $W = D - Wy$, gdzie $W$ — wynik (zł), $D$ — dochody (zł), $Wy$ — wydatki (zł). Gdy $W < 0$ → <b>deficyt</b>, gdy $W > 0$ → <b>nadwyżka</b>.</p><p><b>Etapy procedury budżetowej (cykl roczny):</b></p><ul><li><b>Przygotowanie</b> projektu — Rada Ministrów (RM).</li><li><b>Uchwalenie</b> ustawy budżetowej — Sejm i Senat.</li><li><b>Wykonanie</b> budżetu — rząd (RM).</li><li><b>Kontrola</b> wykonania — m.in. NIK; Sejm udziela rządowi <b>absolutorium</b>.</li></ul>",
+     "checklist": [
+      "Zdefiniować finanse publiczne jako gromadzenie i wydatkowanie środków publicznych",
+      "Sektor publiczny szerszy niż SFP; SFP to ustawowo zamknięty katalog",
+      "Podać, że spółki Skarbu Państwa są w sektorze publicznym, ale NIE w SFP",
+      "Wymienić podmioty SFP (organy władzy, JST, ZUS, NFZ, KRUS)",
+      "Budżet = roczny plan, uchwalany ustawą budżetową",
+      "Dochody = bezzwrotne/definitywne; przychody = zwrotne, finansują deficyt",
+      "Podać wzór wyniku budżetu W = D - Wy (W<0 deficyt, W>0 nadwyżka)",
+      "Wymienić 4 etapy: przygotowanie (RM), uchwalenie (Sejm/Senat), wykonanie, kontrola (NIK/absolutorium)"
+     ],
+     "traps": [
+      "Mylenie dochodów (bezzwrotne) z przychodami (zwrotne) — klasyczne pytanie dobijające",
+      "Twierdzenie, że spółki Skarbu Państwa należą do SFP — należą tylko do sektora publicznego",
+      "Pominięcie etapu kontroli/absolutorium w procedurze budżetowej",
+      "Mówienie, że budżet to uchwała — to USTAWA budżetowa"
+     ]
     }
    ],
    "order": 13
@@ -2757,6 +3238,43 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: dlaczego finansista patrzy na realna stope procentowa po opodatkowaniu, a nie na nominalna? Uzyj wzoru Fishera.",
      "model": "Nominalna stopa (i) mowi tylko, o ile wiecej zlotowek bedziemy mieli, ale nie uwzglednia, ze pieniadz traci sile nabywcza przez inflacje. Realna stopa wedlug wzoru Fishera to r = i - pi, gdzie pi to inflacja — pokazuje rzeczywisty przyrost sily nabywczej. Dodatkowo od odsetek placimy podatek (Belki), wiec liczymy odsetki netto = i*(1-stawka), a dopiero potem odejmujemy inflacje. Moze sie okazac, ze nominalnie 'zarabiamy', a realnie po podatku tracimy — dlatego liczy sie tylko stopa realna po opodatkowaniu."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Makroekonomia dla finansisty</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "pogoda dla zeglarza",
+      "finalnych",
+      "na terytorium",
+      "obywateli/rezydentow",
+      "GDZIE",
+      "KTO",
+      "metoda wydatkowa",
+      "nadwyzka handlowa",
+      "gospodarki otwartej",
+      "bilans platniczy"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym jest PKB i jak mierzymy aktywność gospodarczą? Proszę zdefiniować PKB, odróżnić go od PNB/DNB, podać wzór wydatkowy oraz wyjaśnić, dlaczego dla finansisty istotne jest rozróżnienie wielkości nominalnych i realnych.",
+     "model": "<p><b>PKB (Produkt Krajowy Brutto)</b> to wartość wszystkich dóbr i usług <b>finalnych</b> wytworzonych na <b>terytorium</b> kraju w danym okresie (zwykle rok lub kwartał). Decyduje kryterium <b>geograficzne</b> — liczy się miejsce wytworzenia, niezależnie od narodowości właściciela kapitału. Liczymy tylko dobra finalne, by uniknąć podwójnego liczenia (półprodukty są już zawarte w cenie wyrobu gotowego).</p><p><b>PNB / DNB (Produkt/Dochód Narodowy Brutto)</b> to dochód wytworzony przez <b>rezydentów/obywateli</b> kraju, niezależnie od miejsca wytworzenia (kryterium <b>własnościowe</b>). Związek:</p><p>$PNB = PKB + \\text{dochody netto z zagranicy}$, gdzie dochody netto z zagranicy = dochody rezydentów uzyskane za granicą $-$ dochody nierezydentów uzyskane w kraju.</p><p><b>PKB metodą wydatkową (gospodarka otwarta):</b></p><p>$Y = C + I + G + (X - M)$</p><ul><li>$Y$ — PKB (zł)</li><li>$C$ — konsumpcja gospodarstw domowych (zł)</li><li>$I$ — inwestycje przedsiębiorstw (zł)</li><li>$G$ — wydatki rządowe (zł)</li><li>$X$ — eksport (zł), $M$ — import (zł)</li><li>$(X-M)$ — eksport netto / saldo handlowe (zł)</li></ul><p><b>Nominalne vs realne:</b> wielkość <b>nominalna</b> jest wyrażona w cenach bieżących, <b>realna</b> — skorygowana o inflację (w cenach stałych). Wzrost PKB nominalnego może wynikać wyłącznie ze wzrostu cen, a nie z większej produkcji. Dla finansisty kluczowa jest wielkość realna, bo to ona pokazuje rzeczywistą siłę nabywczą i realny zwrot z kapitału. <b>Przykład:</b> kraj o dużym napływie kapitału zagranicznego ma zwykle <b>PKB > PNB</b>, bo część zysków wytworzonych na jego terytorium jest transferowana do właścicieli za granicą.</p>",
+     "checklist": [
+      "Definicja PKB: dobra finalne, na terytorium, kryterium geograficzne",
+      "Definicja PNB/DNB: dochody rezydentów, kryterium własnościowe",
+      "Wzór: PNB = PKB + dochody netto z zagranicy",
+      "Wzór wydatkowy Y = C + I + G + (X - M) z opisem symboli",
+      "Wyjaśnienie eksportu netto (X-M)",
+      "Tylko dobra finalne (unikanie podwójnego liczenia)",
+      "Rozróżnienie nominalne (ceny bieżące) vs realne (skorygowane o inflację)",
+      "PKB > PNB w kraju z napływem kapitału zagranicznego"
+     ],
+     "traps": [
+      "Mylenie kryterium PKB (terytorium) z PNB (rezydenci) — komisja tu dociska najmocniej",
+      "Liczenie dóbr pośrednich zamiast tylko finalnych (podwójne liczenie)",
+      "Pomylenie kierunku nierówności: kraj z kapitałem zagranicznym ma PKB > PNB, nie odwrotnie",
+      "Twierdzenie, że wzrost PKB nominalnego = realny wzrost gospodarczy (może być sama inflacja)"
+     ]
     }
    ],
    "order": 14
@@ -2972,6 +3490,44 @@
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami: po co istnieje Expected Shortfall (ES), skoro mamy już VaR?",
      "model": "Bo VaR podaje tylko próg (gdzie zaczyna się ogon strat), a milczy o tym, jak głęboki jest ten ogon. ES to średnia strata w przypadkach, gdy strata przekroczyła VaR — mówi więc \"jak źle bywa za progiem\". Dodatkowo ES jest miarą koherentną (spełnia subaddytywność), więc zawsze szanuje dywersyfikację, podczas gdy VaR przy grubych ogonach potrafi ją karać. Dlatego regulacja FRTB przeszła z VaR na ES (97,5%)."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Value at Risk i ryzyka rynkowe banku</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "Stopa zwrotu",
+      "Zmienność",
+      "Rozkład normalny (Gauss)",
+      "Kwantyl",
+      "Analogia",
+      "kwantyl rozkładu strat",
+      "w danym horyzoncie",
+      "Strata",
+      "Horyzont",
+      "Poziom ufności"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym jest Value at Risk (VaR)? Proszę podać definicję, wzór VaR parametrycznego z wyjaśnieniem symboli, regułę skalowania w czasie oraz zilustrować to przykładem liczbowym.",
+     "model": "<p><b>Definicja.</b> VaR (Value at Risk, wartość zagrożona ryzykiem) to <b>maksymalna oczekiwana strata portfela</b> w zadanym <b>horyzoncie czasowym</b> i przy zadanym <b>poziomie ufności</b>, w normalnych warunkach rynkowych. Formalnie jest to <b>kwantyl rozkładu strat</b> — linia odcięcia w lewym ogonie rozkładu, a NIE strata maksymalna.</p><p><b>Trzy parametry, które MUSZĄ paść:</b></p><ul><li><b>strata</b> (kwota w zł),</li><li><b>horyzont</b> (np. 1 dzień, 10 dni),</li><li><b>poziom ufności</b> $(1-\\alpha)$ (np. 99%).</li></ul><p>Odczyt „VaR = 1 mln, 99%, 1 dzień\" znaczy: <b>z prawdopodobieństwem 99% strata dzienna nie przekroczy 1 mln zł</b>; równoważnie średnio 1 dzień na 100 będzie gorszy.</p><p><b>Wzór VaR parametrycznego (delta-normal):</b></p><p>$VaR = z_{\\alpha} \\cdot \\sigma \\cdot V$</p><ul><li>$VaR$ — wartość zagrożona ryzykiem (zł),</li><li>$z_{\\alpha}$ — kwantyl rozkładu normalnego: $z = 1{,}65$ dla 95%, $z = 2{,}33$ dla 99%, $z = 1{,}96$ dla 97,5%,</li><li>$\\sigma$ — zmienność (odchylenie standardowe stóp zwrotu, ułamek, np. $0{,}02 = 2\\%$),</li><li>$V$ — wartość pozycji (zł).</li></ul><p>Sens $z$: to punkt odcinający najgorszy procent wyników, bo $P(R < -z_{\\alpha}\\sigma) = \\alpha$. Dla 99% jest $z=2{,}33$, ponieważ $P(R < -2{,}33\\sigma) = 1\\%$.</p><p><b>Skalowanie w czasie (reguła pierwiastka):</b></p><p>$VaR_{t} = VaR \\cdot \\sqrt{t}$</p><ul><li>$VaR_t$ — VaR za $t$ dni, $t$ — horyzont w dniach, $\\sqrt{t}$ — pierwiastek z liczby dni ($\\sqrt{10} \\approx 3{,}16$).</li></ul><p>Rośnie jak $\\sqrt{t}$, a nie $\\times t$, bo <b>wariancje niezależnych zwrotów sumują się liniowo</b>, więc odchylenie (i VaR) rośnie z pierwiastkiem.</p><p><b>Przykład liczbowy.</b> Portfel $V = 1\\,000\\,000$ zł, $\\sigma = 2\\% = 0{,}02$, ufność 99% ($z = 2{,}33$):</p><ul><li>VaR jednodniowy: $VaR_{1d} = 2{,}33 \\cdot 0{,}02 \\cdot 1\\,000\\,000 = 46\\,600$ zł,</li><li>VaR na 10 dni: $VaR_{10d} = 46\\,600 \\cdot \\sqrt{10} \\approx 46\\,600 \\cdot 3{,}16 \\approx 147\\,300$ zł.</li></ul><p><b>Interpretacja:</b> w 99 dniach na 100 dzienna strata nie powinna przekroczyć ~46,6 tys. zł.</p><p><b>Po co to:</b> VaR zamienia mgliste „rynek jest ryzykowny\" w jedną, porównywalną liczbę — podstawę limitów ryzyka, wymogu kapitałowego i raportowania.</p>",
+     "checklist": [
+      "Podać definicję: maksymalna oczekiwana strata w horyzoncie i przy poziomie ufności",
+      "Wymienić 3 parametry: strata, horyzont, poziom ufności (1-alfa)",
+      "Podkreślić, że VaR to kwantyl rozkładu strat, NIE strata maksymalna",
+      "Podać wzór VaR = z·σ·V i wyjaśnić każdy symbol",
+      "Podać wartości z: 1,65 (95%), 2,33 (99%), 1,96 (97,5%)",
+      "Uzasadnić z=2,33 przez P(R<-2,33σ)=1%",
+      "Podać skalowanie VaR_t = VaR·√t i uzasadnić sumowaniem wariancji",
+      "Wykonać przykład: 2,33·0,02·1 mln = 46 600 zł oraz ·√10 ≈ 147 300 zł",
+      "Podać interpretację słowną wyniku (99 dni na 100)"
+     ],
+     "traps": [
+      "Pomylenie z=1,65 (95%) z z=2,33 (99%) — najczęstszy błąd, komisja pyta 'dlaczego 2,33?'",
+      "Powiedzenie 'VaR = strata maksymalna' — komisja dopyta 'a w tym 1%?' (od tego jest ES)",
+      "Skalowanie przez t zamiast √t — przeszacowuje ryzyko; trzeba uzasadnić liniowym sumowaniem wariancji",
+      "Stosowanie delta-normal do opcji — opcje są nieliniowe (gamma), liniowa delta zaniża VaR"
+     ]
     }
    ],
    "order": 15
@@ -3181,6 +3737,43 @@
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami różnicę między stratą oczekiwaną (EL) a nieoczekiwaną (UL) oraz czym każdą się pokrywa.",
      "model": "EL to średnia, długoterminowa strata na ekspozycji: EL = PD·LGD·EAD; jest przewidywalnym kosztem biznesu, więc pokrywają ją rezerwy i marża (cena kredytu musi być od niej wyższa). UL to strata nieoczekiwana — odchylenie od średniej, „zły rok\", ogon rozkładu strat; jest rzadka, ale dotkliwa, więc pokrywa ją KAPITAŁ banku. To fundament Bazylei: marża na codzienne straty, kapitał jako poduszka na rzadki cios. Powiedzenie, że kapitał pokrywa EL, jest błędem merytorycznym."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Zdolnosc kredytowa i ryzyko kredytowe</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "prospektywne",
+      "silnie lewarowany",
+      "ustawowym obowiązkiem",
+      "Zdolność kredytowa",
+      "Ryzyko kredytowe",
+      "niewypłacalność (default)",
+      "co najmniej jeden",
+      "90 dni",
+      "PD",
+      "LGD"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym jest zdolność kredytowa, jak bank ją bada i czym różni się od wypłacalności i płynności? Proszę omówić zdolność pierwotną i wtórną oraz wymiary oceny.",
+     "model": "<p><b>Definicja.</b> Zdolność kredytowa to (wg art. 70 ust. 1 Prawa bankowego) zdolność kredytobiorcy do spłaty zaciągniętego kredytu wraz z odsetkami w terminach określonych w umowie, z własnych przyszłych przepływów pieniężnych. Jest to pojęcie <b>prospektywne</b> (patrzy w przyszłość) i dotyczy <b>konkretnego długu</b>, a nie ogólnej kondycji firmy. Bank ma ustawowy obowiązek jej zbadania przed udzieleniem kredytu.</p><p><b>Po co.</b> Bank jest mocno lewarowany (na ~100 zł aktywów ma ~8–10 zł kapitału własnego), więc nawet mały procent strat może wymazać kapitał. Głębszy sens: bank nie minimalizuje strat (zero strat = zero kredytów), lecz <b>maksymalizuje zysk skorygowany o ryzyko</b> (RAROC) — oprocentowanie to „kurs zakładu\" na spłatę.</p><p><b>Dwa wymiary badania:</b></p><ul><li><b>Ilościowy</b> — analiza wskaźnikowa (płynność, zadłużenie, rentowność) i przepływy; dla firmy $DSCR$/$ICR$, dla osoby fizycznej $DStI$ + scoring.</li><li><b>Jakościowy</b> — rama <b>5 C</b>: Character (wiarygodność → PD), Capacity (zdolność spłaty z przepływów → PD), Capital (\"skóra w grze\", bufor), Collateral (zabezpieczenie → LGD), Conditions (otoczenie makro → ryzyko systemowe).</li></ul><p><b>Zdolność pierwotna vs wtórna.</b> Pierwotna = spłata z bieżących przepływów z działalności — to <b>główna podstawa decyzji</b>. Wtórna = z realizacji zabezpieczeń („plan B\", kanał LGD). Oparcie decyzji na zabezpieczeniu, a nie na przepływach, to błędny model <b>lombardowy</b>.</p><p><b>Trzy różne pojęcia.</b> <b>Zdolność kredytowa</b> — prospektywna, dotyczy konkretnego długu. <b>Wypłacalność</b> — dodatni kapitał własny (ujęcie bilansowe). <b>Płynność</b> — bieżąca gotówka. Firma wypłacalna (dobry bilans) może zdefaultować z braku płynności (brak gotówki na ratę dziś).</p><p><b>Regulacje.</b> Prawo bankowe (art. 70), KNF (Rekomendacje S, T), Bazylea III/CRR, MSSF 9 (ECL).</p>",
+     "checklist": [
+      "Podać definicję z art. 70 ust. 1 Prawa bankowego (spłata kapitału + odsetek w terminach umowy)",
+      "Podkreślić charakter prospektywny i odniesienie do przyszłych przepływów",
+      "Wyjaśnić sens: dźwignia banku + maksymalizacja zysku skorygowanego o ryzyko, nie minimum strat",
+      "Wymienić dwa wymiary: ilościowy (wskaźniki, DSCR/DStI) i jakościowy (5 C)",
+      "Wymienić 5 C i przypisać do parametru ryzyka (Character/Capacity→PD, Collateral→LGD)",
+      "Odróżnić zdolność pierwotną (z przepływów) od wtórnej (z zabezpieczeń)",
+      "Rozróżnić zdolność kredytową vs wypłacalność vs płynność",
+      "Wskazać, że oparcie na zabezpieczeniu = błędny model lombardowy"
+     ],
+     "traps": [
+      "Mylenie zdolności kredytowej z wypłacalnością lub płynnością — to trzy różne pojęcia",
+      "Stwierdzenie, że decyzja opiera się na zabezpieczeniu (to model lombardowy) zamiast na przepływach pierwotnych",
+      "Pominięcie prospektywnego charakteru — zdolność dotyczy PRZYSZŁOŚCI, nie historycznego bilansu",
+      "Nieumiejętność przypisania 5 C do PD vs LGD"
+     ]
     }
    ],
    "order": 16
@@ -3384,6 +3977,44 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami glowna mysl calego tematu: co laczy wycene bonu, obligacji, akcji i forwardu.",
      "model": "Wszystkie te instrumenty to obietnice przyszlych przeplywow pieniednych, a ich wartosc to suma tych przeplywow zdyskontowanych do dzis (DCF). Roznia sie tylko ksztaltem i pewnoscia przeplywow: bon ma jeden przeplyw na koncu (procent prosty, krotki termin), obligacja — kupony plus nominal (procent skladany, YTM), akcja — rosnaca nieskonczona dywidende (model Gordona, warunek r>g). Stopa dyskontowa odzwierciedla czas i ryzyko: wieksze ryzyko lub dalsza przyszlosc = mocniejsze dyskontowanie = nizsza cena. Derywaty (forward, opcje) wyceniamy dodatkowo przez zasade braku arbitrazu, a nie przez prognoze przyszlej ceny — bo dwie strategie o tym samym efekcie musza dzis kosztowac tyle samo."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Wycena instrumentow finansowych</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "sprowadzic do dzis",
+      "stopa dyskontowa",
+      "klasy instrumentow",
+      "udzialowe",
+      "dluzne",
+      "pochodne/derywaty",
+      "Rynek pieniezny",
+      "Rynek kapitalowy",
+      "Rynek terminowy",
+      "jak sie wycenia"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Proszę scharakteryzować instrumenty finansowe: zdefiniować pojęcie instrumentu finansowego, omówić jego klasy oraz przedstawić zasady (modele) wyceny w sprawozdawczości (MSSF 9 / MSSF 13).",
+     "model": "<p><b>Definicja.</b> Instrument finansowy to <b>kontrakt</b>, który u jednej strony tworzy <b>aktywo finansowe</b>, a u drugiej <b>zobowiązanie finansowe</b> albo <b>instrument kapitałowy</b>. To relacja prawna, a nie rzecz fizyczna.</p><p><b>Trzy klasy instrumentów:</b></p><ul><li><b>Udziałowe (kapitałowe)</b> — akcja, udział; roszczenie <b>rezydualne</b> (po wierzycielach), <b>bezterminowe</b>.</li><li><b>Dłużne</b> — obligacja, bon skarbowy, weksel; roszczenie <b>uprzywilejowane</b>, z <b>terminem wykupu</b>. Bony to instrumenty krótkoterminowe rynku pieniężnego ($\\leq 1$ rok).</li><li><b>Pochodne (derywaty)</b> — kontrakt, którego wartość zależy od <b>instrumentu bazowego</b>, z niewielkim nakładem początkowym i rozliczeniem w przyszłości (roszczenie warunkowe).</li></ul><p><b>Dwa modele wyceny:</b></p><ul><li><b>Wartość godziwa</b> (fair value, MSSF 13) — cena sprzedaży (<b>exit price</b>) w uporządkowanej transakcji; przy aktywnym rynku równa wartości rynkowej. MSSF 13 wprowadza <b>hierarchię 3 poziomów</b>: poziom 1 — ceny notowane na aktywnym rynku; poziom 2 — dane obserwowalne pośrednio; poziom 3 — dane nieobserwowalne (modele własne).</li><li><b>Zamortyzowany koszt</b> (AC) — wartość początkowa korygowana <b>efektywną stopą procentową</b> oraz odpisem na oczekiwane straty kredytowe; <b>nie reaguje</b> na bieżące wahania rynku.</li></ul><p><b>Klasyfikacja aktywów wg MSSF 9</b> opiera się na <b>modelu biznesowym</b> + teście <b>SPPI</b> (czy przepływy to wyłącznie spłata kapitału i odsetek) i daje trzy kategorie: <b>zamortyzowany koszt</b> ('trzymaj do wykupu'), <b>FVOCI</b> (wartość godziwa przez inne całkowite dochody — 'trzymaj i sprzedawaj'), <b>FVTPL</b> (wartość godziwa przez wynik — reszta, w tym wszystkie derywaty).</p><p><b>Po co to.</b> Sposób wyceny decyduje, czy zmiany rynku trafiają do bilansu i wyniku — to wpływa na obraz sytuacji finansowej i zmienność wyniku jednostki.</p>",
+     "checklist": [
+      "Definicja: kontrakt → aktywo u jednej strony, zobowiązanie/kapitał u drugiej",
+      "Wymienić 3 klasy: udziałowe, dłużne, pochodne",
+      "Natura roszczenia: rezydualne / uprzywilejowane / warunkowe; akcja bezterminowa, obligacja z terminem wykupu",
+      "Derywat = wartość zależna od instrumentu bazowego",
+      "Dwa modele: wartość godziwa vs zamortyzowany koszt",
+      "Wartość godziwa = exit price (MSSF 13) + hierarchia 3 poziomów",
+      "Zamortyzowany koszt = efektywna stopa + odpis na straty kredytowe",
+      "MSSF 9: model biznesowy + test SPPI → AC / FVOCI / FVTPL",
+      "Derywaty zawsze w FVTPL"
+     ],
+     "traps": [
+      "Mylenie instrumentu finansowego (kontrakt) z aktywem fizycznym lub samym papierem wartościowym",
+      "Niewskazanie testu SPPI i modelu biznesowego jako kryteriów klasyfikacji w MSSF 9",
+      "Pominięcie hierarchii 3 poziomów wartości godziwej (MSSF 13)",
+      "Twierdzenie, że zamortyzowany koszt reaguje na wahania rynku — nie reaguje"
+     ]
     }
    ],
    "order": 17
@@ -3571,6 +4202,44 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: dlaczego firma miedzynarodowa NIE musi miec automatycznie wyzszego kosztu kapitalu niz krajowa (odpowiedz dwukierunkowa)?",
      "model": "Bo dzialaja dwie przeciwne sily. W gore koszt pchaja: premia za ryzyko kraju (CRP doliczana do $K_e$) i ryzyko walutowe — to podnosi WACC i obniza wycene DCF. Ale w dol pcha dostep do tanszego, globalnego kapitalu: szerszy rynek inwestorow i tansze zrodla finansowania. Dodatkowo to, czy rynek jest zintegrowany czy segmentowany, zmienia same parametry CAPM (globalna vs lokalna beta i MRP). Koncowy koszt kapitalu to bilans tych sil, a nie automatyczne 'drozej o ryzyko kraju'."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Koszt kapitalu przedsiebiorstwa miedzynarodowego</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "minimalna stopa zwrotu",
+      "koszt alternatywny",
+      "wymagana stopa zwrotu",
+      "Poprzeczka = WACC",
+      "podnosi poprzeczke",
+      "ryzyko kraju",
+      "ryzyko walutowe",
+      "Dwa zrodla finansowania",
+      "kapital wlasny",
+      "dlug"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym jest koszt kapitału przedsiębiorstwa i jak zbudowany jest WACC? Wyprowadź wzór, wyjaśnij koszt kapitału własnego przez CAPM i policz krótki przykład.",
+     "model": "<p><b>Definicja (prostym językiem).</b> Koszt kapitału to <b>minimalna wymagana stopa zwrotu</b>, jaką firma musi wypracować, żeby nie niszczyć wartości. To jednocześnie <b>stopa dyskontowa</b> przyszłych przepływów i <b>koszt alternatywny</b> — cena rezygnacji inwestora z najlepszej innej inwestycji o tym samym ryzyku. Uwaga: to NIE jest wydatek księgowy, lecz wymóg ekonomiczny. Analogia: WACC to wysokość poprzeczki w skoku wzwyż — projekt o zwrocie powyżej WACC tworzy wartość, poniżej niszczy, choćby księgowo dawał zysk.</p><p><b>Dwa źródła finansowania.</b> Kapitał własny (właściciele, bez gwarancji zwrotu, najdroższy) oraz dług (wierzyciele, odsetki z pierwszeństwem, tańszy, ale podnosi ryzyko bankructwa).</p><p><b>Wzór WACC:</b></p><p>$WACC = \\frac{E}{V} \\cdot K_e + \\frac{D}{V} \\cdot K_d \\cdot (1 - T)$</p><ul><li>$E$ — wartość <b>rynkowa</b> kapitału własnego (kapitalizacja = cena akcji $\\cdot$ liczba akcji)</li><li>$D$ — wartość rynkowa długu</li><li>$V = E + D$ — łączna wartość firmy</li><li>$K_e$ — koszt kapitału własnego (%)</li><li>$K_d$ — koszt długu przed podatkiem (%)</li><li>$T$ — stawka podatku (ułamek, np. $0{,}19$)</li><li>$(1-T)$ — <b>tarcza podatkowa</b>: odsetki są kosztem uzyskania przychodu, więc obniżają podatek; efektywny koszt długu to $K_d(1-T)$</li></ul><p><b>Koszt kapitału własnego przez CAPM:</b></p><p>$K_e = R_f + \\beta \\cdot (R_m - R_f)$</p><ul><li>$R_f$ — stopa wolna od ryzyka (% rocznie, np. rentowność obligacji skarbowych)</li><li>$\\beta$ — beta, miara ryzyka <b>systematycznego</b> (niedywersyfikowalnego); $\\beta=1$ jak rynek, $>1$ agresywniej, $<1$ defensywnie</li><li>$(R_m - R_f)$ — premia za ryzyko rynkowe MRP (nadwyżka zwrotu rynku akcji nad $R_f$)</li></ul><p><b>Kluczowe:</b> CAPM wycenia tylko ryzyko systematyczne (betę), bo ryzyko specyficzne inwestor eliminuje przez dywersyfikację — rynek za nie nie płaci.</p><p><b>Przykład.</b> $R_f=4\\%$, $\\beta=1{,}2$, $MRP=5{,}5\\%$, $K_d=7\\%$, $T=19\\%$, $E/V=0{,}6$, $D/V=0{,}4$.</p><ul><li>$K_e = 4\\% + 1{,}2 \\cdot 5{,}5\\% = 10{,}6\\%$</li><li>Koszt długu po tarczy: $7\\% \\cdot 0{,}81 = 5{,}67\\%$</li><li>$WACC = 0{,}6 \\cdot 10{,}6\\% + 0{,}4 \\cdot 5{,}67\\% = 6{,}36\\% + 2{,}27\\% = 8{,}63\\%$</li></ul><p><b>Znaczenie.</b> WACC to stopa dyskontowa dla FCFF (przepływów dla całej firmy); $K_e$ to stopa dla FCFE i dywidend. Im wyższe ryzyko, tym wyższy WACC i niższa wycena DCF, bo $V = CF/WACC$ dla renty wieczystej.</p>",
+     "checklist": [
+      "Koszt kapitału = wymagana stopa zwrotu = stopa dyskontowa = koszt alternatywny (nie wydatek księgowy)",
+      "Podać wzór WACC = (E/V)·Ke + (D/V)·Kd·(1−T)",
+      "Wyjaśnić, że wagi E i D są RYNKOWE, nie księgowe",
+      "Wytłumaczyć tarczę podatkową (1−T) tylko przy długu",
+      "Podać wzór CAPM: Ke = Rf + β·(Rm−Rf)",
+      "Nazwać człony CAPM: Rf, beta, MRP",
+      "Podkreślić, że CAPM wycenia tylko ryzyko systematyczne (beta), nie specyficzne",
+      "Policzyć przykład Ke i WACC na liczbach",
+      "Powiązać WACC z wyceną: wyższy WACC → niższa wartość DCF"
+     ],
+     "traps": [
+      "Wagi księgowe zamiast rynkowych — E to kapitalizacja, nie wartość bilansowa equity",
+      "Doliczanie tarczy (1−T) do kosztu kapitału własnego — błąd, dywidendy nie są kosztem uzyskania przychodu",
+      "Mówienie, że CAPM wycenia całe ryzyko — wycenia TYLKO systematyczne (betę)",
+      "Mylenie WACC (dla FCFF) z Ke (dla FCFE/dywidend) jako stopy dyskontowej"
+     ]
     }
    ],
    "order": 18
@@ -3768,6 +4437,43 @@
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami: dlaczego bilans banku jest „na opak\" względem zwykłej firmy i jakie są tego konsekwencje dla rachunkowości?",
      "model": "W zwykłej firmie aktywa to policzalne, namacalne rzeczy (towary, maszyny). W banku „towarem\" są pieniądze, a bilans w 80–90% to instrumenty finansowe. Po stronie aktywów bank ma głównie obietnice spłaty (kredyty), których wartość zależy od przyszłości; po stronie pasywów — cudze pieniądze, w tym depozyty (depozyt to dług banku wobec klienta, czyli pasywo, a nie aktywo). Konsekwencja: skoro wartość aktywów zależy od niepewnej przyszłości, rachunkowość bankowa to rachunkowość ogólna + nadbudowa ryzyka (model ECL, odpisy) + wymóg nadzorczy (FINREP/COREP, adekwatność kapitałowa). Dlatego potrzeba całego aparatu oczekiwanej straty i dwóch reżimów prawnych (UoR oraz MSSF dla skonsolidowanych sprawozdań banków giełdowych)."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Rachunkowosc bankowa (ustawa vs MSR)</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "Intuicja",
+      "Dlaczego to ważne?",
+      "Dlaczego?",
+      "pasywem",
+      "obowiązkowe",
+      "Charakter obu",
+      "Memoriał",
+      "Ostrożność",
+      "Kontynuacja działania",
+      "Współmierność"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Na czym polega specyfika rachunkowości bankowej i jakie są jej podstawy prawne (Ustawa o rachunkowości a MSR/MSSF)? Proszę wyjaśnić, dlaczego depozyt jest pasywem banku i który reżim prawny ma prymat dla skonsolidowanego sprawozdania banku giełdowego.",
+     "model": "<p><b>Specyfika banku.</b> Bank to nie zwykła firma — jego \"towarem\" są pieniądze, a bilans w <b>80–90% składa się z instrumentów finansowych</b> (kredyty, depozyty, papiery wartościowe). Cechy: bardzo wysoka dźwignia finansowa, dominacja ryzyka kredytowego, wymóg nadzorczy oraz wielu odbiorców sprawozdania (deponenci, nadzór, inwestorzy). Skrót: <b>rachunkowość bankowa = rachunkowość ogólna + nadbudowa ryzyka + wymóg nadzorczy</b>.</p><p><b>Dlaczego depozyt to pasywo?</b> Deponent powierza bankowi pieniądze, które bank musi oddać (na żądanie lub w terminie) — to <b>dług banku wobec klienta</b>, a nie jego majątek. Aktywem stają się dopiero <b>kredyty udzielone z tych środków</b>. Dlatego bilans banku wygląda \"na opak\" względem firmy produkcyjnej.</p><p><b>Zasady nadrzędne rachunkowości</b> (banki ich nie zmieniają, stosują w trudniejszym otoczeniu ryzyka): <b>memoriał</b>, <b>ostrożność</b>, <b>kontynuacja działania</b>, <b>współmierność</b>, <b>treść nad formą</b>.</p><p><b>Trzy warstwy podstaw prawnych:</b></p><ul><li><b>UoR</b> — Ustawa o rachunkowości z 1994 r. — rama prawa bilansowego, obejmuje banki (art. 2).</li><li><b>Rozporządzenie MF</b> o szczególnych zasadach rachunkowości banków — uszczegółowienie dla sektora.</li><li><b>MSR/MSSF</b> (IAS/IFRS) — <b>obowiązkowe dla skonsolidowanych sprawozdań banków giełdowych</b> na mocy rozporządzenia UE nr 1606/2002; kluczowy jest <b>MSSF 9</b>.</li></ul><p><b>Prymat reżimu.</b> Bank z GPW <b>nie może</b> raportować skonsolidowanie tylko po UoR — dla sprawozdania skonsolidowanego <b>MSSF ma prymat w ujęciu i wycenie</b>, UoR reguluje kwestie formalno-proceduralne. UoR jest bardziej <b>regułowa</b>, MSSF bardziej oparte na <b>osądzie i wartości godziwej</b> — bank giełdowy prowadzi de facto dwa ujęcia.</p><p><b>Nazewnictwo sprawozdań.</b> Bilans (UoR) = <b>sprawozdanie z sytuacji finansowej</b> (MSR 1); rachunek zysków i strat wchodzi w <b>sprawozdanie z całkowitych dochodów</b> (P&L + OCI). Pozycje typowe dla banku: należności od klientów, depozyty, wynik z tytułu odsetek.</p><p><b>Instytucje:</b> <b>KNF</b> (nadzór), <b>NBP</b> (sprawozdawczość FINREP/COREP), <b>biegły rewident</b> (audyt), <b>BFG</b> (gwarancje depozytów + resolution). Nadzór ≠ audyt.</p>",
+     "checklist": [
+      "Powiedzieć, że bilans banku to w 80–90% instrumenty finansowe + wysoka dźwignia + wymóg nadzorczy",
+      "Wyjaśnić: depozyt = zobowiązanie (pasywo) banku, aktywem są kredyty z tych środków",
+      "Wymienić 4–5 zasad nadrzędnych (memoriał, ostrożność, kontynuacja, współmierność, treść nad formą)",
+      "Podać trzy warstwy podstaw prawnych: UoR 1994 + rozp. MF + MSR/MSSF",
+      "Powołać rozporządzenie UE 1606/2002 jako podstawę obowiązku MSSF dla banków giełdowych",
+      "Stwierdzić prymat MSSF dla sprawozdania skonsolidowanego banku z GPW",
+      "Podać nazewnictwo: bilans = sprawozdanie z sytuacji finansowej (MSR 1), P&L w sprawozdaniu z całkowitych dochodów",
+      "Wymienić instytucje i rozróżnić nadzór (KNF) od audytu (biegły rewident), wskazać NBP, BFG"
+     ],
+     "traps": [
+      "Najczęstszy błąd \"od zera\": traktowanie depozytu jako aktywa banku — to zobowiązanie",
+      "Twierdzenie, że bank giełdowy może raportować skonsolidowanie tylko po UoR — nie, obowiązkowo MSSF",
+      "Mylenie roli instytucji: KNF nadzoruje, biegły rewident audytuje, BFG gwarantuje depozyty (nie nadzoruje)",
+      "Nieumiejętność wskazania, że UoR jest regułowa, a MSSF oparte na osądzie i wartości godziwej"
+     ]
     }
    ],
    "order": 19
@@ -3972,6 +4678,43 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: dlaczego strategia z trafnoscia ponizej 50 procent moze byc zyskowna, i jaki jest najmocniejszy zarzut wobec AT?",
      "model": "Zyskownosc bierze sie z asymetrii zysk/strata, a nie z czestosci trafien: jesli wygrane sa wyraznie wieksze od przegranych, wartosc oczekiwana EV = p*zysk + (1-p)*strata moze byc dodatnia mimo trafnosci np. 40 procent (np. 0,40*18 + 0,60*(-6) = +3,60 zl). Sluza temu stop-loss (male straty) i pozwalanie zyskom rosnac. Najmocniejszy zarzut wobec AT to slaba forma hipotezy rynku efektywnego: skoro cala informacja z przeszlych cen jest juz w cenie, a AT bazuje wylacznie na przeszlych cenach, nie powinna dawac trwalej przewagi. AT broni sie finansami behawioralnymi (powtarzalne bledy tlumu) i efektem samospelniajacej sie przepowiedni."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Analiza techniczna</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "wlasnymi slowami",
+      "AT",
+      "FA",
+      "komplementarne",
+      "Cena dyskontuje wszystko",
+      "Historia sie powtarza",
+      "Trend",
+      "wzrostowy",
+      "spadkowy",
+      "boczny"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym jest analiza techniczna, na jakich trzech założeniach (teoria Dowa) się opiera i czym różni się od analizy fundamentalnej?",
+     "model": "<p><b>Definicja.</b> Analiza techniczna (AT) to prognozowanie przyszłych cen na podstawie <b>historycznych danych o cenie i wolumenie</b> — badamy sam wykres, a nie sprawozdania finansowe spółki. AT zakłada, że wszystko, co warto wiedzieć o spółce, jest już zawarte w cenie. To narzędzie <b>timingu (KIEDY działać)</b>, a nie wyceny.</p><p><b>Trzy założenia (aksjomaty teorii Dowa):</b></p><ul><li><b>Cena dyskontuje wszystko</b> — cała dostępna informacja (fundamenty, nastroje, polityka) jest już odzwierciedlona w cenie, więc wystarczy badać cenę.</li><li><b>Ceny poruszają się w trendach</b> — ruchy mają kierunek i trwają, dopóki nie pojawi się sygnał odwrócenia.</li><li><b>Historia się powtarza</b> — bo powtarza się psychologia tłumu (strach i chciwość), stąd powtarzalne formacje.</li></ul><p><b>Różnica AT vs FA.</b> Analiza fundamentalna (FA) szacuje <b>wartość wewnętrzną</b> spółki ze sprawozdań finansowych i odpowiada na pytanie ILE coś jest warte. AT bada <b>cenę</b> (timing, KIEDY), FA bada <b>wartość</b> (wycena, ILE). Są komplementarne: FA mówi CO kupić, AT — KIEDY.</p><p><b>Ważne zastrzeżenie.</b> AT nie przewiduje przyszłości w sposób pewny — daje jedynie <b>przewagę probabilistyczną</b> z powtarzalnych układów popytu i podaży.</p>",
+     "checklist": [
+      "AT = prognozowanie z historycznej ceny i wolumenu",
+      "AT bada wykres, ignoruje fundamenty (bo zakłada, że są już w cenie)",
+      "Założenie 1: cena dyskontuje wszystko",
+      "Założenie 2: ceny poruszają się w trendach",
+      "Założenie 3: historia się powtarza (psychologia tłumu)",
+      "Wskazać, że to aksjomaty teorii Dowa",
+      "AT = timing/KIEDY, FA = wartość/ILE",
+      "Podkreślić: przewaga probabilistyczna, nie prognoza pewna"
+     ],
+     "traps": [
+      "Twierdzić, że AT przewiduje przyszłość pewnie — to przewaga probabilistyczna, nie wyrocznia",
+      "Mylić, co bada AT a co FA (AT = cena, FA = wartość)",
+      "Pominąć, że trzy założenia to teoria Dowa",
+      "Mówić, że AT i FA się wykluczają — są komplementarne (timing vs wycena)"
+     ]
     }
    ],
    "order": 20
@@ -4167,6 +4910,44 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: czym pieniadz elektroniczny rozni sie od depozytu bankowego (wymien co najmniej trzy roznice)?",
      "model": "E-pieniadz to przedplacona wartosc u instytucji pieniadza elektronicznego (IPE), z obowiazkiem wykupu po nominale, NIEoprocentowana, chroniona przez SEGREGACJE srodkow (trzymane osobno), BEZ gwarancji BFG, i IPE nim nie obraca. Depozyt to roszczenie wobec banku, ktorym bank OBRACA w rezerwie czastkowej, jest OPROCENTOWANY i objety GWARANCJAMI BFG. Trzy slowa-klucze dla e-pieniadza: przedplacona wartosc, IPE, bez BFG."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Produkty i uslugi bankowe</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "Witaj!",
+      "jedna logika",
+      "marza odsetkowa",
+      "transformuje",
+      "gromadzi",
+      "dluznikiem",
+      "pasywow",
+      "wykorzystuje",
+      "wierzycielem",
+      "aktywow"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Proszę scharakteryzować produkty i usługi bankowe: jak je klasyfikujemy według bilansu banku (operacje bierne, czynne, pośredniczące) i z czego wynika zysk banku?",
+     "model": "<p><b>Punkt wyjścia:</b> bank to nie sejf, lecz <b>pośrednik finansowy</b>. Robi trzy rzeczy: <b>gromadzi</b> środki (operacje bierne), <b>pożycza</b> je (operacje czynne) i <b>pośredniczy</b> w przepływie pieniądza za prowizję (operacje pośredniczące). Klasyfikacja produktów odzwierciedla stronę bilansu, po której zostawiają ślad.</p><p><b>1. Operacje bierne (pasywne)</b> — gromadzenie środków. Bank jest <b>dłużnikiem</b> klienta, produkt po stronie <b>pasywów</b>. Przykłady: lokaty, rachunki, emisja własnych papierów dłużnych. To źródło finansowania banku.</p><p><b>2. Operacje czynne (aktywne)</b> — wykorzystanie środków. Bank jest <b>wierzycielem</b>, produkt po stronie <b>aktywów</b>. Przykłady: kredyty, pożyczki, gwarancje. Uwaga: \"czynne\" odnosi się do banku (bank jest aktywną stroną-wierzycielem), nie do aktywności klienta.</p><p><b>3. Operacje pośredniczące</b> — przepływ pieniędzy za prowizję, <b>neutralne bilansowo</b>. Przykłady: przelewy, karty, wymiana walut, usługi inwestycyjne.</p><p><b>Produkt vs usługa:</b> produkt bankowy to wystandaryzowana oferta zostawiająca ślad w bilansie (kredyt, lokata); usługa to czynność na zlecenie klienta dająca zwykle dochód prowizyjny (rozliczenia, doradztwo, przechowanie).</p><p><b>Skąd zysk banku (najważniejsza pointa):</b> głównie z <b>marży odsetkowej</b> — oprocentowanie kredytów (czynne, drogie) jest wyższe niż depozytów (bierne, tanie), różnica to <b>wynik odsetkowy</b>. Plus prowizje z operacji pośredniczących (stabilny dochód nieobciążający kapitału ryzykiem kredytowym).</p><p>Miara rentowności pośrednictwa to <b>marża odsetkowa netto (NIM)</b>:</p><p>$NIM = \\frac{przychody\\ odsetkowe - koszty\\ odsetkowe}{A}$</p><p>gdzie licznik to <b>wynik odsetkowy</b> (zł), a $A$ to <b>średnie aktywa pracujące</b> generujące odsetki (zł); wynik wyrażony w %.</p><p><b>Przykład:</b> $A = 10$ mld zł, przychody odsetkowe $600$ mln zł, koszty $250$ mln zł. Wynik odsetkowy $= 600 - 250 = 350$ mln zł. $NIM = \\frac{350}{10000} = 0{,}035 = 3{,}5\\%$ — na każdej złotówce aktywów pracujących bank zarabia 3,5 gr rocznie.</p><p><b>Zakotwiczenie prawne:</b> czynności bankowe <b>sensu stricto</b> (art. 5 ust. 1 Prawa bankowego — zastrzeżone dla banków: przyjmowanie wkładów, prowadzenie rachunków, udzielanie kredytów, gwarancje, emisja e-pieniądza) i <b>sensu largo</b> (art. 5 ust. 2 — bankowe tylko, gdy wykonuje je bank: pożyczki, karty, nabywanie wierzytelności).</p>",
+     "checklist": [
+      "Bank jako pośrednik finansowy: gromadzi, pożycza, pośredniczy",
+      "Operacje bierne = pasywa, bank dłużnikiem (lokaty, rachunki, emisja)",
+      "Operacje czynne = aktywa, bank wierzycielem (kredyty, gwarancje)",
+      "Operacje pośredniczące = neutralne bilansowo, za prowizję (przelewy, karty)",
+      "Rozróżnienie produkt (ślad w bilansie) vs usługa (dochód prowizyjny)",
+      "Zysk głównie z marży odsetkowej (czynne drogie − bierne tanie) + prowizje",
+      "Podać wzór NIM = (przychody − koszty odsetkowe) / A i wyjaśnić A",
+      "Przykład liczbowy NIM (np. 3,5%)",
+      "Czynności bankowe sensu stricto (art. 5 ust. 1) vs sensu largo (art. 5 ust. 2)"
+     ],
+     "traps": [
+      "Nie myl \"czynne\" z aktywnością klienta — czynne dotyczy banku jako wierzyciela; kredyt = czynna, NIE bierna",
+      "Sama lista produktów bez wskazania źródła zysku (marża + prowizje) traci najwyżej punktowaną pointę",
+      "Komisja dociska: \"skąd zysk banku?\" — odpowiedź to różnica oprocentowania (wynik odsetkowy/marża), nie sama suma odsetek",
+      "Przy NIM mianownik to średnie AKTYWA PRACUJĄCE, nie wszystkie aktywa ani pasywa"
+     ]
     }
    ],
    "order": 21
@@ -4363,6 +5144,42 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: dlaczego firma z wolnymi mocami powinna przyjac zamowienie po cenie nizszej niz koszt pelny, ale wyzszej niz koszt zmienny?",
      "model": "Bo koszty stałe firma ponosi tak czy inaczej — są nieistotne dla tej decyzji (to koszty utopione w danym okresie). Skoro maszyny i tak stoją wolne, każda dodatkowa sztuka kosztuje tylko swój koszt zmienny. Dopóki cena przewyższa koszt zmienny jednostkowy, marża pokrycia jest dodatnia i całkowity zysk rośnie. Koszt pełny zawiera rozliczone koszty stałe, dlatego myli — sugeruje stratę, której realnie nie ma. Cena progowa to wtedy koszt zmienny. Zastrzeżenie: gdyby firma NIE miała wolnych mocy, trzeba doliczyć koszt utraconych korzyści (utraconą marżę z normalnej sprzedaży), co podnosi próg cenowy."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Rachunkowosc zarzadcza i controlling</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "marżę pokrycia",
+      "próg rentowności",
+      "Rachunkowość finansowa",
+      "Rachunkowość zarządcza",
+      "controlling",
+      "obligatoryjny",
+      "regulowany",
+      "tylko miernika pieniężnego",
+      "danymi historycznymi",
+      "wewnętrzny"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym różni się rachunkowość zarządcza od finansowej oraz jaką rolę w firmie pełni controlling (w tym controlling finansowy)?",
+     "model": "<p><b>Rachunkowość finansowa</b> to obowiązkowy, regulowany prawem (ustawa o rachunkowości, MSR/MSSF) system ewidencji dla odbiorców <b>zewnętrznych</b> (bank, fiskus, inwestorzy). Posługuje się wyłącznie miernikiem pieniężnym, pokazuje dane <b>historyczne</b> i dba o porównywalność oraz precyzję. To 'lusterko wsteczne' — odpowiada na pytanie 'ile było?'.</p><p><b>Rachunkowość zarządcza</b> to wewnętrzny, <b>fakultatywny</b> (dobrowolny), nieregulowany system informacji pod <b>decyzje menedżerskie</b>. Jest zorientowana na <b>przyszłość</b>, używa też danych niepieniężnych (np. liczba sztuk, czas), wybiera trafność i szybkość zamiast maksymalnej precyzji. Odpowiada na pytanie 'co się opłaca?'.</p><p><b>Oś rozróżnienia (do zapamiętania):</b></p><ul><li>finansowa = na zewnątrz / wstecz / obligatoryjna / tylko pieniądz;</li><li>zarządcza = do wewnątrz / w przód / fakultatywna / też dane niepieniężne.</li></ul><p><i>Dlaczego tak?</i> Zewnętrzny odbiorca wymaga porównywalności sprawozdań, stąd sztywne regulacje finansowej; decyzje wewnętrzne wymagają elastyczności, stąd swoboda zarządczej.</p><p><b>Controlling</b> spina oba obrazy. To proces koordynacji <b>planowania, sterowania i kontroli</b> oraz zasilania w informacje — pętla: plan → wykonanie → pomiar → odchylenia → korekta. Controller jest <b>nawigatorem</b> (steruje kursem z wyprzedzeniem), a nie kapitanem ani policjantem. Dzieli się na <b>strategiczny</b> ('robić właściwe rzeczy') i <b>operacyjny</b> ('robić rzeczy właściwie').</p><p><b>Controlling finansowy</b> to odmiana skupiona na <b>płynności, wyniku, strukturze kapitału i rentowności</b> (cash flow, EBIT, ROI). Obejmuje budżetowanie, analizę odchyleń, KPI oraz sprawozdania pro forma. Odpowiada na pytanie 'czy idziemy zgodnie z planem?'.</p>",
+     "checklist": [
+      "Finansowa: obligatoryjna, regulowana (ustawa o rachunkowości / MSR-MSSF), odbiorca zewnętrzny",
+      "Finansowa: dane historyczne, wyłącznie miernik pieniężny",
+      "Zarządcza: fakultatywna, nieregulowana, odbiorca wewnętrzny, decyzje",
+      "Zarządcza: zorientowana na przyszłość, też dane niepieniężne",
+      "Uzasadnić 'dlaczego': zewnętrzny odbiorca → porównywalność → sztywność",
+      "Controlling = pętla planowanie-sterowanie-kontrola + zasilanie w informacje",
+      "Podział controllingu: strategiczny vs operacyjny; controller = nawigator",
+      "Controlling finansowy: płynność, wynik, struktura kapitału, ROI, budżetowanie, KPI, pro forma"
+     ],
+     "traps": [
+      "'Controlling to nie kontrola' — to sterowanie z wyprzedzeniem w pętli; kontrola jest tylko JEDNYM jego elementem",
+      "Nie sprowadzaj zarządczej do 'liczenia kosztów' — kluczowa jest orientacja na PRZYSZŁOŚĆ i decyzje",
+      "Pamiętaj uzasadnić, DLACZEGO finansowa jest regulowana (porównywalność dla odbiorcy zewnętrznego), a nie tylko wymienić cechy"
+     ]
     }
    ],
    "order": 22
@@ -4570,6 +5387,43 @@
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami, jak rozłożyć odchylenie wartości na część cenową i ilościową oraz po co służy kontrola krzyżowa.",
      "model": "Korzystamy z tożsamości wartość = cena × ilość. Odchylenie ceny = (c_rz − c_pl)·q_rz (różnicę cen mnożymy przez ilość rzeczywistą), odchylenie ilości = (q_rz − q_pl)·c_pl (różnicę ilości mnożymy przez cenę planowaną). Człon interakcyjny (mieszany) konwencyjnie przypisujemy cenie — dlatego przy cenie używamy q_rz, a nie q_pl. Kontrola krzyżowa: suma odchylenia ceny i ilości musi równać się odchyleniu całkowitemu (rzeczywiste − planowane); jeśli się nie zgadza, gdzieś jest błąd. Dodatkowo oba odchylenia czyta się łącznie — wyższa cena mogła zdławić wolumen."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Planowanie, budzetowanie i analiza odchylen</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "Memoriałowo",
+      "Kasowo",
+      "Zmienne",
+      "Stałe",
+      "Mieszane",
+      "marży pokrycia",
+      "progu rentowności",
+      "bilansowo-finansowa",
+      "węższy niż KON",
+      "operacyjna"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Proszę omówić proces planowania finansowego i konstrukcję budżetu wiodącego (master budget). Dlaczego rentowna firma może zbankrutować i jaką rolę odgrywa tu nakład na kapitał obrotowy (ΔKON)?",
+     "model": "<p><b>Plan finansowy</b> to przełożenie strategii firmy na liczby: ile zarobimy, ile wydamy i — co najważniejsze — czy starczy gotówki, by dożyć do zarobku. Kluczowa teza egzaminacyjna: <b>zysk to nie gotówka</b>. Rentowna firma może zbankrutować, bo zysk jest <b>memoriałowy</b> (księgowany w momencie sprzedaży), a wzrost zamraża realną gotówkę w należnościach i zapasach szybciej, niż marża ją wygeneruje — zjawisko <b>profitable but broke</b>.</p><p><b>Budżet wiodący (master budget)</b> to zintegrowany zestaw budżetów cząstkowych, składający się z dwóch części:</p><ul><li><b>Część operacyjna</b> — sekwencja: prognoza sprzedaży (driverowo) → produkcja → koszty (zmienne/stałe) → kończy się <b>prognozowanym RZiS</b>.</li><li><b>Część finansowa</b> — <b>budżet kasowy</b> (cash flow, identyfikuje peak funding need) + <b>prognozowany bilans</b>.</li></ul><p>Kolejność planowania nie jest dowolna — wynika z zależności pozycji: sprzedaż → koszty → należności (DSO) → zapasy (DIO) → zobowiązania (DPO) → ΔKON → budżet kasowy.</p><p><b>Mechanizm bankructwa rentownej firmy.</b> Wolny przepływ pieniężny:</p><p>$FCF = NOPAT + D\\&A - CapEx - \\Delta KON$</p><p>gdzie: $FCF$ — wolny przepływ pieniężny (zł); $NOPAT$ — zysk operacyjny po opodatkowaniu (zł); $D\\&A$ — amortyzacja (zł); $CapEx$ — nakłady inwestycyjne (zł); $\\Delta KON$ — nakład na kapitał obrotowy, czyli przyrost kapitału obrotowego (zł). Przy wzroście ΔKON jest <b>wypływem</b> gotówki, przy spadku — wpływem.</p><p><b>Przykład liczbowy.</b> Firma rośnie z 12 do 18 mln zł przychodu, marża NOPAT 8%, dni bez zmian (DSO 45, DIO 60, DPO 30), $D\\&A$=200 tys., CapEx=500 tys. WCR rośnie z 2 136 986 do 3 205 480 zł, więc $\\Delta KON = 1\\,068\\,494$ zł. $NOPAT = 0{,}08 \\cdot 18\\,000\\,000 = 1\\,440\\,000$ zł. Wtedy $FCF = 1\\,440\\,000 + 200\\,000 - 500\\,000 - 1\\,068\\,494 = 71\\,506$ zł. Firma jest wyraźnie rentowna (NOPAT 1,44 mln), a generuje niemal zero gotówki — sam ΔKON pochłonął ~74% NOPAT.</p><p><b>Wniosek:</b> finansowanie wzrostu (kapitału obrotowego) trzeba zabezpieczyć <b>z góry</b>, bo rentowność nie gwarantuje płynności.</p>",
+     "checklist": [
+      "Postawić tezę: zysk to nie gotówka (zysk memoriałowy)",
+      "Wyjaśnić mechanizm profitable but broke — wzrost zamraża gotówkę w należnościach i zapasach",
+      "Podać budżet wiodący = część operacyjna (kończy się RZiS) + finansowa (budżet kasowy + bilans)",
+      "Wymienić sekwencję planowania: sprzedaż → koszty → DSO → DIO → DPO → ΔKON → budżet kasowy",
+      "Podać wzór FCF = NOPAT + D&A − CapEx − ΔKON i wytłumaczyć symbole",
+      "Wyjaśnić, że ΔKON to wypływ gotówki przy wzroście kapitału obrotowego",
+      "Podać przykład: rentowna firma generuje ~0 gotówki, ΔKON zjada NOPAT",
+      "Pointa: finansowanie kapitału obrotowego zabezpieczyć z góry"
+     ],
+     "traps": [
+      "Mylenie zysku z gotówką — zawsze dodać, że rentowność nie gwarantuje płynności",
+      "Pominięcie podziału master budget na część operacyjną i finansową",
+      "Niewytłumaczenie, dlaczego ΔKON jest wypływem (wzrost) a nie wpływem",
+      "Sezonowość: finansowanie wymiarować pod peak funding need (najgłębszy dołek), nie pod średnią"
+     ]
     }
    ],
    "order": 23
@@ -4797,6 +5651,44 @@
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami różnicę między antyselekcją a hazardem moralnym oraz między ZUS a OFE.",
      "model": "Antyselekcja to problem PRZED umową: przy uśrednionej cenie do puli garną się głównie klienci o ryzyku wyższym niż średnia, co psuje pulę; leczy się to underwritingiem i obowiązkowością (OC). Hazard moralny to problem PO umowie: skoro szkodę pokryje ubezpieczyciel, spada ostrożność; leczy się franszyzą i bonus-malus. ZUS to I filar repartycyjny — składki obecnych pracujących finansują obecnych emerytów. OFE to II filar kapitałowy — środki są inwestowane na rynku (akcje GPW) i zarządzane przez PTE; to NIE jest część ZUS."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Ubezpieczenia i OFE</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "zdarzenia losowego",
+      "w dużej grupie",
+      "prawdopodobieństwo",
+      "mutualizacja",
+      "awersję do ryzyka",
+      "Składka",
+      "Suma ubezpieczenia",
+      "osobowych",
+      "świadczeniu",
+      "majątkowych"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym jest ubezpieczenie? Proszę wyjaśnić jego istotę (mechanizm transferu i rozłożenia ryzyka), wymienić cechy i funkcje oraz wyprowadzić składkę czystą z zasady ekwiwalentności.",
+     "model": "<p><b>Definicja (istota).</b> Ubezpieczenie to <b>transfer ryzyka</b> z jednostki na dużą zbiorowość: ubezpieczający płaci małą, pewną <b>składkę</b>, a w zamian ubezpieczyciel gromadzi z wielu składek wspólny fundusz i wypłaca świadczenia tym, których dotknęło zdarzenie losowe. Ryzyko nie znika — zostaje <b>rozłożone (zmutualizowane)</b> na wspólnotę ryzyka i statystycznie ujarzmione dzięki <b>prawu wielkich liczb</b>. To kluczowe zdanie: zamiana wielkiej, niepewnej straty jednostki na znośny, drobny koszt dla każdego.</p><p><b>Dlaczego w ogóle płacimy składkę?</b> Z <b>awersji do ryzyka</b> — wolimy pewny mały wydatek niż loterię o tej samej wartości oczekiwanej.</p><p><b>Cechy ubezpieczenia:</b></p><ul><li><b>losowość</b> — zdarzenie może zajść albo nie;</li><li><b>wzajemność</b> — wielu wpłaca, świadczenie dostaje dotknięty;</li><li><b>ekwiwalentność</b> — składki muszą w wartości oczekiwanej pokryć świadczenia + koszty + zysk;</li><li>(pomocniczo) planowość i realność.</li></ul><p><b>Funkcje ubezpieczeń:</b></p><ul><li><b>ochronna</b> (główna) — kompensacja szkód;</li><li><b>finansowa / akumulacyjna</b> — gromadzenie i lokowanie kapitału (rezerwy);</li><li><b>prewencyjna</b> — ograniczanie ryzyka (np. zniżki za zabezpieczenia);</li><li><b>redystrybucyjna</b> — rozłożenie skutków na wspólnotę; dodatkowo <b>kontrolna</b>.</li></ul><p><b>Składka czysta (zasada ekwiwalentności):</b> $P_{czysta} = q \\cdot S$, gdzie $P_{czysta}$ — składka czysta/netto (zł), sam ekwiwalent ryzyka; $q$ — prawdopodobieństwo szkody (bezwymiarowe, $0 \\leq q \\leq 1$); $S$ — suma ubezpieczenia, maksymalna wypłata (zł). Wynika to z tego, że oczekiwana wypłata z polisy to $E[X] = q \\cdot S$, a składka czysta ma jej dokładnie odpowiadać.</p><p><b>Składka brutto</b> (to, co realnie płaci klient) dolicza narzut na koszty i bezpieczeństwo: $P_{brutto} = \\frac{P_{czysta}}{1-\\lambda}$, gdzie $\\lambda$ — udział narzutu w składce brutto (np. 0,25), a $1-\\lambda$ — część brutto przeznaczona na czyste ryzyko. <b>Uwaga: dzielimy, nie mnożymy.</b></p><p><b>Przykład.</b> Życie, $S = 200\\,000$ zł, $q = 0{,}002$, $\\lambda = 25\\%$. Składka czysta: $0{,}002 \\cdot 200\\,000 = 400$ zł. Brutto: $\\frac{400}{1-0{,}25} = \\frac{400}{0{,}75} \\approx 533{,}33$ zł (błędne $400 \\cdot 1{,}25 = 500$ zł to typowa pułapka).</p><p><b>Po co to działa — prawo wielkich liczb.</b> Im większa pula $n$ polis, tym mniejszy procentowy rozrzut łącznej wypłaty: $CV = \\frac{\\sigma_X}{\\mu} \\cdot \\frac{1}{\\sqrt{n}}$, gdzie $CV$ — współczynnik zmienności (bezwymiarowy), $\\frac{\\sigma_X}{\\mu}$ — względna zmienność jednej polisy (stała), $n$ — liczba polis. Większa pula → niższy narzut bezpieczeństwa.</p>",
+     "checklist": [
+      "Nazwać istotę: transfer ryzyka jednostka → zbiorowość za składkę",
+      "Powiązać działanie z prawem wielkich liczb / mutualizacją (rozłożenie, nie zniknięcie ryzyka)",
+      "Wskazać awersję do ryzyka jako powód płacenia składki",
+      "Wymienić cechy: losowość, wzajemność, ekwiwalentność",
+      "Wymienić funkcje: ochronna (główna), finansowa/akumulacyjna, prewencyjna, redystrybucyjna",
+      "Podać wzór składki czystej P = q·S z wyjaśnieniem q i S",
+      "Wyprowadzić ją z zasady ekwiwalentności (E[X] = q·S)",
+      "Podać wzór składki brutto P_brutto = P_czysta/(1−λ) i podkreślić, że się dzieli",
+      "Wykonać przykład liczbowy (np. 400 zł netto, ~533 zł brutto)"
+     ],
+     "traps": [
+      "Narzut: dzielić przez (1−λ), NIE mnożyć przez (1+λ) — typowy błąd dający 500 zamiast 533,33",
+      "Składka czysta q·S to dopiero netto — klient płaci brutto z narzutami; nie mylić obu",
+      "Twierdzenie, że ubezpieczenie 'usuwa' ryzyko — ono je rozkłada/transferuje, nie likwiduje",
+      "Mylenie wartości oczekiwanej E[X]=q·S z samą sumą ubezpieczenia S"
+     ]
     }
    ],
    "order": 24
@@ -5002,6 +5894,46 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: czym rozni sie zabezpieczenie forwardem od zabezpieczenia opcja, i kiedy ktore wybrac?",
      "model": "Forward to OBOWIAZEK wymiany po umowionym dzis kursie — nic nie placisz z gory, ale zamrazasz wynik: jesli kurs pojdzie korzystnie, oddajesz ten zysk. Opcja to PRAWO (nie obowiazek) wymiany, kupowane za z gory zaplacona premie — dziala jak ubezpieczenie: gdy kurs pojdzie przeciw Tobie, wykonujesz opcje i jestes chroniony; gdy pojdzie korzystnie, rezygnujesz z niej i zarabiasz na rynku, tracac tylko premie. Forward wybiera ten, kto chce pelnej pewnosci bez kosztu poczatkowego i akceptuje utrate potencjalnego zysku. Opcje wybiera ten, kto chce zachowac szanse na korzystny ruch i jest gotow zaplacic za to premie."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Ryzyko walutowe, kurs wymienny i Forex</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "Zdefiniować kurs walutowy jako cenę waluty + odróżnić walutę bazową od kwotowanej (EUR/PLN)",
+      "Odróżnić kurs nominalny od realnego (korekta o różnice poziomów cen / inflację)",
+      "Odróżnić aprecjację/deprecjację (rynek, kurs płynny) od rewaluacji/dewaluacji (administracja, kurs stały)",
+      "Zdefiniować ryzyko walutowe (ta sama liczba, inna wartość w mojej walucie)",
+      "Wymienić 3 typy ryzyka: transakcyjne, przeliczeniowe/translacyjne, ekonomiczne",
+      "Podać krótką charakterystykę każdego typu (realne przepływy / księgowe-konsolidacja / długookresowa konkurencyjność)",
+      "Zdefiniować pozycję walutową jako różnicę aktywa−pasywa w danej walucie",
+      "Rozróżnić pozycję długą (zysk na aprecjacji), krótką (zysk na deprecjacji), zamkniętą (brak ryzyka)",
+      "Powiązać: importer = pozycja krótka, boi się aprecjacji waluty obcej",
+      "Podać wzór CIP: $F = S \\cdot (1 + r_{kw} \\cdot t/360) / (1 + r_{baz} \\cdot t/360)$",
+      "Wyjaśnić każdy symbol: F, S, r_kw (kwotowana), r_baz (bazowa), t, 360",
+      "Wykonać przykład: F = 4,30 · 1,015/1,0075 = 4,3320"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Czym jest ryzyko walutowe? Proszę zdefiniować kurs walutowy, sklasyfikować rodzaje ryzyka walutowego oraz wyjaśnić pojęcie pozycji walutowej (długa/krótka/zamknięta).",
+     "model": "<p><b>Kurs walutowy</b> to cena jednej waluty wyrażona w jednostkach drugiej. W notacji EUR/PLN = 4,30 euro jest walutą <b>bazową</b> (kupujemy 1 sztukę), a złoty walutą <b>kwotowaną</b> (w nim podajemy cenę) — za 1 EUR płacimy 4,30 PLN.</p><p><b>Kurs nominalny vs realny:</b> nominalny to sama cyfra rynkowa; <b>realny</b> to kurs nominalny skorygowany o różnice poziomów cen (inflacji) między krajami — mierzy faktyczną siłę nabywczą i konkurencyjność, a nie samą cenę waluty.</p><p><b>Aprecjacja/deprecjacja vs rewaluacja/dewaluacja:</b> aprecjacja/deprecjacja to rynkowy wzrost/spadek wartości waluty w reżimie kursu <b>płynnego</b>; rewaluacja/dewaluacja to <b>administracyjna</b> zmiana parytetu w reżimie kursu <b>stałego</b>. Nazwa zależy więc od reżimu kursowego.</p><p><b>Ryzyko walutowe</b> to ryzyko, że <i>liczba</i> w umowie pozostanie ta sama, a jej <i>wartość w mojej walucie</i> będzie inna, bo kurs się zmieni. Dzieli się na trzy typy:</p><ul><li><b>Transakcyjne</b> — realne, zakontraktowane przepływy (np. faktura importowa w EUR z terminem 90 dni); najbardziej namacalne.</li><li><b>Przeliczeniowe (translacyjne)</b> — księgowe, powstaje przy konsolidacji sprawozdań spółek zależnych w walucie obcej; wpływa na bilans, nie na realny cash flow.</li><li><b>Ekonomiczne</b> — długookresowy wpływ kursu na konkurencyjność i pozycję rynkową firmy.</li></ul><p><b>Pozycja walutowa</b> to różnica między aktywami a pasywami denominowanymi w danej walucie:</p><ul><li><b>Długa</b> — nadwyżka aktywów nad pasywami; zyskuje na <b>aprecjacji</b> danej waluty (np. eksporter z należnością w EUR).</li><li><b>Krótka</b> — nadwyżka pasywów nad aktywami; zyskuje na <b>deprecjacji</b> (np. importer ze zobowiązaniem w EUR).</li><li><b>Zamknięta (domknięta)</b> — aktywa równe pasywom w danej walucie → brak ryzyka kursowego.</li></ul><p><b>Po co to wszystko:</b> pozycja walutowa jest ogniwem spinającym ryzyko z zabezpieczeniem — żeby się zabezpieczyć, zajmuję pozycję przeciwną do pierwotnej. <b>Importer ma pozycję krótką i boi się aprecjacji</b> waluty obcej; eksporter odwrotnie — pozycję długą i boi się deprecjacji.</p>",
+     "checklist": [
+      "Zdefiniować kurs walutowy jako cenę waluty + odróżnić walutę bazową od kwotowanej (EUR/PLN)",
+      "Odróżnić kurs nominalny od realnego (korekta o różnice poziomów cen / inflację)",
+      "Odróżnić aprecjację/deprecjację (rynek, kurs płynny) od rewaluacji/dewaluacji (administracja, kurs stały)",
+      "Zdefiniować ryzyko walutowe (ta sama liczba, inna wartość w mojej walucie)",
+      "Wymienić 3 typy ryzyka: transakcyjne, przeliczeniowe/translacyjne, ekonomiczne",
+      "Podać krótką charakterystykę każdego typu (realne przepływy / księgowe-konsolidacja / długookresowa konkurencyjność)",
+      "Zdefiniować pozycję walutową jako różnicę aktywa−pasywa w danej walucie",
+      "Rozróżnić pozycję długą (zysk na aprecjacji), krótką (zysk na deprecjacji), zamkniętą (brak ryzyka)",
+      "Powiązać: importer = pozycja krótka, boi się aprecjacji waluty obcej"
+     ],
+     "traps": [
+      "Mylenie aprecjacji z rewaluacją — komisja sprawdza, czy student wie, że nazwa zależy od reżimu kursowego (płynny vs stały).",
+      "Odwrócenie kierunku pozycji — pomylenie, kto ma pozycję długą, a kto krótką; importer to pozycja KRÓTKA i boi się aprecjacji waluty obcej.",
+      "Mylenie ryzyka przeliczeniowego (księgowe, konsolidacja) z transakcyjnym (realny cash flow) — to częsty błąd klasyfikacji.",
+      "Twierdzenie, że pozycja zamknięta nadal ma ryzyko — domknięcie (aktywa=pasywa) eliminuje ryzyko kursowe."
+     ]
     }
    ],
    "order": 25
@@ -5205,6 +6137,43 @@
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: jak swap IRS zabezpiecza firme przed wzrostem stop procentowych i co dokladnie jest w nim wymieniane?",
      "model": "Firma majaca kredyt o zmiennym oprocentowaniu (np. WIBOR + marza) wchodzi w IRS, w ktorym PLACI stala stope, a OTRZYMUJE zmienna (WIBOR). Otrzymywany WIBOR pokrywa zmienna czesc kredytu — zmienne nogi sie znosza i firmie zostaje przewidywalny koszt staly (stala stopa ze swapa + marza kredytu), niezaleznie od tego, czy stopy wzrosna, czy spadna. Wymieniana jest jedynie ROZNICA odsetek (netto), liczona od nominalu; sam nominal NIE jest wymieniany — sluzy tylko jako baza do obliczen."
+    },
+    {
+     "type": "blurt",
+     "prompt": "Zamknij oczy i wypisz z pamięci WSZYSTKO, co wiesz o: <b>Instrumenty pochodne: forward, futures, opcje, swapy</b> — definicje, wzory, kluczowe rozróżnienia. Potem odhacz, ile trafiłeś.",
+     "checklist": [
+      "Intuicja",
+      "Dlaczego to istnieje?",
+      "(1) Hedging (zabezpieczenie)",
+      "(2) Spekulacja",
+      "(3) Arbitraz",
+      "niestandaryzowana umowa OTC",
+      "zobowiazuje obie strony",
+      "Analogia (catering)",
+      "Plusy i minusy",
+      "ryzyko kontrahenta"
+     ]
+    },
+    {
+     "type": "capstone",
+     "q": "Proszę scharakteryzować forward i futures: konstrukcja, wycena (cena forward), profil wypłaty oraz różnice między tymi dwoma instrumentami.",
+     "model": "<p><b>Definicja instrumentu pochodnego (kontekst).</b> Derywat to kontrakt, którego wartość <b>wynika z ceny innego aktywa</b> (instrumentu bazowego: akcji, waluty, stopy, surowca) — to \"zakład o przyszłą cenę czegoś innego\". Cele: <b>hedging</b> (zabezpieczenie), <b>spekulacja</b> (otwarcie ekspozycji), <b>arbitraż</b> (bezryzykowy zysk z różnicy cen).</p><p><b>Forward.</b> Niestandaryzowana umowa <b>OTC</b> (poza giełdą), która <b>zobowiązuje OBIE strony</b> do transakcji po umówionej cenie $F$ w przyszłej dacie $T$. Jest elastyczny (dopasowany do potrzeb stron), ale obarczony <b>ryzykiem kontrahenta</b> (druga strona może nie wywiązać się z umowy).</p><p><b>Futures.</b> To \"forward na giełdzie\" — ekonomicznie taki sam obowiązek dostawy, ale: <b>wystandaryzowany</b>, notowany na <b>giełdzie</b>, rozliczany przez <b>izbę rozliczeniową (CCP)</b>, która eliminuje ryzyko kontrahenta, z <b>depozytem zabezpieczającym</b> i codziennym <b>mark-to-market</b> (rynek wyrównuje zyski/straty każdego dnia; przy stracie pojawia się <b>margin call</b>). W dacie wygaśnięcia zachodzi <b>konwergencja</b>: $F_T \\to S_T$.</p><p><b>Wycena — cena forward (cost-of-carry):</b></p><p>$F = S_0 \\cdot (1 + r)^{T}$</p><p>gdzie: $F$ — uczciwa cena forward (zł), $S_0$ — cena spot dziś (zł), $r$ — roczna stopa wolna od ryzyka (np. 0,05 = 5%), $T$ — czas do dostawy w latach. Intuicja: cena dostawy w przyszłości to dzisiejsza cena \"przeniesiona w czasie\" przez kapitalizację kosztu finansowania.</p><p><b>Wypłata (long):</b></p><p>$Wyplata = S_T - F$</p><p>gdzie: $S_T$ — cena spot w dacie $T$, $F$ — umówiona cena forward. Wynik dodatni = zysk longa, ujemny = strata. Profil jest <b>symetryczny i liniowy</b> (prosta nachylona pod 45 stopni, przecinająca oś w $F$); zysk longa = strata shorta — gra o sumie zero.</p><p><b>Cena $F$ vs wartość $V$.</b> $F$ jest ustalana <b>raz na starcie</b> i jest stała; w momencie zawarcia $V_0 = 0$. Wartość kontraktu $V$ zmienia się w czasie wraz z ceną spot.</p><p><b>Cztery osie różnicy forward vs futures:</b></p><ul><li><b>Standaryzacja</b> — futures tak, forward nie (szyty na miarę).</li><li><b>Miejsce obrotu</b> — futures: giełda; forward: OTC.</li><li><b>Ryzyko kontrahenta</b> — futures eliminuje je przez izbę rozliczeniową; forward je ponosi.</li><li><b>Depozyt + mark-to-market</b> — tylko futures (codzienne rozliczenie, ryzyko margin call); forward rozlicza się dopiero w $T$.</li></ul>",
+     "checklist": [
+      "Definicja derywatu: wartość pochodna od bazy, cele hedging/spekulacja/arbitraż",
+      "Forward = OTC, niestandaryzowany, OBIE strony zobowiązane, ryzyko kontrahenta",
+      "Futures = standaryzowany, giełda, izba rozliczeniowa (CCP), depozyt, mark-to-market, margin call",
+      "Podać wzór ceny forward $F = S_0(1+r)^T$ i wyjaśnić każdy symbol",
+      "Podać wypłatę longa $S_T - F$ i nazwać profil symetryczny/liniowy",
+      "Rozróżnić cenę $F$ (stała, $V_0=0$) od wartości $V$ (zmienna)",
+      "Wymienić CZTERY osie różnicy: standaryzacja, miejsce obrotu, ryzyko kontrahenta, depozyt+MtM",
+      "Wspomnieć konwergencję $F_T \\to S_T$ w dacie wygaśnięcia"
+     ],
+     "traps": [
+      "Porównanie forward/futures sprowadzone tylko do 'jeden jest na giełdzie' — trzeba podać CZTERY osie naraz, inaczej utrata punktów",
+      "Mylenie ceny $F$ (ustalana raz, stała) z wartością $V$ (zmienna w czasie, na starcie 0)",
+      "Pominięcie izby rozliczeniowej jako mechanizmu eliminującego ryzyko kontrahenta w futures",
+      "Twierdzenie, że profil forwardu jest asymetryczny — jest symetryczny i liniowy (gra o sumie zero)"
+     ]
     }
    ],
    "order": 26

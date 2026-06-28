@@ -30,40 +30,40 @@
         <nav class="glass-nav">
             <div class="nav-brand"><span class="brand-glow">FiR</span> Trener</div>
             <div class="nav-links">
-                <button class="nav-btn active" data-view="learn" title="Ucz mnie">
-                    <span class="icon">🎓</span><span class="label">Ucz mnie</span>
+                <button class="nav-btn active" data-view="learn" title="Lekcje">
+                    <span class="icon">🎓</span><span class="label">Lekcje</span>
                 </button>
-                <button class="nav-btn" data-view="tasks" title="Zadania">
+                <button class="nav-btn" data-view="tasks" title="Zadania" style="display:none">
                     <span class="icon">✍️</span><span class="label">Zadania</span>
                 </button>
-                <button class="nav-btn" data-view="dashboard" title="Pulpit">
+                <button class="nav-btn" data-view="dashboard" title="Pulpit" style="display:none">
                     <span class="icon">📊</span><span class="label">Pulpit</span>
                 </button>
-                <button class="nav-btn" data-view="flashcards" title="Fiszki">
+                <button class="nav-btn" data-view="flashcards" title="Fiszki" style="display:none">
                     <span class="icon">📇</span><span class="label">Fiszki</span>
                 </button>
-                <button class="nav-btn" data-view="quiz" title="Quiz">
+                <button class="nav-btn" data-view="quiz" title="Quiz" style="display:none">
                     <span class="icon">❓</span><span class="label">Quiz</span>
                 </button>
-                <button class="nav-btn" data-view="match" title="Pary">
+                <button class="nav-btn" data-view="match" title="Pary" style="display:none">
                     <span class="icon">🔗</span><span class="label">Pary</span>
                 </button>
-                <button class="nav-btn" data-view="reader" title="Czytaj">
+                <button class="nav-btn" data-view="reader" title="Czytaj" style="display:none">
                     <span class="icon">📖</span><span class="label">Czytaj</span>
                 </button>
-                <button class="nav-btn" data-view="commission" title="Komisja">
+                <button class="nav-btn" data-view="commission" title="Komisja" style="display:none">
                     <span class="icon">⚠️</span><span class="label">Komisja</span>
                 </button>
-                <button class="nav-btn" data-view="analytics" title="Analityka">
+                <button class="nav-btn" data-view="analytics" title="Analityka" style="display:none">
                     <span class="icon">📈</span><span class="label">Analityka</span>
                 </button>
-                <button class="nav-btn" data-view="formulas" title="Wzory">
+                <button class="nav-btn" data-view="formulas" title="Wzory" style="display:none">
                     <span class="icon">∑</span><span class="label">Wzory</span>
                 </button>
-                <button class="nav-btn" data-view="search" title="Szukaj">
+                <button class="nav-btn" data-view="search" title="Szukaj" style="display:none">
                     <span class="icon">🔍</span><span class="label">Szukaj</span>
                 </button>
-                <button class="nav-btn" data-view="settings" title="Ustawienia">
+                <button class="nav-btn" data-view="settings" title="Ustawienia" style="display:none">
                     <span class="icon">⚙️</span><span class="label">Ustawienia</span>
                 </button>
             </div>
@@ -95,25 +95,36 @@
                 </div>
             </div>
 
-            <!-- View: Learn (Ucz mnie) -->
-            <section id="view-learn" class="view-container">
-                <header class="view-header">
-                    <h1 class="view-title">Ucz mnie</h1>
-                    <div class="header-controls">
-                        <!-- Mastery per chapter / Dropdown -->
-                        <select id="learn-chapter-filter" class="glass-input">
-                            <option value="all">Wszystkie działy</option>
-                        </select>
+            <!-- View: Learn (Lekcje) -->
+            <section id="view-learn" class="view-container" style="max-width: 1200px; margin: 0 auto; padding: 2rem 1rem;">
+                <div class="rpg-split-layout">
+                    
+                    <!-- Left Panel: RPG Character Card -->
+                    <div id="rpg-character-panel" class="glass-card">
+                        <!-- Dynamic RPG stats card will be loaded here -->
                     </div>
-                </header>
-                <div id="learn-modebar" class="mode-bar"></div>
-                <div id="learn-container" class="learn-layout flex-center">
-                    <!-- Dynamic lesson content will be injected here -->
+                    
+                    <!-- Right Panel: Core Learning Area -->
+                    <div class="learn-main-area">
+                        <header class="view-header" style="padding: 0; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <h1 class="view-title gradient-text" id="learn-view-title" style="font-size: 2rem;">Lekcje</h1>
+                            <div class="header-controls" id="learn-filter-container">
+                                <select id="learn-chapter-filter" class="glass-input" style="padding: 0.5rem 1rem; border-radius: 12px;">
+                                    <option value="all">Wszystkie działy</option>
+                                </select>
+                            </div>
+                        </header>
+                        
+                        <div id="learn-container" class="flex-center" style="width: 100%; flex-direction: column; min-height: 400px; justify-content: flex-start; align-items: stretch;">
+                            <!-- Dynamic content (Main Map, Active Steps, Blurting, Feynman, Boss Fight) -->
+                        </div>
+                        
+                        <div id="learn-controls" class="flashcard-controls" style="display: none; justify-content: center; gap: 15px; margin-top: 1rem; flex-wrap: wrap; width: 100%;">
+                            <!-- Controls -->
+                        </div>
+                    </div>
+                    
                 </div>
-                <div id="learn-controls" class="flashcard-controls" style="display: none;">
-                    <!-- Filled dynamically based on step type -->
-                </div>
-                <div id="modes-stage" class="flex-center" style="display:none;flex-direction:column"></div>
             </section>
 
             <!-- View: Match (Pary) -->
@@ -386,7 +397,6 @@
     <script src="js/ui_select.js"></script>
     <script src="js/match.js"></script>
     <script src="js/boss.js"></script>
-    <script src="js/learn_modes.js"></script>
     <script src="js/app.js"></script>
     
     <script>

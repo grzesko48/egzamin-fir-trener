@@ -92,7 +92,7 @@ const App = {
                 hero.style.opacity = '0';
                 setTimeout(() => hero.style.display = 'none', 500);
             }
-            this.navigate('dashboard');
+            this.navigate('learn');
         }, 1500); // 1.5s splash screen
 
         // Init modules (moduly to `const`, wiec nie sa na window — referuj bezposrednio)
@@ -109,7 +109,6 @@ const App = {
         
         // V3 Modules
         if(typeof Learn!=='undefined') Learn.init(this.lessonsData || window.LESSONS);
-        if(typeof LearnModes!=='undefined') LearnModes.init(this.lessonsData || window.LESSONS, window.EXAM);
         if(typeof Tasks!=='undefined') Tasks.init(window.PROBLEMS);
         if(typeof Match!=='undefined') Match.init(this.data);
     },
