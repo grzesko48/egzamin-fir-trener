@@ -1,7 +1,7 @@
 /**
- * Learn Mode Engine V4 Premium (Norris / Verstappen 2026 Edition)
- * Unifies RPG, Spaced Repetition (SRS), Active Recall (Fiszki, Feynman, Blurting), 
- * offline Web Audio Synthesizer, and cinematic GSAP micro-interactions.
+ * Learn Mode Engine V4 Premium - RPG & Active Learning Super-App
+ * Noris / Verstappen 2026 Edition.
+ * Features: True generated RPG avatars, custom inventory inspect cards, Boss battles, web audio synthesizer, GSAP transitions.
  */
 
 // Web Audio API Synthesizer for offline haptic feedback
@@ -233,24 +233,23 @@ window.Learn = {
         });
     },
 
-    // --- Dynamic Character Emojis on Levels ---
-    getCharacterEmoji(className, level) {
+    // --- Dynamic Character Titles based on level ---
+    getCharacterRank(className, level) {
         if (className === 'audytor') {
-            if (level < 3) return '💼'; // Młodszy księgowy
-            if (level < 6) return '👔'; // Analityk
-            if (level < 10) return '🤵'; // Starszy audytor
-            return '👑'; // Wiceprezes
+            if (level < 3) return 'Młodszy Księgowy';
+            if (level < 6) return 'Starszy Analityk';
+            if (level < 10) return 'Wielki Audytor';
+            return 'Wiceprezes ds. Fuzji';
         } else if (className === 'kinezjolog') {
-            if (level < 3) return '🏋️'; // Adept
-            if (level < 6) return '🎗️'; // Trener
-            if (level < 10) return '🦾'; // Kinezjolog
-            return '👑'; // Mistrz
+            if (level < 3) return 'Adept Treningu';
+            if (level < 6) return 'Trener Personalny';
+            if (level < 10) return 'Kinezjolog Kliniczny';
+            return 'Mistrz Biomechaniki';
         } else {
-            // Strateg
-            if (level < 3) return '📊'; // Stażysta
-            if (level < 6) return '📓'; // Doradca
-            if (level < 10) return '📈'; // Strateg
-            return '👑'; // Prezes funduszu
+            if (level < 3) return 'Stażysta Rynkowy';
+            if (level < 6) return 'Doradca Inwestycyjny';
+            if (level < 10) return 'Strateg Rynkowy';
+            return 'Prezes Funduszu';
         }
     },
 
@@ -272,9 +271,7 @@ window.Learn = {
 
         const state = Store.getGamifyState();
         const currentLevel = state.level || 1;
-        
-        const emoji = this.getCharacterEmoji(avatar.class, currentLevel);
-        
+        const rank = this.getCharacterRank(avatar.class, currentLevel);
         const classNames = { audytor: 'Wielki Audytor', kinezjolog: 'Kinezjolog', strateg: 'Strateg Rynkowy' };
         const name = classNames[avatar.class] || 'Student';
 
@@ -291,11 +288,24 @@ window.Learn = {
 
         const eq = avatar.eq || { head: null, weapon: null, chest: null };
 
+        // Determine item graphic display inside slots
+        let weaponImg = '⚪';
+        if (eq.weapon === 'Złoty Kalkulator') weaponImg = `<img src="assets/avatars/item_kalkulator.png" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
+        else if (eq.weapon === 'Hantel 50kg') weaponImg = `<img src="assets/avatars/item_hantel.png" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
+        else if (eq.weapon === 'Notatnik Rynkowy') weaponImg = `<img src="assets/avatars/item_notatnik.png" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
+
+        let chestImg = '⚪';
+        if (eq.chest === 'Garnitur Audytora') chestImg = `<img src="assets/avatars/item_garnitur.png" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
+        else if (eq.chest === 'Pas Kulturystyczny') chestImg = `<img src="assets/avatars/item_pas.png" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
+        else if (eq.chest === 'Kamizelka Finansisty') chestImg = `<img src="assets/avatars/item_garnitur.png" style="width:100%; height:100%; object-fit:cover; border-radius:11px; filter: hue-rotate(90deg);" />`;
+
         panel.innerHTML = `
             <div class="rpg-avatar-box" style="width: 100%;">
-                <div class="avatar-image-container">${emoji}</div>
-                <h3 style="margin: 0;" class="gradient-text">${name}</h3>
-                <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Poziom ${currentLevel}</div>
+                <div class="avatar-image-container" style="border: 2px solid var(--primary); width:120px; height:120px; overflow:hidden; border-radius:50%;">
+                    <img src="assets/avatars/${avatar.class}.png" style="width:100%; height:100%; object-fit:cover;" alt="Avatar" />
+                </div>
+                <h3 style="margin: 0.5rem 0 0 0;" class="gradient-text">${name}</h3>
+                <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Poziom ${currentLevel} • ${rank}</div>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
@@ -342,11 +352,11 @@ window.Learn = {
                         <div class="slot-name">Głowa</div>
                     </div>
                     <div class="rpg-eq-slot ${eq.weapon ? 'equipped' : ''}" onclick="window.Learn.inspectItem('weapon')">
-                        ${eq.weapon === 'Złoty Kalkulator' ? '🧮' : (eq.weapon === 'Hantel 50kg' ? '🏋️' : (eq.weapon === 'Notatnik Rynkowy' ? '📓' : '⚪'))}
+                        ${weaponImg}
                         <div class="slot-name">Broń</div>
                     </div>
                     <div class="rpg-eq-slot ${eq.chest ? 'equipped' : ''}" onclick="window.Learn.inspectItem('chest')">
-                        ${eq.chest === 'Garnitur Audytora' ? '👔' : (eq.chest === 'Pas Kulturystyczny' ? '🎗️' : (eq.chest === 'Kamizelka Finansisty' ? '🧥' : '⚪'))}
+                        ${chestImg}
                         <div class="slot-name">Klatka</div>
                     </div>
                 </div>
@@ -360,21 +370,87 @@ window.Learn = {
         const avatar = Store._data.avatar;
         if (!avatar || !avatar.eq) return;
         const item = avatar.eq[slot];
-        if (!item) {
-            alert(`Ten slot ekwipunku (${slot}) jest pusty. Zdobędziesz przedmioty za pokonywanie bossów lub awans poziomu!`);
-            return;
+
+        // Animated AAAA Inspect Modal Overlay (No browser alert)
+        const modal = document.createElement('div');
+        modal.className = 'view-container active';
+        modal.style.zIndex = '10005';
+        modal.style.background = 'rgba(5, 5, 10, 0.85)';
+        modal.style.backdropFilter = 'blur(15px)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+
+        let itemTitle = item || 'Pusty Slot';
+        let itemIcon = '⚪';
+        let itemDesc = 'Zdobądź przedmioty za pokonywanie bossów lub awans poziomu!';
+
+        if (slot === 'head') {
+            itemIcon = '🎓';
+            if (item) {
+                itemTitle = item;
+                itemDesc = 'Okulary Analityka. Chronią wzrok przed zmęczeniem i dodają +10% do zyskiwanego XP.';
+            } else {
+                itemTitle = 'Pusty Slot Głowy';
+            }
+        } else if (slot === 'weapon') {
+            if (item === 'Złoty Kalkulator') { 
+                itemIcon = `<img src="assets/avatars/item_kalkulator.png" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid var(--primary); box-shadow: 0 0 15px var(--primary-glow);" />`; 
+                itemDesc = 'Mityczne narzędzie matematyczne. Zwiększa obrażenia zadawane Bossom o 15% oraz dodaje 10% XP za poprawne odpowiedzi.'; 
+            } else if (item === 'Hantel 50kg') { 
+                itemIcon = `<img src="assets/avatars/item_hantel.png" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid var(--success); box-shadow: 0 0 15px rgba(0,255,100,0.3);" />`; 
+                itemDesc = 'Ultraciężki ciężar. Każde uderzenie w Bossa zadaje 20% więcej obrażeń.'; 
+            } else if (item === 'Notatnik Rynkowy') { 
+                itemIcon = `<img src="assets/avatars/item_notatnik.png" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid var(--secondary); box-shadow: 0 0 15px rgba(0,229,255,0.3);" />`; 
+                itemDesc = 'Uporządkowane tabele finansowe. Zwiększa zysk punktów XP o 20% na wszystkich zadaniach.'; 
+            } else { 
+                itemTitle = 'Pusty Slot Broni'; 
+            }
+        } else if (slot === 'chest') {
+            if (item === 'Garnitur Audytora') { 
+                itemIcon = `<img src="assets/avatars/item_garnitur.png" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid var(--primary); box-shadow: 0 0 15px var(--primary-glow);" />`; 
+                itemDesc = 'Wzmacnia autorytet. Zwiększa maksymalne HP postaci o 25 punktów.'; 
+            } else if (item === 'Pas Kulturystyczny') { 
+                itemIcon = `<img src="assets/avatars/item_pas.png" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid var(--success); box-shadow: 0 0 15px rgba(0,255,100,0.3);" />`; 
+                itemDesc = 'Zabezpiecza kręgosłup. Chroni przed obrażeniami z błędnych odpowiedzi (redukuje straty HP o 5 punktów).'; 
+            } else if (item === 'Kamizelka Finansisty') { 
+                itemIcon = `<img src="assets/avatars/item_garnitur.png" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid var(--secondary); filter: hue-rotate(90deg); box-shadow: 0 0 15px rgba(0,229,255,0.3);" />`; 
+                itemDesc = 'Ochronny styl korporacyjny. Zwiększa maksymalne HP o 15 punktów.'; 
+            } else { 
+                itemTitle = 'Pusty Slot Pancerza'; 
+            }
         }
-        
-        const descriptions = {
-            'Złoty Kalkulator': 'Mityczne narzędzie matematyczne. Zwiększa obrażenia zadawane Bossom o 15% oraz dodaje 10% XP za poprawne odpowiedzi.',
-            'Hantel 50kg': 'Ultraciężki ciężar. Każde uderzenie w Bossa zadaje 20% więcej obrażeń.',
-            'Notatnik Rynkowy': 'Uporządkowane tabele finansowe. Zwiększa zysk punktów XP o 20% na wszystkich zadaniach.',
-            'Garnitur Audytora': 'Wzmacnia autorytet. Zwiększa maksymalne HP postaci o 25 punktów.',
-            'Pas Kulturystyczny': 'Zabezpiecza kręgosłup. Chroni przed obrażeniami z błędnych odpowiedzi (redukuje straty HP o 5 punktów).',
-            'Kamizelka Finansisty': 'Ochronny styl korporacyjny. Zwiększa maksymalne HP o 15 punktów.'
+
+        const iconContainer = itemIcon.startsWith('<img') 
+            ? itemIcon 
+            : `<div style="font-size: 4.5rem; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));">${itemIcon}</div>`;
+
+        modal.innerHTML = `
+            <div class="glass-card inspect-item-modal fade-in" style="width:100%; max-width:440px; text-align:center; padding: 2.5rem; border-color: rgba(0, 229, 255, 0.4); box-shadow: 0 0 25px rgba(0,229,255,0.25);">
+                <div style="margin-bottom: 1.5rem; display:flex; justify-content:center;">${iconContainer}</div>
+                <h3 class="gradient-text" style="font-size:1.6rem; margin-bottom:0.3rem;">${itemTitle}</h3>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom:1.5rem;">Slot: ${slot === 'head' ? 'Głowa' : (slot === 'weapon' ? 'Broń / Narzędzie' : 'Pancerz / Ubiór')}</div>
+                <p class="text-muted" style="line-height: 1.6; font-size:1rem; margin-bottom: 2rem;">${itemDesc}</p>
+                <button class="btn primary ripple" style="width:100%; border-radius:24px; padding:0.8rem 1.5rem;">Zamknij Panel</button>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        const card = modal.querySelector('.glass-card');
+        const btn = modal.querySelector('button');
+
+        if (typeof gsap !== 'undefined') {
+            gsap.fromTo(card, { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(1.5)" });
+        }
+
+        btn.onclick = () => {
+            if (typeof gsap !== 'undefined') {
+                gsap.to(modal, { opacity: 0, duration: 0.25, onComplete: () => modal.remove() });
+            } else {
+                modal.remove();
+            }
         };
-        
-        alert(`⭐ PRZEDMIOT: ${item}\n\nEfekt pasywny:\n${descriptions[item] || 'Brak opisu.'}`);
     },
 
     resetAvatar() {
@@ -471,22 +547,22 @@ window.Learn = {
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; text-align: left; width: 100%;">
                     
                     <!-- Class 1 -->
-                    <div class="glass-card class-card-rpg ripple" style="cursor:pointer; border-color: rgba(255, 234, 0, 0.2); padding: 1.5rem; transition: all 0.3s;" onclick="window.Learn.createHero('audytor')">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">💼</div>
+                    <div class="glass-card class-card-rpg ripple" style="cursor:pointer; border-color: rgba(255, 234, 0, 0.2); padding: 1.5rem; transition: all 0.3s; display:flex; flex-direction:column; align-items:center; text-align:center;" onclick="window.Learn.createHero('audytor')">
+                        <img src="assets/avatars/audytor.png" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); box-shadow: 0 0 15px var(--primary-glow); margin-bottom: 1.2rem;" alt="Audytor" />
                         <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Wielki Audytor</h3>
                         <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Ekspert bilansów i WACC. Rozpoczyna ze <b>Złotym Kalkulatorem</b> (+15% XP) i <b>Garniturem Audytora</b> (+25 max HP).</p>
                     </div>
 
                     <!-- Class 2 -->
-                    <div class="glass-card class-card-rpg ripple" style="cursor:pointer; border-color: rgba(0, 255, 100, 0.2); padding: 1.5rem; transition: all 0.3s;" onclick="window.Learn.createHero('kinezjolog')">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🏋️</div>
+                    <div class="glass-card class-card-rpg ripple" style="cursor:pointer; border-color: rgba(0, 255, 100, 0.2); padding: 1.5rem; transition: all 0.3s; display:flex; flex-direction:column; align-items:center; text-align:center;" onclick="window.Learn.createHero('kinezjolog')">
+                        <img src="assets/avatars/kinezjolog.png" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--success); box-shadow: 0 0 15px rgba(0,255,100,0.3); margin-bottom: 1.2rem;" alt="Kinezjolog" />
                         <h3 style="color: var(--success); margin-bottom: 0.5rem;">Kinezjolog</h3>
                         <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Mistrz fizjologii i biomechaniki. Otrzymuje <b>Hantel 50kg</b> (+20% obrażeń) oraz <b>Pas Kulturystyczny</b> (redukuje straty HP).</p>
                     </div>
 
                     <!-- Class 3 -->
-                    <div class="glass-card class-card-rpg ripple" style="cursor:pointer; border-color: rgba(0, 229, 255, 0.2); padding: 1.5rem; transition: all 0.3s;" onclick="window.Learn.createHero('strateg')">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                    <div class="glass-card class-card-rpg ripple" style="cursor:pointer; border-color: rgba(0, 229, 255, 0.2); padding: 1.5rem; transition: all 0.3s; display:flex; flex-direction:column; align-items:center; text-align:center;" onclick="window.Learn.createHero('strateg')">
+                        <img src="assets/avatars/strateg.png" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--secondary); box-shadow: 0 0 15px rgba(0,229,255,0.3); margin-bottom: 1.2rem;" alt="Strateg" />
                         <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">Strateg Rynkowy</h3>
                         <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Optymalizuje rynki rygoru. Otrzymuje <b>Notatnik Rynkowy</b> (+20% zysku XP) oraz <b>Kamizelkę Finansisty</b> (+15 max HP).</p>
                     </div>
@@ -527,7 +603,7 @@ window.Learn = {
         Store._data.vitality = 100;
         Store.save();
 
-        window.LearnSound.playLevelUp(); // play creator start sound
+        window.LearnSound.playLevelUp();
         this.lessonState = 'map';
         this.renderRPGPanel();
         this.renderMain();
@@ -594,24 +670,22 @@ window.Learn = {
                     
                     <!-- Boss 1 -->
                     <div class="glass-card" style="border-color: rgba(255,23,68,0.3); padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; background: linear-gradient(135deg, rgba(255,23,68,0.03) 0%, transparent 100%);">
-                        <div>
-                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-                                <h4 style="color: var(--danger); margin: 0; font-size: 1.15rem;">Architekt Bilansu</h4>
-                                <span style="font-size: 0.75rem; background: rgba(255,23,68,0.15); padding: 2px 8px; border-radius: 10px; color: var(--danger); font-weight: bold;">FINANSE & RACHUNKOWOŚĆ</span>
-                            </div>
-                            <p class="text-muted" style="font-size: 0.85rem; line-height: 1.5;">Strażnik zasad memoriałowych i WACC. Zmierzy się z Tobą w bezlitosnym starciu z operacji gospodarczych.</p>
+                        <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                            <img src="assets/avatars/boss_bilans.png" style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:2px solid var(--danger); box-shadow: 0 0 10px rgba(255,23,68,0.3); margin-bottom:1rem;" alt="Architekt" />
+                            <h4 style="color: var(--danger); margin: 0; font-size: 1.15rem;">Architekt Bilansu</h4>
+                            <span style="font-size: 0.75rem; background: rgba(255,23,68,0.15); padding: 2px 8px; border-radius: 10px; color: var(--danger); font-weight: bold; margin-top:0.4rem;">FINANSE & RACHUNKOWOŚĆ</span>
+                            <p class="text-muted" style="font-size: 0.85rem; line-height: 1.5; margin-top:0.8rem;">Strażnik zasad memoriałowych i WACC. Zmierzy się z Tobą w bezlitosnym starciu z operacji gospodarczych.</p>
                         </div>
                         <button class="btn danger ripple" style="width:100%; font-weight: bold; border-radius:24px; padding:0.8rem;" onclick="window.Learn.challengeBoss('finance')">Rzuć Wyzwanie (Egzamin)</button>
                     </div>
 
                     <!-- Boss 2 -->
                     <div class="glass-card" style="border-color: rgba(255,23,68,0.3); padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; background: linear-gradient(135deg, rgba(255,23,68,0.03) 0%, transparent 100%);">
-                        <div>
-                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-                                <h4 style="color: var(--danger); margin: 0; font-size: 1.15rem;">Golem Powięziowy</h4>
-                                <span style="font-size: 0.75rem; background: rgba(255,23,68,0.15); padding: 2px 8px; border-radius: 10px; color: var(--danger); font-weight: bold;">ANATOMIA & BIOMECHANIKA</span>
-                            </div>
-                            <p class="text-muted" style="font-size: 0.85rem; line-height: 1.5;">Ostateczny sprawdzian z przyczepów mięśni i planowania jednostek treningowych. Każdy błąd kosztuje HP.</p>
+                        <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                            <img src="assets/avatars/boss_golem.png" style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:2px solid var(--danger); box-shadow: 0 0 10px rgba(255,23,68,0.3); margin-bottom:1rem;" alt="Golem" />
+                            <h4 style="color: var(--danger); margin: 0; font-size: 1.15rem;">Golem Powięziowy</h4>
+                            <span style="font-size: 0.75rem; background: rgba(255,23,68,0.15); padding: 2px 8px; border-radius: 10px; color: var(--danger); font-weight: bold; margin-top:0.4rem;">ANATOMIA & BIOMECHANIKA</span>
+                            <p class="text-muted" style="font-size: 0.85rem; line-height: 1.5; margin-top:0.8rem;">Ostateczny sprawdzian z przyczepów mięśni i planowania jednostek treningowych. Każdy błąd kosztuje HP.</p>
                         </div>
                         <button class="btn danger ripple" style="width:100%; font-weight: bold; border-radius:24px; padding:0.8rem;" onclick="window.Learn.challengeBoss('biomechanics')">Rzuć Wyzwanie (Egzamin)</button>
                     </div>
@@ -744,12 +818,11 @@ window.Learn = {
 
         if (step.type === 'teach' || step.type === 'example') {
             const npcName = lesson.chapter === 'fundament' || lesson.chapter === 'stopy' ? 'Wielki Audytor' : 'Trener-Mistrz';
-            const npcEmoji = lesson.chapter === 'fundament' || lesson.chapter === 'stopy' ? '💼' : '🏋️';
 
             contentEl.innerHTML = `
                 <div style="display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 1rem; background: rgba(255,255,255,0.01); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.03); box-shadow: inset 0 0 15px rgba(0,0,0,0.3);">
-                    <div style="font-size: 2.8rem; background: rgba(0,229,255,0.1); width: 68px; height: 68px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid var(--primary-glow);">
-                        ${npcEmoji}
+                    <div style="font-size: 2.8rem; background: rgba(0,229,255,0.1); width: 68px; height: 68px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid var(--primary-glow); overflow:hidden;">
+                        <img src="assets/avatars/${lesson.chapter === 'fundament' || lesson.chapter === 'stopy' ? 'audytor' : 'kinezjolog'}.png" style="width:100%; height:100%; object-fit:cover;" />
                     </div>
                     <div>
                         <div style="font-weight: bold; color: var(--primary); font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: 0.5px;">💬 ${npcName}</div>
@@ -1124,7 +1197,6 @@ window.Learn = {
             const badge = blockDiv.querySelector('.order-badge');
             if (badge) badge.textContent = scrambledIdx + 1;
             
-            // Re-index remaining badges
             this.selectedFeynmanOrder.forEach((idx, order) => {
                 const b = document.querySelector(`.feynman-block[data-idx="${idx}"] .order-badge`);
                 if (b) b.textContent = order + 1;
@@ -1216,7 +1288,6 @@ window.Learn = {
             return { word: keyword, hit: isHit };
         });
 
-        // Stagger fade-in matched checklist
         const box = document.getElementById('blurt-checklist-box');
         if (box) {
             box.style.display = 'grid';
@@ -1229,7 +1300,6 @@ window.Learn = {
                 itemDiv.innerHTML = `<span class="badge">${item.hit ? '✓' : '✗'}</span> <span>${item.word}</span>`;
                 box.appendChild(itemDiv);
                 
-                // GSAP stagger entry
                 if (typeof gsap !== 'undefined') {
                     gsap.to(`.blurt-item-${i}`, { opacity: item.hit ? 1 : 0.5, translateY: 0, delay: i * 0.05, duration: 0.3 });
                 } else {
@@ -1281,17 +1351,14 @@ window.Learn = {
         Store.save();
         this.renderRPGPanel();
 
-        // Shaking effect
         const card = document.getElementById('rpg-character-panel');
         if (card) {
             card.classList.add('shake-danger');
             setTimeout(() => card.classList.remove('shake-danger'), 500);
         }
         
-        // Audio effect
         window.LearnSound.playDamage();
 
-        // Show floating red damage indicator over RPG card
         const rect = card.getBoundingClientRect();
         const floatEl = document.createElement('div');
         floatEl.className = 'floating-damage';
@@ -1416,7 +1483,6 @@ window.Learn = {
         nextBtn.onclick = () => this.nextStep(2);
         controls.appendChild(nextBtn);
 
-        // GSAP animate hint display
         if (typeof gsap !== 'undefined') {
             gsap.from(hintDiv, { height: 0, opacity: 0, overflow: 'hidden', duration: 0.35, ease: "power2.out" });
         }
@@ -1625,7 +1691,9 @@ window.Learn = {
                     </div>
                 </div>
 
-                <div class="boss-avatar-box" style="margin-bottom:2rem;">${boss.emoji}</div>
+                <div class="boss-avatar-box" style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; border: 4px solid var(--danger); box-shadow: 0 0 25px rgba(255, 23, 68, 0.6); margin: 0 auto 2rem auto;">
+                    <img src="assets/avatars/boss_${boss.chapter === 'fundament' ? 'bilans' : 'golem'}.png" style="width:100%; height:100%; object-fit:cover;" alt="Boss" />
+                </div>
                 
                 <!-- Active Challenge -->
                 <div id="boss-challenge-area" style="background: rgba(0,0,0,0.4); padding: 1.8rem; border-radius: 16px; border:1px solid rgba(255,23,68,0.25); text-align: left; box-shadow: inset 0 0 15px rgba(0,0,0,0.5);">
@@ -1791,13 +1859,11 @@ window.Learn = {
 
         boss.hp = Math.max(0, boss.hp - amount);
 
-        // Shake animation on boss card
         const card = document.querySelector('.boss-arena-card');
         if (card) {
             card.classList.add('shake-danger');
             setTimeout(() => card.classList.remove('shake-danger'), 300);
             
-            // Show damage floating text
             const rect = card.getBoundingClientRect();
             const floatEl = document.createElement('div');
             floatEl.className = 'floating-damage';

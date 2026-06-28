@@ -256,6 +256,66 @@
      "gap": true
     },
     {
+     "type": "teach",
+     "html": "<p><b>Koszty klasyfikuje sie na rozne sposoby</b> i egzamin lubi te podzialy.</p><p><b>Uklad rodzajowy</b> grupuje koszty wedlug ich natury: amortyzacja, zuzycie materialow i energii, wynagrodzenia, uslugi obce, podatki i oplaty. <b>Uklad funkcjonalny (kalkulacyjny)</b> grupuje je wedlug miejsca powstania i funkcji: koszty produkcji (wytworzenia), koszty sprzedazy i koszty ogolnego zarzadu.</p><p>Stad biora sie dwa warianty rachunku zyskow i strat: <b>porownawczy</b> (oparty na ukladzie rodzajowym, z korekta o zmiane stanu produktow) oraz <b>kalkulacyjny</b> (oparty na ukladzie funkcjonalnym).</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Rachunek kosztow penych</b> przypisuje na produkt wszystkie koszty wytworzenia - zarowno zmienne, jak i staa czesc kosztow posrednich. <b>Rachunek kosztow zmiennych</b> przypisuje na produkt tylko koszty zmienne, a koszty stae traktuje jako koszt okresu (obciaza nimi caly wynik, nie pojedyncza sztuke).</p><p>Roznica jest istotna decyzyjnie: rachunek kosztow zmiennych daje <b>marze pokrycia</b> i jest baza decyzji krotkookresowych (czy przyjac dodatkowe zlecenie, jaka cena minimalna). Rachunek penych wymagany jest natomiast do wyceny zapasow w sprawozdaniu finansowym.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Nie kazdy koszt ksiegowy jest kosztem podatkowym</b>, a nie kazdy przychod ksiegowy jest przychodem podatkowym. Dlatego wynik finansowy brutto (ksiegowy) rozni sie od <b>dochodu do opodatkowania</b>.</p><p>Od wyniku ksiegowego dochodzimy do podstawy opodatkowania, korygujac go o pozycje nieuznawane podatkowo (np. czesc kosztow reprezentacji, niektore odpisy, kary) - to tzw. roznice trwale i przejsciowe. Dopiero od tak ustalonego dochodu liczy sie podatek (np. CIT). To dlatego zysk wykazany w RZiS i kwota faktycznego podatku rzadko sa wprost proporcjonalne.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Teoria portfela Markowitza</b> formalizuje dywersyfikacje: laczac aktywa, ktorych stopy zwrotu sa skorelowane sabiej niz idealnie (korelacja $\\leq 1$), obniza sie ryzyko portfela mierzone odchyleniem $\\sigma$ bez utraty oczekiwanego zwrotu.</p><p>Zbior portfeli dajacych <b>najwyzszy zwrot przy danym poziomie ryzyka</b> (lub najnizsze ryzyko przy danym zwrocie) tworzy <b>granice efektywna</b>. Racjonalny inwestor wybiera zawsze portfel lezacy na tej granicy - kazdy punkt ponizej niej jest gorszy, bo da sie miec wiecej zwrotu przy tym samym ryzyku.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Hipoteza efektywnosci rynku (EMH)</b> mowi, ze ceny aktywow szybko i pelnie odzwierciedlaja dostepne informacje, przez co trwae \"pobicie rynku\" jest bardzo trudne.</p><p>Wyroznia sie trzy formy: <b>saba</b> (ceny zawieraja wszystkie dane historyczne - wiec analiza techniczna nie daje przewagi), <b>posilna</b> (ceny zawieraja takze wszystkie informacje publiczne - bez przewagi z analizy sprawozdan), <b>silna</b> (ceny zawieraja nawet informacje poufne). EMH jest glownym argumentem przeciw skutecznosci analizy technicznej i za inwestowaniem pasywnym.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Twierdzenie Modiglianiego-Millera</b> mowi, ze w swiecie bez podatkow i kosztow bankructwa struktura kapitau (proporcja dlugu do kapitau wlasnego) nie wplywa na wartosc firmy. Po wprowadzeniu <b>podatkow</b> dlug staje sie korzystny, bo daje tarcze podatkowa - ale rosnace zadluzenie zwieksza ryzyko bankructwa.</p><p>Wynika stad teoria <b>trade-off</b>: optymalna struktura to rownowaga miedzy korzyscia z tarczy a kosztami trudnosci finansowych. <b>Dzwignia finansowa</b> (uzycie dlugu) podnosi rentownosc kapitau wlasnego ROE, gdy firma zarabia wiecej niz kosztuje dlug - ale w tym samym stopniu zwieksza ryzyko strat.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Asymetria informacji</b> wystepuje, gdy jedna strona transakcji wie wiecej niz druga. Ma dwa klasyczne skutki.</p><p><b>Selekcja negatywna (adverse selection)</b> dziaa <b>przed</b> zawarciem umowy: bank nie odrozni dobrego kredytobiorcy od zlego, wiec ustala srednia cene (oprocentowanie), ktora odstrasza dobrych, a przyciaga ryzykownych. <b>Pokusa naduzycia (moral hazard)</b> dziaa <b>po</b> zawarciu umowy: zabezpieczony klient zmienia zachowanie na bardziej ryzykowne. Dlatego banki badaja zdolnosc kredytowa, zadaja zabezpieczen i monitoruja klienta - to mechanizmy ograniczania obu zjawisk.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Prawo jednej ceny</b> mowi, ze dwa aktywa generujace identyczne przyszle przeplywy musza miec te sama cene - inaczej powstaje okazja do <b>arbitrazu</b>, czyli pewnego zysku bez ryzyka i bez angazowania wlasnego kapitau (kup tanio tam, sprzedaj drogo tu).</p><p>Dziaania arbitrazystow szybko wyrownuja ceny, dlatego w efektywnym rynku arbitraz \"znika\". Ta zasada jest fundamentem <b>wyceny instrumentow pochodnych</b> oraz parytetow (np. parytet stop procentowych na rynku walutowym).</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>EVA (ekonomiczna wartosc dodana)</b> mierzy, czy firma zarabia wiecej, niz wynosi koszt caego zaangazowanego kapitau. Liczy sie ja jako zysk operacyjny po opodatkowaniu (NOPAT) pomniejszony o oplate za kapital: $EVA = NOPAT - WACC \\cdot K$, gdzie $K$ to wartosc zaangazowanego kapitau.</p><p>Dodatnie EVA oznacza, ze firma <b>tworzy wartosc</b> dla wlascicieli (zarabia powyzej kosztu kapitau); ujemne - niszczy ja, mimo ze ksiegowo moze wykazywac zysk. To kluczowe narzedzie zarzadzania przez wartosc (VBM).</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>ARR (Accounting Rate of Return, ksiegowa stopa zwrotu)</b> to prosta metoda oceny inwestycji: $ARR = \\frac{przecietny\\ zysk\\ roczny}{przecietny\\ nakad\\ inwestycyjny}$, wynik podaje sie w procentach.</p><p>Jej zaleta jest prostota i oparcie na danych z ksiag. Wady: opiera sie na <b>zysku ksiegowym, a nie na przeplywach pieniaznych</b>, oraz - jak okres zwrotu - <b>ignoruje wartosc pieniadza w czasie</b>. Dlatego sluzy tylko do wstepnej oceny, a decyzje merytoryczne podejmuje sie na NPV/IRR.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Podatek to przymusowe, bezzwrotne i nieodplatne swiadczenie pieniezne na rzecz panstwa. Pelni trzy glowne <b>funkcje</b>: <b>fiskalna</b> (dostarcza dochodow budzetowi - to funkcja podstawowa), <b>redystrybucyjna</b> (przesuwa dochody miedzy grupami spoeczenstwa, np. przez progresje) oraz <b>stymulacyjna</b> (zachECA lub zniechECA do okreslonych dziaan, np. ulgi na inwestycje czy badania).</p><p>Niezaleznie od funkcji obowiazuje podzial na podatki <b>bezposrednie</b> (PIT, CIT - od dochodu/majatku podatnika) i <b>posrednie</b> (VAT, akcyza - wliczone w cene towaru).</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Roczne sprawozdanie finansowe przechodzi okreslona sciezke formalna: <b>sporzadzenie</b>, ewentualne <b>badanie przez bieglego rewidenta</b> (obowiazkowe dla wiekszych jednostek speniajacych ustawowe progi), <b>zatwierdzenie</b> przez organ wlasciwy (np. zgromadzenie wspolnikow) oraz <b>zlozenie i ogoszenie</b> w rejestrze.</p><p>Element <b>informacja dodatkowa</b> sklada sie z dwoch czesci: <b>wprowadzenia</b> do sprawozdania (przyjete zasady rachunkowosci, metody wyceny) oraz <b>dodatkowych informacji i objasnien (not)</b>. To ona nadaje liczbom z bilansu i RZiS kontekst i czyni je porownywalnymi.</p>",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wyjaśnij zasadę wartości pieniądza w czasie i napisz, jaką regułą decyzyjną kierujemy się przy NPV oraz przy IRR.",
      "model": "Wartość pieniądza w czasie: złotówka dziś jest warta więcej niż złotówka jutro, bo dziś można ją zainwestować i zarobić — dlatego przyszłe kwoty trzeba dyskontować do dziś przez $PV=\\frac{FV}{(1+r)^{n}}$. Reguła NPV: inwestycja opłacalna, gdy NPV > 0 (po zdyskontowaniu tworzy wartość ponad nakład i koszt kapitału). Reguła IRR: opłacalna, gdy IRR > koszt kapitału (projekt zarabia więcej procent, niż kosztuje jego finansowanie). Obie reguły są spójne: przy IRR = koszt kapitału NPV = 0."
@@ -572,6 +632,36 @@
      "gap": true
     },
     {
+     "type": "teach",
+     "html": "<p><b>Cel inflacyjny NBP wynosi 2,5% z dopuszczalnym pasmem odchyleń ±1 pp</b> (czyli przedział $1{,}5\\% \\leq CPI \\leq 3{,}5\\%$). To tzw. ciągły cel inflacyjny realizowany przez RPP za pomocą stóp procentowych.</p><p>Mechanizm transmisji: <b>podnosząc stopy</b> RPP schładza gospodarkę i zbija inflację (drożeją kredyty, rośnie skłonność do oszczędzania); <b>obniżając</b> — pobudza popyt. To stała teoretyczna, którą warto znać na pamięć.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Pełny parametryczny VaR:</b> $VaR = z \\cdot \\sigma \\cdot V$, gdzie $z$ to kwantyl normalny (np. $2{,}33$ dla 99%), $\\sigma$ — odchylenie standardowe stopy zwrotu (zmienność), a $V$ — wartość (ekspozycja) portfela. Mnożenie przez $V$ przelicza ryzyko z procentów na kwotę straty.</p><p>Dla horyzontu $t$ dni: $VaR_t = z \\cdot \\sigma \\cdot V \\cdot \\sqrt{t}$. Uwaga: skalujemy <b>pierwiastkiem czasu</b> $\\sqrt{t}$, nie $\\times t$.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>VaR ma istotną wadę:</b> mówi tylko, jaka strata nie zostanie przekroczona z danym prawdopodobieństwem, ale <b>nie informuje, jak głęboka jest strata, gdy próg zostanie przekroczony</b> (ignoruje „gruby ogon”).</p><p>Tę lukę uzupełnia <b>Expected Shortfall (ES), zwany CVaR</b> — średnia (oczekiwana) strata w ogonie, warunkowo poza poziomem VaR. ES jest miarą <b>koherentną</b> (spełnia subaddytywność), dlatego <b>Bazylea III zastąpiła nim VaR przy poziomie 97,5%</b> jako podstawę wymogu kapitałowego dla ryzyka rynkowego.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Bazylea (ryzyko rynkowe):</b> bank musi utrzymać kapitał na poziomie mnożnik $\\geq 3 \\cdot VaR$ — minimum trzykrotność wyliczonego VaR jako bufor.</p><p><b>Backtesting:</b> model VaR przy 99% ufności na 250 dniach powinien dać średnio $\\approx 2{,}5$ wyjątku rocznie, bo $1\\% \\cdot 250 = 2{,}5$. Jeśli wyjątków jest istotnie więcej, model nie docenia ryzyka i regulator podnosi mnożnik.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Stopa dyskontowa</b> dotyczy dyskonta weksli — bank „skupuje” weksel przed terminem za kwotę pomniejszoną o dyskonto. <b>Stopa redyskontowa</b> dotyczy sytuacji, gdy <b>NBP odkupuje (redyskontuje) weksel od banku komercyjnego</b>.</p><p>Obie ustala RPP. Na egzaminie pojawiają się rzadziej, a ich wartości są zmienne [zweryfikuj] — ważny jest kierunek: bank dyskontuje weksel klientowi, NBP redyskontuje go bankowi.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>W modelu Altman Z-Score składnik X4 = wartość RYNKOWA kapitału własnego / zobowiązania ogółem</b> — uwaga: rynkowa, <b>nie księgowa</b> (to częsty dystraktor egzaminacyjny).</p><p>Progi interpretacji: $Z < 1{,}81$ — strefa zagrożenia (ryzyko bankructwa), $1{,}81 \\leq Z \\leq 2{,}99$ — szara strefa, $Z > 2{,}99$ — strefa bezpieczna.</p>",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wymień korytarz stóp NBP (relacja trzech stóp) oraz powiedz, która jest „w środku”.",
      "model": "Korytarz: depozytowa ≤ referencyjna ≤ lombardowa. W środku jest stopa referencyjna (główna „cena pieniądza”). Lombardowa to górny pułap (≈ ref. +1 pp), depozytowa to dolny (≈ ref. −1 pp). Rynkowa stawka overnight trzyma się w tych widełkach."
@@ -786,6 +876,21 @@
      "html": "<b>Jak zbudowac wzorcowa odpowiedz egzaminacyjna (schemat).</b> 1) Zdefiniuj TVM i uzasadnij (zarobkowanie, ryzyko, inflacja). 2) Pokaz dwie operacje: kapitalizacja $FV$ i dyskontowanie $PV$, z wzorami. 3) Rozroznij platnosc pojedyncza i renty (zwykla, wieczysta). 4) Wymien metody proste (okres zwrotu, ARR) i dyskontowe (NPV, IRR, PI), zaznaczajac, ze proste pomijaja TVM. 5) Podaj kryteria: $NPV \\geq 0$, $IRR \\geq r$, $PI \\geq 1$. 6) Oceń zalety/wady i wskaz NPV jako nadrzedne. 7) Zakoncz: przy wyborze projektow decyduje NPV. Taka struktura pokazuje komisji, ze panujesz nad calym tematem."
     },
     {
+     "type": "teach",
+     "html": "<p><b>Zdyskontowany okres zwrotu</b> to wariant prostego okresu zwrotu, w ktorym przed kumulowaniem najpierw <b>dyskontujemy</b> kazdy wplyw do wartosci biezacej: $CF_t/(1+r)^{t}$. Liczymy czas, po ktorym suma zdyskontowanych wplywow pokryje naklad $|CF_0|$.</p><p>Dzieki temu usuwa glowna wade wersji prostej — <b>uwzglednia wartosc pieniadza w czasie (TVM)</b>. Nadal jednak <b>pomija przeplywy po terminie zwrotu</b>, wiec pozostaje miara plynnosci, a nie pelnej rentownosci. Zdyskontowany okres zwrotu jest zawsze $\\geq$ od prostego (dyskontowanie zmniejsza wplywy, wiec naklad pokrywa sie pozniej).</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>ARR (accounting rate of return)</b> to relacja sredniego rocznego <b>zysku ksiegowego</b> do nakladu: $ARR = \\frac{\\overline{Z}}{I}$, gdzie $\\overline{Z}$ — przecietny roczny zysk ksiegowy (po amortyzacji i podatku), a $I$ — naklad sredni lub poczatkowy (zaleznie od konwencji).</p><p>Kryterium: przyjmij projekt, gdy $ARR \\geq$ stopa graniczna zadana przez firme. Dwie slabosci, na ktore zwraca uwage komisja: ARR opiera sie na <b>zysku ksiegowym, a nie na przeplywie gotowkowym</b>, oraz <b>nie dyskontuje</b> (ignoruje TVM) — dlatego jest metoda pomocnicza, nie rozstrzygajaca.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Stopa nominalna</b> ($r_{nom}$) to stopa roczna podawana bez uwzglednienia czestotliwosci kapitalizacji; <b>stopa efektywna</b> ($EAR$) to faktyczny roczny przyrost po doliczeniu kapitalizacji srodrocznej. Przy $m$ kapitalizacjach w roku: $EAR = (1 + \\frac{r_{nom}}{m})^{m} - 1$.</p><p>Przyklad: $r_{nom} = 12\\%$ kapitalizowane kwartalnie ($m=4$) daje $EAR = (1+0{,}03)^{4} - 1 \\approx 12{,}55\\%$ — wiecej niz 12%. Im czestsza kapitalizacja, tym wyzsza stopa efektywna; mylenie tych dwoch stop to typowy blad wytykany przez komisje.</p>",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: czym rozni sie dyskontowanie od kapitalizacji i po co w ogole 'przesuwamy' pieniadz w czasie?",
      "model": "Pieniadz ma wartosc w czasie (zarobkowanie, ryzyko, inflacja), wiec kwot z roznych momentow nie wolno wprost dodawac. Kapitalizacja przesuwa kwote w przyszlosc, mnozac ja przez $(1+r)^{n}$ (procent skladany — odsetki od odsetek). Dyskontowanie robi odwrotnie: sprowadza przyszla kwote do dzis, dzielac przez $(1+r)^{n}$. Robimy to, by sprowadzic wszystkie przeplywy do wspolnego momentu i dopiero wtedy uczciwie je porownac."
@@ -977,6 +1082,26 @@
      "type": "teach",
      "html": "<p><b>Produkt koncowy rachunkowosci</b> to <b>sprawozdanie finansowe</b> — uporzadkowane zestawienie sytuacji majatkowej i finansowej jednostki na koniec okresu. Wedlug Ustawy o Rachunkowosci sklada sie ono z trzech podstawowych elementow: <b>bilansu</b> (zestawienie aktywow i pasywow na dzien bilansowy, czyli majatku $A$ oraz zrodel jego finansowania $K_w + Z$), <b>rachunku zyskow i strat (RZiS)</b> (zestawienie przychodow i kosztow okresu, ktore prowadzi do wyniku finansowego $WF = P - K$) oraz <b>informacji dodatkowej</b> (wprowadzenie do sprawozdania plus dodatkowe noty objasniajace, np. zasady wyceny i przyjeta polityka rachunkowosci). W wiekszych jednostkach dochodza tez <b>rachunek przeplywow pienieznych</b> (cash flow) oraz <b>zestawienie zmian w kapitale wlasnym</b>. To wlasnie sprawozdanie finansowe realizuje cel nadrzedny — daje <b>rzetelny i wierny obraz</b> (true and fair view) sytuacji firmy.</p>",
      "gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Oprócz czterech głównych funkcji (informacyjna, kontrolna, sprawozdawcza, dowodowa) komisja często oczekuje wymienienia dwóch dodatkowych:</p><p><b>Funkcja analityczna</b> — dostarcza danych do analizy finansowej (np. wskaźniki rentowności, płynności), pozwalając ocenić kondycję jednostki. <b>Funkcja statystyczna</b> — dane z ksiąg zasilają sprawozdawczość statystyczną (np. dla GUS) oraz zestawienia zbiorcze. Wymienienie ich jako uzupełnienia czterech podstawowych funkcji świadczy o pełnej odpowiedzi.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Na pytanie o <b>istotę rachunkowości</b> warto podać jej zadania ujęte jako łańcuch czynności, a nie tylko ogólną definicję:</p><p><b>identyfikacja</b> zdarzenia gospodarczego → <b>pomiar</b> (wycena w pieniądzu) → <b>ewidencja</b> (zapis na podstawie dowodu) → <b>grupowanie</b> (klasyfikacja na kontach) → <b>komunikowanie</b> danych użytkownikom. Ta sekwencja pokazuje, że rachunkowość to proces przetwarzania informacji od zdarzenia aż do sprawozdania, a nie pojedyncza czynność.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Zasada podwójnego zapisu</b> to techniczny fundament ewidencji księgowej: każdą operację gospodarczą ujmuje się jednocześnie na co najmniej dwóch kontach — po stronie <b>Winien (Wn)</b> jednego konta i <b>Ma</b> drugiego, w tej samej kwocie.</p><p>Dzięki temu suma zapisów po stronie Wn zawsze równa się sumie po stronie Ma, a równanie bilansowe $A = K_{w} + Z$ pozostaje zachowane po każdej operacji. To właśnie podwójny zapis gwarantuje samokontrolę ksiąg i równość stron bilansu.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Zasada memoriału ma <b>nadrzędny wyjątek</b>: stosuje się ją tylko przy założeniu <b>kontynuacji działania</b>. Gdy kontynuacja jest zagrożona (jednostka kończy działalność), aktywa wycenia się po cenach sprzedaży netto, a nie według dotychczasowych zasad.</p><p>Warto też wiedzieć, że memoriał oznacza ujmowanie <b>wszystkich</b> przychodów i kosztów dotyczących danego roku obrotowego, niezależnie od terminu zapłaty — w tym kosztów jeszcze niezafakturowanych (rozliczenia międzyokresowe, rezerwy). To rozszerza intuicję „sprzedaż w grudniu, zapłata w styczniu”.</p>",
+     "kompendium_gap": true
     },
     {
      "type": "recall",
@@ -1189,6 +1314,16 @@
      "type": "teach",
      "html": "<p>Pełna podstawa prawna wyceny w Polsce to <b>ustawa o rachunkowości z dnia 29 września 1994 r.</b> (w skrócie UoR; data uchwalenia: $29.09.1994$). Na egzaminie warto podać tę pełną datę, a nie tylko 'z 1994 r.', bo komisja często jej oczekuje dosłownie.</p><p>Momentem, na który dokonuje się wyceny, jest <b>dzień bilansowy</b> — dzień, na który sporządza się sprawozdanie finansowe, zwykle $31.12$ danego roku obrotowego. To na ten dzień ustala się wartość bilansową każdego składnika aktywów i pasywów.</p>",
      "gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Trwała utrata wartości</b> to sytuacja, w której istnieje <b>duże prawdopodobieństwo</b>, że dany składnik aktywów nie przyniesie w przyszłości przewidywanych korzyści ekonomicznych (w całości lub w istotnej części).</p><p>Skutkiem jest <b>odpis aktualizujący</b>, który obniża wartość bilansową aktywu do jego wartości możliwej do uzyskania: różnicę $C_{n} - W_{r}$ ujmuje się jako koszt. To bezpośrednie zastosowanie zasady ostrożności — spadek wartości pokazujemy od razu, a nie dopiero przy sprzedaży.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Wartość godziwa</b> (fair value) to — w ujęciu definicyjnym UoR — <b>kwota, za jaką dany składnik aktywów mógłby zostać wymieniony, a zobowiązanie uregulowane, między zainteresowanymi, dobrze poinformowanymi i niezależnymi (niepowiązanymi) stronami</b> w transakcji rynkowej na warunkach rynkowych.</p><p>Na egzaminie warto podać tę definicję dosłownie, z naciskiem na trzy cechy stron: <b>zainteresowane, dobrze poinformowane, niezależne</b>. Pamiętaj: w UoR dominuje koszt historyczny, a wartość godziwa stosowana jest wybiórczo (np. niektóre inwestycje, połączenia jednostek).</p>",
+     "kompendium_gap": true
     },
     {
      "type": "recall",
@@ -1423,6 +1558,36 @@
      "gap": true
     },
     {
+     "type": "teach",
+     "html": "<p><b>Zasobowa</b> (stan na moment) vs <b>strumieniowa</b> (zmiana w okresie) to kluczowe rozróżnienie, na którym komisja łapie. <b>Bilans</b> jest wielkością <b>zasobową</b> — pokazuje stan aktywów i pasywów na konkretny dzień (jak poziom wody w wannie). <b>Rachunek zysków i strat</b> oraz <b>rachunek przepływów pieniężnych</b> są <b>strumieniowe</b> — mierzą zmiany za cały okres (ile wody wlało się przez kran). Uwaga na pułapkę: to <b>bilans = zasób</b>, a nie odwrotnie.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Dla firm <b>nienotowanych</b> stosuje się wariant <b>Z'</b> (1983), gdzie w $X_{4}$ wstawia się <b>wartość księgową</b> kapitału własnego zamiast rynkowej, a wagi i progi są inne: $Z' = 0{,}717 X_{1} + 0{,}847 X_{2} + 3{,}107 X_{3} + 0{,}420 X_{4} + 0{,}998 X_{5}$. Progi też się przesuwają: $Z' > 2{,}9$ — bezpieczna; $1{,}23 \\leq Z' \\leq 2{,}9$ — szara strefa; $Z' < 1{,}23$ — zagrożenie. <b>Nie wolno</b> wstawiać wartości księgowej do wzoru giełdowego (1968) ani odwrotnie — to błąd metodologiczny.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Funkcja dyskryminacyjna</b> to narzędzie z <b>wielowymiarowej analizy dyskryminacyjnej</b> (MDA): na podstawie próby firm zdrowych i bankrutów dobiera się <b>wagi</b> tak, by jedna liczba $Z$ jak najlepiej <b>rozdzielała</b> obie grupy. Wagi (np. $1{,}2$; $1{,}4$; $3{,}3$) nie są dowolne — to współczynniki oszacowane <b>empirycznie</b> na danych historycznych. Dlatego model jest <b>statystyczny i branżowo/czasowo ograniczony</b>: poza populacją, na której go zbudowano, jego trafność spada.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Dług podnosi <b>ROE ponad ROA</b> (dźwignia <b>dodatnia</b>) tylko wtedy, gdy rentowność majątku przewyższa koszt długu: $ROA > r_{d}$, gdzie $r_{d}$ to stopa oprocentowania zobowiązań. Gdy $ROA < r_{d}$ — dźwignia działa <b>niekorzystnie</b>: odsetki zjadają więcej, niż majątek wypracowuje, i rosnące zadłużenie <b>obniża</b> ROE poniżej ROA. Dlatego wysokie ROE bywa nagrodą za sprawnie użyty dług albo pułapką ryzyka — zawsze czytaj je razem z poziomem i kosztem zadłużenia.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Analiza wskaźnikowa ma wbudowane <b>wady</b>, które komisja lubi wyciągnąć. Opiera się na danych <b>historycznych</b> (przeszłość, nie prognoza) i <b>księgowych</b> (podatnych na politykę rachunkowości i kreatywną księgowość). Wskaźniki liczone na <b>dzień bilansowy</b> mogą być przypadkowe (window dressing). Brak jednej, uniwersalnej normy — <b>widełki różnią się między branżami</b>, więc bez porównania branżowego i trendu w czasie pojedyncza liczba jest <b>bezwartościowa</b>.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Złota reguła bilansowa</b>: aktywa trwałe powinny być finansowane <b>kapitałem własnym</b> (lub szerzej — kapitałem stałym: własny + zobowiązania długoterminowe), bo majątek długoterminowy wymaga stabilnego, długiego źródła. Powiązany jest z tym <b>kapitał obrotowy netto</b>: $KON = \\text{aktywa obrotowe} - \\text{zobowiązania bieżące}$; gdy $KON > 0$, część majątku obrotowego finansuje kapitał stały (bufor). Naruszenie reguły — finansowanie majątku trwałego krótkim długiem — to sygnał <b>napięcia płynnościowego</b>.</p>",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami: czym różni się analiza pozioma od pionowej i dlaczego firma rentowna może zbankrutować.",
      "model": "Analiza pozioma (dynamiki) porównuje te same pozycje sprawozdania w czasie — np. przychody rok do roku — pokazując zmiany i tempo wzrostu. Analiza pionowa (struktury) pokazuje udział pozycji w sumie w jednym momencie — np. udział zapasów w aktywach. Pozioma = czas, pionowa = struktura. Firma rentowna może zbankrutować, bo rentowność (zysk w RZiS) to nie to samo co płynność (dostępna gotówka). Jeśli pieniądze są zamrożone w należnościach i zapasach, firma mimo dodatniego wyniku może nie mieć czym zapłacić bieżących zobowiązań i upada z braku płynności."
@@ -1647,6 +1812,21 @@
      "html": "<p><b>Model idealnej odpowiedzi egzaminacyjnej — jak poskładać to w całość.</b> Gdy dostaniesz to zagadnienie, prowadź odpowiedź tak:</p><ol><li>Zacznij od klasyfikacji kosztów: pokaż dwa przekroje (rodzajowy vs funkcjonalny oraz stały/zmienny i bezpośredni/pośredni).</li><li>Zdefiniuj RKP vs RKZ przez jedno kryterium: co robimy ze stałymi kosztami produkcji.</li><li>Powiedz, kiedy wyniki się różnią: tylko przy zmianie zapasu; produkcja > sprzedaż ⇒ RKP wyższy zysk.</li><li>Wprowadź marżę pokrycia jako pomost do CVP (wzory $cm$, $wcm$).</li><li>Wyprowadź BEP (ilościowy i wartościowy), opisz wykres, zaznacz margines bezpieczeństwa.</li><li>Dołóż dźwignię operacyjną (wysokie koszty stałe = wysoki DOL = ryzyko i nagroda).</li><li>Zakończ wnioskiem zarządczym: RKZ do decyzji, RKP do sprawozdawczości.</li></ol><p>Taka struktura pokazuje komisji, że masz pełen obraz, nie tylko pojedyncze wzory.</p>"
     },
     {
+     "type": "teach",
+     "html": "<p><b>Dwa przekroje ewidencji kosztów.</b> <b>Układ rodzajowy</b> grupuje koszty według <i>natury zużytego zasobu</i>, niezależnie od miejsca powstania — klasyczne pozycje to: amortyzacja, zużycie materiałów i energii, usługi obce, wynagrodzenia, ubezpieczenia i inne świadczenia, podatki i opłaty.</p><p><b>Układ funkcjonalny (kalkulacyjny)</b> grupuje koszty według <i>funkcji/miejsca powstania</i>: koszt wytworzenia, koszty sprzedaży oraz koszty ogólnego zarządu. Model odpowiedzi egzaminacyjnej każe ZACZĄĆ właśnie od pokazania tych dwóch przekrojów (rodzajowy vs funkcjonalny) obok podziału stały/zmienny i bezpośredni/pośredni — to fundament obu rachunków kosztów.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>To rozróżnienie jest mechanizmem całej różnicy RKP–RKZ.</b> <b>Koszty produktu</b> „idą\" w wartość wyrobu i wędrują do zapasu — obciążają wynik dopiero w momencie sprzedaży wyrobu (zasada współmierności). <b>Koszty okresu</b> obciążają wynik od razu, w okresie ich poniesienia, niezależnie od sprzedaży.</p><p>Sednem różnicy między rachunkami jest to, do której grupy trafiają <b>stałe koszty produkcji</b>: w RKP są kosztem produktu (aktywowane w zapasie), w RKZ — kosztem okresu (od razu w wyniku). Koszty sprzedaży i ogólnego zarządu są kosztem okresu w OBU rachunkach.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Co dokładnie wchodzi do kosztu wytworzenia wyrobu (RKP) na potrzeby wyceny zapasu w bilansie.</b> Koszt wytworzenia obejmuje: koszty bezpośrednie (materiały bezpośrednie, robocizna bezpośrednia) ORAZ uzasadnioną część <b>pośrednich kosztów produkcji</b> — zarówno zmiennych, jak i <b>stałych</b>.</p><p>Stałe pośrednie koszty produkcji rozlicza się na wyrób na podstawie <b>normalnego poziomu wykorzystania zdolności produkcyjnych</b>; nadwyżka wynikająca z niewykorzystania mocy (koszty niewykorzystanych zdolności) NIE zwiększa wartości zapasu, lecz obciąża wynik okresu. Do kosztu wytworzenia <i>nie zalicza się</i> kosztów sprzedaży ani kosztów ogólnego zarządu. Podstawa: Ustawa o rachunkowości oraz MSR 2 (Zapasy).",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami: dlaczego rachunek kosztów pełnych (RKP) może pokazać wyższy zysk niż rachunek zmienny (RKZ), gdy rosną zapasy?",
      "model": "W RKP stałe koszty produkcji „doklejają się\" do wartości każdego wyrobu i wędrują z nim do magazynu. Koszt obciąża wynik dopiero przy sprzedaży, więc jeśli produkcja > sprzedaż (zapas rośnie), część stałych kosztów zostaje uwięziona w niesprzedanym zapasie i NIE obciąża wyniku tego okresu. W RKZ wszystkie koszty stałe od razu obciążają okres. Dlatego przy rosnących zapasach RKP wykazuje wyższy zysk; różnica wynosi $ks_j \\cdot \\Delta Q_{zapasu}$."
@@ -1861,6 +2041,11 @@
      "gap": true
     },
     {
+     "type": "teach",
+     "html": "<p>W tarczy podatkowej $k_d = r_d \\cdot (1-T)$ stawka $T$ to <b>stopa CIT</b>: w Polsce podstawowa $T = 19\\%$ (czyli $0{,}19$), a preferencyjna $T = 9\\%$ ($0{,}09$) dla <b>malych podatnikow</b> oraz firm rozpoczynajacych dzialalnosc.</p><p>Im wyzsza stawka $T$, tym <b>silniejsza</b> tarcza i tym tanszy efektywny dlug — przy $T = 9\\%$ tarcza jest slabsza niz przy $19\\%$. Na egzaminie wstaw $T$ jako <b>ulamek</b>, nie procent.</p>",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami, czym jest WACC i dlaczego nazywa sie go minimalna stopa zwrotu projektu.",
      "model": "WACC (sredni wazony koszt kapitalu) to laczny koszt finansowania firmy — srednia z kosztu kapitalu wlasnego i kosztu dlugu po podatku, wazona udzialem kazdego zrodla: $WACC = \\frac{E}{E+D} \\cdot k_e + \\frac{D}{E+D} \\cdot r_d (1-T)$. Jest minimalna stopa zwrotu, bo projekt musi zarobic przynajmniej tyle, ile kosztuje pozyskany kapital. Zwrot powyzej WACC buduje wartosc firmy, rowny WACC wychodzi na zero, a ponizej — niszczy wartosc dawcow finansowania."
@@ -2064,6 +2249,16 @@
     {
      "type": "teach",
      "html": "<b>Model odpowiedzi egzaminacyjnej — jak ulozyc wypowiedz.</b> 1) Zdefiniuj KON i podaj OBA pomiary (majatkowy $AO - ZK$ i kapitalowy $(KW+ZD)-AT$), zaznaczajac, ze daja ten sam wynik. 2) Wyjasnij sens: KON jako bufor plynnosci finansowany kapitalem stalym. 3) Powiaz z plynnoscia: $KON > 0$ ⇔ zwykle $CR > 1$. 4) Omow trzy strategie i trade-off rentownosc-ryzyko. 5) Wspomnij o zarzadzaniu elementami (zapasy, naleznosci, zobowiazania). 6) Wprowadz CCC jako miare efektywnosci — cel: skracac. 7) Wniosek: optymalny KON balansuje bezpieczenstwo plynnosci z kosztem zamrozonego kapitalu."
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Cykl operacyjny</b> to suma okresu rotacji zapasow i okresu sciagania naleznosci: $C_{op} = OZ + ON$. Obejmuje cala droge 'fizyczna' gotowki — od zakupu zapasow, przez ich sprzedaz, az do inkasa naleznosci od klienta.</p><p>To pojecie samodzielne, a nie tylko skladnik wzoru na CCC. Roznica wobec cyklu konwersji gotowki sprowadza sie do $OZob$: $CCC = C_{op} - OZob$, bo przez okres splaty zobowiazan finansuje nas dostawca. Komisja czesto prosi o sama definicje cyklu operacyjnego — pamietaj, ze tu NIE odejmujemy zobowiazan.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Kredyt kupiecki</b> wystepuje po obu stronach bilansu i trzeba je rozrozniac. <b>Naleznosci krotkoterminowe</b> to kredyt, ktorego firma UDZIELA swoim odbiorcom (sprzedaz z odroczona platnoscia) — zamrazaja gotowke i wydluzaja $ON$.</p><p><b>Zobowiazania krotkoterminowe</b> z tytulu dostaw to kredyt, ktory firma OTRZYMUJE od dostawcow — uwalniaja gotowke i wydluzaja $OZob$. Dlatego we wzorze $CCC = OZ + ON - OZob$ naleznosci dzialaja na niekorzysc (dodajemy), a zobowiazania na korzysc (odejmujemy) plynnosci.</p>",
+     "kompendium_gap": true
     },
     {
      "type": "recall",
@@ -2305,6 +2500,46 @@
      "gemini": true
     },
     {
+     "type": "teach",
+     "html": "<p>Wycena zawsze odbywa się wobec konkretnego <b>standardu (premisy) wartości</b> — to nie jest jedna uniwersalna „wartość\". Komisja oczekuje rozróżnienia: <b>wartość godziwa</b> (fair value, do sprawozdawczości), <b>wartość rynkowa</b> (cena między niezależnymi stronami na otwartym rynku) oraz <b>wartość inwestycyjna</b> (dla konkretnego inwestora, uwzględniająca jego synergie). Ten sam podmiot może mieć różną wartość zależnie od przyjętego standardu i celu wyceny (transakcja, sprawozdawczość, spór sądowy).</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Kluczowe rozróżnienie egzaminacyjne: <b>wartość</b> to szacunek analityka oparty na założeniach, a <b>cena</b> to faktyczny wynik transakcji rynkowej. Te dwie wielkości nie muszą być równe — cena może odbiegać od wartości fundamentalnej z powodu negocjacji, asymetrii informacji, presji czasu czy nastrojów rynku. Dlatego mówimy, że wycena szacuje wartość, a rynek ustala cenę.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Wybór nadrzędnej grupy metod zależy od założenia o kontynuacji działalności. Dla firmy działającej (<b>going concern</b>) nadrzędne są metody dochodowe, bo wartość tworzą przyszłe przepływy. Gdy firma nie kontynuuje działalności, stosuje się <b>wartość likwidacyjną</b> (majątkową) — aktywa wyceniane przy założeniu wymuszonej sprzedaży, często poniżej wartości księgowej i pomniejszone o koszty likwidacji. Złe założenie o kontynuacji prowadzi do błędnego doboru metody.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Stopa podatku $T$ używana w $EBIT \\cdot (1-T)$ oraz w tarczy podatkowej WACC to polski <b>CIT</b>: standardowo <b>19%</b>, a stawka preferencyjna <b>9%</b> dla małych podatników i podmiotów rozpoczynających działalność (od przychodów operacyjnych, w granicach limitu obrotu). Na egzaminie warto podać konkretną stawkę i zaznaczyć, którą stosujesz, bo wpływa ona zarówno na FCFF, jak i na efektywny koszt długu $r_d \\cdot (1-T)$.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>W CAPM ($r_e = r_f + \\beta \\cdot (r_m - r_f)$) parametr <b>beta</b> mierzy wrażliwość zwrotu z akcji na ruchy całego rynku. Interpretacja: $\\beta = 1$ — spółka porusza się jak rynek; $\\beta > 1$ — bardziej zmienna niż rynek, więc wyższy wymagany zwrot $r_e$; $\\beta < 1$ — mniej zmienna, niższy $r_e$. Człon $(r_m - r_f)$ to <b>premia za ryzyko rynkowe</b>. Im wyższa beta, tym wyższy koszt kapitału własnego, a więc wyższy WACC i niższa wycena.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Pełne przejście od wartości całej firmy do kapitału właścicieli zwykłych to nie tylko odjęcie długu netto: $equity = EV - dlug\\ netto - NCI - akcje\\ uprzywilejowane$. <b>Dług netto</b> = dług oprocentowany minus gotówka. W grupie kapitałowej trzeba dodatkowo odjąć <b>udziały mniejszości (NCI)</b> oraz <b>akcje uprzywilejowane</b>, bo nie należą do akcjonariuszy zwykłych. Pominięcie tych pozycji w holdingu zawyża wycenę dla akcjonariuszy zwykłych.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>W modelu DCF <b>wartość rezydualna (TV)</b> stanowi często <b>60–80% całej wyceny</b>, dlatego drobne zmiany założeń $g$ lub $WACC$ mocno przesuwają wynik. To uzasadnia obowiązkową <b>analizę wrażliwości/scenariuszy</b> na te dwa parametry. Twardy warunek modelu Gordona: $g \\leq WACC$ (inaczej mianownik $WACC - g$ jest zerowy lub ujemny), a dodatkowo $g$ nie powinno przekraczać długookresowego tempa wzrostu gospodarki — firma nie rośnie wiecznie szybciej niż cała gospodarka.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Triangulacja</b> to krzyżowa weryfikacja wyceny przez zestawienie wyników różnych grup metod (dochodowej, majątkowej, porównawczej). Jeśli wyniki się zbiegają, rośnie wiarygodność wyceny; rozbieżność sygnalizuje błędne założenia lub specyfikę firmy (np. metoda majątkowa zaniża wartość firmy usługowej). To dlatego końcowa wycena jest <b>przedziałem</b>, a nie jedną liczbą, i powinna łączyć kilka metod zamiast polegać na jednej.</p>",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami: czym różni się FCFF od FCFE i jaką stopę dyskontową stosujemy do każdego z nich?",
      "model": "FCFF to wolne przepływy dla wszystkich dawców kapitału (właścicieli i wierzycieli), liczone przed obsługą długu — dyskontujemy je WACC. FCFE to przepływy dostępne tylko dla właścicieli, po zapłaceniu odsetek i rozliczeniu długu — dyskontujemy je kosztem kapitału własnego r_e. Reguła: przepływ i stopa muszą pasować do tej samej grupy dawców kapitału; pomylenie tego to błąd metodologiczny."
@@ -2526,6 +2761,26 @@
      "type": "teach",
      "html": "<p><b>Swap</b> to instrument pochodny, w ktorym dwie strony zobowiazuja sie do <b>wymiany strumieni platnosci</b> w przyszlosci, wedlug z gory ustalonych zasad, przez okreslony czas. Najpopularniejszy jest <b>swap procentowy (IRS)</b>: jedna strona placi odsetki wedlug stopy <b>stalej</b>, a druga wedlug stopy <b>zmiennej</b> (np. WIBOR/EURIBOR), liczonych od tej samej kwoty bazowej (tzw. nominal, ktory zwykle nie jest wymieniany). Drugi czesty typ to <b>swap walutowy</b> - wymiana platnosci w dwoch roznych walutach. Swap sluzy glownie do <b>zabezpieczenia</b> (np. firma z kredytem o zmiennym oprocentowaniu zamienia go na stale, by uniezaleznic sie od wahan stop) oraz do <b>spekulacji</b> na kierunku stop procentowych lub kursow. Intuicja: swap to seria nastepujacych po sobie kontraktow terminowych (forward) 'spietych' w jedna umowe na wymiane przeplywow. Przyklad: firma placi w swapie stale 5% rocznie, a otrzymuje WIBOR; jesli WIBOR wzrosnie powyzej 5%, firma zarabia na swapie, co rekompensuje jej wyzsze raty kredytu o zmiennym oprocentowaniu.</p>",
      "gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Podatek Belki</b> to zryczaltowany podatek od dochodow kapitalowych wynoszacy <b>19%</b>. Obejmuje m.in. odsetki, dyskonto (np. zysk na bonie skarbowym), dywidendy oraz zyski ze sprzedazy akcji i obligacji.</p><p>Wazne egzaminacyjnie: wszystkie wyliczone wyzej zyski (np. ~24,32 PLN dyskonta na bonie) sa kwotami <i>brutto</i> - realny zysk inwestora jest o 19% nizszy. Stawka jest liniowa, niezalezna od wysokosci dochodu.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Rynek finansowy dzielimy wg <b>trzech kryteriow</b>: (1) wg <b>terminu</b> - pieniezny (do 1 roku) vs kapitalowy (powyzej 1 roku); (2) wg <b>etapu obrotu</b> - pierwotny vs wtorny; (3) wg <b>przedmiotu obrotu</b> - rynek walutowy (FOREX) oraz rynek <b>terminowy</b> (instrumentow pochodnych).</p><p>Komisja czesto wymaga wymienienia wszystkich trzech plaszczyzn naraz - sam podzial na pieniezny/kapitalowy i pierwotny/wtorny to odpowiedz niepelna.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Istnieje wzorcowa zaleznosc miedzy <b>cena obligacji a stopa kuponu</b>: gdy stopa wymagana $r$ rowna sie stopie kuponowej, cena obligacji rowna sie nominalowi ($P = N$, obligacja <i>at par</i>).</p><p>Gdy $r$ jest wyzsza od kuponu, obligacja notowana jest <b>z dyskontem</b> ($P \\leq N$); gdy $r$ jest nizsza od kuponu - <b>z premia</b> ($P \\geq N$). To szybki test poprawnosci wyniku obliczen.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Profil wyplaty nabywcy opcji <b>call</b> jest asymetryczny: maksymalna <b>strata = zaplacona premia</b> $p$ (gdy $S_T \\leq K$ i rezygnujesz z wykonania), a <b>zysk jest potencjalnie nieograniczony</b>, bo rosnie wraz z $S_T - K$.</p><p>Z wzoru $Z = \\max(S_T - K,\\ 0) - p$ wynika, ze punkt <b>break-even</b> (prog oplacalnosci) to $S_T = K + p$ - dopiero powyzej tej ceny nabywca zaczyna zarabiac.</p>",
+     "kompendium_gap": true
     },
     {
      "type": "recall",
@@ -2756,6 +3011,26 @@
      "type": "teach",
      "html": "<p><b>Jak finansuje się deficyt budżetowy.</b> Gdy wydatki przewyższają dochody, rząd pokrywa różnicę nie przez 'dodruk' pieniądza, lecz przez <b>zaciąganie długu</b> — głównie <b>emisję skarbowych papierów wartościowych</b> (obligacji i bonów skarbowych), które kupują banki, fundusze i inwestorzy. NBP <b>nie może</b> bezpośrednio finansować deficytu (zakaz monetyzacji długu / dodruku na rzecz rządu) — to chroni przed inflacją i jest filarem niezależności banku centralnego. Każdy rok z deficytem oznacza nową emisję długu, co powiększa <b>dług publiczny</b> jako sumę narastającą.</p>",
      "gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Na egzaminie warto znac rzedy wielkosci podstawowych parametrow NBP (sprawdz aktualne przed egzaminem): <b>stopa referencyjna</b> rzedu <b>5,75%</b>, <b>stopa rezerwy obowiazkowej</b> ok. <b>3,5%</b>, a <b>cel inflacyjny</b> to <b>2,5%</b> z pasmem $\\pm 1$ pkt proc. (przedzial $1{,}5\\%$ do $3{,}5\\%$).</p><p>Stopa referencyjna wyznacza rentownosc podstawowych operacji otwartego rynku i przeklada sie na stopy rynkowe (np. WIBOR). Te liczby zmieniaja sie w czasie, wiec na egzaminie podawaj je jako rzad wielkosci i zaznacz, ze nalezy zweryfikowac biezaca wartosc.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Wzor $m = \\frac{1}{r}$ daje <b>teoretyczne maksimum</b> kreacji pieniadza i opiera sie na zalozeniach, ktore w praktyce nie sa w pelni spelnione.</p><p>Po pierwsze zaklada, ze caly pozyczony pieniadz wraca do systemu bankowego jako kolejny depozyt — w rzeczywistosci czesc wycieka jako <b>gotowka w obiegu</b> (trzymana poza bankiem), co obniza realny mnoznik. Po drugie zaklada, ze banki utrzymuja tylko rezerwe obowiazkowa; gdy trzymaja dodatkowe <b>rezerwy nadwyzkowe</b> lub brakuje popytu na kredyt, faktyczna kreacja jest mniejsza niz $\\frac{1}{r}$. Dlatego rzeczywisty przyrost depozytow jest zwykle nizszy od $\\Delta D = \\Delta R \\cdot \\frac{1}{r}$.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Poza stopa referencyjna NBP ustala tez stope <b>lombardowa</b> i stope <b>depozytowa</b>, ktore tworza tzw. <b>korytarz stop procentowych</b>.</p><p>Stopa <b>lombardowa</b> (gorna granica korytarza) to koszt, po jakim banki komercyjne moga pozyczyc pieniadz od NBP pod zastaw papierow wartosciowych; stopa <b>depozytowa</b> (dolna granica) to oprocentowanie, po jakim banki moga zlozyc nadwyzke srodkow w NBP na noc. Stopa referencyjna lezy wewnatrz tego korytarza i wyznacza srodek, wokol ktorego oscyluja krotkoterminowe stopy rynku miedzybankowego.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Dzialanie stop NBP przeklada sie na inflacje przez tzw. <b>mechanizm transmisji monetarnej</b>, ktory dziala z <b>opoznieniem</b> (zwykle kilka kwartalow).</p><p>Lancuch jest taki: wzrost stopy referencyjnej $\\rightarrow$ wzrost stop rynkowych (WIBOR) $\\rightarrow$ drozszy kredyt i wyzej oprocentowane depozyty $\\rightarrow$ spadek konsumpcji i inwestycji (mniejszy popyt) $\\rightarrow$ slabsza presja na wzrost cen $\\rightarrow$ nizsza inflacja. Z powodu opoznienia RPP musi dzialac z wyprzedzeniem, reagujac na <b>prognozowana</b>, a nie tylko biezaca inflacje.</p>",
+     "kompendium_gap": true
     },
     {
      "type": "recall",
@@ -2994,6 +3269,36 @@
      "gemini": true
     },
     {
+     "type": "teach",
+     "html": "<p>Oprócz konstytucyjnego limitu <b>60% PKB</b> (art. 216), ustawa o finansach publicznych przewiduje <b>progi ostrożnościowe</b> uruchamiane, zanim dług dobije do sufitu. Klasyczny <b>próg sanacyjny to relacja $\\frac{DP}{PKB} \\geq 0{,}55$</b> (55%) — jego przekroczenie wymusza działania naprawcze, m.in. brak nominalnego wzrostu wynagrodzeń w budżetówce i ograniczenia w deficycie kolejnego roku. <b>Pułapka egzaminacyjna:</b> nie myl liczonego tu <b>państwowego długu publicznego (PDP)</b> z szerszą kategorią unijną <b>EDP/długiem sektora general government</b> liczoną wg metodologii ESA — to dwie różne miary, a relacja 60% odnosi się do PDP.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Aplikacja podaje stawki PIT, ale nie pokazuje <b>procedury liczenia podatku progresywnego</b>, a komisja lubi kontrast ze wzorem liniowym $T = p \\cdot D_{p}$. W skali najpierw od dochodu odejmuje się <b>kwotę wolną</b>, a wyższą stawkę stosuje się tylko do <b>nadwyżki ponad próg</b>: $T = 0{,}12 \\cdot (P - KW) + 0{,}32 \\cdot (D_{p} - P)$, gdzie $P$ — próg (~$120\\,000$ zł), $KW$ — kwota zmniejszająca/wolna, $D_p$ — dochód. <b>Istota progresji:</b> stawka $32\\%$ nigdy nie obejmuje całego dochodu, lecz wyłącznie część powyżej progu — to różni skalę od podatku liniowego o stałej stawce.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Warto znać <b>stałe elementy konstrukcji każdego podatku</b>, bo komisja często prosi o ich wskazanie na konkretnym przykładzie. Są to: <b>podmiot</b> (podatnik — kto płaci; oraz organ podatkowy), <b>przedmiot</b> (z czego/jakiego zdarzenia powstaje obowiązek), <b>podstawa opodatkowania</b> (wartość, od której liczymy — np. dochód $D_p$), <b>stawka</b> ($p$, kwotowa lub procentowa) oraz <b>ulgi i zwolnienia</b>. We wzorze $T = p \\cdot D_{p}$ widać dwa z nich wprost: stawkę $p$ i podstawę $D_p$.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Sama liczba procentowa to za mało — komisja pyta o <b>rodzaj stawki</b>. Wyróżniamy: <b>proporcjonalną (liniową)</b> — stała niezależnie od podstawy (CIT $19\\%$, podatek Belki $19\\%$); <b>progresywną</b> — rośnie wraz z podstawą (skala PIT $12\\% \\to 32\\%$); <b>regresywną</b> — maleje wraz ze wzrostem podstawy; oraz <b>kwotową</b> — wyrażoną w złotych na jednostkę, a nie w procentach (np. część akcyzy liczona od litra/sztuki). Stawki <b>ad valorem</b> liczy się od wartości ($p \\cdot D_p$), kwotowe — od ilości.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Aplikacja świetnie tłumaczy <b>nieodpłatność</b> odróżniającą podatek od opłaty, ale warto domknąć dwie dalsze cechy, których komisja czasem szuka. <b>Ogólny (generalny) charakter</b>: podatek nakłada akt prawny na nieoznaczony krąg adresatów — nie jest indywidualną decyzją wobec jednej osoby. <b>Jednostronność ustalenia</b>: wysokość i zasady określa państwo, bez negocjacji z podatnikiem. Dlatego pełna definicja brzmi: świadczenie <b>pieniężne, przymusowe, bezzwrotne, nieodpłatne, ogólne i jednostronnie ustalane</b> na rzecz związku publicznoprawnego.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Poza etapami procedury warto znać <b>zasady budżetowe</b>, o które komisja potrafi dopytać. <b>Uprzedniość (roczność)</b>: budżet powinien być uchwalony <i>przed</i> rozpoczęciem roku, którego dotyczy, i obowiązuje co do zasady jeden rok. <b>Jawność i przejrzystość</b>: dochody i wydatki są publiczne i czytelnie sklasyfikowane. <b>Zupełność (powszechność)</b>: budżet obejmuje całość dochodów i wydatków państwa. Te zasady wyjaśniają, <i>dlaczego</i> budżet musi mieć formę ustawy i być kontrolowany przez parlament.</p>",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami: czym różni się dochód budżetowy od przychodu budżetowego i dlaczego komisja na to zwraca uwagę?",
      "model": "Dochód budżetowy to wpływ bezzwrotny i definitywny (np. podatki, cła, opłaty) — państwo nie musi go oddawać, trwale zwiększa jego zasoby. Przychód budżetowy to wpływ zwrotny (np. emisja obligacji, kredyty, prywatyzacja), który trzeba kiedyś oddać i który służy finansowaniu deficytu. Komisja zwraca na to uwagę, bo to klasyczna pułapka: obligacja czy kredyt to nie „dochód”, lecz dług — mylenie ich pokazuje brak zrozumienia mechanizmu finansowania państwa."
@@ -3228,6 +3533,11 @@
      "type": "teach",
      "html": "<p><b>Efekt krzywej J.</b> Po deprecjacji waluty bilans handlowy (eksport netto $X-M$) <b>najpierw się pogarsza, a dopiero później poprawia</b> — stąd kształt litery J. Powód: w krótkim okresie ilości eksportu i importu są sztywne (kontrakty już zawarte), więc działa tylko efekt cenowy — import w walucie krajowej od razu drożeje, co chwilowo powiększa deficyt. Dopiero po pewnym czasie ilości się dostosowują (tańszy eksport rośnie, droższy import maleje) i saldo $X-M$ realnie się poprawia. Warunkiem trwałej poprawy jest spełnienie warunku Marshalla-Lernera (suma elastyczności popytu na eksport i import $>1$).</p>",
      "gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Warunek Marshalla-Lernera</b> mówi, kiedy deprecjacja waluty trwale poprawia bilans handlowy: poprawa nastąpi tylko wtedy, gdy <b>suma elastyczności cenowych popytu na eksport i na import jest większa od 1</b> ($\\epsilon_X + \\epsilon_M > 1$).</p><p>Intuicja: osłabienie waluty obniża cenę eksportu i podnosi cenę importu, ale saldo $X-M$ poprawi się tylko, jeśli ilości reagują dostatecznie silnie na te zmiany cen. Gdy elastyczności są niskie (popyt sztywny), deprecjacja może wręcz pogorszyć bilans — to też tłumaczy początkowe pogorszenie w <b>krzywej J</b>.</p>",
+     "kompendium_gap": true
     },
     {
      "type": "recall",
@@ -3482,6 +3792,51 @@
      "html": "<p><b>Spinamy wszystko: model dobrej odpowiedzi egzaminacyjnej.</b></p><p>Gdyby padło \"omów VaR i ryzyko rynkowe\", zbuduj odpowiedź tak:</p><p>1) <b>Definicja VaR</b> z trzema parametrami (strata, horyzont, ufność) + zdanie interpretacyjne + uwaga, że to kwantyl rozkładu strat, nie strata maksymalna.<br>2) <b>Wzór</b> $VaR = z_{\\alpha}\\sigma V$, osobno skalowanie $\\sqrt{t}$.<br>3) <b>Trzy metody</b>: parametryczna (szybka, zaniża grube ogony), historyczna (zero założeń o rozkładzie, ale zakłada powtórkę przeszłości), Monte Carlo (najogólniejsza, radzi sobie z opcjami, ale kosztowna).<br>4) <b>Cztery ryzyka</b> (FX, stopa, akcje, towary) + mapowanie.<br>5) <b>Przykład liczbowy</b> + efekt dywersyfikacji.<br>6) <b>Wady VaR + ES</b> (koherentna, średnia z ogona) + backtesting.<br>7) <b>Druga strona bilansu</b>: portfel depozytowy (osad, GAP) i rezerwa obowiązkowa ($m = 1/r$).</p><p>Taki szkielet pokazuje, że ogarniasz temat całościowo — od wzoru po regulacje.</p>"
     },
     {
+     "type": "teach",
+     "html": "<p><b>Trzy metody wyznaczania VaR</b> (klasyczne pytanie egzaminacyjne — aplikacja uczy tylko metody parametrycznej):</p><p><b>1. Parametryczna (delta-normal)</b> — zakłada rozkład normalny opisany przez $\\mu$ i $\\sigma$; szybka i prosta, ale <b>zaniża grube ogony</b> i zawodzi przy opcjach (nieliniowość).</p><p><b>2. Historyczna (symulacja historyczna)</b> — bierze realny rozkład przeszłych stóp zwrotu, <b>zero założeń o kształcie rozkładu</b>, ale milcząco zakłada, że przeszłość się powtórzy.</p><p><b>3. Monte Carlo</b> — losuje tysiące scenariuszy z zadanego modelu; <b>najogólniejsza</b>, radzi sobie z opcjami, ale kosztowna obliczeniowo i wrażliwa na dobór modelu.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Metody parametrycznej (delta-normal) NIE wolno stosować do opcji.</b> Opcje są instrumentami <b>nieliniowymi</b> — ich wrażliwość (delta) sama zmienia się wraz z ceną instrumentu bazowego, co opisuje <b>gamma</b>. Liniowa delta ignoruje krzywiznę wypłaty i <b>drastycznie zaniża VaR</b> opcji.</p><p>Poprawnie liczy się VaR opcji przez symulację (historyczną lub Monte Carlo) z <b>pełną rewyceną</b> pozycji w każdym scenariuszu.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Miara ryzyka koherentna</b> spełnia cztery aksjomaty, z których kluczowy egzaminacyjnie jest <b>subaddytywność</b>: $\\rho(A+B) \\leq \\rho(A) + \\rho(B)$, czyli ryzyko połączonego portfela nigdy nie przekracza sumy ryzyk składników (dywersyfikacja nie może zaszkodzić).</p><p><b>ES (Expected Shortfall) jest koherentny</b>, natomiast <b>VaR nie jest</b> — dla rozkładów z grubymi ogonami VaR potrafi łamać subaddytywność, czyli „karać dywersyfikację\". To główny powód przejścia regulacji FRTB z VaR na ES.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Backtesting</b> sprawdza model, porównując liczbę rzeczywistych <b>przekroczeń (wyjątków)</b> VaR z oczekiwaną. Przy ufności 99% i 250 dniach oczekujemy $0{,}01 \\cdot 250 = 2{,}5$ wyjątku rocznie.</p><p>Nadzór stosuje system <b>traffic-light</b> (trzy strefy): <b>zielona</b> (0–4 wyjątki, model OK, mnożnik 3,0), <b>żółta</b> (5–9 wyjątków, rosnący mnożnik), <b>czerwona</b> ($\\geq 10$ wyjątków, mnożnik 4,0). Im gorszy model, tym wyższy mnożnik kapitałowy — kara za zaniżanie ryzyka.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Każdy z czterech rodzajów ryzyka rynkowego ma własną <b>miarę wrażliwości</b> (częste pytanie „wymień i zmapuj\"):</p><p><b>Walutowe (FX)</b> → <b>pozycja netto</b> w danej walucie. <b>Stopy procentowej</b> → <b>duracja modyfikowana / PV01</b>. <b>Akcji (equity)</b> → <b>beta</b> i korelacje względem indeksu. <b>Towarowe</b> → pozycja w surowcu.</p><p>Ryzyko rynkowe dotyczy głównie <b>księgi handlowej (trading book)</b>, czyli pozycji wycenianych na bieżąco do rynku (mark-to-market).</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Przy ryzyku stopy procentowej zamiast zmienności ceny mierzy się <b>wrażliwość ceny obligacji na ruch stóp</b>.</p><p><b>Duracja modyfikowana</b> — przybliżona procentowa zmiana ceny obligacji przy zmianie stopy o 1 punkt procentowy. <b>PV01 (Present Value of 1 basis point)</b> — zmiana wartości pozycji <b>w złotych</b> przy ruchu stopy o 1 punkt bazowy (0,01%). Im dłuższa obligacja (późniejszy zwrot kapitału), tym większa duracja i większe ryzyko stopy.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Komisja często miesza trzy odrębne reżimy regulacyjne — trzeba je rozróżnić:</p><p><b>Rezerwa obowiązkowa</b> — instrument <b>polityki pieniężnej</b> (środki na rachunku w NBP, steruje akcją kredytową). <b>LCR/NSFR</b> — <b>normy płynności</b> (LCR: 30-dniowy bufor płynności na stres; NSFR: stabilność finansowania długoterminowego). <b>Wymóg kapitałowy</b> — fundusze własne na <b>absorpcję strat</b> (wypłacalność, np. CET1).</p><p>Trzy różne cele: sterowanie pieniądzem, płynność, wypłacalność.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Osad depozytów</b> to stabilna część depozytów bieżących, która mimo formy „na żądanie\" pozostaje w banku latami — pozwala bezpiecznie finansować dłuższe aktywa (kredyty).</p><p><b>GAP</b> to niedopasowanie terminów przeszacowania aktywów i pasywów — źródło <b>ryzyka stopy procentowej w księdze bankowej</b>. Osad <b>zmniejsza GAP</b>, bo „krótkie\" depozyty zachowują się jak długoterminowe finansowanie.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Najczęstsza pułapka:</b> stwierdzenie „VaR to strata maksymalna\". <b>To błąd.</b> VaR to <b>kwantyl rozkładu strat</b> — próg odcinający najgorszy procent przypadków przy danej ufności i horyzoncie, opisujący granicę „normalnych\" złych dni.</p><p>Za tym progiem (w tym najgorszym 1% przy ufności 99%) strata może być <b>wielokrotnie wyższa</b> i VaR o niej milczy — od tego jest Expected Shortfall. Na pytanie „a w tym 1%?\" odpowiada ES, nie VaR.</p>",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami: co dokładnie oznacza zdanie \"VaR = 1 mln zł, 99%, 1 dzień\"?",
      "model": "Z prawdopodobieństwem 99% strata portfela w ciągu jednego dnia nie przekroczy 1 mln zł; równoważnie — średnio 1 dzień na 100 będzie gorszy niż ta granica. To kwantyl rozkładu strat (próg w lewym ogonie), a NIE strata maksymalna: w tym najgorszym 1% przypadków strata może być znacznie wyższa, o czym VaR już nic nie mówi (od tego jest Expected Shortfall)."
@@ -3729,6 +4084,41 @@
      "gap": true
     },
     {
+     "type": "teach",
+     "html": "<p><b>RAROC</b> (Risk-Adjusted Return on Capital) to miara, wokół której kręci się cała decyzja kredytowa: bank nie minimalizuje strat, lecz maksymalizuje <b>zwrot skorygowany o ryzyko</b> w stosunku do zaangażowanego kapitału.</p><p>W uproszczeniu $RAROC = \\frac{\\text{marża} - EL + \\text{przychody}}{\\text{kapitał (na pokrycie UL)}}$. Licznik to dochód pomniejszony o stratę oczekiwaną, mianownik to kapitał pochłaniany przez stratę nieoczekiwaną. To idealna puenta odpowiedzi: kredyt udzielamy, gdy RAROC przewyższa wymagany zwrot na kapitale.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>MSSF 9</b> zastąpił stary model „straty poniesionej\" modelem <b>straty oczekiwanej</b> (ECL) i dzieli ekspozycje na trzy etapy.</p><p><b>Stage 1</b> — brak istotnego wzrostu ryzyka od udzielenia: rezerwa = ECL z horyzontu <b>12 miesięcy</b>. <b>Stage 2</b> — istotny wzrost ryzyka (np. opóźnienie > 30 dni), ale jeszcze bez defaultu: rezerwa = ECL <b>dożywotnia</b> (lifetime). <b>Stage 3</b> — ekspozycja w defaulcie (zagrożona): rezerwa lifetime, a odsetki naliczane od wartości netto. Przejście 1 $\\rightarrow$ 2 to skokowy wzrost rezerwy, co komisja lubi sprawdzać.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Bazylea III/CRR daje bankowi dwie drogi liczenia wymogu kapitałowego. W <b>metodzie standardowej</b> wagi ryzyka są <b>narzucone przez regulatora</b> (zależnie od typu ekspozycji i ratingu zewnętrznego) — bank nie szacuje własnych parametrów.</p><p>W metodzie <b>IRB</b> (Internal Ratings-Based) bank szacuje <b>własne</b> parametry ryzyka. W wariancie <b>F-IRB</b> (podstawowym) bank liczy tylko $PD$, a $LGD$ i $EAD$ bierze z regulacji; w <b>A-IRB</b> (zaawansowanym) bank szacuje sam $PD$, $LGD$ i $EAD$. IRB wymaga zgody nadzoru i bywa kapitałowo korzystniejszy dla banku.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>ICR</b> (Interest Coverage Ratio) to wskaźnik komplementarny do DSCR, używany przy ocenie firmy. Mierzy, ile razy zysk operacyjny pokrywa <b>same odsetki</b>: $ICR = \\frac{EBIT}{\\text{odsetki}}$.</p><p>Różnica wobec DSCR: ICR patrzy tylko na koszt odsetkowy, a $DSCR = \\frac{CFADS}{\\text{rata kapitałowa} + \\text{odsetki}}$ obejmuje <b>pełną</b> obsługę długu (kapitał + odsetki). Dlatego ICR jest zwykle wyższy i mniej rygorystyczny; DSCR lepiej oddaje realne ryzyko niedomknięcia spłaty.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>DStI</b> (Debt Service to Income) to udział raty w dochodzie netto osoby fizycznej: $DStI = \\frac{\\text{raty}}{\\text{dochód netto}}$ — odpowiednik DSCR po stronie detalicznej (im wyższy, tym gorzej).</p><p>To wskaźnik nadzorowany przez KNF w ramach <b>Rekomendacji T</b>: bardzo wysoki DStI (np. zbliżający się do 100% dochodu po kosztach utrzymania) oznacza brak bufora i odmowę. Na egzaminie warto powiązać: DStI i scoring to ilościowo-statystyczny rdzeń oceny osoby fizycznej, analogicznie jak DSCR/ICR dla firmy.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Wzór $EL = PD \\cdot LGD \\cdot EAD$ liczy stratę dla <b>jednej</b> ekspozycji. Dla portfela strata oczekiwana jest po prostu <b>sumą</b> EL pojedynczych ekspozycji: $EL_{port} = \\sum_{i} PD_i \\cdot LGD_i \\cdot EAD_i$ — bo wartość oczekiwana sumy to suma wartości oczekiwanych (korelacje tu nie wchodzą).</p><p>Inaczej jest ze stratą nieoczekiwaną: $UL$ portfela <b>nie</b> jest sumą UL, lecz zależy od <b>korelacji</b> między kredytobiorcami — dlatego portfel zdywersyfikowany ma niższe UL i niższy wymóg kapitałowy. To uzasadnia istnienie modeli portfelowych (CreditMetrics) i pojęcia Credit VaR.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Credit VaR</b> (kredytowa wartość zagrożona) to maksymalna strata portfela na zadanym poziomie ufności (np. 99,9%) w przyjętym horyzoncie. Łączy ona ranę EL/UL z konkretną liczbą na potrzeby kapitału.</p><p>Zależność: <b>kapitał ekonomiczny = Credit VaR − EL</b>, czyli kapitał pokrywa tylko część <b>nieoczekiwaną</b> (ogon ponad średnią), bo EL jest już pokryte rezerwami i marżą. To formalne uzasadnienie zasady „kapitał pokrywa UL, nie EL\" — fundamentu Bazylei.</p>",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami, dlaczego zabezpieczenie obniża LGD, a nie PD — i co z tego wynika dla decyzji kredytowej.",
      "model": "PD to prawdopodobieństwo, że klient nie spłaci — zależy od jego sytuacji dochodowej, która nie zmienia się od tego, co zastawi. Zabezpieczenie wpływa dopiero na to, ile bank odzyska PO defaulcie: wyższy odzysk (RR) → niższa strata, czyli niższe LGD (LGD = 1 − RR). Wniosek: decyzję opieramy na zdolności pierwotnej (spłata z przyszłych przepływów, np. DSCR), a zabezpieczenie traktujemy jako plan B, który zmniejsza stratę, nie ryzyko niespłacenia. Opieranie decyzji na samym zabezpieczeniu to model lombardowy, nie kredytowy."
@@ -3969,6 +4359,26 @@
      "gap": true
     },
     {
+     "type": "teach",
+     "html": "<p><b>Reforma wskaźników referencyjnych (WIBOR → WIRON).</b> W Polsce trwa zastępowanie stawki <b>WIBOR</b> (kwotowanej deklaratywnie przez banki) wskaźnikiem <b>WIRON</b> (Warszawski Indeks Rynku Overnight) — opartym na <b>rzeczywistych</b> transakcjach depozytowych O/N, zgodnie z rozporządzeniem unijnym <b>BMR</b>. WIRON jest stopą typu overnight składaną wstecz za okres odsetkowy, więc co do zasady plasuje się <b>niżej</b> niż WIBOR (nie zawiera premii terminowej). Znaczenie dla wyceny: zmiana wskaźnika to zmiana stopy dyskontowej i kuponu w instrumentach o zmiennym oprocentowaniu.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Dwa rodzaje duration.</b> <b>Duration Macaulaya</b> ($D$) to średni ważony czas do otrzymania przepływów (w latach), gdzie wagą jest udział zdyskontowanego przepływu w cenie. <b>Duration zmodyfikowana</b> przelicza ją na wrażliwość ceny: $D_{mod} = \\frac{D}{1+r}$, a przybliżona zmiana ceny to $\\frac{\\Delta P}{P} \\approx -D_{mod} \\cdot \\Delta r$. Stąd duration zmodyfikowana mówi, o ile procent zmieni się cena przy zmianie stopy o 1 pkt proc. — i jest zawsze nieco mniejsza od Macaulaya.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Cena brudna vs czysta obligacji.</b> Suma zdyskontowanych przepływów daje <b>cenę brudną</b> (dirty price) — pełną wartość zapłaty w dniu transakcji. Cena <b>czysta</b> (clean price), którą podaje się w notowaniach giełdowych, to cena brudna pomniejszona o <b>odsetki narosłe</b> (accrued interest) od ostatniego kuponu: $P_{czysta} = P_{brudna} - AI$. Komisja sprawdza tu, czy wiesz, że kupujący między kuponami płaci sprzedającemu narosłą część kuponu.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Parytet kupna-sprzedaży (put-call parity).</b> Ceny europejskiej opcji call ($C$) i put ($P$) o tym samym $K$ i $T$ wiąże relacja braku arbitrażu: $C - P = S_0 - \\frac{K}{(1+r)^T}$. Pozwala wyznaczyć cenę jednej opcji znając drugą, bez modelu Black-Scholesa. Naruszenie parytetu oznacza możliwość arbitrażu — to ta sama zasada „dwie strategie o identycznej wypłacie kosztują dziś tyle samo\", która wycenia forward.</p>",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami, dlaczego cena obligacji spada, gdy rosna stopy rynkowe — i co znaczy, ze relacja ta jest 'wypukla'.",
      "model": "Cena obligacji to suma jej przyszlych przeplywow (kupony + nominal) zdyskontowanych rynkowa stopa (YTM). Stopa siedzi w mianowniku czynnika dyskontowego $\\frac{1}{(1+r)^t}$, wiec gdy YTM rosnie, mianownik rosnie, a wartosc biezaca kazdego przeplywu maleje — suma, czyli cena, spada. Intuicyjnie: nowe obligacje placa wiecej, wiec stara z nizszym kuponem musi staniec, by dac kupujacemu te sama rentownosc. 'Wypukla' znaczy, ze zaleznosc nie jest linia prosta: spadek YTM o 1 pkt proc. podnosi cene troche mocniej, niz ten sam wzrost ja obniza (convexity)."
@@ -4192,6 +4602,21 @@
      "q": "Poprawna, 'mocna' odpowiedz na pytanie o roznice firmy miedzynarodowej: jej koszt kapitalu jest po prostu zawsze wyzszy o ryzyko kraju.",
      "bool": false,
      "explain": "Falsz — to wlasnie slaba, jednokierunkowa odpowiedz, na ktorej komisja lapie. Mocna jest dwukierunkowa: w gore (CRP + waluta), w dol (tanszy globalny kapital), plus segmentacja/integracja jako wyjasnienie zmiany parametrow. Wynik to bilans, nie automat."
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Każda stopa ma swój przepływ.</b> WACC dyskontuje <b>FCFF</b> (przepływy dla całej firmy — i właścicieli, i wierzycieli), bo łączy koszt equity i długu. Natomiast sam <b>$K_e$</b> dyskontuje <b>FCFE</b> (przepływy tylko dla właścicieli, po obsłudze długu) oraz dywidendy.</p><p>To częsta pułapka: nie wolno dyskontować FCFE WACC-iem ani FCFF kosztem $K_e$ — przepływ i stopa muszą pochodzić z tej samej perspektywy, inaczej ryzyko długu policzysz dwa razy albo wcale.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Ile realnie wynosi MRP?</b> Premia za ryzyko rynkowe $(R_m - R_f)$ nie jest dowolna — historycznie dla rynku USA przyjmuje się ją w przedziale ok. <b>4,5–6%</b> rocznie. To rząd wielkości, którym warto się posłużyć, gdy zadanie nie podaje liczby.</p><p>Uwaga: MRP to nadwyżka <b>całego rynku akcji</b> ponad $R_f$ — dopiero beta skaluje ją do ryzyka konkretnej spółki ($\\beta \\cdot MRP$). Nie myl MRP (premia rynku) z $K_e$ (wymagany zwrot pojedynczej spółki).</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Który koszt długu wstawiamy do WACC?</b> $K_d$ to efektywne oprocentowanie <b>nowego, marginalnego</b> długu — czyli ile firma zapłaciłaby, zaciągając finansowanie dziś. To <b>nie</b> jest średnie oprocentowanie starych kredytów z bilansu.</p><p>Powód: WACC ma wyceniać koszt kapitału dla <b>nowych</b> decyzji inwestycyjnych, więc liczy się aktualna cena rynkowa pieniądza. Dodatkowo $K_d$ zależy od <b>waluty</b> finansowania — dług w EUR i w PLN ma inny koszt nominalny przez różnicę stóp.</p>",
+     "kompendium_gap": true
     },
     {
      "type": "recall",
@@ -4427,6 +4852,41 @@
      "type": "teach",
      "html": "<p><b>Gdzie księguje się odpis ECL?</b> Odpis na oczekiwane straty kredytowe (allowance) jest <b>kontr-aktywem</b> — pomniejsza wartość należności po stronie <b>aktywów</b> (kredyt netto $=$ kredyt brutto $-$ odpis), a drugostronnie obciąża wynik finansowy. To <b>nie jest rezerwa z MSR 37</b>, którą ujmuje się po stronie <b>pasywów</b>. <b>Rozróżnienie kluczowe na egzaminie:</b> rezerwa MSR 37 dotyczy zobowiązań o niepewnej kwocie lub terminie (np. spory sądowe, gwarancje), a <b>odpis ECL z MSSF 9</b> dotyczy utraty wartości aktywów finansowych. Mylenie tych dwóch pozycji (aktywa vs pasywa) to klasyczny błąd, na którym komisja dociska.</p>",
      "gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Instrument finansowy</b> to umowa, która rodzi <b>aktywo finansowe</b> u jednej strony oraz <b>zobowiązanie finansowe lub instrument kapitałowy</b> u drugiej strony. Należą do nich m.in. kredyty, depozyty, obligacje i akcje. To właśnie dlatego ta sama umowa (np. depozyt) jest jednocześnie aktywem dla klienta i pasywem dla banku — instrument zawsze ma dwie strony.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>MSSF 9</b> (ang. IFRS 9) to standard regulujący instrumenty finansowe, obowiązujący od <b>1 stycznia 2018 r.</b> Zastąpił on <b>MSR 39</b> i to właśnie MSSF 9 wprowadził model oczekiwanej straty kredytowej (ECL) w miejsce dawnej straty poniesionej. Wartość godziwą definiuje z kolei odrębny standard <b>MSSF 13</b>.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Trzy parametry wzoru ECL: <b>PD</b> (Probability of Default) — prawdopodobieństwo defaultu, ułamek (12-miesięczne dla Stage 1, lifetime dla Stage 2/3); <b>LGD</b> (Loss Given Default) — strata na jednostkę ekspozycji przy defaulcie, ułamek, gdzie $LGD = 1 - RR$ ($RR$ to stopa odzysku); <b>EAD</b> (Exposure at Default) — kwota \"na ryzyku\" w chwili defaultu, w złotych. Pamiętaj: procenty zamieniaj na ułamki przed mnożeniem.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>FINREP</b> i <b>COREP</b> to dwa pakiety sprawozdawczości nadzorczej w UE. <b>FINREP</b> = dane finansowe sporządzane według MSSF. <b>COREP</b> = adekwatność kapitałowa według rozporządzenia <b>CRR</b>. Skrót pomocniczy: FIN = finanse, CO = capital (kapitał).</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Odpis na oczekiwane straty (ECL, MSSF 9)</b> to kontr-aktywo: pomniejsza wartość należności po stronie aktywów ($kredyt\\ netto = kredyt\\ brutto - odpis$) i dotyczy utraty wartości aktywów finansowych. <b>Rezerwa z MSR 37</b> to natomiast <b>zobowiązanie po stronie pasywów</b> — dotyczy zobowiązań o niepewnej kwocie lub terminie (np. spory sądowe, gwarancje). Mylenie tych dwóch pozycji (aktywa vs pasywa) to klasyczny błąd egzaminacyjny.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Obowiązek stosowania MSR/MSSF dla <b>skonsolidowanych</b> sprawozdań spółek notowanych (w tym banków giełdowych) wynika z <b>rozporządzenia UE nr 1606/2002</b>. Krajowa rama to <b>Ustawa o rachunkowości z 1994 r.</b> (obejmuje banki na mocy art. 2) plus rozporządzenie MF o szczególnych zasadach rachunkowości banków. Dla sprawozdania skonsolidowanego banku z GPW <b>MSSF ma prymat w ujęciu i wycenie</b>, a UoR reguluje kwestie formalno-proceduralne — bank giełdowy prowadzi de facto dwa ujęcia.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Wartość pieniądza w czasie:</b> złotówka dziś jest warta więcej niż za rok, dlatego przyszły przepływ sprowadzamy do wartości dzisiejszej dzieląc przez czynnik dyskontujący $(1 + r)^{t}$. W modelu ECL rolę stopy $r$ pełni efektywna stopa procentowa $EIR$. Pominięcie dyskonta (zwłaszcza w Stage 3) zaniża stratę — komisja często tu dociska.</p>",
+     "kompendium_gap": true
     },
     {
      "type": "recall",
@@ -4670,6 +5130,36 @@
      "gap": true
     },
     {
+     "type": "teach",
+     "html": "<p><b>Świeca japońska zapisuje cztery ceny sesji:</b> <b>O</b> (otwarcie), <b>H</b> (maksimum), <b>L</b> (minimum), <b>C</b> (zamknięcie) — wszystkie w zł.</p><p>To z tych czterech liczb buduje się cały wykres i liczy wskaźniki (np. SMA i RSI używają <b>ceny zamknięcia C</b>). Korpus świecy to przedział między O a C, a „knoty\" sięgają do H i L. Świeca <b>biała/zielona</b> ($C \\geq O$) oznacza sesję wzrostową, <b>czarna/czerwona</b> ($C < O$) — spadkową.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Do rynku można podejść na trzy sposoby:</b> <b>fundamentalnie</b> (bada kondycję firmy ze sprawozdań), <b>technicznie</b> (bada sam wykres ceny i wolumenu) oraz <b>ilościowo/quant</b> (testuje statystycznie mechaniczne reguły na danych historycznych).</p><p>Analiza techniczna jest więc tylko <b>jednym z trzech</b> podejść, nie całością inwestowania. Na egzaminie warto zaznaczyć, że quant różni się od „klasycznej\" AT tym, że wymaga rygorystycznego <b>backtestu</b> reguł, a nie subiektywnego odczytu wykresu.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>EMA (wykładnicza średnia ruchoma)</b> to drugi obok SMA wskaźnik trendu. W przeciwieństwie do SMA, która waży wszystkie ceny w oknie jednakowo, <b>EMA przypisuje większą wagę cenom najnowszym</b>.</p><p>Skutek: EMA reaguje na zmianę ceny <b>szybciej i ma mniejszy lag</b> niż SMA o tym samym $n$ — ceną za to jest większa wrażliwość na szum (więcej fałszywych sygnałów). Klasyczny <b>złoty krzyż / krzyż śmierci</b> liczy się natomiast na średnich prostych: przecięcie $SMA_{50}$ i $SMA_{200}$.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>W mapie wskaźników poza RSI i Bollingerem padają jeszcze trzy nazwy — warto wiedzieć, co dokładnie mierzą:</p><p><b>MACD</b> (momentum) — różnica dwóch EMA (zwykle 12 i 26), wygładzona linią sygnału (EMA 9); przecięcia i dywergencje sygnalizują zmiany pędu. <b>ATR</b> (zmienność) — <b>średni rzeczywisty zasięg</b> ruchu ceny w sesji; nie ma kierunku, służy do skalowania stop-lossa (np. $1{,}5 \\cdot ATR$). <b>OBV</b> (wolumen) — skumulowany wolumen: dodaje wolumen w sesje wzrostowe i odejmuje w spadkowe, badając, czy wolumen <b>potwierdza</b> ruch ceny.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Formacje świecowe to układy 1–2 świec niosące sygnał o starciu popytu i podaży:</p><p><b>Doji</b> — otwarcie niemal równe zamknięciu ($C \\approx O$, korpus jak kreska): <b>równowaga</b> sił i niezdecydowanie, często zapowiedź zmiany kierunku. <b>Młot</b> — mały korpus u góry i długi dolny knot na dnie spadków: popyt odrzucił niskie ceny, sygnał <b>odwrócenia w górę</b>. <b>Objęcie hossy</b> (bullish engulfing) — duża świeca wzrostowa, której korpus <b>obejmuje</b> poprzednią spadkową: przejęcie inicjatywy przez kupujących.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Hipoteza rynku efektywnego (EMH) ma <b>trzy formy</b>, różniące się zakresem informacji już zawartej w cenie:</p><p><b>Słaba</b> — cena zawiera całą informację z <b>przeszłych cen i wolumenu</b> (to ta forma podważa AT). <b>Półsilna</b> — cena zawiera dodatkowo wszystkie <b>informacje publiczne</b> (sprawozdania, komunikaty) — uderza w analizę fundamentalną. <b>Silna</b> — cena zawiera nawet informacje <b>poufne</b> (insider). Komisja często sprawdza, czy nie pomylisz form: AT jest w konflikcie wyłącznie z formą <b>słabą</b>.</p>",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: czym rozni sie analiza techniczna od fundamentalnej i dlaczego sa komplementarne?",
      "model": "AT bada cene i wolumen z wykresu i odpowiada na pytanie KIEDY wejsc/wyjsc (timing); zaklada, ze cala informacja jest juz w cenie. FA czyta sprawozdania finansowe i szacuje wartosc wewnetrzna spolki — odpowiada na pytanie ILE cos jest warte (wycena). Sa komplementarne, bo FA mowi CO kupic (dobra, niedowartosciowana firma), a AT KIEDY to zrobic (gdy wykres potwierdza moment) — dobry inwestor laczy oba podejscia."
@@ -4900,6 +5390,51 @@
      "type": "teach",
      "html": "<p><b>Otoczenie nadzorczo-regulacyjne banku.</b> <b>KNF</b> (Komisja Nadzoru Finansowego) sprawuje nadzor nad bankami i licencjonuje czynnosci bankowe; <b>NBP</b> (Narodowy Bank Polski) to bank centralny — emituje pieniadz, prowadzi polityke pieniezna i dba o stabilnosc systemu platniczego; <b>BFG</b> (Bankowy Fundusz Gwarancyjny) gwarantuje depozyty (do rownowartosci <b>100 000 EUR</b> na deponenta w banku) i prowadzi przymusowa restrukturyzacje. Wymogi ostroznosciowe (kapital, plynnosc) okresla <b>Bazylea III</b>, wdrozona w UE rozporzadzeniem <b>CRR</b> (<i>575/2013</i>) i dyrektywa CRD — to one wymuszaja, by bank trzymal odpowiedni kapital wlasny na pokrycie ryzyka kredytowego z operacji czynnych.</p>",
      "gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Underwriting to nie tylko prowizja — to realne ryzyko straty.</b> Gwarantując emisję, bank zobowiązuje się objąć papiery, których nie kupią inwestorzy, po z góry ustalonej cenie. Jeśli <b>źle wyceni popyt</b> i obejmie papiery, których potem nie zdoła odsprzedać po tej cenie, <b>może wyjść na minus</b> mimo pobranej prowizji. Istota: za prowizję bank przejmuje <b>ryzyko nieuplasowania emisji</b>, a nie tylko ją organizuje.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Rozróżnienie subemisji <b>inwestycyjnej</b> i <b>usługowej</b> komisja sprawdza przez pryzmat <b>wielkości ekspozycji kapitałowej banku</b>, a nie celu. Przy inwestycyjnej bank angażuje kapitał tylko na resztę nieobjętą (np. 3 mln z 20 mln), przy usługowej obejmuje od razu całość (20 mln). Cel obu jest ten sam — zagwarantowanie pozyskania kapitału przez emitenta; różni je <b>tylko skala kapitału, jaki bank musi wyłożyć</b>.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Dla czynności <b>sensu largo</b> (art. 5 ust. 2 Prawa bankowego) kluczowe jest to, że stają się one „bankowe\" <b>tylko wtedy, gdy wykonuje je bank</b> — wykonane przez inny podmiot są zwykłymi czynnościami cywilnoprawnymi. Ta sama pożyczka udzielona przez bank to czynność bankowa, a udzielona przez osobę prywatną to zwykła umowa pożyczki z Kodeksu cywilnego. Słowo-klucz egzaminacyjny: <b>„zależy od podmiotu\"</b>.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Silne uwierzytelnianie (SCA) wymagane przez PSD2 ma <b>ustawowe wyłączenia</b> — nie każda transakcja go wymaga. Z drugiego czynnika mogą zwalniać m.in. <b>bardzo niskie kwoty</b> oraz <b>analiza ryzyka transakcji (TRA, Transaction Risk Analysis)</b>, gdy system oceni transakcję jako niskiego ryzyka. To dlatego płatność zbliżeniowa małej kwoty nie wymaga PIN-u, mimo że formalnie jest płatnością elektroniczną.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Opłata za zarządzanie aktywami (management fee) to dochód <b>prowizyjny</b> (nieodsetkowy) banku, naliczany od wartości powierzonego portfela proporcjonalnie do czasu: $fee = WAN \\cdot s \\cdot \\frac{d}{365}$, gdzie $WAN$ — wartość aktywów netto pod zarządzaniem (zł), $s$ — roczna stawka opłaty (ułamek, np. $0{,}02 = 2\\%$), $d$ — liczba dni naliczania, a $365$ — baza roczna (actual/365). Przykład: dla $WAN = 100$ mln zł, $s = 2\\%$, $d = 30$ dni opłata wynosi $\\approx 164\\,384$ zł.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Siła SCA wynika z mnożenia prawdopodobieństw <b>niezależnych</b> czynników: $P_{atak} = p_1 \\cdot p_2$, gdzie $P_{atak}$ to szansa złamania <b>obu naraz</b> (0–1), a $p_1, p_2$ to szanse złamania każdego czynnika osobno. Mnożymy, bo oszust musi pokonać jedno <b>i</b> drugie zabezpieczenie. Dla $p_1 = p_2 = 0{,}01$ wychodzi $P_{atak} = 0{,}0001$ — ryzyko spada <b>100-krotnie</b> (z 1 na 100 do 1 na 10 000).</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Bankowy Fundusz Gwarancyjny (BFG) gwarantuje depozyty do równowartości <b>100 000 EUR na deponenta w jednym banku</b> oraz prowadzi <b>przymusową restrukturyzację (resolution)</b> banków zagrożonych upadłością. To liczbowy detal, który warto podać przy różnicy depozyt vs e-pieniądz: depozyt jest chroniony tym funduszem do konkretnego limitu, a środki w pieniądzu elektronicznym — nie funduszem, lecz <b>segregacją</b> (oddzielnym kontem), bez limitu kwotowego BFG.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Do operacji <b>biernych</b> (pasywnych) — w których bank gromadzi środki i jest <b>dłużnikiem</b> — należą nie tylko lokaty i rachunki, ale również <b>emisja własnych papierów dłużnych banku</b> (np. obligacji, listów zastawnych, certyfikatów depozytowych). To także źródło finansowania zapisane po stronie pasywów. Nie myl tego z pośredniczeniem banku w emisji papierów <b>cudzych</b> (underwriting), które jest operacją pośredniczącą/inwestycyjną.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Wymogi <b>ostrożnościowe</b> (poziom kapitału i płynności banku) określa <b>Bazylea III</b>, wdrożona w UE rozporządzeniem <b>CRR (575/2013)</b> i dyrektywą <b>CRD</b>. To one wymuszają, by bank utrzymywał odpowiedni <b>kapitał własny na pokrycie ryzyka kredytowego</b> z operacji czynnych (kredytów). Warto tym domknąć odpowiedź obok wzmianki o KNF (nadzór i licencjonowanie), NBP (bank centralny, emisja pieniądza) i BFG (gwarancje depozytów).</p>",
+     "kompendium_gap": true
     },
     {
      "type": "recall",
@@ -5134,6 +5669,26 @@
      "type": "teach",
      "html": "<p><b>Po co istnieją dwa rachunki kosztów (cel, nie tylko mechanika).</b> Rachunek kosztów <b>pełnych</b> (absorpcyjny) służy do <b>wyceny zapasów i sprawozdania finansowego</b>: zgodnie z <b>MSR 2 'Zapasy'</b> koszt wytworzenia wyrobu musi obejmować nie tylko koszty zmienne, ale też <b>uzasadnioną część stałych pośrednich kosztów produkcji</b> (rozliczanych przy normalnym wykorzystaniu zdolności). Dlatego do bilansu i RZiS (koszt własny sprzedaży) stosuje się rachunek pełny.</p><p>Rachunek kosztów <b>zmiennych</b> (variable costing) jest <b>niedozwolony do wyceny zapasów w bilansie</b> wg MSR 2 — służy <b>wewnętrznie do decyzji</b>, bo izoluje marżę pokrycia $mj = c - kz$ i pokazuje, ile realnie 'dokłada' każda dodatkowa sztuka. Stąd kluczowa para egzaminacyjna: <b>pełny → sprawozdanie/wycena zapasów (MSR 2)</b>, <b>zmienny → decyzje krótkookresowe</b>. To kolejny raz zasada 'ta sama liczba, inny cel'.</p>",
      "gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Koszt</b> to memoriałowe (w chwili zużycia) zużycie zasobów, a <b>wydatek</b> to kasowy rozchód pieniądza — zdarzają się w różnym czasie.</p><p>Klasyczne przykłady rozjazdu: <b>amortyzacja</b> jest kosztem, ale nie jest wydatkiem (gotówka wypłynęła wcześniej, przy zakupie środka trwałego); zakup materiałów do magazynu jest wydatkiem, ale jeszcze nie kosztem (kosztem stanie się dopiero przy zużyciu).</p><p>To rozróżnienie jest fundamentem całego tematu: dlatego wynik (memoriał) $\\neq$ przepływ gotówki (kasa), i dlatego w budżecie gotówki amortyzacji nie wpisujemy.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Odchylenie całkowite rozkłada się na dwie części, każdą liczoną tak, by się nie nakładały:</p><p><b>Odchylenie cenowe</b> $= (c_{rz} - c_{st}) \\cdot Q_{rz}$ — różnicę cen mnożymy przez <b>ilość rzeczywistą</b>.</p><p><b>Odchylenie ilościowe</b> $= (Q_{rz} - Q_{st}) \\cdot c_{st}$ — różnicę ilości mnożymy przez <b>cenę standardową</b>.</p><p>gdzie $c_{rz}, c_{st}$ — cena (stawka) rzeczywista i standardowa, $Q_{rz}, Q_{st}$ — ilość rzeczywista i standardowa. Drugi czynnik trzymamy stały, by odizolować efekt i nie policzyć podwójnie wspólnego narożnika cena$\\times$ilość.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Próg rentowności można podać od razu w złotówkach, bez liczenia sztuk, dzieląc koszty stałe przez <b>wskaźnik marży pokrycia</b>:</p><p>$BEP_{zl} = \\frac{KS}{mj/c}$, gdzie $mj/c$ to udział marży w cenie (wskaźnik marży pokrycia).</p><p>Dla danych $c = 50$, $kz = 30$, $KS = 100\\,000$: wskaźnik $= 20/50 = 0{,}4$, więc $BEP_{zl} = 100\\,000 / 0{,}4 = 250\\,000$ zł — tyle samo co $Q^{*} \\cdot c = 5\\,000 \\cdot 50$. Ta wersja jest niezbędna, gdy firma sprzedaje wiele produktów i nie da się podać jednej „sztuki”.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Podział controllingu warto umieć powiązać z parą pojęć egzaminacyjnych: <b>controlling strategiczny</b> pilnuje <b>skuteczności</b> („robić właściwe rzeczy” — właściwy rynek/produkt, długi horyzont), a <b>controlling operacyjny</b> pilnuje <b>efektywności</b> („robić rzeczy właściwie” — sprawne koszty i budżety, krótki horyzont).</p><p>Skrót: strategiczny = <b>CO</b> (cel, skuteczność), operacyjny = <b>JAK</b> (wykonanie, efektywność). Komisja lubi, gdy do metafory nawigatora dorzucisz tę parę pojęciową.</p>",
+     "kompendium_gap": true
     },
     {
      "type": "recall",
@@ -5377,6 +5932,26 @@
       "oparty na zerze"
      ],
      "explain": "To ZBB (zero-based budgeting), czyli budżet od zera. Przeciwieństwo budżetu przyrostowego, który bazuje na poprzednim okresie ± korekta i ryzykuje utrwaleniem marnotrawstwa."
+    },
+    {
+     "type": "teach",
+     "html": "<p>Dekompozycja odchylenia wartości formalnie wynika z rozbicia iloczynu. Pełna różnica to <b>$c_{rz} \\cdot q_{rz} - c_{pl} \\cdot q_{pl}$</b>, którą rozkłada się przez <b>człon pomostowy</b> $c_{pl} \\cdot q_{rz}$: dodajemy go i odejmujemy, otrzymując odchylenie ceny $(c_{rz}-c_{pl}) \\cdot q_{rz}$ oraz ilości $(q_{rz}-q_{pl}) \\cdot c_{pl}$.</p><p>Powstaje też <b>odchylenie interakcyjne</b> (mieszane) $(c_{rz}-c_{pl}) \\cdot (q_{rz}-q_{pl})$ — konwencyjnie dolicza się je do <b>ceny</b>, dlatego w członie cenowym mnożymy przez ilość rzeczywistą $q_{rz}$, a nie planowaną.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Budżet elastyczny pozwala formalnie rozdzielić odchylenie kosztów na dwie części. <b>Odchylenie wolumenu (skali)</b> = budżet elastyczny − budżet sztywny — to neutralny efekt sprzedania innej liczby sztuk niż planowano, za który menedżer nie odpowiada.</p><p><b>Odchylenie efektywności</b> = wykonanie rzeczywiste − budżet elastyczny (przeskalowany do faktycznego wolumenu) — i dopiero to mierzy, czy gospodarowano oszczędnie. Bez tego rozdzielenia menedżerowi błędnie przypisuje się całe przekroczenie $\\geq 0$ kosztów zmiennych jako jego winę.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Na egzaminie warto wyliczyć wszystkie <b>cztery funkcje planu</b>: <b>alokacyjną</b> (rozdział ograniczonych zasobów między ośrodki), <b>koordynacyjną</b> (uzgodnienie działań działów wokół wspólnych celów), <b>kontrolną</b> (porównanie planu z wykonaniem przez analizę odchyleń) i <b>motywacyjną</b> (cel mobilizuje i jest podstawą oceny).</p><p>Łańcuch logiczny: bez planu nie ma odchylenia, a bez odchylenia nie ma sygnału do działania korygującego.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Rozróżnienie memoriał/kasa przekłada się wprost na strukturę master budgetu: <b>prognozowany RZiS</b> kończy część operacyjną i pokazuje wynik <b>memoriałowo</b> (przychody i koszty w momencie sprzedaży/poniesienia), natomiast <b>budżet kasowy</b> w części finansowej śledzi realny ruch gotówki <b>kasowo</b>.</p><p>Te dwa ujęcia rozjeżdżają się dokładnie o pozycje kapitału obrotowego (należności, zapasy, zobowiązania) — stąd dodatni wynik w RZiS może współistnieć z ujemnym saldem w budżecie kasowym.</p>",
+     "kompendium_gap": true
     },
     {
      "type": "recall",
@@ -5643,6 +6218,46 @@
      "gap": true
     },
     {
+     "type": "teach",
+     "html": "<p><b>Instytucje rynku ubezpieczeń w Polsce</b> — komisja oczekuje ich wyliczenia w punkcie \"otoczenie\". <b>KNF</b> (Komisja Nadzoru Finansowego) — nadzór nad zakładami i rynkiem. <b>UFG</b> (Ubezpieczeniowy Fundusz Gwarancyjny) — wypłaca odszkodowania, gdy sprawca jest nieubezpieczony lub nieznany, oraz przy upadłości zakładu. <b>PIU</b> (Polska Izba Ubezpieczeń) — samorząd branżowy. <b>Rzecznik Finansowy</b> — chroni klientów w sporach z zakładem.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Solvency II</b> to unijny reżim wypłacalności obowiązujący zakłady ubezpieczeń w UE. Wymaga utrzymywania kapitału adekwatnego do faktycznie podejmowanego ryzyka: kluczowe progi to <b>SCR</b> (kapitałowy wymóg wypłacalności — poziom docelowy) oraz niższy <b>MCR</b> (minimalny wymóg kapitałowy — granica interwencji nadzoru). Opiera się na trzech filarach: wymogi ilościowe (kapitał, rezerwy), wymogi jakościowe (zarządzanie ryzykiem, nadzór) oraz obowiązki sprawozdawcze i przejrzystość rynkowa.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Komisja rozróżnia dwa rodzaje udziału własnego. <b>Franszyza redukcyjna (kwotowa)</b> — od każdej wypłaty odejmuje się stałą kwotę, np. przy szkodzie $8\\,000$ zł i franszyzie $1\\,000$ zł zakład płaci $7\\,000$ zł. <b>Franszyza integralna (warunkowa)</b> — to próg: szkody poniżej niego nie są wypłacane wcale, ale po jego przekroczeniu zakład płaci <b>całość</b> bez potrącenia. Redukcyjna zawsze zmniejsza wypłatę; integralna albo zeruje, albo płaci w pełni.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Reasekuracja</b> to \"ubezpieczenie ubezpieczyciela\": zakład (cedent) odstępuje część przyjętego ryzyka większemu podmiotowi (reasekuratorowi) w zamian za część składki. Pozwala unieść ryzyka skorelowane i katastroficzne (powódź, pandemia), których pula nie zdywersyfikuje, oraz stabilizuje wynik i zwalnia kapitał. Formy: <b>proporcjonalna</b> (cedent i reasekurator dzielą składki i szkody w ustalonym stosunku) oraz <b>nieproporcjonalna</b> (reasekurator pokrywa nadwyżkę szkody ponad ustalony próg).</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Cat bonds</b> (obligacje katastroficzne) to instrument transferu ryzyka katastroficznego na <b>rynek kapitałowy</b>, a nie na reasekuratora. Inwestor kupuje obligację o wysokim oprocentowaniu; jeśli zajdzie zdefiniowane zdarzenie (np. trzęsienie ziemi o określonej sile), traci część lub całość kapitału, który zasila wypłaty ubezpieczyciela. Dzięki temu ryzyko systematyczne, którego nie redukuje prawo wielkich liczb, rozprasza się wśród inwestorów słabo skorelowanych z rynkiem ubezpieczeń.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>W modelowej odpowiedzi komisja oczekuje wyliczenia <b>cech ubezpieczenia</b>: <b>losowość</b> (zdarzenie może zajść albo nie), <b>wzajemność</b> (wielu wpłaca, świadczenie otrzymuje dotknięty zdarzeniem), <b>ekwiwalentność</b> (składki w wartości oczekiwanej pokrywają świadczenia, koszty i zysk), a pomocniczo <b>planowość</b> (działanie według kalkulacji aktuarialnej, nie przypadku) i <b>realność</b> (gwarancja faktycznej wypłaty, zabezpieczona rezerwami i kapitałem).</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Składka czysta to formalnie <b>wartość oczekiwana wypłaty</b> z polisy: $E[X] = q \\cdot S$, gdzie z prawdopodobieństwem $q$ wypłaca się $S$, a z prawdopodobieństwem $1-q$ nie wypłaca się nic. Stąd $P_{czysta} = q \\cdot S$ — pobierając średnio tyle, ile średnio wypłacasz, wychodzisz na zero na samych szkodach. To uzasadnia, dlaczego $q \\cdot S$, a nie jakakolwiek inna kombinacja, jest \"sprawiedliwą\" ceną ryzyka.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Awersja do ryzyka oznacza, że klient płaci składkę <b>wyższą</b> niż wartość oczekiwana jego straty: $P_{brutto} \\geq E[X] = q \\cdot S$. Nadwyżka $P_{brutto} - q \\cdot S$ to świadoma \"opłata za spokój\" pokrywająca narzut i ryzyko zakładu. Gdyby klient był neutralny wobec ryzyka, akceptowałby tylko składkę równą $q \\cdot S$ i rynek by nie istniał — to awersja, mierzalna wklęsłością funkcji użyteczności, napędza popyt na polisy.</p>",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wytłumacz własnymi słowami, czym jest ubezpieczenie i jak liczy się składkę czystą oraz brutto.",
      "model": "Ubezpieczenie to transfer i rozłożenie ryzyka: klient płaci małą pewną składkę, a ubezpieczyciel przejmuje ryzyko wielkiej niepewnej straty, rozkładając jej skutki na całą wspólnotę ryzyka (mutualizacja) dzięki prawu wielkich liczb. Składka czysta to ekwiwalent ryzyka, czyli wartość oczekiwana wypłaty: $P_{czysta} = q \\cdot S$ (gdzie $q$ to prawdopodobieństwo szkody, $S$ to suma ubezpieczenia). Składka brutto dolicza narzut na koszty, bezpieczeństwo i zysk: przy narzucie $\\lambda$ liczonym od brutto $P_{brutto} = P_{czysta}/(1-\\lambda)$ — dzielimy, nie mnożymy."
@@ -5886,6 +6501,46 @@
      "explain": "Kluczowe zdanie: 'Zabezpieczenie kosztuje pewnosc, nie pieniadze'. Hedging to swiadoma wymiana ZMIENNOSCI na PEWNOSC — oddajesz szanse na korzystny ruch kursu, by usunac ryzyko. To nie jest darmowe zarabianie ani maksymalizacja zysku."
     },
     {
+     "type": "teach",
+     "html": "<p><b>Punkty swapowe</b> to różnica między kursem terminowym a kasowym: $punkty = F - S$. Jeśli $F \\geq S$ (dokładniej $F > S$), waluta bazowa jest na <b>premii terminowej</b>; gdy $F < S$ — na <b>dyskoncie terminowym</b>. W przykładzie EUR/PLN punkty swapowe wynoszą $4{,}3320 - 4{,}30 = 0{,}0320$, czyli euro (bazowe) jest na premii, bo to złoty ma wyższą stopę i jest na termin słabszy.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Kurs spot</b> to cena rozliczenia natychmiastowego, technicznie z dostawą w <b>T+2</b> (dwa dni robocze), a nie tego samego dnia. <b>Kurs forward</b> ustala się dziś, lecz z dostawą w dalszej przyszłości (np. T+90). Różnica dat waluty (value date) jest źródłem punktów swapowych, które wynikają wprost z różnicy stóp procentowych obu walut.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Na rynku walutowym działają trzej aktorzy: <b>hedger</b> (zabezpiecza istniejącą pozycję, chce zredukować zmienność), <b>spekulant</b> (świadomie <i>otwiera</i> nową pozycję, bierze ryzyko w nadziei na zysk) oraz <b>arbitrażysta</b> (wykorzystuje chwilowe rozbieżności cen, by zarobić <b>bez ryzyka i bez kapitału netto</b>). To właśnie arbitrażysta wymusza poziom kursu forward zgodny z CIP — jego działanie eliminuje „darmowy obiad\".</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Kurs walutowy ruszają cztery główne czynniki: <b>stopy procentowe</b> (parytet stóp / IRP — kapitał płynie tam, gdzie wyższy zwrot), <b>inflacja</b> (parytet siły nabywczej / PPP — waluta kraju o wyższej inflacji deprecjonuje się), <b>bilans płatniczy</b> (popyt na towary kraju to popyt na jego walutę) oraz <b>oczekiwania i sentyment</b> (rynek wycenia przyszłość, plotka rusza kurs zawczasu). Dwa pierwsze mają swoje wzory-parytety (IRP, PPP), dwa kolejne to siły popytu i psychologii.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Parytet siły nabywczej (PPP)</b> mówi, że w długim okresie kursy dążą do wyrównania siły nabywczej walut (<b>prawo jednej ceny</b>), a waluta kraju o wyższej inflacji się <b>deprecjonuje</b>. To „grawitacja długoterminowa\", a nie prognoza na jutro — w krótkim okresie kurs może od niej znacznie odbiegać.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>MFW</b> (Międzynarodowy Fundusz Walutowy) to „strażak płynności\": czuwa nad stabilnością systemu walutowego, prowadzi nadzór makro (<b>art. IV</b>), udziela <b>warunkowych pożyczek</b> (conditionality) krajom z problemami bilansu płatniczego i operuje jednostką <b>SDR</b>. <b>Bank Światowy</b> finansuje rozwój długoterminowo. Jednozdaniowa różnica: MFW = płynność i bilans płatniczy krótkoterminowo, Bank Światowy = rozwój długoterminowo. Warto dorzucić <b>BIS</b> (bank banków centralnych) i <b>EBC</b> (polityka pieniężna strefy euro).</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Po wyczerpaniu narzędzi wewnętrznych firma sięga po instrumenty zewnętrzne (pochodne): <b>forward</b> (OTC, obowiązek wymiany po umówionym kursie), <b>futures</b> (giełdowy, wystandaryzowany odpowiednik forwardu z rozliczeniem przez izbę), <b>opcja</b> (prawo, nie obowiązek, za premię) oraz <b>swap walutowy / CIRS</b> (wymiana strumieni płatności w dwóch walutach). Forward i futures różnią się głównie miejscem obrotu i standaryzacją, choć ekonomicznie zabezpieczają ten sam kurs.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Na <b>Forexie</b> (rynek OTC, 24h/5 dni, największy na świecie) zarabia się na <b>spreadzie</b> — różnicy między ceną kupna (ask) a sprzedaży (bid). <b>Dźwignia</b> pozwala operować kwotą wielokrotnie większą niż wniesiony kapitał, ale jest mieczem obosiecznym: w tej samej proporcji powiększa zyski i straty. Dlatego Forex to teren spekulantów, a nie miejsce na „bezpieczne oszczędzanie\".</p>",
+     "kompendium_gap": true
+    },
+    {
      "type": "recall",
      "prompt": "Wytlumacz wlasnymi slowami: dlaczego waluta o wyzszej stopie procentowej jest na rynku terminowym (forward) slabsza niz na spocie?",
      "model": "Wymaga tego brak arbitrazu (parytet stop procentowych, CIP). Gdyby waluta o wyzszej stopie byla na termin tak samo mocna lub mocniejsza, mozna by bez ryzyka zarobic: pozyczyc walute nizej oprocentowana, zamienic ja na walute wyzej oprocentowana, ulokowac na wyzszy procent, a kurs powrotny zaklepac dzis forwardem. Taki pewny zysk bez kapitalu (darmowy obiad) nie moze istniec na efektywnym rynku. Dlatego forward ustawia sie na poziomie, ktory kasuje te roznice stop — waluta o wyzszej stopie jest na termin na dyskoncie (slabsza)."
@@ -6127,6 +6782,51 @@
     {
      "type": "teach",
      "html": "<p><b>Podsumowanie — szkielet modelowej odpowiedzi egzaminacyjnej.</b> Gdy padnie pytanie o instrumenty pochodne, idz tym torem:</p><p><b>1. Definicja:</b> wartosc pochodna od bazy (\"zaklad o przyszla cene\"); cele: hedging / spekulacja / arbitraz.<br><b>2. Forward:</b> OTC, obie strony zobowiazane, ryzyko kontrahenta, $F = S_0(1+r)^T$, wyplata $S_T - F$; rozroznij $F$ od $V$.<br><b>3. Futures:</b> \"forward na gieldzie\" — standaryzacja, izba (CCP), depozyt, mark-to-market, margin call, konwergencja $F_T \\to S_T$.<br><b>4. Opcje:</b> call/put, prawo vs obowiazek, premia, strike, wartosc wewnetrzna + czasowa, 5 czynnikow, asymetria.<br><b>5. Swapy:</b> IRS (stale na zmienne), wymiana netto, nominal bez wymiany; wspomnij CIRS i CDS.<br><b>6. Profile wyplat:</b> forward = prosta 45 stopni (symetria); opcja = kolano w $K$ (asymetria).<br><b>7. Domkniecie:</b> derywat nie jest dobry ani zly — liczy sie, czy zmniejsza (hedging), czy zwieksza (spekulacja) ekspozycje.</p>"
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Long vs short</b> to dwie strony każdego derywatu. <b>Long (kupujący)</b> zyskuje, gdy cena instrumentu bazowego rośnie; <b>short (sprzedający)</b> zyskuje, gdy cena spada.</p><p>W forwardzie/futures jest to gra o sumie zero: $\\text{Wyplata}_{\\text{long}} = S_T - F$, a short ma wynik dokładnie przeciwny $F - S_T$. Dlatego zysk longa równa się stracie shorta.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Wycena derywatów opiera się na <b>wartości pieniądza w czasie</b>. <b>Kapitalizacja</b> przesuwa kwotę w przyszłość przez czynnik $(1+r)^{T}$, natomiast <b>dyskontowanie</b> ściąga przyszłą kwotę do dziś przez $e^{-rT}$ (lub $\\frac{1}{(1+r)^{T}}$).</p><p>Właśnie dlatego cena forward $F = S_0 \\cdot (1+r)^{T}$ jest dzisiejszą ceną spot „przesuniętą\" do przodu o narosłe odsetki — bez tego powstałby arbitraż.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Próg opłacalności (break-even)</b> to cena bazy, przy której wynik netto nabywcy = 0 (zysk z wykonania dokładnie pokrywa premię).</p><p>Dla <b>calla</b>: $\\text{BE} = K + \\text{premia}$ (np. $K=105$, premia $4$ → BE $=109$). Dla <b>puta</b>: $\\text{BE} = K - \\text{premia}$. Powyżej/poniżej BE nabywca zaczyna realnie zarabiać; samo $S_T > K$ jeszcze nie oznacza zysku, dopóki nie pokryje się premii.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Wartość opcji = wewnętrzna + czasowa.</b> Wartość wewnętrzna to zysk z natychmiastowego wykonania: dla calla $\\max(S-K,0)$, a dla <b>puta</b> $\\max(K-S,0)$.</p><p><b>Wartość czasowa</b> to dopłata za szansę, że cena ruszy jeszcze korzystniej do wygaśnięcia; maleje do zera w dniu wygaśnięcia — wtedy zostaje wyłącznie wartość wewnętrzna, bo nie ma już „przyszłości\", za którą warto płacić.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Futures <b>eliminuje ryzyko kontrahenta</b> (przez izbę rozliczeniową), ale w zamian wprowadza <b>ryzyko płynności</b>. Codzienne mark-to-market oznacza, że przy niekorzystnych ruchach trzeba mieć gotówkę na bieżące dopłaty (<b>margin call</b>) — nawet jeśli pozycja ostatecznie wyjdzie na plus.</p><p>Forward takiego ryzyka nie ma: rozlicza się raz, dopiero w dacie $T$.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p><b>Konwergencja</b>: w miarę zbliżania się daty wygaśnięcia cena futures zbiega do ceny spot, czyli $F_T \\to S_T$. Wynika to z tego, że w dniu dostawy futures to po prostu kupno aktywa „na już\", więc obie ceny muszą się zrównać.</p><p>To częsty element pytań komisji o różnicę forward/futures — warto wymienić go obok standaryzacji, izby i mark-to-market.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Poza najpopularniejszym <b>IRS</b> (wymiana odsetek stałych na zmienne) warto znać dwie odmiany. <b>CIRS</b> (currency IRS) to swap walutowy — wymiana płatności w różnych walutach. <b>CDS</b> (credit default swap) to wymiana ryzyka kredytowego, rodzaj ubezpieczenia od bankructwa emitenta.</p><p>Komisja docenia wymienienie ich obok IRS jako dowód szerszego rozumienia rodziny swapów.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>To ulubiona pułapka komisji. <b>Premia</b> (opcja) to cena płacona z góry za prawo wyboru — <b>przepada w całości</b>, niezależnie od tego, czy opcję wykonasz.</p><p><b>Depozyt zabezpieczający</b> (futures) to natomiast zabezpieczenie rozliczenia — <b>wraca</b> do posiadacza po zamknięciu pozycji. Mylenie tych dwóch pojęć (np. „depozyt przepada jak premia\") = utrata punktów.</p>",
+     "kompendium_gap": true
+    },
+    {
+     "type": "teach",
+     "html": "<p>Opcja ma dwie strony o skrajnie różnych profilach. <b>Nabywca</b> płaci premię i ma <b>prawo</b> wyboru (strata ograniczona do premii, zysk potencjalnie duży). <b>Wystawca</b> (sprzedający) inkasuje premię, ale ma <b>obowiązek</b> wywiązać się, jeśli nabywca zażąda.</p><p>Profil wystawcy jest lustrzany: maksymalny zysk = premia, a strata może być duża (przy wystawionym callu teoretycznie nieograniczona). To odwrotność asymetrii nabywcy.</p>",
+     "kompendium_gap": true
     },
     {
      "type": "recall",

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fir-trener-v16-cache';
+const CACHE_NAME = 'fir-trener-v17-cache';
 const urlsToCache = [
   './',
   './index.html',
@@ -30,6 +30,16 @@ const urlsToCache = [
   './data/lessons.js',
   './data/problems.js',
   './data/exam.js',
+  './assets/avatars/audytor.png',
+  './assets/avatars/kinezjolog.png',
+  './assets/avatars/strateg.png',
+  './assets/avatars/boss_bilans.png',
+  './assets/avatars/boss_golem.png',
+  './assets/avatars/item_kalkulator.png',
+  './assets/avatars/item_hantel.png',
+  './assets/avatars/item_notatnik.png',
+  './assets/avatars/item_garnitur.png',
+  './assets/avatars/item_pas.png',
   'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css',
   'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js',
   'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js',
