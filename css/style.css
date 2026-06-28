@@ -1148,50 +1148,102 @@ body {
     box-shadow: 0 0 24px var(--biome-glow, rgba(255, 215, 0, 0.3)) !important;
 }
 
-/* === LAYOUT POZIOMY: wąski icon-rail nav + szersza treść (czerwiec 2026) === */
+/* ============================================================
+   PLAN KONSULI (LLM Council) — skala/czytelnosc 11/10 (czerwiec 2026)
+   Mapowanie na realne selektory apki. Nadpisuje slim-rail + zmiany Antigravity.
+   ============================================================ */
+:root {
+    --ink: #ECE6D8;            /* tekst — nie czysta biel (mniej zmeczenia na dark fantasy) */
+    --gold-text: #E8C76A;
+}
+/* dpr 1.25 — wyostrzenie tekstu */
+body { color: var(--ink); text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+
 @media (min-width: 992px) {
-    /* Lewy pasek -> wąska szyna z samymi ikonami (z 280px na 78px) */
+    /* TIER 3 — NAV ETYKIETOWANY 212px (jak w grach AAAA; nadpisuje icon-only Antigravity) */
     .glass-nav {
-        width: 78px !important;
-        padding: 1.4rem 0 !important;
-        align-items: center;
+        width: 212px !important;
+        padding: 1.8rem 0.9rem !important;
+        align-items: stretch !important;
     }
     .nav-brand {
-        display: block !important;                  /* nadpisz ukrycie z Antigravity — male "FiR" dla identyfikacji */
-        font-size: 1.15rem !important;
+        display: block !important;
+        font-size: 1.4rem !important;
         font-weight: 900;
-        margin: 0 0 1.4rem !important;
-        text-align: center;
+        margin: 0 0 1.8rem 0.4rem !important;
+        text-align: left;
         line-height: 1;
     }
-    .nav-brand .brand-word { display: none; }      /* ukryj " Trener", zostaje glow "FiR" */
-    .nav-links { align-items: center; gap: 0.45rem; padding: 0; }
+    .nav-brand .brand-word { display: inline !important; }   /* pokaz pelne "FiR Trener" */
+    .nav-links { align-items: stretch !important; gap: 0.5rem !important; padding: 0 !important; }
     .nav-btn {
-        width: 60px !important;
-        justify-content: center !important;
-        align-items: center;
-        flex-direction: column !important;
-        gap: 0.18rem;
-        padding: 0.55rem 0.3rem !important;
-        border-radius: 14px !important;
+        width: 100% !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        gap: 0.85rem !important;
+        padding: 0.78rem 1rem !important;
+        min-height: 46px;
+        font-size: 0.95rem !important;        /* 15px etykieta */
+        font-weight: 600 !important;
+        letter-spacing: 0.02em;
+        border-radius: 12px !important;
         border-left: none !important;
+        border-bottom: none !important;
     }
-    .nav-btn .label { display: none !important; }  /* tylko ikona; opis w tooltipie (title) */
-    .nav-btn .icon { font-size: 1.5rem; }
+    .nav-btn .label { display: inline !important; }
+    .nav-btn .icon { font-size: 1.3rem !important; width: 24px; text-align: center; flex-shrink: 0; }
     .nav-btn.active {
-        background: rgba(255, 255, 255, 0.07) !important;
-        border-left: none !important;
-        box-shadow: inset 0 0 0 1px var(--border-glass) !important;
+        background: rgba(212,175,55,0.10) !important;
+        border: 1px solid rgba(212,175,55,0.45) !important;
+        box-shadow: inset 3px 0 0 var(--primary), inset 0 0 18px rgba(212,175,55,0.10) !important;
+        color: var(--primary) !important;
     }
-    .theme-toggle { display: flex; margin: 0.6rem auto 0; }
+    .theme-toggle { display: flex !important; margin-top: auto; margin-left: 0.6rem; align-self: flex-start; }
 
-    /* Odzyskany poziom: dużo mniej paddingu wokół treści */
-    .view-container { padding: 1.5rem 2rem !important; }
-    /* Karta postaci węższa, środek (nauka) szerszy */
-    .rpg-split-layout { grid-template-columns: 270px 1fr 300px !important; gap: 1.2rem !important; }
+    /* TIER 4 — kolumny: panel postaci 300 / tresc 1fr / prawa 320 */
+    .rpg-split-layout { grid-template-columns: 300px minmax(0,1fr) 320px !important; gap: 1.5rem !important; }
+    .view-container { padding: 1.8rem 2.2rem !important; }
 }
-@media (min-width: 1500px) {
-    .view-container { padding: 1.8rem 2.6rem !important; }
+@media (min-width: 1500px) { .view-container { padding: 2rem 2.8rem !important; } }
+
+/* TIER 8 — panel postaci ZAWSZE widoczny (fix wyblakniecia z GSAP) */
+#rpg-character-panel { opacity: 1 !important; }
+
+/* TIER 2 — premium frost na panelach nad foto biomu (kontrast + glebia) */
+#view-learn .glass-card {
+    backdrop-filter: blur(14px) saturate(1.05);
+    -webkit-backdrop-filter: blur(14px) saturate(1.05);
+}
+
+/* TIER 4 — naglowek kampanii: hierarchia + scrim na foto */
+#learn-view-title { font-size: 2rem !important; letter-spacing: -0.01em; text-shadow: 0 2px 14px rgba(0,0,0,0.7); }
+
+/* TIER 5 — karty mapy czytelne (min 14-16px, wiecej oddechu) */
+.quest-map-card { padding: 1.05rem 1.2rem !important; }
+.quest-map-card .text-lg,
+.quest-map-card b { font-size: 1.05rem !important; line-height: 1.3 !important; }
+.quest-map-card .text-muted,
+.quest-map-card small { font-size: 0.9rem !important; line-height: 1.45 !important; }
+
+/* TIER 7 — SVG wykresy NPV/CAPM/SML czytelne (osie/ticki/serie min 13px) */
+.medieval-chart-container svg text { font-size: 13px !important; }
+.medieval-chart-container svg text[font-weight="bold"] { font-size: 14px !important; }
+
+/* a11y (slepe punkty konsuli) — focus-visible + reduced-motion */
+.nav-btn:focus-visible,
+.btn:focus-visible,
+button:focus-visible,
+.quest-map-card:focus-visible {
+    outline: 2px solid var(--gold-text) !important;
+    outline-offset: 2px !important;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
 }
 
 /* Medieval Chart Styling */

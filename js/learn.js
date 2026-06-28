@@ -849,7 +849,7 @@ window.Learn = {
     // Probe order: JPG first (wszystkie tla sa jpg), PNG jako fallback. Brak pliku => zostaje gradient (0 bledow 404 w UI).
     applyScene(view, chapter, b) {
         if (!view) return;
-        const V = '23';
+        const V = '24';
         const tint = `radial-gradient(135% 95% at 50% 113%, rgba(${b.glow},.28) 0%, rgba(${b.glow},.08) 38%, transparent 64%), linear-gradient(177deg, ${b.sky[0]}e6 0%, ${b.sky[1]}cc 48%, ${b.sky[2]}cc 100%)`;
         const applyBg = (ext) => {
             if (view.dataset.biome === chapter) {
@@ -1207,7 +1207,7 @@ window.Learn = {
                 
                 <div style="text-align: left; background: rgba(0,0,0,0.3); padding: 2rem; border-radius: var(--radius-md); margin-bottom: 2.5rem; border: 1px solid var(--border-glass); box-shadow: inset 0 0 15px rgba(0,0,0,0.4);">
                     <h4 style="color: var(--primary); margin-bottom: 1.2rem; opacity: 0.9; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; font-weight: 800;">Czego się nauczysz:</h4>
-                    <div class="text-lg" style="line-height: 1.8; font-size: 1.15rem;">${this.injectHelpfulGraphics(firstTeach)}</div>
+                    <div class="text-lg lesson-body" style="line-height: 1.65; font-size: 1.25rem; max-width: 68ch; margin-inline: auto;">${this.injectHelpfulGraphics(firstTeach)}</div>
                 </div>
             </div>
         `;
@@ -1279,7 +1279,7 @@ window.Learn = {
                     </div>
                     <div>
                         <div style="font-weight: bold; color: var(--primary); font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: 0.5px;">💬 ${npcName}</div>
-                        <div class="text-lg" style="line-height: 1.8; font-size: 1.1rem;">${this.injectHelpfulGraphics(step.html)}</div>
+                        <div class="text-lg lesson-body" style="line-height: 1.65; font-size: 1.25rem; max-width: 68ch;">${this.injectHelpfulGraphics(step.html)}</div>
                     </div>
                 </div>
             `;

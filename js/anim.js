@@ -157,16 +157,15 @@ const Anim = {
             }
         });
 
-        // Stagger glass cards
+        // Stagger glass cards — subtelny slide BEZ opacity (opacity:0 powodowal utykanie paneli na niewidocznym, gdy ScrollTrigger nie odpalil)
         gsap.utils.toArray('.glass-card').forEach((card, i) => {
             gsap.from(card, {
-                y: 50,
-                opacity: 0,
-                duration: 0.8,
+                y: 24,
+                duration: 0.55,
                 ease: 'power3.out',
                 scrollTrigger: {
                     trigger: card,
-                    start: 'top 85%',
+                    start: 'top 92%',
                     toggleActions: 'play none none none'
                 }
             });
