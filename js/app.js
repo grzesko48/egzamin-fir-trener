@@ -111,6 +111,7 @@ const App = {
         if(typeof Learn!=='undefined') Learn.init(this.lessonsData || window.LESSONS);
         if(typeof Tasks!=='undefined') Tasks.init(window.PROBLEMS);
         if(typeof Match!=='undefined') Match.init(this.data);
+        if(typeof Study!=='undefined') Study.init(this.data);
     },
 
     navigate(viewId) {
@@ -137,6 +138,8 @@ const App = {
         if (viewId === 'dashboard' && typeof Dashboard!=='undefined') Dashboard.render();
         if (viewId === 'analytics' && typeof Analytics!=='undefined') Analytics.render();
         if (viewId === 'match' && typeof Match!=='undefined') Match.render();
+        if (viewId === 'progress' && typeof Study!=='undefined') Study.renderProgress();
+        if (viewId === 'improve' && typeof Study!=='undefined') Study.renderImprove();
     }
 };
 

@@ -1,8 +1,38 @@
 /**
  * Learn Mode Engine V4 Premium - RPG & Active Learning Super-App
- * Noris / Verstappen 2026 Edition.
- * Features: True generated RPG avatars, custom inventory inspect cards, Boss battles, web audio synthesizer, GSAP transitions.
+ * HARDCORE DARK SOULS EDITION (2026 AAAA Edition).
+ * Features: Souls & Bloodstains, Bonfires, Hardcore damage scaling, audio synth, GSAP animations.
  */
+
+// Boss templates for all chapters
+const BOSS_TEMPLATES = {
+    'fundament': { name: 'Architekt Bilansu', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Strażnik zasad memoriałowych i WACC. Zmierzy się z Tobą w bezlitosnym starciu z podstaw finansowych.', rewardItem: 'Złoty Kalkulator' },
+    'stopy': { name: 'Kolekcjoner Stóp NBP', hp: 320, image: 'boss_bilans.png', hue: 45, desc: 'Pan korytarza stóp procentowych. Czy potrafisz obliczyć stopę lombardową i depozytową w locie?', rewardItem: 'Wizor Rynkowy' },
+    'k5': { name: 'Dyskontowy Demon NPV', hp: 340, image: 'boss_golem.png', hue: 120, desc: 'Władca przyszłej wartości pieniądza. Będzie rzucał w Ciebie trudnymi wzorami NPV i IRR.', rewardItem: 'Złoty Kalkulator' },
+    'k1': { name: 'Cenzor Memoriału', hp: 300, image: 'boss_bilans.png', hue: 180, desc: 'Bezlitosny strażnik zasady współmierności przychodów i kosztów. Uważaj na podejście kasowe!', rewardItem: 'Garnitur Audytora' },
+    'k2': { name: 'Wyceniacz Pasywów', hp: 350, image: 'boss_golem.png', hue: 200, desc: 'Stoi na straży wyceny aktywów w bilansie według kosztu historycznego i wartości godziwej.', rewardItem: 'Garnitur Audytora' },
+    'k3': { name: 'Golem Upadłości', hp: 380, image: 'boss_golem.png', hue: 0, desc: 'Monstrum zasilane wskaźnikiem Altmana. Zmierzy się z Tobą w analizie rentowności i płynności.', rewardItem: 'Pas Kulturystyczny' },
+    'k4': { name: 'Mistrz Kosztów Zmiennych', hp: 330, image: 'boss_bilans.png', hue: 240, desc: 'Sprawdza próg rentowności i marżę pokrycia. Każda pomyłka obniży Twój BEP do zera.', rewardItem: 'Pas Kulturystyczny' },
+    'k6': { name: 'Kapitalista WACC', hp: 360, image: 'boss_golem.png', hue: 280, desc: 'Tarcza podatkowa to jego zbroja. Spróbuje zniszczyć Twój portfel kosztem kapitału obcego.', rewardItem: 'Kamizelka Finansisty' },
+    'k7': { name: 'Pożeracz Płynności KON', hp: 320, image: 'boss_bilans.png', hue: 300, desc: 'Zamraża gotówkę w cyklu konwersji. Musisz skrócić DSO i DIO, aby zadać mu obrażenia.', rewardItem: 'Notatnik Rynkowy' },
+    'k8': { name: 'Wyceniacz DCF', hp: 400, image: 'boss_golem.png', hue: 90, desc: 'Wycenia firmy dochodowo i porównawczo. Wymaga znajomości NOPAT, WACC oraz EVA.', rewardItem: 'Notatnik Rynkowy' },
+    'k9': { name: 'Arbitrażowy Arbitr', hp: 350, image: 'boss_bilans.png', hue: 150, desc: 'Strażnik prawa jednej ceny. Zmusi Cię do wyłapania okazji arbitrażowych na rynku.', rewardItem: 'Notatnik Rynkowy' },
+    'k10': { name: 'Gubernator Monetarny', hp: 370, image: 'boss_golem.png', hue: 60, desc: 'Kontroluje podaż pieniądza. Będzie walczył stopami procentowymi i rezerwą obowiązkową.', rewardItem: 'Wizor Rynkowy' },
+    'k11': { name: 'Poborca Podatkowy CIT', hp: 340, image: 'boss_bilans.png', hue: 320, desc: 'Ściąga podatki bezpośrednie i pośrednie. Zmierzy się z Tobą w kalkulacji dochodu CIT.', rewardItem: 'Garnitur Audytora' },
+    'k12': { name: 'Tytan Recesji', hp: 420, image: 'boss_golem.png', hue: 340, desc: 'Władca cyklu koniunkturalnego. Musisz przetrwać jego recesję, odpowiadając na pytania PKB.', rewardItem: 'Pas Kulturystyczny' },
+    't1': { name: 'Władca Value at Risk (VaR)', hp: 400, image: 'boss_golem.png', hue: 200, desc: 'Mierzy maksymalną stratę z określonym prawdopodobieństwem. Czy przetrwasz jego test stresu?', rewardItem: 'Wizor Rynkowy' },
+    't2': { name: 'Audytor Kredytowy', hp: 360, image: 'boss_bilans.png', hue: 210, desc: 'Sprawdza zdolność kredytową i asymetrię informacji. Uważaj na selekcję negatywną!', rewardItem: 'Garnitur Audytora' },
+    't5': { name: 'Syntetyk Opcji', hp: 380, image: 'boss_golem.png', hue: 130, desc: 'Tworzy skomplikowane struktury opcyjne. Będziesz musiał wycenić opcje i spłacić premię.', rewardItem: 'Notatnik Rynkowy' },
+    't11': { name: 'Kosztodawca Międzynarodowy', hp: 350, image: 'boss_bilans.png', hue: 160, desc: 'Liczy koszt kapitału w transgranicznych fuzjach. Przygotuj się na parytet inflacji.', rewardItem: 'Kamizelka Finansisty' },
+    't3': { name: 'Inspektor MSR', hp: 360, image: 'boss_golem.png', hue: 180, desc: 'Weryfikuje zgodność z Międzynarodowymi Standardami Rachunkowości bankowej.', rewardItem: 'Garnitur Audytora' },
+    't4': { name: 'Wykresowy Manipulator', hp: 330, image: 'boss_bilans.png', hue: 250, desc: 'Mistrz formacji świecowych i średnich kroczących. Przetestuje Twoją analizę techniczną.', rewardItem: 'Notatnik Rynkowy' },
+    't6': { name: 'Bankier Produktowy', hp: 340, image: 'boss_golem.png', hue: 270, desc: 'Zna na pamięć każdy produkt bankowy i prowizję. Spróbuje obciążyć Cię kosztami.', rewardItem: 'Wizor Rynkowy' },
+    't8': { name: 'Kontroler Odchyleń', hp: 350, image: 'boss_bilans.png', hue: 80, desc: 'Porównuje plany z wykonaniem. Każda odchyłka od normy to obrażenia dla Twojego HP.', rewardItem: 'Pas Kulturystyczny' },
+    't9': { name: 'Strażnik Budżetu', hp: 370, image: 'boss_golem.png', hue: 110, desc: 'Pilnuje dyscypliny budżetowej w przedsiębiorstwie. Wymaga precyzyjnych prognoz.', rewardItem: 'Kamizelka Finansisty' },
+    't7': { name: 'Likwidator Szkód OFE', hp: 380, image: 'boss_bilans.png', hue: 140, desc: 'Władca ubezpieczeń i funduszy emerytalnych. Oblicz renty dożywotnie, by go pokonać.', rewardItem: 'Pas Kulturystyczny' },
+    't10': { name: 'Spekulant Forex', hp: 410, image: 'boss_golem.png', hue: 220, desc: 'Manipuluje kursami walut. Musisz przewidzieć ruchy par walutowych Forex.', rewardItem: 'Wizor Rynkowy' },
+    't12': { name: 'Władca Swapów i Futures', hp: 450, image: 'boss_golem.png', hue: 310, desc: 'Ostateczny boss instrumentów pochodnych. Zabezpiecz pozycje, aby przeżyć.', rewardItem: 'Notatnik Rynkowy' }
+};
 
 // Web Audio API Synthesizer for offline haptic feedback
 window.LearnSound = {
@@ -137,15 +167,24 @@ window.Learn = {
         if (Store._data.vitality === undefined) {
             Store._data.vitality = 100;
         }
+
+        // Initialize souls and bloodstain systems for Hardcore mode
+        if (Store._data.avatar) {
+            if (Store._data.avatar.souls === undefined) Store._data.avatar.souls = 0;
+            if (Store._data.avatar.level === undefined) Store._data.avatar.level = 1;
+            if (Store._data.avatar.bloodstain === undefined) Store._data.avatar.bloodstain = null;
+        }
         
         // Override store level-up callback for retro sound
         const originalAddXP = Store.addXP;
         Store.addXP = function(amount) {
-            const res = originalAddXP.call(Store, amount);
-            if (res.leveledUp) {
-                setTimeout(() => window.LearnSound.playLevelUp(), 100);
+            // In Dark Souls Mode, XP is raw souls. No auto level up.
+            const avatar = Store._data.avatar;
+            if (avatar) {
+                avatar.souls += amount;
+                Store.save();
             }
-            return res;
+            return { leveledUp: false }; 
         };
 
         this.populateFilters();
@@ -269,15 +308,14 @@ window.Learn = {
             return;
         }
 
-        const state = Store.getGamifyState();
-        const currentLevel = state.level || 1;
+        const currentLevel = avatar.level || 1;
         const rank = this.getCharacterRank(avatar.class, currentLevel);
         const classNames = { audytor: 'Wielki Audytor', kinezjolog: 'Kinezjolog', strateg: 'Strateg Rynkowy' };
         const name = classNames[avatar.class] || 'Student';
 
-        const xp = state.xp || 0;
-        const xpNeeded = Math.floor(100 * Math.pow(currentLevel, 1.5));
-        const xpPercent = Math.min(100, Math.round((xp / xpNeeded) * 100));
+        const souls = avatar.souls || 0;
+        const soulsNeeded = Math.floor(100 * Math.pow(currentLevel, 1.5));
+        const xpPercent = Math.min(100, Math.round((souls / soulsNeeded) * 100));
 
         const hp = avatar.hp || 100;
         const maxHp = avatar.maxHp || 100;
@@ -290,19 +328,19 @@ window.Learn = {
 
         // Determine item graphic display inside slots
         let weaponImg = '⚪';
-        if (eq.weapon === 'Złoty Kalkulator') weaponImg = `<img src="assets/avatars/item_kalkulator.png" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
-        else if (eq.weapon === 'Hantel 50kg') weaponImg = `<img src="assets/avatars/item_hantel.png" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
-        else if (eq.weapon === 'Notatnik Rynkowy') weaponImg = `<img src="assets/avatars/item_notatnik.png" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
+        if (eq.weapon === 'Złoty Kalkulator') weaponImg = `<img src="assets/avatars/item_kalkulator.png?v=2026" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
+        else if (eq.weapon === 'Hantel 50kg') weaponImg = `<img src="assets/avatars/item_hantel.png?v=2026" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
+        else if (eq.weapon === 'Notatnik Rynkowy') weaponImg = `<img src="assets/avatars/item_notatnik.png?v=2026" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
 
         let chestImg = '⚪';
-        if (eq.chest === 'Garnitur Audytora') chestImg = `<img src="assets/avatars/item_garnitur.png" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
-        else if (eq.chest === 'Pas Kulturystyczny') chestImg = `<img src="assets/avatars/item_pas.png" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
-        else if (eq.chest === 'Kamizelka Finansisty') chestImg = `<img src="assets/avatars/item_garnitur.png" style="width:100%; height:100%; object-fit:cover; border-radius:11px; filter: hue-rotate(90deg);" />`;
+        if (eq.chest === 'Garnitur Audytora') chestImg = `<img src="assets/avatars/item_garnitur.png?v=2026" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
+        else if (eq.chest === 'Pas Kulturystyczny') chestImg = `<img src="assets/avatars/item_pas.png?v=2026" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
+        else if (eq.chest === 'Kamizelka Finansisty') chestImg = `<img src="assets/avatars/item_garnitur.png?v=2026" style="width:100%; height:100%; object-fit:cover; border-radius:11px; filter: hue-rotate(90deg);" />`;
 
         panel.innerHTML = `
             <div class="rpg-avatar-box" style="width: 100%;">
                 <div class="avatar-image-container" style="border: 2px solid var(--primary); width:120px; height:120px; overflow:hidden; border-radius:50%;">
-                    <img src="assets/avatars/${avatar.class}.png" style="width:100%; height:100%; object-fit:cover;" alt="Avatar" />
+                    <img src="assets/avatars/${avatar.class}.png?v=2026" style="width:100%; height:100%; object-fit:cover;" alt="Avatar" />
                 </div>
                 <h3 style="margin: 0.5rem 0 0 0;" class="gradient-text">${name}</h3>
                 <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Poziom ${currentLevel} • ${rank}</div>
@@ -323,7 +361,7 @@ window.Learn = {
                 <!-- Vitality Bar -->
                 <div class="rpg-stat-bar bar-vitality">
                     <div class="bar-label">
-                        <span>⚡ Energia (Witalność)</span>
+                        <span>⚡ Witalność (Energia)</span>
                         <span>${vit} / 100</span>
                     </div>
                     <div class="bar-track">
@@ -331,14 +369,14 @@ window.Learn = {
                     </div>
                 </div>
 
-                <!-- XP Bar -->
+                <!-- Souls (XP) Bar -->
                 <div class="rpg-stat-bar bar-xp">
                     <div class="bar-label">
-                        <span>✨ Doświadczenie</span>
-                        <span>${xp} / ${xpNeeded} XP</span>
+                        <span style="color:#ffa726;">🔥 Zebrane Dusze (Souls)</span>
+                        <span>${souls} / ${soulsNeeded}</span>
                     </div>
                     <div class="bar-track">
-                        <div class="bar-fill" style="width: ${xpPercent}%;"></div>
+                        <div class="bar-fill" style="width: ${xpPercent}%; background: linear-gradient(90deg, #ff5722, #ffb74d); box-shadow: 0 0 8px rgba(255,87,34,0.5);"></div>
                     </div>
                 </div>
             </div>
@@ -466,28 +504,13 @@ window.Learn = {
     // --- Cinematic GSAP Transition Wrapper ---
     animateTransition(updateCallback) {
         const container = document.getElementById('learn-container');
-        if (!container) {
-            updateCallback();
-            return;
-        }
-
-        if (typeof gsap !== 'undefined') {
-            gsap.to(container, {
-                opacity: 0,
-                y: 10,
-                duration: 0.15,
-                ease: "power2.out",
-                onComplete: () => {
-                    updateCallback();
-                    // Animate back in smoothly
-                    gsap.fromTo(container, 
-                        { opacity: 0, y: -15 },
-                        { opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.2)" }
-                    );
-                }
-            });
-        } else {
-            updateCallback();
+        // ZAWSZE renderuj treść NATYCHMIAST (niezawodnie), animację rób na gotowej treści.
+        updateCallback();
+        if (container && typeof gsap !== 'undefined') {
+            gsap.fromTo(container,
+                { opacity: 0, y: -12 },
+                { opacity: 1, y: 0, duration: 0.3, ease: "power2.out", clearProps: "opacity,transform" }
+            );
         }
     },
 
@@ -548,21 +571,21 @@ window.Learn = {
                     
                     <!-- Class 1 -->
                     <div class="glass-card class-card-rpg ripple" style="cursor:pointer; border-color: rgba(255, 234, 0, 0.2); padding: 1.5rem; transition: all 0.3s; display:flex; flex-direction:column; align-items:center; text-align:center;" onclick="window.Learn.createHero('audytor')">
-                        <img src="assets/avatars/audytor.png" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); box-shadow: 0 0 15px var(--primary-glow); margin-bottom: 1.2rem;" alt="Audytor" />
+                        <img src="assets/avatars/audytor.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); box-shadow: 0 0 15px var(--primary-glow); margin-bottom: 1.2rem;" alt="Audytor" />
                         <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Wielki Audytor</h3>
                         <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Ekspert bilansów i WACC. Rozpoczyna ze <b>Złotym Kalkulatorem</b> (+15% XP) i <b>Garniturem Audytora</b> (+25 max HP).</p>
                     </div>
 
                     <!-- Class 2 -->
                     <div class="glass-card class-card-rpg ripple" style="cursor:pointer; border-color: rgba(0, 255, 100, 0.2); padding: 1.5rem; transition: all 0.3s; display:flex; flex-direction:column; align-items:center; text-align:center;" onclick="window.Learn.createHero('kinezjolog')">
-                        <img src="assets/avatars/kinezjolog.png" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--success); box-shadow: 0 0 15px rgba(0,255,100,0.3); margin-bottom: 1.2rem;" alt="Kinezjolog" />
+                        <img src="assets/avatars/kinezjolog.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--success); box-shadow: 0 0 15px rgba(0,255,100,0.3); margin-bottom: 1.2rem;" alt="Kinezjolog" />
                         <h3 style="color: var(--success); margin-bottom: 0.5rem;">Kinezjolog</h3>
                         <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Mistrz fizjologii i biomechaniki. Otrzymuje <b>Hantel 50kg</b> (+20% obrażeń) oraz <b>Pas Kulturystyczny</b> (redukuje straty HP).</p>
                     </div>
 
                     <!-- Class 3 -->
                     <div class="glass-card class-card-rpg ripple" style="cursor:pointer; border-color: rgba(0, 229, 255, 0.2); padding: 1.5rem; transition: all 0.3s; display:flex; flex-direction:column; align-items:center; text-align:center;" onclick="window.Learn.createHero('strateg')">
-                        <img src="assets/avatars/strateg.png" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--secondary); box-shadow: 0 0 15px rgba(0,229,255,0.3); margin-bottom: 1.2rem;" alt="Strateg" />
+                        <img src="assets/avatars/strateg.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--secondary); box-shadow: 0 0 15px rgba(0,229,255,0.3); margin-bottom: 1.2rem;" alt="Strateg" />
                         <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">Strateg Rynkowy</h3>
                         <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Optymalizuje rynki rygoru. Otrzymuje <b>Notatnik Rynkowy</b> (+20% zysku XP) oraz <b>Kamizelkę Finansisty</b> (+15 max HP).</p>
                     </div>
@@ -598,7 +621,10 @@ window.Learn = {
             class: className,
             hp: maxHp,
             maxHp: maxHp,
-            eq: eq
+            eq: eq,
+            souls: 0,
+            level: 1,
+            bloodstain: null
         };
         Store._data.vitality = 100;
         Store.save();
@@ -615,6 +641,10 @@ window.Learn = {
         if (!container) return;
 
         this.loadQueue();
+        const avatar = Store._data.avatar;
+        const currentLevel = avatar?.level || 1;
+        const souls = avatar?.souls || 0;
+        const soulsNeeded = Math.floor(100 * Math.pow(currentLevel, 1.5));
 
         const chapterFilter = document.getElementById('learn-chapter-filter')?.value || 'all';
         let lessonsPool = this.data;
@@ -622,86 +652,183 @@ window.Learn = {
             lessonsPool = lessonsPool.filter(l => l.chapter === chapterFilter);
         }
 
+        // --- BONFIRE (Ognisko) & LEVEL UP CARD ---
+        let bonfireHTML = `
+            <div class="glass-card bonfire-card fade-in" style="width: 100%; margin-bottom: 2rem; padding: 2rem; border-color: #ff5722; text-align: center; box-shadow: 0 0 20px rgba(255, 87, 34, 0.2);">
+                <div style="width: 90px; height: 90px; margin: 0 auto 1rem auto; filter: drop-shadow(0 0 15px #ff5722); animation: pulse 2s infinite; border-radius: 50%; overflow: hidden;">
+                    <img src="assets/avatars/bonfire.png?v=2026" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
+                <h3 style="color: #ff5722; margin: 0 0 0.5rem 0; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">Ognisko Ocalenia (Bonfire)</h3>
+                <p class="text-muted" style="font-size: 0.9rem; max-width: 500px; margin: 0 auto 1.5rem auto; line-height: 1.5;">
+                    Odpocznij, aby uleczyć rany i odzyskać witalność. Odpoczynek przywraca 100% HP i Energii, ale <b>wszystkie codzienne powtórki (przeciwnicy) natychmiast odrodzą się na mapie!</b>
+                </p>
+                
+                <div style="display:flex; justify-content:center; gap: 1rem; flex-wrap:wrap; margin-bottom:1rem;">
+                    <button class="btn warning ripple" style="font-weight: bold; border-color:#ff5722; background:rgba(255,87,34,0.15); padding: 0.8rem 1.5rem; border-radius:30px;" onclick="window.Learn.restAtBonfire()">Odpocznij (Ulecz HP i Energię)</button>
+                    <button class="btn primary ripple" style="font-weight: bold; padding: 0.8rem 1.5rem; border-radius:30px;" ${souls >= soulsNeeded ? '' : 'disabled'} onclick="window.Learn.buyLevelUp()">Awansuj Poziom (Koszt: ${soulsNeeded} Duszy)</button>
+                </div>
+            </div>
+        `;
+
         let dailiesHTML = '';
         if (this.queue.length > 0) {
             dailiesHTML = `
                 <div class="glass-card fade-in" style="width: 100%; border-color: var(--warning); background: rgba(255, 234, 0, 0.02); margin-bottom: 2rem; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; box-shadow: 0 0 15px rgba(255,234,0,0.05);">
                     <div>
-                        <h3 style="color: var(--warning); display: flex; align-items: center; gap: 0.5rem; margin: 0;">⏱️ Codzienne Wyzwania (Dailies)</h3>
-                        <p class="text-muted" style="font-size: 0.9rem; margin-top: 0.3rem;">Masz <b>${this.queue.length}</b> zaległych powtórek do wykonania, by wzmocnić synapsy i zregenerować HP.</p>
+                        <h3 style="color: var(--warning); display: flex; align-items: center; gap: 0.5rem; margin: 0;">⏱️ Zjawy Pamięciowe (Powtórki)</h3>
+                        <p class="text-muted" style="font-size: 0.9rem; margin-top: 0.3rem;">Masz <b>${this.queue.length}</b> aktywnych zjaw kognitywnych do pokonania w celu regeneracji witalności.</p>
                     </div>
-                    <button class="btn warning ripple" style="font-weight: bold; padding: 0.8rem 1.5rem; border-radius:30px;" onclick="window.Learn.startDailies()">Rozpocznij Powtórki (+20⚡)</button>
-                </div>
-            `;
-        } else {
-            dailiesHTML = `
-                <div class="glass-card" style="width: 100%; border-color: var(--success); background: rgba(0, 255, 100, 0.01); margin-bottom: 2rem; padding: 1.2rem; text-align: center; box-shadow: 0 0 15px rgba(0,255,100,0.03);">
-                    <span style="color: var(--success); font-weight: bold; font-size:1.05rem;">✓ Wszystkie codzienne powtórki (Dailies) wykonane! Pamięć długotrwała utrwalona.</span>
+                    <button class="btn warning ripple" style="font-weight: bold; padding: 0.8rem 1.5rem; border-radius:30px;" onclick="window.Learn.startDailies()">Rozpocznij Walkę (+20⚡)</button>
                 </div>
             `;
         }
 
-        let listHTML = '';
-        lessonsPool.forEach(lesson => {
-            const state = Store.getLessonState(lesson.id);
-            const mastery = state.mastery || 0;
-            
-            listHTML += `
-                <div class="quest-map-card ${mastery >= 100 ? 'completed' : 'unlocked'}" onclick="window.Learn.selectLesson('${lesson.id}')">
-                    <div style="display: flex; flex-direction: column; gap: 0.3rem; max-width: 75%;">
-                        <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; letter-spacing:0.5px;">DZIEŃ ${lesson.day} • MISJA GŁÓWNA</div>
-                        <h4 style="margin: 0; font-size: 1.2rem;">${lesson.title}</h4>
-                        <div style="font-size: 0.85rem; color: var(--text-muted);">Dział: ${lesson.chapter}</div>
-                    </div>
-                    <div style="text-align: right; display:flex; flex-direction:column; align-items:flex-end; gap:0.3rem;">
-                        <span style="font-weight: bold; color: ${mastery >= 80 ? 'var(--success)' : (mastery >= 40 ? 'var(--warning)' : 'var(--danger)')}">${mastery}% Mastery</span>
-                        <div style="width: 100px; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;">
-                            <div style="width: ${mastery}%; height: 100%; background: ${mastery >= 80 ? 'var(--success)' : (mastery >= 40 ? 'var(--warning)' : 'var(--danger)')};"></div>
+        // Group lessons by Chapter
+        const uniqueChapters = [...new Set(lessonsPool.map(l => l.chapter))];
+        let mapHTML = '';
+
+        uniqueChapters.forEach(ch => {
+            const chapterLessons = lessonsPool.filter(l => l.chapter === ch);
+            const chapterDef = typeof App !== 'undefined' && App.data && App.data.chapters 
+                ? App.data.chapters.find(c => c.id === ch) 
+                : null;
+            const chapterTitle = chapterDef ? chapterDef.title : `Kategoria: ${ch.toUpperCase()}`;
+
+            const totalMastery = chapterLessons.reduce((acc, l) => acc + (Store.getLessonState(l.id).mastery || 0), 0);
+            const avgMastery = chapterLessons.length > 0 ? Math.round(totalMastery / chapterLessons.length) : 0;
+
+            const boss = BOSS_TEMPLATES[ch] || { name: 'Strażnik Działu', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Tajemniczy strażnik kognitywny.', rewardItem: 'Złoty Kalkulator' };
+            const isBossUnlocked = avgMastery >= 50;
+
+            let lessonsListHTML = '';
+            chapterLessons.forEach(lesson => {
+                const state = Store.getLessonState(lesson.id);
+                const mastery = state.mastery || 0;
+                
+                // Check if bloodstain is dropped here
+                const hasBloodstain = avatar?.bloodstain && avatar.bloodstain.lessonId === lesson.id;
+                const bloodstainBadge = hasBloodstain 
+                    ? `<span style="font-size: 0.75rem; background: rgba(0, 230, 118, 0.15); border:1px solid var(--success); color: var(--success); padding: 4px 10px; border-radius:12px; font-weight: bold; margin-left: 0.5rem; display: inline-flex; align-items: center; gap: 6px; animation: pulse 1.5s infinite;"><img src="assets/avatars/bloodstain.png?v=2026" style="width: 14px; height: 14px; border-radius:50%; object-fit: cover;" /> Plama Krwi (${avatar.bloodstain.souls} Duszy)</span>`
+                    : '';
+
+                lessonsListHTML += `
+                    <div class="quest-map-card ${mastery >= 100 ? 'completed' : 'unlocked'} ${hasBloodstain ? 'bloodstain-active' : ''}" onclick="window.Learn.selectLesson('${lesson.id}')" style="margin-bottom:0.8rem;">
+                        <div style="display: flex; flex-direction: column; gap: 0.3rem; max-width: 70%;">
+                            <div style="font-size: 0.75rem; color: var(--primary); font-weight: bold; letter-spacing:0.5px; display:flex; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                                DZIEŃ ${lesson.day} • MISJA GŁÓWNA ${bloodstainBadge}
+                            </div>
+                            <h4 style="margin: 0; font-size: 1.1rem;">${lesson.title}</h4>
                         </div>
+                        <div style="text-align: right; display:flex; flex-direction:column; align-items:flex-end; gap:0.3rem;">
+                            <span style="font-weight: bold; font-size: 0.85rem; color: ${mastery >= 80 ? 'var(--success)' : (mastery >= 40 ? 'var(--warning)' : 'var(--danger)')}">${mastery}% Mastery</span>
+                            <div style="width: 80px; height: 5px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden;">
+                                <div style="width: ${mastery}%; height: 100%; background: ${mastery >= 80 ? 'var(--success)' : (mastery >= 40 ? 'var(--warning)' : 'var(--danger)')};"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Chapter Box HTML
+            mapHTML += `
+                <div class="glass-card" style="margin-bottom: 2rem; padding: 1.8rem; border-color: rgba(255,255,255,0.06);">
+                    <div style="display:flex; justify-content:between; align-items:center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
+                        <div>
+                            <h3 style="margin: 0; font-size:1.25rem;" class="gradient-text">${chapterTitle}</h3>
+                            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">Dział: ${ch.toUpperCase()} • Opanowanie: ${avgMastery}%</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column;">
+                        ${lessonsListHTML}
+                    </div>
+
+                    <!-- Chapter Boss Card at the end of Chapter -->
+                    <div class="boss-chapter-card ${isBossUnlocked ? 'unlocked' : 'locked'}" style="margin-top: 1.2rem; border: 1px solid ${isBossUnlocked ? 'rgba(255,23,68,0.4)' : 'rgba(255,255,255,0.05)'}; background: ${isBossUnlocked ? 'linear-gradient(135deg, rgba(255,23,68,0.04) 0%, transparent 100%)' : 'rgba(0,0,0,0.1)'}; padding: 1.2rem; border-radius: 14px; display: flex; align-items: center; gap: 1.2rem; justify-content: space-between; flex-wrap: wrap;">
+                        <div style="display:flex; align-items:center; gap:1.2rem; max-width: 70%;">
+                            <div style="width:68px; height:68px; border-radius:50%; overflow:hidden; border: 2px solid ${isBossUnlocked ? 'var(--danger)' : '#666'}; filter: hue-rotate(${boss.hue}deg) ${isBossUnlocked ? '' : 'grayscale(1)'}; flex-shrink: 0;">
+                                <img src="assets/avatars/${boss.image}?v=2026" style="width:100%; height:100%; object-fit:cover;" />
+                            </div>
+                            <div style="text-align: left;">
+                                <h4 style="margin: 0; color: ${isBossUnlocked ? 'var(--danger)' : 'var(--text-muted)'}; font-size:1.1rem; font-weight:800; display:flex; align-items:center; gap:0.5rem;">
+                                    ⚔️ BOSS: ${boss.name}
+                                </h4>
+                                <p class="text-muted" style="font-size: 0.8rem; line-height:1.4; margin-top: 0.3rem;">${isBossUnlocked ? boss.desc : `Aura Bossa zablokowana. Osiągnij minimum <b>50% opanowania działu</b>, aby wyzwać go na starcie.`}</p>
+                            </div>
+                        </div>
+                        <button class="btn ${isBossUnlocked ? 'danger' : 'secondary'} ripple" ${isBossUnlocked ? '' : 'disabled'} style="font-weight: bold; padding: 0.7rem 1.4rem; border-radius:24px; font-size: 0.85rem;" onclick="window.Learn.challengeBoss('${ch}')">
+                            ${isBossUnlocked ? 'Rzuć Wyzwanie' : '🔒 Zablokowane'}
+                        </button>
                     </div>
                 </div>
             `;
         });
 
-        let bossesHTML = `
-            <div style="margin-top: 2.5rem; width: 100%;">
-                <h3 style="color: var(--danger); margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.1rem; border-bottom: 1px solid rgba(255,23,68,0.2); padding-bottom: 0.5rem; display:flex; align-items:center; gap:0.5rem;">🔥 Boss Arena (Egzaminy Działów)</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-                    
-                    <!-- Boss 1 -->
-                    <div class="glass-card" style="border-color: rgba(255,23,68,0.3); padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; background: linear-gradient(135deg, rgba(255,23,68,0.03) 0%, transparent 100%);">
-                        <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
-                            <img src="assets/avatars/boss_bilans.png" style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:2px solid var(--danger); box-shadow: 0 0 10px rgba(255,23,68,0.3); margin-bottom:1rem;" alt="Architekt" />
-                            <h4 style="color: var(--danger); margin: 0; font-size: 1.15rem;">Architekt Bilansu</h4>
-                            <span style="font-size: 0.75rem; background: rgba(255,23,68,0.15); padding: 2px 8px; border-radius: 10px; color: var(--danger); font-weight: bold; margin-top:0.4rem;">FINANSE & RACHUNKOWOŚĆ</span>
-                            <p class="text-muted" style="font-size: 0.85rem; line-height: 1.5; margin-top:0.8rem;">Strażnik zasad memoriałowych i WACC. Zmierzy się z Tobą w bezlitosnym starciu z operacji gospodarczych.</p>
-                        </div>
-                        <button class="btn danger ripple" style="width:100%; font-weight: bold; border-radius:24px; padding:0.8rem;" onclick="window.Learn.challengeBoss('finance')">Rzuć Wyzwanie (Egzamin)</button>
-                    </div>
-
-                    <!-- Boss 2 -->
-                    <div class="glass-card" style="border-color: rgba(255,23,68,0.3); padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; background: linear-gradient(135deg, rgba(255,23,68,0.03) 0%, transparent 100%);">
-                        <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
-                            <img src="assets/avatars/boss_golem.png" style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:2px solid var(--danger); box-shadow: 0 0 10px rgba(255,23,68,0.3); margin-bottom:1rem;" alt="Golem" />
-                            <h4 style="color: var(--danger); margin: 0; font-size: 1.15rem;">Golem Powięziowy</h4>
-                            <span style="font-size: 0.75rem; background: rgba(255,23,68,0.15); padding: 2px 8px; border-radius: 10px; color: var(--danger); font-weight: bold; margin-top:0.4rem;">ANATOMIA & BIOMECHANIKA</span>
-                            <p class="text-muted" style="font-size: 0.85rem; line-height: 1.5; margin-top:0.8rem;">Ostateczny sprawdzian z przyczepów mięśni i planowania jednostek treningowych. Każdy błąd kosztuje HP.</p>
-                        </div>
-                        <button class="btn danger ripple" style="width:100%; font-weight: bold; border-radius:24px; padding:0.8rem;" onclick="window.Learn.challengeBoss('biomechanics')">Rzuć Wyzwanie (Egzamin)</button>
-                    </div>
-
-                </div>
-            </div>
-        `;
-
         container.innerHTML = `
+            ${bonfireHTML}
             ${dailiesHTML}
             <div class="quest-list-container">
-                <h3 style="margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; font-size: 1.1rem;">Misje Główne</h3>
-                ${listHTML}
+                ${mapHTML}
             </div>
-            ${bossesHTML}
         `;
+    },
+
+    restAtBonfire() {
+        const avatar = Store._data.avatar;
+        if (!avatar) return;
+
+        // Bonfire restores all HP and energy
+        avatar.hp = avatar.maxHp || 100;
+        Store._data.vitality = 100;
+        Store.save();
+
+        window.LearnSound.playLevelUp();
+        
+        // Dark Souls enemy respawn logic: Resets all daily queues, reshuffling reviews back to map!
+        if (window.LESSONS && window.LESSONS.lessons) {
+            window.LESSONS.lessons.forEach(l => {
+                const state = Store.getLessonState(l.id);
+                // Reshuffle review times to current time, making Dailies active again!
+                state.nextReview = Date.now();
+                Store.updateLesson(l.id, state.mastery);
+            });
+        }
+        
+        alert("🔥 Odpocząłeś przy Ognisku. Twoje zdrowie i energia kognitywna zostały w pełni odnowione. Uważaj: cienie przeszłości (powtórki) odrodziły się!");
+        
+        this.loadQueue();
+        this.renderRPGPanel();
+        this.renderMain();
+    },
+
+    buyLevelUp() {
+        const avatar = Store._data.avatar;
+        if (!avatar) return;
+
+        const currentLevel = avatar.level || 1;
+        const soulsNeeded = Math.floor(100 * Math.pow(currentLevel, 1.5));
+
+        if (avatar.souls < soulsNeeded) {
+            alert("🔥 Masz zbyt mało dusz, by połączyć się z płomieniem.");
+            return;
+        }
+
+        avatar.souls -= soulsNeeded;
+        avatar.level = currentLevel + 1;
+        
+        // Permanent HP scaling
+        avatar.maxHp = (avatar.maxHp || 100) + 5;
+        avatar.hp = avatar.maxHp; // Full heal
+        Store._data.vitality = 100;
+        Store.save();
+
+        // Trigger Level-Up modal overlay
+        if (typeof Gamify !== 'undefined' && Gamify.showLevelUp) {
+            Gamify.showLevelUp(avatar.level);
+        }
+
+        this.renderRPGPanel();
+        this.renderMain();
     },
 
     startDailies() {
@@ -725,7 +852,7 @@ window.Learn = {
 
         const vit = Store._data.vitality || 0;
         if (vit < 20) {
-            alert("⚡ Brak energii! Twoja witalność wynosi poniżej 20. Rozwiąż codzienne powtórki (Dailies), aby zregenerować energię kognitywną do misji głównej.");
+            alert("⚡ Brak witalności! Odpocznij przy ognisku (Bonfire) lub pokonaj zjawy pamięciowe.");
             return;
         }
 
@@ -770,7 +897,7 @@ window.Learn = {
             btn.style.padding = '1rem 2rem';
             btn.style.borderRadius = '30px';
             btn.style.fontSize = '1.1rem';
-            btn.textContent = 'Rozpocznij Naukę (Enter)';
+            btn.textContent = 'Rozpocznij Starcie (Enter)';
             btn.onclick = () => {
                 this.lessonState = 'step';
                 this.currentStepIndex = 0;
@@ -795,10 +922,10 @@ window.Learn = {
         const pct = Math.round((this.currentStepIndex / lesson.steps.length) * 100);
 
         container.innerHTML = `
-            <div class="glass-card fade-in" style="width: 100%; position: relative;">
+            <div class="glass-card fade-in hardcore-step" style="width: 100%; position: relative;">
                 <!-- Postęp w lekcji -->
                 <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">
-                    <span>Postęp misji</span>
+                    <span>Postęp starcia</span>
                     <span>${this.currentStepIndex + 1} / ${lesson.steps.length}</span>
                 </div>
                 <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; margin-bottom: 2rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.03);">
@@ -873,8 +1000,8 @@ window.Learn = {
                             btn.style.boxShadow = '0 0 15px rgba(255,23,68,0.2)';
                             grid.children[step.correct].style.border = '2px solid var(--success)';
                             
-                            this.takeDamage(20);
-                            this.showContextualHint(step.explain || 'Pomyłka. Zapamiętaj prawidłową odpowiedź.');
+                            this.takeDamage(35); // Hardcore Damage
+                            this.showContextualHint(step.explain || 'Błąd. Zrozum zasady, zanim spróbujesz ponownie.');
                         }
                     };
                     grid.appendChild(btn);
@@ -915,7 +1042,7 @@ window.Learn = {
                         window.LearnSound.playDamage();
                         input.style.borderColor = 'var(--danger)';
                         input.style.color = 'var(--danger)';
-                        this.takeDamage(20);
+                        this.takeDamage(35); // Hardcore Damage
                         this.showContextualHint(`Poprawna odpowiedź to: <b>${step.answer}</b>.<br><br>${step.explain || ''}`);
                     }
                 };
@@ -956,8 +1083,8 @@ window.Learn = {
                             btn.style.background = 'rgba(255, 23, 68, 0.12)';
                             btn.style.borderColor = 'var(--danger)';
                             btn.style.boxShadow = '0 0 15px rgba(255,23,68,0.2)';
-                            this.takeDamage(20);
-                            this.showContextualHint(step.explain || 'Pomyłka. Pamiętaj na przyszłość.');
+                            this.takeDamage(35); // Hardcore Damage
+                            this.showContextualHint(step.explain || 'Błąd logiczny. Skup się.');
                         }
                     };
                     grid.appendChild(btn);
@@ -1002,7 +1129,7 @@ window.Learn = {
                         window.LearnSound.playDamage();
                         input.style.borderColor = 'var(--danger)';
                         input.style.color = 'var(--danger)';
-                        this.takeDamage(20);
+                        this.takeDamage(35); // Hardcore Damage
                         this.showContextualHint(`Prawidłowe słowo: <b>${step.cloze_answer}</b>.<br><br>${step.explain || ''}`);
                     }
                 };
@@ -1078,7 +1205,7 @@ window.Learn = {
                     btnForgot.innerHTML = '<strong>1.</strong> Zapomniałem';
                     btnForgot.onclick = () => {
                         window.LearnSound.playDamage();
-                        this.takeDamage(20);
+                        this.takeDamage(35); // Hardcore Damage
                         this.nextStep(1); 
                     };
                     
@@ -1087,7 +1214,7 @@ window.Learn = {
                     btnHazy.style.borderRadius = '20px';
                     btnHazy.innerHTML = '<strong>2.</strong> Z mgłą';
                     btnHazy.onclick = () => {
-                        this.takeDamage(5);
+                        this.takeDamage(10); // Hardcore Damage
                         this.nextStep(3); 
                     };
                     
@@ -1130,44 +1257,56 @@ window.Learn = {
             setTimeout(() => document.getElementById('blurting-textarea')?.focus(), 100);
 
         } else if (step.type === 'capstone') {
-            contentEl.innerHTML = `<h3 style="margin-bottom: 1.5rem; font-size: 1.4rem; font-weight:700;">🎯 Zadanie Podsumowujące (Capstone)</h3><div class="text-lg" style="line-height:1.7;">${step.q}</div>`;
-            const input = document.createElement('input');
-            input.type = 'text';
+            const chap = this.activeQuest.chapter;
+            const aiOn = (typeof GeminiAI !== 'undefined' && GeminiAI.hasKey());
+            contentEl.innerHTML = `<h3 style="margin-bottom: 1rem; font-size: 1.4rem; font-weight:700;">🎤 Pytanie komisji (ustne)</h3><div class="text-lg" style="line-height:1.7;">${step.q}</div>
+                <p class="text-muted" style="margin-top:.8rem;font-size:.9rem">${aiOn ? '🛡️ Egzaminator AI (Gemini) oceni Twoją odpowiedź — surowo, ale kulturalnie.' : '<i>Odpowiedz jak przed komisją, potem porównaj z wzorcem. (Włącz Egzaminatora AI w zakładce „Postępy", by oceniał prawdziwy AI.)</i>'}</p>`;
+            const input = document.createElement('textarea');
             input.className = 'glass-input';
-            input.placeholder = 'Wpisz ostateczną odpowiedź weryfikacyjną...';
-            input.style.width = '100%'; input.style.marginTop = '1.8rem'; input.style.padding = '1.2rem'; input.style.borderRadius = '14px';
+            input.placeholder = 'Wpisz swoją odpowiedź ustną...';
+            input.style.cssText = 'width:100%;margin-top:1rem;padding:1rem;min-height:120px;border-radius:14px;font-family:inherit;line-height:1.6';
             contentEl.appendChild(input);
 
-            const btn = document.createElement('button');
-            btn.className = 'btn primary ripple';
-            btn.style.borderRadius = '24px';
-            btn.textContent = 'Wyślij (Enter)';
-            btn.onclick = () => {
-                contentEl.innerHTML += `
-                    <div class="fade-in" style="margin-top:2rem; padding:1.8rem; background: rgba(0,0,0,0.3); border-radius: var(--radius-md); border: 1px solid rgba(0,255,100,0.15); box-shadow: inset 0 0 15px rgba(0,0,0,0.3);">
-                        <div style="font-size: 0.8rem; color: var(--success); font-weight: bold; margin-bottom: 0.5rem; letter-spacing: 1.5px; text-transform: uppercase;">Wzorzec Odpowiedzi:</div>
-                        <div class="text-lg" style="line-height: 1.6; font-size: 1.1rem;">${step.model}</div>
-                    </div>
-                `;
+            const revealModel = () => {
+                contentEl.insertAdjacentHTML('beforeend', `<div class="fade-in" style="margin-top:1.5rem;padding:1.5rem;background:rgba(0,0,0,.3);border-radius:var(--radius-md);border:1px solid rgba(0,255,100,.15)"><div style="font-size:.8rem;color:var(--success);font-weight:bold;margin-bottom:.5rem;letter-spacing:1.5px;text-transform:uppercase">Wzorzec Odpowiedzi:</div><div class="text-lg" style="line-height:1.6">${step.model}</div></div>`);
+                if (typeof renderMathInElement === 'function') renderMathInElement(contentEl, { delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}] });
+            };
+            const selfGrade = () => {
                 controls.innerHTML = '';
-                const btnOk = document.createElement('button');
-                btnOk.className = 'btn success ripple';
-                btnOk.style.borderRadius = '20px';
-                btnOk.textContent = 'Zgadza się z moją';
-                btnOk.onclick = () => { Gamify.awardXP(40, 'Idealny capstone'); if (this.activeBoss) this.damageBoss(100); this.nextStep(5); };
-                
-                const btnBad = document.createElement('button');
-                btnBad.className = 'btn danger ripple';
-                btnBad.style.borderRadius = '20px';
-                btnBad.textContent = 'Mam luki';
-                btnBad.onclick = () => { this.takeDamage(20); this.nextStep(2); };
-                
-                controls.appendChild(btnOk);
-                controls.appendChild(btnBad);
+                const ok = document.createElement('button'); ok.className = 'btn success ripple'; ok.style.borderRadius = '20px'; ok.textContent = 'Zgadza się z moją';
+                ok.onclick = () => { Gamify.awardXP(40, 'Capstone'); if (this.activeBoss) this.damageBoss(100); if (typeof Study !== 'undefined') Study.recordAnswer(true); this.nextStep(5); };
+                const bad = document.createElement('button'); bad.className = 'btn danger ripple'; bad.style.borderRadius = '20px'; bad.textContent = 'Mam luki';
+                bad.onclick = () => { this.takeDamage(35); if (typeof Study !== 'undefined') { Study.recordAnswer(false); Study.addImprove(chap, 'Pytanie komisji: ' + (this.activeQuest.title || chap)); } this.nextStep(2); };
+                controls.appendChild(ok); controls.appendChild(bad);
+            };
 
-                if (typeof renderMathInElement === 'function') {
-                    renderMathInElement(contentEl, { delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}] });
+            const btn = document.createElement('button');
+            btn.className = 'btn primary ripple'; btn.style.borderRadius = '24px';
+            btn.textContent = aiOn ? 'Wyślij do komisji AI' : 'Pokaż wzorzec';
+            btn.onclick = async () => {
+                const ans = input.value.trim();
+                if (!aiOn) { revealModel(); selfGrade(); btn.remove(); return; }
+                if (!ans) { input.focus(); return; }
+                btn.disabled = true; input.disabled = true; btn.textContent = 'Komisja ocenia...';
+                const r = await GeminiAI.gradeOral(step.q, step.model, ans);
+                btn.remove();
+                if (r.error) {
+                    contentEl.insertAdjacentHTML('beforeend', `<div style="margin-top:1rem;color:var(--warning)">Egzaminator AI niedostępny (${r.error}). Oceń się sam wzorcem.</div>`);
+                    revealModel(); selfGrade(); return;
                 }
+                const g = r.ok, pass = !!g.pass;
+                contentEl.insertAdjacentHTML('beforeend', `<div class="fade-in glass-card" style="margin-top:1.5rem;border-color:${pass ? 'var(--success)' : 'var(--danger)'}">
+                    <div style="display:flex;justify-content:space-between;align-items:center"><b style="color:${pass ? 'var(--success)' : 'var(--danger)'};font-size:1.2rem">🎓 ${g.verdict || (pass ? 'Zaliczone' : 'Wymaga uzupełnienia')}</b><b style="font-size:1.4rem">${g.score}%</b></div>
+                    <p style="margin-top:.6rem"><b>👍 Dobrze:</b> ${g.good || '—'}</p>
+                    ${(g.missing && g.missing.length) ? `<p style="margin-top:.4rem"><b>⚠️ Czego zabrakło:</b></p><ul>${g.missing.map(m => `<li>${m}</li>`).join('')}</ul>` : ''}
+                    ${g.tip ? `<p style="margin-top:.4rem"><b>💡 Wskazówka:</b> ${g.tip}</p>` : ''}</div>`);
+                revealModel();
+                if (typeof Study !== 'undefined') { Study.recordAnswer(pass); (g.missing || []).forEach(m => Study.addImprove(chap, m)); }
+                if (pass) { Gamify.awardXP(Math.round(g.score / 2), 'Komisja AI zaliczyła'); if (this.activeBoss) this.damageBoss(g.score); } else { this.takeDamage(35); }
+                controls.innerHTML = '';
+                const next = document.createElement('button'); next.className = 'btn primary ripple'; next.textContent = 'Dalej (Enter)';
+                next.onclick = () => this.nextStep(pass ? 5 : 2);
+                controls.appendChild(next);
             };
             controls.appendChild(btn);
             setTimeout(() => input.focus(), 100);
@@ -1257,7 +1396,7 @@ window.Learn = {
                 .map(b => `<li>${b.text}</li>`)
                 .join('');
 
-            this.takeDamage(20);
+            this.takeDamage(40); // Feynman Error Damage
             this.showContextualHint(`Niepoprawna sekwencja logiczna. Prawidłowy ciąg to:<br><ol style="margin-left: 1.5rem; margin-top: 0.5rem; line-height: 1.6;">${correctOrderTexts}</ol>`);
         }
     },
@@ -1318,7 +1457,7 @@ window.Learn = {
             btn.className = 'btn primary ripple';
             btn.style.borderRadius = '24px';
             
-            if (pct >= 60) {
+            if (pct >= 70) { // Hardcore threshold raised to 70%
                 window.LearnSound.playSuccess();
                 btn.textContent = 'Świetny blurt! Dalej (Enter)';
                 btn.onclick = () => {
@@ -1328,9 +1467,9 @@ window.Learn = {
                 };
             } else {
                 window.LearnSound.playDamage();
-                btn.textContent = 'Za mało szczegółów. Dalej (Enter)';
+                btn.textContent = 'Brak kluczowych pojęć. Dalej (Enter)';
                 btn.onclick = () => {
-                    this.takeDamage(15);
+                    this.takeDamage(35); // Hardcore Damage
                     this.nextStep(2);
                 };
             }
@@ -1421,13 +1560,32 @@ window.Learn = {
 
         window.LearnSound.playDefeat();
 
+        // Dark Souls Death: Lose all unspent souls and drop them as bloodstain at this lesson!
+        const avatar = Store._data.avatar;
+        if (avatar) {
+            const lostSouls = avatar.souls || 0;
+            if (lostSouls > 0) {
+                avatar.bloodstain = {
+                    lessonId: this.activeQuest ? this.activeQuest.id : 'unknown',
+                    souls: lostSouls
+                };
+            }
+            avatar.souls = 0; // Wipe current souls
+            avatar.hp = Math.round(avatar.maxHp / 2); // Resurrect at half health
+            Store.save();
+        }
+
         container.innerHTML = `
-            <div class="glass-card fade-in flex-center" style="width: 100%; text-align: center; padding: 3rem; border-color: var(--danger); background: linear-gradient(135deg, rgba(255,23,68,0.05) 0%, transparent 100%); box-shadow: 0 0 25px rgba(255,23,68,0.25);">
-                <div style="font-size: 5.5rem; margin-bottom: 1rem; filter: drop-shadow(0 0 15px rgba(255,23,68,0.4));">💀</div>
-                <h2 style="font-size: 2.5rem; color: var(--danger); text-shadow: 0 0 10px rgba(255,23,68,0.3); font-weight:900;">KLĘSKA KOGNITYWNA</h2>
-                <p class="text-lg text-muted" style="margin-top: 1rem; margin-bottom: 2rem; line-height:1.7;">Utraciłeś wszystkie punkty życia z powodu przeciążenia poznawczego. Twój awatar musi się zregenerować.</p>
-                <div style="background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 14px; font-size: 0.95rem; border: 1px dashed rgba(255,255,255,0.1); margin-bottom: 2rem; width:100%; text-align:left; line-height:1.6;">
-                    💡 <b>Wskazówka regeneracyjna:</b> Ukończenie powtórek (Dailies) na mapie głównej wyleczy Twoje HP (+20 HP za powtórkę) i naładuje energię.
+            <div class="glass-card fade-in flex-center" style="width: 100%; text-align: center; padding: 4rem 2rem; border-color: #ff1744; background: rgba(5,5,10,0.95); box-shadow: 0 0 35px rgba(255, 23, 68, 0.4);">
+                <div style="width: 70px; height: 70px; margin: 0 auto 1.5rem auto; border-radius:50%; overflow:hidden; border:2px dashed var(--danger); opacity:0.8;">
+                    <img src="assets/avatars/bloodstain.png?v=2026" style="width:100%; height:100%; object-fit:cover; filter: grayscale(1) brightness(0.6);" />
+                </div>
+                <div class="you-died-title" style="margin-bottom: 2rem;">YOU DIED</div>
+                <p class="text-lg text-muted" style="margin-bottom: 2.5rem; line-height:1.7; max-width:560px; margin-left:auto; margin-right:auto;">
+                    Straciłeś wszystkie zgromadzone dusze. Twoja plama krwi została upuszczona na polu bitwy. Odrodziłeś się przy ognisku z 50% HP.
+                </p>
+                <div style="background: rgba(255,255,255,0.02); padding: 1.2rem; border-radius: 14px; font-size: 0.9rem; border: 1px dashed rgba(255,255,255,0.1); margin-bottom: 2rem; max-width:560px; text-align:left; line-height:1.6; margin-left:auto; margin-right:auto;">
+                    💡 <b>Zasada Plamy Krwi:</b> Wejdź ponownie do lekcji, w której poległeś, i ukończ ją pomyślnie, aby odzyskać stracone dusze. Kolejna śmierć przed odzyskaniem plamy wymaże ją na zawsze.
                 </div>
             </div>
         `;
@@ -1438,12 +1596,9 @@ window.Learn = {
             const btn = document.createElement('button');
             btn.className = 'btn primary ripple';
             btn.style.borderRadius = '30px';
-            btn.style.padding = '1rem 2rem';
-            btn.textContent = 'Wskrześ Awatara (Ulecz HP i wróć do mapy)';
+            btn.style.padding = '1rem 2.5rem';
+            btn.textContent = 'Powróć do Ogniska (Enter)';
             btn.onclick = () => {
-                const avatar = Store._data.avatar;
-                if (avatar) avatar.hp = avatar.maxHp || 100;
-                Store.save();
                 this.lessonState = 'map';
                 this.activeQuest = null;
                 this.activeBoss = null;
@@ -1459,6 +1614,13 @@ window.Learn = {
         const controls = document.getElementById('learn-controls');
         const contentEl = document.getElementById('step-content');
         if (!contentEl || !controls) return;
+        // Sledzenie: bledna odpowiedz -> sekcja "Do poprawy" + celnosc
+        if (typeof Study !== 'undefined' && this.activeQuest) {
+            Study.recordAnswer(false);
+            const cs = this.activeQuest.steps[this.currentStepIndex];
+            const q = (cs && (cs.q || cs.prompt)) || this.activeQuest.title || this.activeQuest.chapter;
+            Study.addImprove(this.activeQuest.chapter, String(q).replace(/<[^>]+>/g, '').slice(0, 130));
+        }
 
         const hintDiv = document.createElement('div');
         hintDiv.className = 'fade-in';
@@ -1470,7 +1632,7 @@ window.Learn = {
         hintDiv.style.borderLeft = '5px solid var(--danger)';
         hintDiv.style.boxShadow = 'inset 0 0 15px rgba(0,0,0,0.3)';
         hintDiv.innerHTML = `
-            <div style="font-weight: 800; color: var(--danger); font-size: 0.85rem; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 1.5px; display:flex; align-items:center; gap:0.5rem;">⚠️ Wyjaśnienie merytoryczne (Zrozum swój błąd):</div>
+            <div style="font-weight: 800; color: var(--danger); font-size: 0.85rem; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 1.5px; display:flex; align-items:center; gap:0.5rem;">⚠️ Merytoryczne uderzenie zwrotne:</div>
             <div class="text-muted" style="font-size: 1.05rem; line-height: 1.7;">${htmlContent}</div>
         `;
         contentEl.appendChild(hintDiv);
@@ -1497,10 +1659,10 @@ window.Learn = {
         let text = '', bg = '', icon = '';
         if (type === 'teach') { text = 'LEKCJA'; bg = 'rgba(0, 240, 255, 0.15)'; icon = '📖'; }
         else if (type === 'example') { text = 'PRZYKŁAD'; bg = 'rgba(255, 170, 0, 0.15)'; icon = '🔍'; }
-        else if (type === 'check') { text = 'SZYBKI SPRAWDZIAN'; bg = 'rgba(0, 255, 100, 0.15)'; icon = '✅'; }
-        else if (type === 'recall') { text = 'WYTŁUMACZ WŁASNYMI SŁOWAMI'; bg = 'rgba(200, 50, 255, 0.15)'; icon = '💬'; }
-        else if (type === 'blurt') { text = 'BLURTING'; bg = 'rgba(255, 0, 150, 0.15)'; icon = '✍️'; }
-        else if (type === 'capstone') { text = 'PODSUMOWANIE'; bg = 'rgba(255, 120, 0, 0.15)'; icon = '🎯'; }
+        else if (type === 'check') { text = 'STARCIE KONTROLNE'; bg = 'rgba(255, 23, 68, 0.15)'; icon = '⚔️'; }
+        else if (type === 'recall') { text = 'AKTYWNY RECALL'; bg = 'rgba(200, 50, 255, 0.15)'; icon = '💬'; }
+        else if (type === 'blurt') { text = 'PRÓBA DUSZY (BLURTING)'; bg = 'rgba(255, 0, 150, 0.15)'; icon = '✍️'; }
+        else if (type === 'capstone') { text = 'WERYFIKACJA OSTATECZNA'; bg = 'rgba(255, 120, 0, 0.15)'; icon = '🎯'; }
         
         return `<div style="
             display: inline-flex; align-items: center; gap: 0.5rem;
@@ -1513,6 +1675,9 @@ window.Learn = {
     nextStep(quality) {
         this.earnedQuality.push(quality);
         const lesson = this.activeQuest;
+        // Celnosc: poprawna odpowiedz na sprawdzian/blurt (blędne licza sie w showContextualHint/capstone)
+        const st = lesson.steps[this.currentStepIndex];
+        if (typeof Study !== 'undefined' && st && (st.type === 'check' || st.type === 'blurt') && quality >= 4) Study.recordAnswer(true);
 
         if (this.currentStepIndex >= lesson.steps.length - 1) {
             this.lessonState = 'outro';
@@ -1531,32 +1696,53 @@ window.Learn = {
 
         const lesson = this.activeQuest;
         const avgQuality = this.earnedQuality.length ? (this.earnedQuality.reduce((a,b)=>a+b,0)/this.earnedQuality.length) : 5;
-        let xpEarned = Math.round(avgQuality * 15);
+        let soulsEarned = Math.round(avgQuality * 15);
 
         const avatar = Store._data.avatar;
         if (avatar && avatar.eq && avatar.eq.weapon === 'Notatnik Rynkowy') {
-            xpEarned = Math.round(xpEarned * 1.2);
+            soulsEarned = Math.round(soulsEarned * 1.2);
         } else if (avatar && avatar.eq && avatar.eq.weapon === 'Złoty Kalkulator') {
-            xpEarned = Math.round(xpEarned * 1.1);
+            soulsEarned = Math.round(soulsEarned * 1.1);
+        }
+
+        // Bloodstain Recovery Logic
+        let bloodstainMsg = '';
+        if (avatar && avatar.bloodstain && avatar.bloodstain.lessonId === lesson.id) {
+            const recoveredSouls = avatar.bloodstain.souls;
+            avatar.souls += recoveredSouls;
+            avatar.bloodstain = null; // Cleared
+            Store.save();
+            
+            bloodstainMsg = `
+                <div style="margin-top: 1.5rem; display: flex; flex-direction: column; align-items: center; background: rgba(0, 230, 118, 0.08); padding: 1.2rem; border-radius: 16px; border: 1.5px solid var(--success); box-shadow: 0 0 20px rgba(0, 230, 118, 0.2);">
+                    <div style="width: 50px; height: 50px; margin-bottom: 0.5rem; border-radius: 50%; overflow: hidden;">
+                        <img src="assets/avatars/bloodstain.png?v=2026" style="width:100%; height:100%; object-fit:cover;" />
+                    </div>
+                    <span style="font-size: 0.85rem; font-weight: 800; color: var(--success); letter-spacing: 1px;">ODZYSKANO PLAMĘ KRWI!</span>
+                    <span style="font-size: 1.5rem; font-weight: 900; color: #fff; margin-top: 0.3rem;">+${recoveredSouls} Duszy</span>
+                </div>
+            `;
+            window.LearnSound.playLevelUp(); // Extra triumph sound
         }
 
         container.innerHTML = `
             <div class="glass-card fade-in flex-center" style="width: 100%; min-height: 380px; text-align: center; padding: 2.5rem; border-color:var(--success); background: linear-gradient(135deg, rgba(0,255,100,0.03) 0%, transparent 100%);">
                 <div style="font-size: 5rem; margin-bottom: 1rem; filter: drop-shadow(0 0 15px rgba(0,255,100,0.4));">🎉</div>
-                <h2 style="font-size: 2.2rem; color: var(--success); text-shadow: 0 0 10px rgba(0, 255, 100, 0.2); font-weight:900;">Misja Zakończona Sukcesem!</h2>
-                <p class="text-lg text-muted" style="margin-top: 1rem; margin-bottom: 2rem; line-height:1.7;">Wiedza z tematu <b>${lesson.title}</b> została utrwalona i skonsolidowana.</p>
+                <h2 style="font-size: 2.2rem; color: var(--success); text-shadow: 0 0 10px rgba(0, 255, 100, 0.2); font-weight:900;">POLE WALKI OPANOWANE</h2>
+                <p class="text-lg text-muted" style="margin-top: 1rem; margin-bottom: 2rem; line-height:1.7;">Zwyciężyłeś starcie merytoryczne w lekcji <b>${lesson.title}</b>.</p>
                 
-                <div style="display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem;">
-                    <div style="background: rgba(0,255,100,0.06); padding: 1.2rem 2.5rem; border-radius: 16px; border: 1px solid rgba(0,255,100,0.25); box-shadow: 0 0 15px rgba(0,255,100,0.05);">
-                        <div style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.4rem; font-weight: 800; text-transform: uppercase;">Zdobyte XP</div>
-                        <div style="font-size: 2.5rem; font-weight: 900; color: var(--success); letter-spacing:0.5px;">+${xpEarned}</div>
+                <div style="display: flex; flex-direction:column; gap: 1rem; align-items:center; justify-content: center; margin-bottom: 2rem; width:100%;">
+                    <div style="background: rgba(255,87,34,0.06); padding: 1.2rem 2.5rem; border-radius: 16px; border: 1px solid rgba(255,87,34,0.25); box-shadow: 0 0 15px rgba(255,87,34,0.05); text-align:center; max-width:260px; width:100%;">
+                        <div style="font-size: 0.85rem; color:#ff8a65; margin-bottom: 0.4rem; font-weight: 800; text-transform: uppercase;">Zdobycz Duszy</div>
+                        <div style="font-size: 2.5rem; font-weight: 900; color: #ff5722; letter-spacing:0.5px;">+${soulsEarned}</div>
                     </div>
+                    ${bloodstainMsg}
                 </div>
             </div>
         `;
 
         window.LearnSound.playVictory();
-        Gamify.awardXP(xpEarned, 'Ukończenie Questu');
+        Gamify.awardXP(soulsEarned, 'Zwycięstwo');
         this.healHero(25);
 
         if (window.Anim) {
@@ -1572,7 +1758,7 @@ window.Learn = {
             btn.style.borderRadius = '30px';
             btn.style.padding = '1rem 2rem';
             btn.style.fontSize = '1.1rem';
-            btn.textContent = 'Zakończ Misję i Powróć (Enter)';
+            btn.textContent = 'Powróć z Tarczą (Enter)';
             btn.onclick = () => {
                 Store.updateLesson(lesson.id, Math.round(avgQuality));
                 this.lessonState = 'map';
@@ -1587,42 +1773,23 @@ window.Learn = {
     // ==========================================================================
     // BOSS FIGHT / ARENA GAMEPLAY
     // ==========================================================================
-    challengeBoss(type) {
-        let totalMastery = 0;
-        let count = 0;
+    challengeBoss(ch) {
+        const template = BOSS_TEMPLATES[ch] || { name: 'Strażnik Wiedzy', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Generowany strażnik kognitywny.', rewardItem: 'Złoty Kalkulator' };
         
-        this.data.forEach(l => {
-            const st = Store.getLessonState(l.id);
-            totalMastery += (st.mastery || 0);
-            count++;
-        });
-        
-        const avg = count > 0 ? (totalMastery / count) : 0;
-        if (avg < 40) {
-            alert(`🔒 Arena Zablokowana! Musisz osiągnąć co najmniej 40% średniego poziomu opanowania (Mastery) z misji głównych, aby móc wyzwać Bossa tej domeny. Twój obecny poziom to: ${Math.round(avg)}%.`);
-            return;
-        }
+        this.activeBoss = {
+            name: template.name,
+            hp: template.hp,
+            maxHp: template.hp,
+            chapter: ch,
+            image: template.image,
+            hue: template.hue
+        };
 
-        if (type === 'finance') {
-            this.activeBoss = {
-                name: 'Architekt Bilansu',
-                emoji: '👹',
-                hp: 300,
-                maxHp: 300,
-                chapter: 'fundament'
-            };
-        } else {
-            this.activeBoss = {
-                name: 'Golem Powięziowy',
-                emoji: '🛡️',
-                hp: 400,
-                maxHp: 400,
-                chapter: 'anatomia'
-            };
-        }
-
+        // Gather questions for the boss fight from lessons in this specific chapter!
         this.bossPool = [];
-        this.data.forEach(l => {
+        const chapterLessons = this.data.filter(l => l.chapter === ch);
+        
+        chapterLessons.forEach(l => {
             l.steps.forEach(s => {
                 if (s.type === 'check') {
                     this.bossPool.push({ step: s, lessonId: l.id });
@@ -1630,18 +1797,32 @@ window.Learn = {
             });
         });
 
+        // Add computational problems matching the chapter theme if available
         if (window.PROBLEMS) {
             window.PROBLEMS.forEach(p => {
-                this.bossPool.push({
-                    step: {
-                        type: 'check',
-                        kind: 'num',
-                        q: p.question,
-                        answer: p.answer,
-                        tol: p.tol || 0.1,
-                        explain: 'Zadanie z bazy problemów obliczeniowych.'
-                    },
-                    lessonId: 'problem'
+                if (p.chapter === ch) {
+                    this.bossPool.push({
+                        step: {
+                            type: 'check',
+                            kind: 'num',
+                            q: p.question,
+                            answer: p.answer,
+                            tol: p.tol || 0.1,
+                            explain: 'Zadanie z bazy problemów obliczeniowych.'
+                        },
+                        lessonId: 'problem'
+                    });
+                }
+            });
+        }
+
+        // If pool is empty, grab from anywhere so the boss fight doesn't crash
+        if (this.bossPool.length === 0) {
+            this.data.forEach(l => {
+                l.steps.forEach(s => {
+                    if (s.type === 'check') {
+                        this.bossPool.push({ step: s, lessonId: l.id });
+                    }
                 });
             });
         }
@@ -1692,7 +1873,7 @@ window.Learn = {
                 </div>
 
                 <div class="boss-avatar-box" style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; border: 4px solid var(--danger); box-shadow: 0 0 25px rgba(255, 23, 68, 0.6); margin: 0 auto 2rem auto;">
-                    <img src="assets/avatars/boss_${boss.chapter === 'fundament' ? 'bilans' : 'golem'}.png" style="width:100%; height:100%; object-fit:cover;" alt="Boss" />
+                    <img src="assets/avatars/${boss.image}?v=2026" style="width:100%; height:100%; object-fit:cover; filter: hue-rotate(${boss.hue}deg);" alt="Boss" />
                 </div>
                 
                 <!-- Active Challenge -->
@@ -1731,7 +1912,7 @@ window.Learn = {
                         btn.style.background = 'rgba(255, 23, 68, 0.12)';
                         btn.style.borderColor = 'var(--danger)';
                         grid.children[step.correct].style.border = '2px solid var(--success)';
-                        this.takeDamage(25);
+                        this.takeDamage(40); // Hardcore Boss Damage
                         this.showBossExplanation(step.explain || 'Błędna odpowiedź.');
                     }
                 };
@@ -1758,7 +1939,7 @@ window.Learn = {
                     } else {
                         btn.style.background = 'rgba(255, 23, 68, 0.12)';
                         btn.style.borderColor = 'var(--danger)';
-                        this.takeDamage(25);
+                        this.takeDamage(40); // Hardcore Boss Damage
                         this.showBossExplanation(step.explain || 'Niestety błąd.');
                     }
                 };
@@ -1786,7 +1967,7 @@ window.Learn = {
                     setTimeout(() => { this.currentStepIndex++; this.renderBossBattle(); }, 1000);
                 } else {
                     input.style.borderColor = 'var(--danger)';
-                    this.takeDamage(30);
+                    this.takeDamage(45); // Hardcore Boss Damage
                     this.showBossExplanation(`Poprawna wartość: <b>${step.answer}</b>.<br><br>${step.explain || ''}`);
                 }
             };
@@ -1824,7 +2005,7 @@ window.Learn = {
                     setTimeout(() => { this.currentStepIndex++; this.renderBossBattle(); }, 1000);
                 } else {
                     input.style.borderColor = 'var(--danger)';
-                    this.takeDamage(25);
+                    this.takeDamage(40); // Hardcore Boss Damage
                     this.showBossExplanation(`Prawidłowe pojęcie: <b>${step.cloze_answer}</b>.<br><br>${step.explain || ''}`);
                 }
             };
@@ -1929,6 +2110,35 @@ window.Learn = {
         const bossName = this.activeBoss.name;
         const rewardXP = 350;
 
+        // Dynamic items drop
+        const ch = this.activeBoss.chapter;
+        const template = BOSS_TEMPLATES[ch];
+        const rewardItem = template ? template.rewardItem : null;
+        let itemClaimedMsg = '';
+
+        const avatar = Store._data.avatar;
+        if (avatar && rewardItem) {
+            let slot = 'weapon';
+            if (rewardItem.includes('Garnitur') || rewardItem.includes('Pas') || rewardItem.includes('Kamizelka')) {
+                slot = 'chest';
+            } else if (rewardItem.includes('Wizor') || rewardItem.includes('Okulary')) {
+                slot = 'head';
+            }
+
+            if (avatar.eq[slot] !== rewardItem) {
+                avatar.eq[slot] = rewardItem;
+                Store.save();
+                this.renderRPGPanel();
+                itemClaimedMsg = `
+                    <div style="margin-top: 1.5rem; display: flex; flex-direction: column; align-items: center; background: rgba(0,229,255,0.06); padding: 1.2rem; border-radius: 16px; border: 1px dashed var(--primary); box-shadow: 0 0 15px rgba(0,229,255,0.1);">
+                        <span style="font-size: 0.8rem; font-weight: 800; letter-spacing: 1px; color: var(--primary);">🎁 NOWY ŁUP ZDOBYTY!</span>
+                        <span style="font-size: 1.25rem; font-weight: 900; color: #fff; margin-top: 0.3rem;">${rewardItem}</span>
+                        <span style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem; text-align: center;">Przedmiot został automatycznie wyposażony w slot: ${slot === 'head' ? 'Głowa' : (slot === 'weapon' ? 'Broń' : 'Klatka')}. Sprawdź kartę postaci!</span>
+                    </div>
+                `;
+            }
+        }
+
         window.LearnSound.playVictory();
 
         container.innerHTML = `
@@ -1937,11 +2147,12 @@ window.Learn = {
                 <h2 style="font-size: 2.5rem; color: var(--success); text-shadow: 0 0 10px rgba(0,255,100,0.3); font-weight:900;">BOSSA POKONANO!</h2>
                 <p class="text-lg text-muted" style="margin-top: 1rem; margin-bottom: 2rem; line-height:1.7;">Udało Ci się ostatecznie zwyciężyć <b>${bossName}</b>. Poziomy Twojej wiedzy osiągnęły pełne mistrzostwo.</p>
                 
-                <div style="display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem;">
-                    <div style="background: rgba(0,255,100,0.06); padding: 1.2rem 2.2rem; border-radius: 16px; border: 1px solid rgba(0,255,100,0.25); box-shadow: 0 0 15px rgba(0,255,100,0.05);">
-                        <div style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.4rem; font-weight:800;">ZWYCIĘSKIE DOŚWIADCZENIE</div>
-                        <div style="font-size: 2.2rem; font-weight: 900; color: var(--success);">+${rewardXP} XP</div>
+                <div style="display: flex; flex-direction: column; gap: 1rem; justify-content: center; align-items: center; width: 100%;">
+                    <div style="background: rgba(255,87,34,0.06); padding: 1.2rem 2.2rem; border-radius: 16px; border: 1px solid rgba(255,87,34,0.25); box-shadow: 0 0 15px rgba(255,87,34,0.05); text-align: center; max-width: 300px;">
+                        <div style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.4rem; font-weight:800; text-transform: uppercase;">ZWYCIĘSKIE DUSZE</div>
+                        <div style="font-size: 2.2rem; font-weight: 900; color: #ff5722;">+${rewardXP} Duszy</div>
                     </div>
+                    ${itemClaimedMsg}
                 </div>
             </div>
         `;
@@ -1966,7 +2177,7 @@ window.Learn = {
             btn.style.borderRadius = '30px';
             btn.style.padding = '1rem 2rem';
             btn.style.fontSize = '1.1rem';
-            btn.textContent = 'Powróć do Mapy Głównej (Enter)';
+            btn.textContent = 'Powróć do Ogniska (Enter)';
             btn.onclick = () => {
                 this.lessonState = 'map';
                 this.activeQuest = null;

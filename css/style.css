@@ -1,29 +1,29 @@
 :root {
-    /* 2026 Premium Dark Theme (Norris / Verstappen style) */
-    --bg-base: #050505;
-    --bg-glass: rgba(15, 15, 20, 0.6);
-    --bg-glass-hover: rgba(25, 25, 30, 0.8);
-    --border-glass: rgba(255, 255, 255, 0.08);
-    --text-main: #f8fafc;
-    --text-muted: #8b949e;
+    /* 2026 Premium Dark Fantasy RPG Theme (Baldur's Gate 4 Style) */
+    --bg-base: #09090b;
+    --bg-glass: rgba(18, 19, 23, 0.92);
+    --bg-glass-hover: rgba(28, 29, 34, 0.96);
+    --border-glass: rgba(197, 168, 128, 0.25); /* Gold dust outline */
+    --text-main: #f4f4f6;
+    --text-muted: #a1a1aa;
     
-    /* Electric / Cinematic Accents */
-    --primary: #00e5ff;
-    --primary-hover: #00b8d4;
-    --primary-glow: rgba(0, 229, 255, 0.4);
+    /* Gilded Gold & Crimson Accents */
+    --primary: #c5a880; /* Antique Gold */
+    --primary-hover: #e5c9a3; /* Bright Gilded Gold */
+    --primary-glow: rgba(197, 168, 128, 0.4);
     
-    --success: #00e676;
-    --danger: #ff1744;
-    --warning: #ffea00;
-    --highlight: rgba(255, 234, 0, 0.2);
+    --success: #38bdf8; /* Mage blue magic / or change to deep emerald: #10b981 */
+    --danger: #ef4444; /* Blood crimson */
+    --warning: #f97316; /* Amber embers */
+    --highlight: rgba(197, 168, 128, 0.15);
     
-    --shadow-sm: 0 4px 15px rgba(0,0,0,0.4);
-    --shadow-md: 0 10px 40px rgba(0,229,255,0.15);
+    --shadow-sm: 0 4px 20px rgba(0,0,0,0.6);
+    --shadow-md: 0 10px 45px rgba(197, 168, 128, 0.18);
     
-    --radius-md: 16px;
-    --radius-lg: 24px;
+    --radius-md: 12px; /* Sharper gothic panels */
+    --radius-lg: 18px;
     
-    --font-heading: 'Outfit', sans-serif;
+    --font-heading: 'Cinzel', 'Marcellus', 'Outfit', serif;
     --font-body: 'Outfit', sans-serif;
 }
 
@@ -57,8 +57,8 @@ body {
     width: 100vw; height: 100vh;
     z-index: -2;
     pointer-events: none;
-    background: radial-gradient(circle at 50% 0%, rgba(0, 229, 255, 0.1), transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(0, 230, 118, 0.05), transparent 50%);
+    background: radial-gradient(circle at 50% 100%, rgba(255, 87, 34, 0.08), transparent 60%),
+                radial-gradient(circle at 0% 0%, rgba(197, 168, 128, 0.05), transparent 40%);
 }
 
 .gradient-text {
@@ -231,14 +231,15 @@ body {
 
 /* --- Glass / Bento Components --- */
 .glass-card {
-    background: var(--bg-glass);
+    background: linear-gradient(135deg, #121316 0%, #1a1b20 100%) !important;
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--border-glass);
+    border: 2px solid var(--border-glass) !important;
     border-radius: var(--radius-lg);
     padding: 2rem;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s, border-color 0.3s;
 }
-.glass-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--primary-glow); }
+.glass-card:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.85), 0 0 20px rgba(197, 168, 128, 0.25) !important; border-color: var(--primary) !important; }
 
 .bento-grid {
     display: grid;
@@ -269,11 +270,11 @@ body {
 .btn-sm { padding: 0.5rem 1rem; font-size: 0.9rem; }
 .wide-btn { width: 100%; padding: 1.2rem; font-size: 1.3rem; }
 
-.btn.primary { background: var(--primary); color: #000; box-shadow: 0 4px 15px var(--primary-glow); }
-.btn.secondary { background: rgba(255,255,255,0.1); color: var(--text-main); border: 1px solid var(--border-glass); }
-.btn.success { background: var(--success); color: #000; box-shadow: 0 4px 15px rgba(0,230,118,0.3); }
-.btn.warning { background: var(--warning); color: #000; box-shadow: 0 4px 15px rgba(255,234,0,0.3); }
-.btn.danger { background: var(--danger); color: #fff; box-shadow: 0 4px 15px rgba(255,23,68,0.3); }
+.btn.primary { background: linear-gradient(180deg, #c5a880 0%, #a2835a 100%); color: #0f1013; border: 1px solid #e5c9a3; box-shadow: 0 4px 15px rgba(197, 168, 128, 0.4); text-shadow: 0 1px 0 rgba(255,255,255,0.2); }
+.btn.secondary { background: linear-gradient(180deg, #24252a 0%, #17181c 100%); color: var(--text-main); border: 1px solid var(--border-glass); box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+.btn.success { background: linear-gradient(180deg, #10b981 0%, #065f46 100%); color: #fff; border: 1px solid #34d399; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+.btn.warning { background: linear-gradient(180deg, #f97316 0%, #9a3412 100%); color: #fff; border: 1px solid #fdba74; box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3); }
+.btn.danger { background: linear-gradient(180deg, #ef4444 0%, #991b1b 100%); color: #fff; border: 1px solid #fca5a5; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); }
 
 /* Ripple Effect */
 .ripple::after {
@@ -569,18 +570,18 @@ body {
 }
 
 .bar-hp .bar-fill {
-    background: linear-gradient(90deg, #ff1744, #ff5252);
-    box-shadow: 0 0 8px rgba(255, 23, 68, 0.5);
+    background: linear-gradient(90deg, #8b0000, #d32f2f);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
 }
 
 .bar-xp .bar-fill {
-    background: linear-gradient(90deg, #00e5ff, #00e676);
-    box-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+    background: linear-gradient(90deg, #b45309, #d4af37);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
 }
 
 .bar-vitality .bar-fill {
-    background: linear-gradient(90deg, #ffea00, #ff9100);
-    box-shadow: 0 0 8px rgba(255, 234, 0, 0.5);
+    background: linear-gradient(90deg, #4338ca, #38bdf8);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
 }
 
 /* Equipment slots */
@@ -821,8 +822,8 @@ body {
 }
 
 .quest-map-card {
-    background: var(--bg-glass);
-    border: 1px solid var(--border-glass);
+    background: linear-gradient(135deg, #16171c 0%, #1d1f25 100%) !important;
+    border: 1px solid rgba(197, 168, 128, 0.15) !important;
     border-radius: var(--radius-md);
     padding: 1.2rem 1.5rem;
     display: flex;
@@ -832,6 +833,7 @@ body {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .quest-map-card::before {
@@ -843,10 +845,10 @@ body {
 }
 
 .quest-map-card:hover {
-    background: var(--bg-glass-hover);
-    border-color: rgba(0, 229, 255, 0.3);
+    background: linear-gradient(135deg, #20222a 0%, #292c36 100%) !important;
+    border-color: var(--primary) !important;
     transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 8px rgba(197, 168, 128, 0.15);
 }
 
 .quest-map-card.unlocked::before {
@@ -985,6 +987,58 @@ body {
         width: 100% !important;
         margin-bottom: 0.5rem !important;
     }
+}
+
+/* ==========================================================================
+   Dark Souls Hardcore Mode Styles (2026 AAAA Edition)
+   ========================================================================== */
+
+/* Ember Pulsing Glow for Bonfire */
+@keyframes emberGlow {
+    0%, 100% { box-shadow: 0 0 15px rgba(255, 87, 34, 0.4), inset 0 0 10px rgba(255, 87, 34, 0.2); border-color: rgba(255, 87, 34, 0.4); }
+    50% { box-shadow: 0 0 30px rgba(255, 87, 34, 0.8), inset 0 0 20px rgba(255, 87, 34, 0.4); border-color: rgba(255, 87, 34, 0.8); }
+}
+
+.bonfire-card {
+    animation: emberGlow 3s infinite ease-in-out;
+    background: linear-gradient(135deg, rgba(30, 15, 10, 0.5) 0%, rgba(10, 5, 5, 0.85) 100%) !important;
+}
+
+/* Pulsing bloodstain indicator */
+@keyframes bloodstainPulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(0, 230, 118, 0.4); border-color: rgba(0, 230, 118, 0.4); }
+    50% { box-shadow: 0 0 25px rgba(0, 230, 118, 0.9); border-color: rgba(0, 230, 118, 0.9); }
+}
+
+.bloodstain-active {
+    animation: bloodstainPulse 1.5s infinite ease-in-out;
+    background: rgba(0, 230, 118, 0.04) !important;
+    border: 1.5px dashed var(--success) !important;
+}
+
+/* YOU DIED Text Screen overlay */
+.you-died-title {
+    font-family: 'Cinzel', 'Outfit', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #ff1744;
+    text-shadow: 0 0 30px rgba(255, 23, 68, 0.9), 0 0 10px rgba(0,0,0,0.8);
+    letter-spacing: 12px;
+    text-transform: uppercase;
+    animation: zoomOutFade 4s ease-out forwards;
+}
+
+@keyframes zoomOutFade {
+    0% { transform: scale(1.3); opacity: 0; filter: blur(10px); }
+    10% { transform: scale(1); opacity: 1; filter: blur(0); }
+    70% { transform: scale(0.98); opacity: 1; filter: blur(0); }
+    100% { transform: scale(0.95); opacity: 0.95; }
+}
+
+/* Hardcore Red borders for high damage steps */
+.hardcore-step {
+    border-color: rgba(255, 23, 68, 0.3) !important;
+    background: linear-gradient(135deg, rgba(255, 23, 68, 0.02) 0%, transparent 100%);
 }
 
 

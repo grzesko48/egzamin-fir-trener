@@ -22,10 +22,14 @@ const Anim = {
             this.particles.push({
                 x: Math.random() * this.canvas.width,
                 y: Math.random() * this.canvas.height,
-                radius: Math.random() * 2 + 0.5,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                color: Math.random() > 0.5 ? 'rgba(0, 229, 255, 0.4)' : 'rgba(0, 230, 118, 0.3)'
+                radius: Math.random() * 2.5 + 0.5,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: -0.2 - Math.random() * 0.8, // Drift upwards
+                color: Math.random() > 0.6 
+                    ? `rgba(255, 87, 34, ${Math.random() * 0.5 + 0.1})` // Orange
+                    : (Math.random() > 0.5 
+                        ? `rgba(255, 23, 68, ${Math.random() * 0.5 + 0.1})` // Crimson
+                        : `rgba(255, 215, 0, ${Math.random() * 0.5 + 0.1})`) // Gold
             });
         }
 
@@ -40,17 +44,17 @@ const Anim = {
     animateCanvas() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Draw connections
+        // Draw connections (subtle glowing warmth lines)
         for (let i = 0; i < this.particles.length; i++) {
             for (let j = i + 1; j < this.particles.length; j++) {
                 const dx = this.particles[i].x - this.particles[j].x;
                 const dy = this.particles[i].y - this.particles[j].y;
                 const dist = Math.sqrt(dx*dx + dy*dy);
 
-                if (dist < 100) {
+                if (dist < 80) {
                     this.ctx.beginPath();
-                    this.ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 - dist/1000})`;
-                    this.ctx.lineWidth = 0.5;
+                    this.ctx.strokeStyle = `rgba(255, 87, 34, ${0.05 - dist/1600})`;
+                    this.ctx.lineWidth = 0.3;
                     this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
                     this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
                     this.ctx.stroke();
@@ -62,13 +66,22 @@ const Anim = {
             p.x += p.vx;
             p.y += p.vy;
 
-            if (p.x < 0 || p.x > this.canvas.width) p.vx *= -1;
-            if (p.y < 0 || p.y > this.canvas.height) p.vy *= -1;
+            // Warp around sides
+            if (p.x < 0) p.x = this.canvas.width;
+            if (p.x > this.canvas.width) p.x = 0;
+            // Respawn at bottom when reaching the top
+            if (p.y < 0) {
+                p.y = this.canvas.height;
+                p.x = Math.random() * this.canvas.width;
+            }
 
             this.ctx.beginPath();
             this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
             this.ctx.fillStyle = p.color;
+            this.ctx.shadowBlur = Math.random() > 0.8 ? 8 : 0;
+            this.ctx.shadowColor = p.color;
             this.ctx.fill();
+            this.ctx.shadowBlur = 0; // reset
         });
 
         this.animationFrameId = requestAnimationFrame(() => this.animateCanvas());

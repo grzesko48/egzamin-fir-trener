@@ -47,17 +47,10 @@ window.Gamify = {
     },
 
     showLevelUp(level) {
-        // Update character stats in Store on level up
-        const avatar = Store._data.avatar;
         let hpBonus = 5;
-        if (avatar) {
-            avatar.maxHp = (avatar.maxHp || 100) + hpBonus;
-            avatar.hp = avatar.maxHp; // Full heal on level up
-            Store.save();
-            // Re-render RPG panel if Learn module is active
-            if (typeof Learn !== 'undefined' && Learn.renderRPGPanel) {
-                Learn.renderRPGPanel();
-            }
+        // Re-render RPG panel if Learn module is active
+        if (typeof Learn !== 'undefined' && Learn.renderRPGPanel) {
+            Learn.renderRPGPanel();
         }
 
         const modal = document.createElement('div');
