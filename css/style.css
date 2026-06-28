@@ -157,25 +157,32 @@ body {
 .nav-btn {
     background: transparent; border: none;
     color: var(--text-muted);
-    font-family: inherit;
-    font-size: 0.8rem; font-weight: 500;
+    font-family: var(--font-heading);
+    font-size: 0.85rem; font-weight: 600;
     padding: 0.5rem;
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
     min-width: 60px;
+    border-left: 3px solid transparent;
 }
 @media (min-width: 992px) {
     .nav-btn {
         flex-direction: row;
-        padding: 1rem 1.2rem;
-        font-size: 1.1rem;
+        padding: 1.1rem 1.5rem;
+        font-size: 1.15rem;
         justify-content: flex-start; gap: 1.2rem;
+        border-radius: 0;
     }
 }
-.nav-btn:hover { background: rgba(255, 255, 255, 0.05); color: var(--text-main); }
-.nav-btn.active { background: var(--primary-glow); color: var(--primary); box-shadow: inset 0 0 0 1px var(--primary); }
+.nav-btn:hover { background: rgba(255, 255, 255, 0.02); color: var(--text-main); border-left-color: rgba(197, 168, 128, 0.3); }
+.nav-btn.active { 
+    background: linear-gradient(90deg, rgba(197, 168, 128, 0.12), transparent) !important; 
+    color: var(--primary) !important; 
+    border-left-color: var(--primary) !important;
+    box-shadow: none !important;
+}
 
 .theme-toggle {
     display: none;
@@ -904,47 +911,62 @@ body {
     box-shadow: 0 0 15px rgba(0, 230, 118, 0.4);
 }
 
-/* Split Layout & Main Area definitions (V4 Premium Layout Grid) */
+/* --- Baldur's Gate 3 Dynamic Layout Grid (3 Columns) --- */
 .rpg-split-layout {
-    display: flex;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: 310px 1fr 340px;
+    gap: 1.5rem;
     width: 100%;
     align-items: flex-start;
-    flex-wrap: wrap;
 }
 
 #rpg-character-panel {
-    width: 320px;
-    flex-shrink: 0;
+    width: 100%;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    border-color: rgba(0, 229, 255, 0.2);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .learn-main-area {
-    flex-grow: 1;
-    min-width: 300px;
+    display: contents; /* Allows sub-elements to directly participate in the parent grid */
+}
+
+.learn-left-col {
+    grid-column: 1;
+}
+
+.learn-center-col {
+    grid-column: 2;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    width: calc(100% - 352px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 0; /* Prevents overflow */
+}
+
+.learn-right-col {
+    grid-column: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (max-width: 1200px) {
+    .rpg-split-layout {
+        grid-template-columns: 300px 1fr;
+    }
+    .learn-right-col {
+        grid-column: 1 / -1;
+    }
 }
 
 @media (max-width: 991px) {
     .rpg-split-layout {
-        flex-direction: column;
-        gap: 1.5rem;
+        grid-template-columns: 1fr;
     }
-    #rpg-character-panel {
-        width: 100% !important;
-        position: static !important;
-    }
-    .learn-main-area {
-        width: 100% !important;
+    .learn-left-col, .learn-center-col, .learn-right-col {
+        grid-column: 1;
     }
 }
 
@@ -1039,6 +1061,102 @@ body {
 .hardcore-step {
     border-color: rgba(255, 23, 68, 0.3) !important;
     background: linear-gradient(135deg, rgba(255, 23, 68, 0.02) 0%, transparent 100%);
+}
+
+/* Character Creator Class Card RPG (High Fantasy theme) */
+.class-card-rpg {
+    background: linear-gradient(135deg, #16171c 0%, #1e2027 100%) !important;
+    border: 2px solid rgba(197, 168, 128, 0.2) !important;
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.5rem !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6) !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.class-card-rpg:hover {
+    transform: translateY(-8px) scale(1.03) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.85), 0 0 20px rgba(197, 168, 128, 0.3) !important;
+}
+
+.class-card-rpg img {
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease !important;
+}
+
+.class-card-rpg:hover img {
+    transform: scale(1.05) rotate(3deg) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 25px var(--primary-glow) !important;
+}
+
+/* Biomes Overrides */
+#view-learn.biome-castle {
+    --primary: #c5a880; /* Antique Gold */
+    --primary-glow: rgba(197, 168, 128, 0.4);
+    --success: #38bdf8;
+    --border-glass: rgba(197, 168, 128, 0.25);
+    background: radial-gradient(circle at 50% 100%, rgba(239, 68, 68, 0.04), transparent 70%);
+}
+
+#view-learn.biome-mine {
+    --primary: #f59e0b; /* Amber Gold */
+    --primary-glow: rgba(245, 158, 11, 0.4);
+    --success: #10b981; /* Emerald green */
+    --border-glass: rgba(245, 158, 11, 0.25);
+    background: radial-gradient(circle at 50% 100%, rgba(245, 158, 11, 0.05), transparent 70%);
+}
+
+#view-learn.biome-snow {
+    --primary: #93c5fd; /* Ice Blue */
+    --primary-glow: rgba(147, 197, 253, 0.4);
+    --success: #38bdf8; /* Frost Cyan */
+    --border-glass: rgba(147, 197, 253, 0.25);
+    background: radial-gradient(circle at 50% 100%, rgba(56, 189, 248, 0.06), transparent 70%);
+}
+
+#view-learn.biome-forest {
+    --primary: #a7f3d0; /* Mint Green */
+    --primary-glow: rgba(167, 243, 208, 0.4);
+    --success: #10b981; /* Forest Green */
+    --border-glass: rgba(167, 243, 208, 0.25);
+    background: radial-gradient(circle at 50% 100%, rgba(16, 185, 129, 0.05), transparent 70%);
+}
+
+/* === 26 biomów sterowanych danymi (updateBiome ustawia tlo + --biome-accent/glow inline per rozdzial) === */
+#view-learn {
+    transition: background 0.7s ease;
+    border-radius: 24px;
+}
+#view-learn .view-title {
+    transition: color 0.5s ease, text-shadow 0.5s ease;
+    text-shadow: 0 0 26px var(--biome-glow, transparent);
+}
+#view-learn .quest-map-card.unlocked:hover {
+    border-color: var(--biome-accent, #c5a880) !important;
+    box-shadow: 0 0 24px var(--biome-glow, rgba(255, 215, 0, 0.3)) !important;
+}
+
+/* Medieval Chart Styling */
+.medieval-chart-container svg text {
+    fill: #d1d5db;
+    font-family: 'Outfit', sans-serif;
+}
+.medieval-chart-container svg text[font-family*="Cinzel"] {
+    font-family: 'Cinzel', serif;
+    fill: var(--primary) !important;
+}
+
+/* Smooth transition for layout collapsing */
+.rpg-split-layout {
+    transition: grid-template-columns 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#rpg-character-panel {
+    transition: opacity 0.25s ease, transform 0.3s ease;
 }
 
 

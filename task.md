@@ -1,0 +1,28 @@
+# Zunifikowane Lekcje (Super-App RPG & Active Recall)
+
+- `[x]` **0. Ukrycie niepotrzebnych widoków**
+  - `[x]` `index.html`: Ukrycie wszystkich pobocznych zakładek (Zadania, Pulpit, Fiszki, Quiz, Pary, Czytaj, Komisja, Analityka, Wzory, Szukaj, Ustawienia).
+  - `[x]` `index.html`: Zmiana głównej nazwy z "Ucz mnie" na "Lekcje" w menu bocznym.
+  - `[x]` `js/app.js`: Ustawienie strony startowej bezpośrednio na widok Lekcji (`learn`).
+- `[x]` **1. Karta Postaci RPG (Lewy Panel)**
+  - `[x]` `js/learn.js`: Kreator postaci na starcie (wybór klasy: Audytor, Kinezjolog, Strateg Rynkowy).
+  - `[x]` `js/learn.js`: Paski życia (HP), energii (Witalność/Vitality) oraz doświadczenia (XP).
+  - `[x]` `js/learn.js`: Trzy sloty na przedmioty (Sygnet, Broń, Ubiór) z opisem bonusów pasywnych przy kliknięciu.
+  - `[x]` `js/learn.js`: Obsługa obrażeń (-HP) i trzęsienia karty przy błędnych odpowiedziach.
+  - `[x]` `js/learn.js`: Obsługa śmierci awatara (Defeat screen) z mechanizmem uleczenia.
+- `[x]` **2. Metody Active Recall w Lekcjach (Prawy Panel)**
+  - `[x]` `js/learn.js`: Klasyczne Fiszki z 3 przyciskami samooceny SRS (Zapomniałem, Z mgłą, Solidnie).
+  - `[x]` `js/learn.js`: Blurting z textareą i dopasowywaniem słów kluczowych do listy kontrolnej.
+  - `[x]` `js/learn.js`: Technika Feynmana (porządkowanie logiczne zdarzeń/zdań w kolejności).
+  - `[x]` `js/learn.js`: Studia przypadków (Case Studies) i kalkulacje TVM / anatomii.
+  - `[x]` `js/learn.js`: Wyjaśnienia kontekstowe (Contextual Hints) pojawiające się od razu na błędach.
+- `[x]` **3. System Spaced Repetition (SRS) & Boss fights**
+  - `[x]` `js/learn.js`: Dailies (powtórki) regenerujące energię (+20 witalności).
+  - `[x]` `js/learn.js`: Blokada misji głównych przy braku witalności.
+  - `[x]` `js/learn.js`: Boss Arena z Bossami (zadawanie ciosów za dobre odpowiedzi, odliczanie HP bossa).
+- `[x]` **4. Wersja Premium V5 (AAAA Layout, Items & Biomes)**
+  - `[x]` `js/learn.js`: Zmiana przedmiotów na średniowieczne RPG fantasy i wdrożenie inline SVGs (`getItemGraphic`).
+  - `[x]` `index.html` & `js/learn.js`: Opcja chowania lewego panelu Postaci (collapsible sidebar grid).
+  - `[x]` `js/anim.js`: Cztery dynamiczne biomy z wektorami wiatru i grawitacji cząsteczek w canvas.
+  - `[x]` `js/learn.js`: Dynamiczne wstrzykiwanie inline SVG wykresów (NPV, CAPM, Korytarz NBP, WACC).
+  - `[x]` Przygotowanie master handoff dla Claude.

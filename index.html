@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=19">
 </head>
 <body>
     <!-- Fullscreen animated background -->
@@ -102,19 +102,22 @@
             </div>
 
             <!-- View: Learn (Lekcje) -->
-            <section id="view-learn" class="view-container" style="max-width: 1200px; margin: 0 auto; padding: 2rem 1rem;">
+            <section id="view-learn" class="view-container" style="max-width: 1440px; margin: 0 auto; padding: 2rem 2rem;">
                 <div class="rpg-split-layout">
                     
-                    <!-- Left Panel: RPG Character Card -->
-                    <div id="rpg-character-panel" class="glass-card">
+                    <!-- Left Panel: RPG Character Card (Column 1) -->
+                    <div id="rpg-character-panel" class="glass-card learn-left-col">
                         <!-- Dynamic RPG stats card will be loaded here -->
                     </div>
                     
-                    <!-- Right Panel: Core Learning Area -->
-                    <div class="learn-main-area">
+                    <!-- Center Panel: Core Campaign Map & Creator (Column 2) -->
+                    <div class="learn-center-col">
                         <header class="view-header" style="padding: 0; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; width: 100%;">
                             <h1 class="view-title gradient-text" id="learn-view-title" style="font-size: 2rem;">Lekcje</h1>
-                            <div class="header-controls" id="learn-filter-container">
+                            <div class="header-controls" id="learn-filter-container" style="display: flex; gap: 10px; align-items: center;">
+                                <button id="toggle-character-panel-btn" class="btn secondary btn-sm ripple" onclick="window.Learn.toggleCharacterPanel()" style="border-radius: 12px; font-size: 0.85rem; padding: 0.5rem 1rem; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap;">
+                                    <span>👤</span> <span id="toggle-panel-label">Ukryj profil</span>
+                                </button>
                                 <select id="learn-chapter-filter" class="glass-input" style="padding: 0.5rem 1rem; border-radius: 12px;">
                                     <option value="all">Wszystkie działy</option>
                                 </select>
@@ -128,6 +131,11 @@
                         <div id="learn-controls" class="flashcard-controls" style="display: none; justify-content: center; gap: 15px; margin-top: 1rem; flex-wrap: wrap; width: 100%;">
                             <!-- Controls -->
                         </div>
+                    </div>
+
+                    <!-- Right Panel: Active Challenge, Boss stats or Dailies (Column 3) -->
+                    <div id="learn-right-sidebar" class="learn-right-col">
+                        <!-- Dynamic content (Active Challenge feedback, current damage log, or side quest recommendations) -->
                     </div>
                     
                 </div>
@@ -391,33 +399,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
     <!-- Data (Fallback) -->
-    <script src="data/content.js"></script>
-    <script src="data/lessons.js"></script>
-    <script src="data/problems.js"></script>
-    <script src="data/exam.js"></script>
+    <script src="data/content.js?v=19"></script>
+    <script src="data/lessons.js?v=19"></script>
+    <script src="data/problems.js?v=19"></script>
+    <script src="data/exam.js?v=19"></script>
 
     <!-- App Scripts -->
-    <script src="js/anim.js"></script>
-    <script src="js/fsrs.js"></script>
-    <script src="js/store.js"></script>
-    <script src="js/gamify.js"></script>
-    <script src="js/dashboard.js"></script>
-    <script src="js/learn.js"></script>
-    <script src="js/problems_ui.js"></script>
-    <script src="js/reader.js"></script>
-    <script src="js/flashcards.js"></script>
-    <script src="js/quiz.js"></script>
-    <script src="js/commission.js"></script>
-    <script src="js/analytics.js"></script>
-    <script src="js/formulas.js"></script>
-    <script src="js/search.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/ui_select.js"></script>
-    <script src="js/match.js"></script>
-    <script src="js/boss.js"></script>
-    <script src="js/gemini.js"></script>
-    <script src="js/study.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/anim.js?v=19"></script>
+    <script src="js/fsrs.js?v=19"></script>
+    <script src="js/store.js?v=19"></script>
+    <script src="js/gamify.js?v=19"></script>
+    <script src="js/dashboard.js?v=19"></script>
+    <script src="js/learn.js?v=19"></script>
+    <script src="js/problems_ui.js?v=19"></script>
+    <script src="js/reader.js?v=19"></script>
+    <script src="js/flashcards.js?v=19"></script>
+    <script src="js/quiz.js?v=19"></script>
+    <script src="js/commission.js?v=19"></script>
+    <script src="js/analytics.js?v=19"></script>
+    <script src="js/formulas.js?v=19"></script>
+    <script src="js/search.js?v=19"></script>
+    <script src="js/settings.js?v=19"></script>
+    <script src="js/ui_select.js?v=19"></script>
+    <script src="js/match.js?v=19"></script>
+    <script src="js/boss.js?v=19"></script>
+    <script src="js/gemini.js?v=19"></script>
+    <script src="js/study.js?v=19"></script>
+    <script src="js/app.js?v=19"></script>
     
     <script>
         if ('serviceWorker' in navigator) {

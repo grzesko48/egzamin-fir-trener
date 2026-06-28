@@ -6,32 +6,32 @@
 
 // Boss templates for all chapters
 const BOSS_TEMPLATES = {
-    'fundament': { name: 'Architekt Bilansu', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Strażnik zasad memoriałowych i WACC. Zmierzy się z Tobą w bezlitosnym starciu z podstaw finansowych.', rewardItem: 'Złoty Kalkulator' },
-    'stopy': { name: 'Kolekcjoner Stóp NBP', hp: 320, image: 'boss_bilans.png', hue: 45, desc: 'Pan korytarza stóp procentowych. Czy potrafisz obliczyć stopę lombardową i depozytową w locie?', rewardItem: 'Wizor Rynkowy' },
-    'k5': { name: 'Dyskontowy Demon NPV', hp: 340, image: 'boss_golem.png', hue: 120, desc: 'Władca przyszłej wartości pieniądza. Będzie rzucał w Ciebie trudnymi wzorami NPV i IRR.', rewardItem: 'Złoty Kalkulator' },
-    'k1': { name: 'Cenzor Memoriału', hp: 300, image: 'boss_bilans.png', hue: 180, desc: 'Bezlitosny strażnik zasady współmierności przychodów i kosztów. Uważaj na podejście kasowe!', rewardItem: 'Garnitur Audytora' },
-    'k2': { name: 'Wyceniacz Pasywów', hp: 350, image: 'boss_golem.png', hue: 200, desc: 'Stoi na straży wyceny aktywów w bilansie według kosztu historycznego i wartości godziwej.', rewardItem: 'Garnitur Audytora' },
-    'k3': { name: 'Golem Upadłości', hp: 380, image: 'boss_golem.png', hue: 0, desc: 'Monstrum zasilane wskaźnikiem Altmana. Zmierzy się z Tobą w analizie rentowności i płynności.', rewardItem: 'Pas Kulturystyczny' },
-    'k4': { name: 'Mistrz Kosztów Zmiennych', hp: 330, image: 'boss_bilans.png', hue: 240, desc: 'Sprawdza próg rentowności i marżę pokrycia. Każda pomyłka obniży Twój BEP do zera.', rewardItem: 'Pas Kulturystyczny' },
-    'k6': { name: 'Kapitalista WACC', hp: 360, image: 'boss_golem.png', hue: 280, desc: 'Tarcza podatkowa to jego zbroja. Spróbuje zniszczyć Twój portfel kosztem kapitału obcego.', rewardItem: 'Kamizelka Finansisty' },
-    'k7': { name: 'Pożeracz Płynności KON', hp: 320, image: 'boss_bilans.png', hue: 300, desc: 'Zamraża gotówkę w cyklu konwersji. Musisz skrócić DSO i DIO, aby zadać mu obrażenia.', rewardItem: 'Notatnik Rynkowy' },
-    'k8': { name: 'Wyceniacz DCF', hp: 400, image: 'boss_golem.png', hue: 90, desc: 'Wycenia firmy dochodowo i porównawczo. Wymaga znajomości NOPAT, WACC oraz EVA.', rewardItem: 'Notatnik Rynkowy' },
-    'k9': { name: 'Arbitrażowy Arbitr', hp: 350, image: 'boss_bilans.png', hue: 150, desc: 'Strażnik prawa jednej ceny. Zmusi Cię do wyłapania okazji arbitrażowych na rynku.', rewardItem: 'Notatnik Rynkowy' },
-    'k10': { name: 'Gubernator Monetarny', hp: 370, image: 'boss_golem.png', hue: 60, desc: 'Kontroluje podaż pieniądza. Będzie walczył stopami procentowymi i rezerwą obowiązkową.', rewardItem: 'Wizor Rynkowy' },
-    'k11': { name: 'Poborca Podatkowy CIT', hp: 340, image: 'boss_bilans.png', hue: 320, desc: 'Ściąga podatki bezpośrednie i pośrednie. Zmierzy się z Tobą w kalkulacji dochodu CIT.', rewardItem: 'Garnitur Audytora' },
-    'k12': { name: 'Tytan Recesji', hp: 420, image: 'boss_golem.png', hue: 340, desc: 'Władca cyklu koniunkturalnego. Musisz przetrwać jego recesję, odpowiadając na pytania PKB.', rewardItem: 'Pas Kulturystyczny' },
-    't1': { name: 'Władca Value at Risk (VaR)', hp: 400, image: 'boss_golem.png', hue: 200, desc: 'Mierzy maksymalną stratę z określonym prawdopodobieństwem. Czy przetrwasz jego test stresu?', rewardItem: 'Wizor Rynkowy' },
-    't2': { name: 'Audytor Kredytowy', hp: 360, image: 'boss_bilans.png', hue: 210, desc: 'Sprawdza zdolność kredytową i asymetrię informacji. Uważaj na selekcję negatywną!', rewardItem: 'Garnitur Audytora' },
-    't5': { name: 'Syntetyk Opcji', hp: 380, image: 'boss_golem.png', hue: 130, desc: 'Tworzy skomplikowane struktury opcyjne. Będziesz musiał wycenić opcje i spłacić premię.', rewardItem: 'Notatnik Rynkowy' },
-    't11': { name: 'Kosztodawca Międzynarodowy', hp: 350, image: 'boss_bilans.png', hue: 160, desc: 'Liczy koszt kapitału w transgranicznych fuzjach. Przygotuj się na parytet inflacji.', rewardItem: 'Kamizelka Finansisty' },
-    't3': { name: 'Inspektor MSR', hp: 360, image: 'boss_golem.png', hue: 180, desc: 'Weryfikuje zgodność z Międzynarodowymi Standardami Rachunkowości bankowej.', rewardItem: 'Garnitur Audytora' },
-    't4': { name: 'Wykresowy Manipulator', hp: 330, image: 'boss_bilans.png', hue: 250, desc: 'Mistrz formacji świecowych i średnich kroczących. Przetestuje Twoją analizę techniczną.', rewardItem: 'Notatnik Rynkowy' },
-    't6': { name: 'Bankier Produktowy', hp: 340, image: 'boss_golem.png', hue: 270, desc: 'Zna na pamięć każdy produkt bankowy i prowizję. Spróbuje obciążyć Cię kosztami.', rewardItem: 'Wizor Rynkowy' },
-    't8': { name: 'Kontroler Odchyleń', hp: 350, image: 'boss_bilans.png', hue: 80, desc: 'Porównuje plany z wykonaniem. Każda odchyłka od normy to obrażenia dla Twojego HP.', rewardItem: 'Pas Kulturystyczny' },
-    't9': { name: 'Strażnik Budżetu', hp: 370, image: 'boss_golem.png', hue: 110, desc: 'Pilnuje dyscypliny budżetowej w przedsiębiorstwie. Wymaga precyzyjnych prognoz.', rewardItem: 'Kamizelka Finansisty' },
-    't7': { name: 'Likwidator Szkód OFE', hp: 380, image: 'boss_bilans.png', hue: 140, desc: 'Władca ubezpieczeń i funduszy emerytalnych. Oblicz renty dożywotnie, by go pokonać.', rewardItem: 'Pas Kulturystyczny' },
-    't10': { name: 'Spekulant Forex', hp: 410, image: 'boss_golem.png', hue: 220, desc: 'Manipuluje kursami walut. Musisz przewidzieć ruchy par walutowych Forex.', rewardItem: 'Wizor Rynkowy' },
-    't12': { name: 'Władca Swapów i Futures', hp: 450, image: 'boss_golem.png', hue: 310, desc: 'Ostateczny boss instrumentów pochodnych. Zabezpiecz pozycje, aby przeżyć.', rewardItem: 'Notatnik Rynkowy' }
+    'fundament': { name: 'Architekt Bilansu', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Strażnik zasad memoriałowych i WACC. Zmierzy się z Tobą w bezlitosnym starciu z podstaw finansowych.', rewardItem: 'Kostur Kalkulacji' },
+    'stopy': { name: 'Kolekcjoner Stóp NBP', hp: 320, image: 'boss_bilans.png', hue: 45, desc: 'Pan korytarza stóp procentowych. Czy potrafisz obliczyć stopę lombardową i depozytową w locie?', rewardItem: 'Sygnet Analityka' },
+    'k5': { name: 'Dyskontowy Demon NPV', hp: 340, image: 'boss_golem.png', hue: 120, desc: 'Władca przyszłej wartości pieniądza. Będzie rzucał w Ciebie trudnymi wzorami NPV i IRR.', rewardItem: 'Kostur Kalkulacji' },
+    'k1': { name: 'Cenzor Memoriału', hp: 300, image: 'boss_bilans.png', hue: 180, desc: 'Bezlitosny strażnik zasady współmierności przychodów i kosztów. Uważaj na podejście kasowe!', rewardItem: 'Zbroja Audytora' },
+    'k2': { name: 'Wyceniacz Pasywów', hp: 350, image: 'boss_golem.png', hue: 200, desc: 'Stoi na straży wyceny aktywów w bilansie według kosztu historycznego i wartości godziwej.', rewardItem: 'Zbroja Audytora' },
+    'k3': { name: 'Golem Upadłości', hp: 380, image: 'boss_golem.png', hue: 0, desc: 'Monstrum zasilane wskaźnikiem Altmana. Zmierzy się z Tobą w analizie rentowności i płynności.', rewardItem: 'Pas Siły' },
+    'k4': { name: 'Mistrz Kosztów Zmiennych', hp: 330, image: 'boss_bilans.png', hue: 240, desc: 'Sprawdza próg rentowności i marżę pokrycia. Każda pomyłka obniży Twój BEP do zera.', rewardItem: 'Pas Siły' },
+    'k6': { name: 'Kapitalista WACC', hp: 360, image: 'boss_golem.png', hue: 280, desc: 'Tarcza podatkowa to jego zbroja. Spróbuje zniszczyć Twój portfel kosztem kapitału obcego.', rewardItem: 'Buty Finansisty' },
+    'k7': { name: 'Pożeracz Płynności KON', hp: 320, image: 'boss_bilans.png', hue: 300, desc: 'Zamraża gotówkę w cyklu konwersji. Musisz skrócić DSO i DIO, aby zadać mu obrażenia.', rewardItem: 'Grymuar Rynkowy' },
+    'k8': { name: 'Wyceniacz DCF', hp: 400, image: 'boss_golem.png', hue: 90, desc: 'Wycenia firmy dochodowo i porównawczo. Wymaga znajomości NOPAT, WACC oraz EVA.', rewardItem: 'Grymuar Rynkowy' },
+    'k9': { name: 'Arbitrażowy Arbitr', hp: 350, image: 'boss_bilans.png', hue: 150, desc: 'Strażnik prawa jednej ceny. Zmusi Cię do wyłapania okazji arbitrażowych na rynku.', rewardItem: 'Grymuar Rynkowy' },
+    'k10': { name: 'Gubernator Monetarny', hp: 370, image: 'boss_golem.png', hue: 60, desc: 'Kontroluje podaż pieniądza. Będzie walczył stopami procentowymi i rezerwą obowiązkową.', rewardItem: 'Sygnet Analityka' },
+    'k11': { name: 'Poborca Podatkowy CIT', hp: 340, image: 'boss_bilans.png', hue: 320, desc: 'Ściąga podatki bezpośrednie i pośrednie. Zmierzy się z Tobą w kalkulacji dochodu CIT.', rewardItem: 'Zbroja Audytora' },
+    'k12': { name: 'Tytan Recesji', hp: 420, image: 'boss_golem.png', hue: 340, desc: 'Władca cyklu koniunkturalnego. Musisz przetrwać jego recesję, odpowiadając na pytania PKB.', rewardItem: 'Pas Siły' },
+    't1': { name: 'Władca Value at Risk (VaR)', hp: 400, image: 'boss_golem.png', hue: 200, desc: 'Mierzy maksymalną stratę z określonym prawdopodobieństwem. Czy przetrwasz jego test stresu?', rewardItem: 'Sygnet Analityka' },
+    't2': { name: 'Audytor Kredytowy', hp: 360, image: 'boss_bilans.png', hue: 210, desc: 'Sprawdza zdolność kredytową i asymetrię informacji. Uważaj na selekcję negatywną!', rewardItem: 'Zbroja Audytora' },
+    't5': { name: 'Syntetyk Opcji', hp: 380, image: 'boss_golem.png', hue: 130, desc: 'Tworzy skomplikowane struktury opcyjne. Będziesz musiał wycenić opcje i spłacić premię.', rewardItem: 'Grymuar Rynkowy' },
+    't11': { name: 'Kosztodawca Międzynarodowy', hp: 350, image: 'boss_bilans.png', hue: 160, desc: 'Liczy koszt kapitału w transgranicznych fuzjach. Przygotuj się na parytet inflacji.', rewardItem: 'Buty Finansisty' },
+    't3': { name: 'Inspektor MSR', hp: 360, image: 'boss_golem.png', hue: 180, desc: 'Weryfikuje zgodność z Międzynarodowymi Standardami Rachunkowości bankowej.', rewardItem: 'Zbroja Audytora' },
+    't4': { name: 'Wykresowy Manipulator', hp: 330, image: 'boss_bilans.png', hue: 250, desc: 'Mistrz formacji świecowych i średnich kroczących. Przetestuje Twoją analizę techniczną.', rewardItem: 'Grymuar Rynkowy' },
+    't6': { name: 'Bankier Produktowy', hp: 340, image: 'boss_golem.png', hue: 270, desc: 'Zna na pamięć każdy produkt bankowy i prowizję. Spróbuje obciążyć Cię kosztami.', rewardItem: 'Sygnet Analityka' },
+    't8': { name: 'Kontroler Odchyleń', hp: 350, image: 'boss_bilans.png', hue: 80, desc: 'Porównuje plany z wykonaniem. Każda odchyłka od normy to obrażenia dla Twojego HP.', rewardItem: 'Pas Siły' },
+    't9': { name: 'Strażnik Budżetu', hp: 370, image: 'boss_golem.png', hue: 110, desc: 'Pilnuje dyscypliny budżetowej w przedsiębiorstwie. Wymaga precyzyjnych prognoz.', rewardItem: 'Buty Finansisty' },
+    't7': { name: 'Likwidator Szkód OFE', hp: 380, image: 'boss_bilans.png', hue: 140, desc: 'Władca ubezpieczeń i funduszy emerytalnych. Oblicz renty dożywotnie, by go pokonać.', rewardItem: 'Pas Siły' },
+    't10': { name: 'Spekulant Forex', hp: 410, image: 'boss_golem.png', hue: 220, desc: 'Manipuluje kursami walut. Musisz przewidzieć ruchy par walutowych Forex.', rewardItem: 'Sygnet Analityka' },
+    't12': { name: 'Władca Swapów i Futures', hp: 450, image: 'boss_golem.png', hue: 310, desc: 'Ostateczny boss instrumentów pochodnych. Zabezpiecz pozycje, aby przeżyć.', rewardItem: 'Grymuar Rynkowy' }
 };
 
 // Web Audio API Synthesizer for offline haptic feedback
@@ -292,20 +292,106 @@ window.Learn = {
         }
     },
 
+    getItemGraphic(itemName, slotType) {
+        if (!itemName) {
+            if (slotType === 'head') return '⚪';
+            if (slotType === 'weapon') return '⚔️';
+            return '🛡️';
+        }
+
+        if (itemName === 'Okulary Analityka' || itemName === 'Sygnet Analityka' || itemName === 'Wizor Rynkowy') {
+            return `
+            <svg viewBox="0 0 64 64" style="width:100%; height:100%; filter: drop-shadow(0 0 6px rgba(197,168,128,0.7));">
+                <circle cx="32" cy="38" r="14" fill="none" stroke="#d4af37" stroke-width="4.5" />
+                <polygon points="32,15 38,23 32,31 26,23" fill="#38bdf8" stroke="#ffffff" stroke-width="1" />
+                <circle cx="32" cy="23" r="2" fill="#ffffff" />
+            </svg>`;
+        }
+
+        if (itemName === 'Złoty Kalkulator' || itemName === 'Kostur Kalkulacji') {
+            return `
+            <svg viewBox="0 0 64 64" style="width:100%; height:100%; filter: drop-shadow(0 0 6px rgba(212,175,55,0.7));">
+                <line x1="14" y1="50" x2="42" y2="22" stroke="#78350f" stroke-width="4.5" stroke-linecap="round" />
+                <circle cx="45" cy="19" r="6" fill="#d4af37" stroke="#ffffff" stroke-width="1.5" />
+                <circle cx="45" cy="19" r="2" fill="#38bdf8" />
+                <line x1="40" y1="24" x2="44" y2="20" stroke="#ffffff" stroke-width="1" />
+            </svg>`;
+        }
+        if (itemName === 'Hantel 50kg' || itemName === 'Młot Kinetyczny') {
+            return `
+            <svg viewBox="0 0 64 64" style="width:100%; height:100%; filter: drop-shadow(0 0 6px rgba(239,68,68,0.7));">
+                <line x1="15" y1="49" x2="45" y2="19" stroke="#4b5563" stroke-width="5" stroke-linecap="round" />
+                <rect x="36" y="10" width="18" height="14" rx="2" transform="rotate(45 45 17)" fill="#1f2937" stroke="#9ca3af" stroke-width="2" />
+                <line x1="41" y1="15" x2="49" y2="23" stroke="#d32f2f" stroke-width="2" />
+            </svg>`;
+        }
+        if (itemName === 'Notatnik Rynkowy' || itemName === 'Grymuar Rynkowy') {
+            return `
+            <svg viewBox="0 0 64 64" style="width:100%; height:100%; filter: drop-shadow(0 0 6px rgba(168,85,247,0.7));">
+                <rect x="16" y="12" width="32" height="40" rx="3" fill="#581c87" stroke="#c5a880" stroke-width="2.5" />
+                <line x1="22" y1="12" x2="22" y2="52" stroke="#c5a880" stroke-width="2" />
+                <polygon points="32,24 36,32 32,40 28,32" fill="#a855f7" />
+            </svg>`;
+        }
+
+        if (itemName === 'Garnitur Audytora' || itemName === 'Zbroja Audytora') {
+            return `
+            <svg viewBox="0 0 64 64" style="width:100%; height:100%; filter: drop-shadow(0 0 6px rgba(197,168,128,0.5));">
+                <path d="M16,14 C20,10 44,10 48,14 L50,30 C50,44 32,54 32,54 C32,54 14,44 14,30 Z" fill="#3f3f46" stroke="#c5a880" stroke-width="2.5" />
+                <path d="M32,14 L32,54" stroke="#c5a880" stroke-dasharray="2,2" stroke-width="1.5" />
+                <circle cx="32" cy="28" r="4" fill="#ef4444" />
+            </svg>`;
+        }
+        if (itemName === 'Pas Kulturystyczny' || itemName === 'Pas Siły') {
+            return `
+            <svg viewBox="0 0 64 64" style="width:100%; height:100%; filter: drop-shadow(0 0 6px rgba(245,158,11,0.5));">
+                <rect x="10" y="24" width="44" height="16" rx="2" fill="#78350f" stroke="#451a03" stroke-width="2" />
+                <circle cx="32" cy="32" r="7" fill="#d4af37" stroke="#ffffff" stroke-width="1.5" />
+                <polygon points="32,28 35,32 32,36 29,32" fill="#ef4444" />
+            </svg>`;
+        }
+        if (itemName === 'Kamizelka Finansisty' || itemName === 'Buty Finansisty') {
+            return `
+            <svg viewBox="0 0 64 64" style="width:100%; height:100%; filter: drop-shadow(0 0 6px rgba(168,85,247,0.5));">
+                <path d="M22,14 L34,14 L32,32 L46,42 L42,48 L20,48 L18,32 Z" fill="#581c87" stroke="#c084fc" stroke-width="2" />
+                <path d="M22,14 L26,14 L24,32 L20,48 L20,48 L18,32 Z" fill="#3b0764" />
+                <path d="M22,14 L34,14 L32,22 L22,22 Z" fill="#a855f7" />
+            </svg>`;
+        }
+
+        return '⚪';
+    },
+
     // --- RPG Panel Renderer ---
     renderRPGPanel() {
         const panel = document.getElementById('rpg-character-panel');
+        const mainArea = document.querySelector('.learn-main-area');
+        const layout = document.querySelector('.rpg-split-layout');
+        const toggleBtn = document.getElementById('toggle-character-panel-btn');
+        const toggleLabel = document.getElementById('toggle-panel-label');
         if (!panel) return;
 
         const avatar = Store._data.avatar;
         if (!avatar) {
-            panel.innerHTML = `
-                <div style="text-align: center; padding: 1rem 0; width:100%;">
-                    <h3 class="gradient-text">Bohater Nieaktywny</h3>
-                    <p class="text-muted" style="font-size:0.85rem; margin-top: 0.5rem;">Wybierz klasę postaci po prawej stronie, aby rozpocząć grę.</p>
-                </div>
-            `;
+            panel.style.display = 'none';
+            if (mainArea) mainArea.style.width = '100%';
+            if (toggleBtn) toggleBtn.style.display = 'none';
             return;
+        } else {
+            if (toggleBtn) toggleBtn.style.display = 'flex';
+        }
+
+        const isCollapsed = !!Store._data.panelCollapsed;
+        if (isCollapsed) {
+            panel.style.display = 'none';
+            if (layout) layout.style.gridTemplateColumns = '0px 1fr 340px';
+            if (toggleLabel) toggleLabel.textContent = 'Pokaż profil';
+            if (mainArea) mainArea.style.width = '100%';
+        } else {
+            panel.style.display = 'flex';
+            if (layout) layout.style.gridTemplateColumns = ''; // reset to CSS default
+            if (toggleLabel) toggleLabel.textContent = 'Ukryj profil';
+            if (mainArea) mainArea.style.width = '';
         }
 
         const currentLevel = avatar.level || 1;
@@ -325,17 +411,6 @@ window.Learn = {
         const vitPercent = Math.min(100, Math.round((vit / 100) * 100));
 
         const eq = avatar.eq || { head: null, weapon: null, chest: null };
-
-        // Determine item graphic display inside slots
-        let weaponImg = '⚪';
-        if (eq.weapon === 'Złoty Kalkulator') weaponImg = `<img src="assets/avatars/item_kalkulator.png?v=2026" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
-        else if (eq.weapon === 'Hantel 50kg') weaponImg = `<img src="assets/avatars/item_hantel.png?v=2026" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
-        else if (eq.weapon === 'Notatnik Rynkowy') weaponImg = `<img src="assets/avatars/item_notatnik.png?v=2026" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
-
-        let chestImg = '⚪';
-        if (eq.chest === 'Garnitur Audytora') chestImg = `<img src="assets/avatars/item_garnitur.png?v=2026" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
-        else if (eq.chest === 'Pas Kulturystyczny') chestImg = `<img src="assets/avatars/item_pas.png?v=2026" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />`;
-        else if (eq.chest === 'Kamizelka Finansisty') chestImg = `<img src="assets/avatars/item_garnitur.png?v=2026" style="width:100%; height:100%; object-fit:cover; border-radius:11px; filter: hue-rotate(90deg);" />`;
 
         panel.innerHTML = `
             <div class="rpg-avatar-box" style="width: 100%;">
@@ -386,16 +461,22 @@ window.Learn = {
                 <h4 style="margin-bottom: 0.8rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">Ekwipunek</h4>
                 <div class="rpg-equipment-grid">
                     <div class="rpg-eq-slot ${eq.head ? 'equipped' : ''}" onclick="window.Learn.inspectItem('head')">
-                        ${eq.head ? '🎓' : '⚪'}
-                        <div class="slot-name">Głowa</div>
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 4px;">
+                            ${this.getItemGraphic(eq.head, 'head')}
+                        </div>
+                        <div class="slot-name">Sygnet</div>
                     </div>
                     <div class="rpg-eq-slot ${eq.weapon ? 'equipped' : ''}" onclick="window.Learn.inspectItem('weapon')">
-                        ${weaponImg}
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 4px;">
+                            ${this.getItemGraphic(eq.weapon, 'weapon')}
+                        </div>
                         <div class="slot-name">Broń</div>
                     </div>
                     <div class="rpg-eq-slot ${eq.chest ? 'equipped' : ''}" onclick="window.Learn.inspectItem('chest')">
-                        ${chestImg}
-                        <div class="slot-name">Klatka</div>
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 4px;">
+                            ${this.getItemGraphic(eq.chest, 'chest')}
+                        </div>
+                        <div class="slot-name">Ubiór</div>
                     </div>
                 </div>
             </div>
@@ -420,54 +501,51 @@ window.Learn = {
         modal.style.justifyContent = 'center';
 
         let itemTitle = item || 'Pusty Slot';
-        let itemIcon = '⚪';
         let itemDesc = 'Zdobądź przedmioty za pokonywanie bossów lub awans poziomu!';
 
         if (slot === 'head') {
-            itemIcon = '🎓';
             if (item) {
-                itemTitle = item;
-                itemDesc = 'Okulary Analityka. Chronią wzrok przed zmęczeniem i dodają +10% do zyskiwanego XP.';
+                itemTitle = 'Sygnet Analityka';
+                itemDesc = 'Mityczny złoty pierścień z szafirem. Chroni umysł przed kognitywnym zmęczeniem i dodaje +10% do zyskiwanego XP.';
             } else {
-                itemTitle = 'Pusty Slot Głowy';
+                itemTitle = 'Pusty Slot Sygnetu';
             }
         } else if (slot === 'weapon') {
-            if (item === 'Złoty Kalkulator') { 
-                itemIcon = `<img src="assets/avatars/item_kalkulator.png" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid var(--primary); box-shadow: 0 0 15px var(--primary-glow);" />`; 
-                itemDesc = 'Mityczne narzędzie matematyczne. Zwiększa obrażenia zadawane Bossom o 15% oraz dodaje 10% XP za poprawne odpowiedzi.'; 
-            } else if (item === 'Hantel 50kg') { 
-                itemIcon = `<img src="assets/avatars/item_hantel.png" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid var(--success); box-shadow: 0 0 15px rgba(0,255,100,0.3);" />`; 
-                itemDesc = 'Ultraciężki ciężar. Każde uderzenie w Bossa zadaje 20% więcej obrażeń.'; 
-            } else if (item === 'Notatnik Rynkowy') { 
-                itemIcon = `<img src="assets/avatars/item_notatnik.png" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid var(--secondary); box-shadow: 0 0 15px rgba(0,229,255,0.3);" />`; 
-                itemDesc = 'Uporządkowane tabele finansowe. Zwiększa zysk punktów XP o 20% na wszystkich zadaniach.'; 
+            if (item === 'Złoty Kalkulator' || item === 'Kostur Kalkulacji') { 
+                itemTitle = 'Kostur Kalkulacji';
+                itemDesc = 'Kostur zwieńczony złotą kulą i runami matematycznymi. Zwiększa obrażenia zadawane Bossom o 15% oraz dodaje 10% XP za poprawne odpowiedzi.'; 
+            } else if (item === 'Hantel 50kg' || item === 'Młot Kinetyczny') { 
+                itemTitle = 'Młot Kinetyczny';
+                itemDesc = 'Ciężki żelazny młot bojowy kinezjologa. Każde uderzenie w Bossa zadaje 20% więcej obrażeń.'; 
+            } else if (item === 'Notatnik Rynkowy' || item === 'Grymuar Rynkowy') { 
+                itemTitle = 'Grymuar Rynkowy';
+                itemDesc = 'Grymuar oprawiony w skórę ze spisem zaklęć rynkowych. Zwiększa zysk punktów XP o 20% na wszystkich zadaniach.'; 
             } else { 
                 itemTitle = 'Pusty Slot Broni'; 
             }
         } else if (slot === 'chest') {
-            if (item === 'Garnitur Audytora') { 
-                itemIcon = `<img src="assets/avatars/item_garnitur.png" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid var(--primary); box-shadow: 0 0 15px var(--primary-glow);" />`; 
-                itemDesc = 'Wzmacnia autorytet. Zwiększa maksymalne HP postaci o 25 punktów.'; 
-            } else if (item === 'Pas Kulturystyczny') { 
-                itemIcon = `<img src="assets/avatars/item_pas.png" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid var(--success); box-shadow: 0 0 15px rgba(0,255,100,0.3);" />`; 
-                itemDesc = 'Zabezpiecza kręgosłup. Chroni przed obrażeniami z błędnych odpowiedzi (redukuje straty HP o 5 punktów).'; 
-            } else if (item === 'Kamizelka Finansisty') { 
-                itemIcon = `<img src="assets/avatars/item_garnitur.png" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid var(--secondary); filter: hue-rotate(90deg); box-shadow: 0 0 15px rgba(0,229,255,0.3);" />`; 
-                itemDesc = 'Ochronny styl korporacyjny. Zwiększa maksymalne HP o 15 punktów.'; 
+            if (item === 'Garnitur Audytora' || item === 'Zbroja Audytora') { 
+                itemTitle = 'Zbroja Audytora';
+                itemDesc = 'Wykuta ze stali i złota zbroja płytowa. Zwiększa maksymalne HP postaci o 25 punktów.'; 
+            } else if (item === 'Pas Kulturystyczny' || item === 'Pas Siły') { 
+                itemTitle = 'Pas Siły';
+                itemDesc = 'Skórzany pas nabijany żelaznymi nitami. Chroni przed obrażeniami z błędnych odpowiedzi (redukuje straty HP o 5 punktów).'; 
+            } else if (item === 'Kamizelka Finansisty' || item === 'Buty Finansisty') { 
+                itemTitle = 'Buty Finansisty';
+                itemDesc = 'Fioletowe buty z magicznej skóry. Zwiększają maksymalne HP o 15 punktów.'; 
             } else { 
-                itemTitle = 'Pusty Slot Pancerza'; 
+                itemTitle = 'Pusty Slot Ubioru'; 
             }
         }
 
-        const iconContainer = itemIcon.startsWith('<img') 
-            ? itemIcon 
-            : `<div style="font-size: 4.5rem; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));">${itemIcon}</div>`;
+        const svgContent = this.getItemGraphic(item, slot);
+        const iconContainer = `<div style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid var(--primary); box-shadow: 0 0 15px var(--primary-glow); background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; padding: 15px;">${svgContent}</div>`;
 
         modal.innerHTML = `
-            <div class="glass-card inspect-item-modal fade-in" style="width:100%; max-width:440px; text-align:center; padding: 2.5rem; border-color: rgba(0, 229, 255, 0.4); box-shadow: 0 0 25px rgba(0,229,255,0.25);">
+            <div class="glass-card inspect-item-modal fade-in" style="width:100%; max-width:440px; text-align:center; padding: 2.5rem; border-color: rgba(197, 168, 128, 0.4); box-shadow: 0 0 25px rgba(197, 168, 128, 0.25);">
                 <div style="margin-bottom: 1.5rem; display:flex; justify-content:center;">${iconContainer}</div>
                 <h3 class="gradient-text" style="font-size:1.6rem; margin-bottom:0.3rem;">${itemTitle}</h3>
-                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom:1.5rem;">Slot: ${slot === 'head' ? 'Głowa' : (slot === 'weapon' ? 'Broń / Narzędzie' : 'Pancerz / Ubiór')}</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom:1.5rem;">Slot: ${slot === 'head' ? 'Sygnet' : (slot === 'weapon' ? 'Broń' : 'Ubiór')}</div>
                 <p class="text-muted" style="line-height: 1.6; font-size:1rem; margin-bottom: 2rem;">${itemDesc}</p>
                 <button class="btn primary ripple" style="width:100%; border-radius:24px; padding:0.8rem 1.5rem;">Zamknij Panel</button>
             </div>
@@ -517,11 +595,18 @@ window.Learn = {
     // --- Main Study Area Router ---
     renderMain() {
         const titleEl = document.getElementById('learn-view-title');
+        const rightSidebar = document.getElementById('learn-right-sidebar');
         const filterEl = document.getElementById('learn-filter-container');
         const controls = document.getElementById('learn-controls');
 
         if (!Store._data.avatar) {
             this.lessonState = 'creator';
+        }
+
+        if (this.lessonState === 'creator') {
+            if (rightSidebar) rightSidebar.style.display = 'none';
+        } else {
+            if (rightSidebar) rightSidebar.style.display = 'flex';
         }
 
         if (this.lessonState === 'map' || this.lessonState === 'creator') {
@@ -531,6 +616,9 @@ window.Learn = {
         } else {
             if (filterEl) filterEl.style.display = 'none';
         }
+
+        // Update active biome
+        this.updateBiome();
 
         this.animateTransition(() => {
             switch (this.lessonState) {
@@ -556,6 +644,211 @@ window.Learn = {
         });
     },
 
+    injectHelpfulGraphics(html) {
+        if (!html) return html;
+        let modifiedHtml = html;
+
+        // 1. CAPM / SML Chart
+        if (html.includes('CAPM') && !html.includes('id="chart-capm"')) {
+            const capmChart = `
+            <div id="chart-capm" class="medieval-chart-container" style="margin: 1.5rem 0; padding: 1.2rem; background: rgba(0,0,0,0.4); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 12px; text-align: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.6);">
+                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 1. Linia Rynku Papierów Wartościowych (SML - CAPM)</div>
+                <svg viewBox="0 0 400 200" style="width: 100%; max-width: 380px; height: auto;">
+                    <!-- Grid Lines -->
+                    <line x1="50" y1="150" x2="350" y2="150" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                    <line x1="50" y1="30" x2="50" y2="150" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                    
+                    <line x1="50" y1="100" x2="350" y2="100" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3,3" />
+                    <line x1="200" y1="30" x2="200" y2="150" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3,3" />
+                    
+                    <!-- Axes labels -->
+                    <text x="350" y="170" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="'Cinzel', serif">Ryzyko (Beta)</text>
+                    <text x="40" y="25" fill="var(--text-muted)" font-size="10" text-anchor="end" font-family="'Cinzel', serif">Oczekiwany zwrot (%)</text>
+                    
+                    <!-- Tick labels -->
+                    <text x="45" y="153" fill="var(--text-muted)" font-size="9" text-anchor="end">0.0</text>
+                    <text x="200" y="163" fill="var(--text-muted)" font-size="9" text-anchor="middle">1.0 (Rynek)</text>
+                    <text x="45" y="103" fill="var(--text-muted)" font-size="9" text-anchor="end">Rf (Wolna od ryzyka)</text>
+                    
+                    <!-- SML Line -->
+                    <line x1="50" y1="100" x2="320" y2="40" stroke="#c5a880" stroke-width="3" stroke-linecap="round" style="filter: drop-shadow(0 0 4px var(--primary-glow));" />
+                    <text x="280" y="32" fill="#c5a880" font-weight="bold" font-size="11" font-family="'Cinzel', serif">Linia SML (CAPM)</text>
+                    
+                    <!-- Market Point -->
+                    <circle cx="200" cy="68" r="5" fill="#ef4444" />
+                    <text x="210" y="65" fill="#ef4444" font-weight="bold" font-size="10">Portfel Rynkowy</text>
+                </svg>
+            </div>`;
+            modifiedHtml += capmChart;
+        }
+
+        // 2. NPV Profile Chart
+        if (html.includes('NPV') && !html.includes('id="chart-npv"')) {
+            const npvChart = `
+            <div id="chart-npv" class="medieval-chart-container" style="margin: 1.5rem 0; padding: 1.2rem; background: rgba(0,0,0,0.4); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 12px; text-align: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.6);">
+                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 2. Profil Wartości Bieżącej Netto (NPV vs Stopa Dyskontowa)</div>
+                <svg viewBox="0 0 400 200" style="width: 100%; max-width: 380px; height: auto;">
+                    <!-- Grid Lines -->
+                    <line x1="50" y1="100" x2="350" y2="100" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                    <line x1="50" y1="20" x2="50" y2="180" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                    
+                    <!-- Axes labels -->
+                    <text x="350" y="120" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="'Cinzel', serif">Stopa dyskontowa (r)</text>
+                    <text x="40" y="25" fill="var(--text-muted)" font-size="10" text-anchor="end" font-family="'Cinzel', serif">NPV (zł)</text>
+                    
+                    <!-- Ticks -->
+                    <text x="45" y="103" fill="var(--text-muted)" font-size="9" text-anchor="end">0</text>
+                    <text x="45" y="40" fill="var(--text-muted)" font-size="9" text-anchor="end">+CF</text>
+                    <text x="45" y="160" fill="var(--text-muted)" font-size="9" text-anchor="end">-Nakład</text>
+                    
+                    <!-- Curve representing NPV Profile -->
+                    <path d="M 50,40 Q 150,70 240,100 T 330,150" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" style="filter: drop-shadow(0 0 4px rgba(56,189,248,0.4));" />
+                    
+                    <!-- IRR Intersection -->
+                    <circle cx="240" cy="100" r="5" fill="#ef4444" />
+                    <text x="245" y="93" fill="#ef4444" font-weight="bold" font-size="10">IRR (NPV = 0)</text>
+                    
+                    <!-- NPV > 0 and NPV < 0 Zones -->
+                    <text x="120" y="75" fill="var(--success)" font-size="9" font-weight="bold">Obszar Opłacalności (NPV > 0)</text>
+                    <text x="270" y="135" fill="var(--danger)" font-size="9" font-weight="bold">NPV < 0</text>
+                </svg>
+            </div>`;
+            modifiedHtml += npvChart;
+        }
+
+        // 3. NBP rates corridor chart
+        if ((html.includes('lombard') || html.includes('depozyt') || html.includes('korytarz stóp')) && !html.includes('id="chart-corridor"')) {
+            const corridorChart = `
+            <div id="chart-corridor" class="medieval-chart-container" style="margin: 1.5rem 0; padding: 1.2rem; background: rgba(0,0,0,0.4); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 12px; text-align: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.6);">
+                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 3. Korytarz stóp procentowych NBP</div>
+                <svg viewBox="0 0 400 200" style="width: 100%; max-width: 380px; height: auto;">
+                    <!-- Axis -->
+                    <line x1="50" y1="170" x2="350" y2="170" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                    <line x1="50" y1="20" x2="50" y2="170" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                    
+                    <!-- Lombard rate (ceiling) -->
+                    <line x1="50" y1="40" x2="350" y2="40" stroke="#f43f5e" stroke-width="2" stroke-dasharray="3,3" />
+                    <text x="340" y="32" fill="#f43f5e" font-size="9" font-weight="bold" text-anchor="end">Stopa Lombardowa (Sufit)</text>
+                    
+                    <!-- Reference rate (center) -->
+                    <line x1="50" y1="90" x2="350" y2="90" stroke="#eab308" stroke-width="2" />
+                    <text x="340" y="82" fill="#eab308" font-size="9" font-weight="bold" text-anchor="end">Stopa Referencyjna (Cena pieniądza)</text>
+                    
+                    <!-- Deposit rate (floor) -->
+                    <line x1="50" y1="140" x2="350" y2="140" stroke="#10b981" stroke-width="2" stroke-dasharray="3,3" />
+                    <text x="340" y="132" fill="#10b981" font-size="9" font-weight="bold" text-anchor="end">Stopa Depozytowa (Podłoga)</text>
+                    
+                    <!-- Market rate (fluctuating) -->
+                    <path d="M 50,110 T 100,85 T 150,95 T 200,60 T 250,90 T 300,105 T 350,92" fill="none" stroke="#38bdf8" stroke-width="2.5" style="filter: drop-shadow(0 0 3px rgba(56,189,248,0.6));" />
+                    <text x="140" y="55" fill="#38bdf8" font-size="9" font-weight="bold">Stawka Rynkowa (WIBOR/Overnight)</text>
+                </svg>
+            </div>`;
+            modifiedHtml += corridorChart;
+        }
+
+        // 4. WACC / Capital Structure Chart
+        if (html.includes('WACC') && !html.includes('id="chart-wacc"')) {
+            const waccChart = `
+            <div id="chart-wacc" class="medieval-chart-container" style="margin: 1.5rem 0; padding: 1.2rem; background: rgba(0,0,0,0.4); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 12px; text-align: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.6);">
+                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 4. Koszt kapitału a dzwignia finansowa</div>
+                <svg viewBox="0 0 400 200" style="width: 100%; max-width: 380px; height: auto;">
+                    <!-- Axis -->
+                    <line x1="50" y1="160" x2="350" y2="160" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                    <line x1="50" y1="20" x2="50" y2="160" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                    
+                    <text x="350" y="175" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="'Cinzel', serif">Udział długu (D/V)</text>
+                    <text x="40" y="25" fill="var(--text-muted)" font-size="10" text-anchor="end" font-family="'Cinzel', serif">Koszt kapitału (%)</text>
+                    
+                    <!-- Cost of Equity (re) -> going up -->
+                    <path d="M 50,70 Q 200,90 350,130" fill="none" stroke="#f43f5e" stroke-width="2" />
+                    <text x="320" y="145" fill="#f43f5e" font-size="9" font-weight="bold">Re (Koszt kapitału własnego)</text>
+                    
+                    <!-- Cost of Debt (rd) -> constant / slightly up -->
+                    <path d="M 50,120 Q 200,125 350,135" fill="none" stroke="#10b981" stroke-width="2" />
+                    <text x="320" y="125" fill="#10b981" font-size="9" font-weight="bold">Rd (Koszt długu po opodatkowaniu)</text>
+                    
+                    <!-- WACC -> U-shape curve (Trade-off theory) -->
+                    <path d="M 50,70 Q 180,105 350,90" fill="none" stroke="#eab308" stroke-width="3.5" style="filter: drop-shadow(0 0 4px rgba(234,179,8,0.5));" />
+                    <text x="210" y="118" fill="#eab308" font-size="11" font-weight="bold">WACC (Średni koszt)</text>
+                    
+                    <!-- Optimal Point -->
+                    <circle cx="180" cy="103" r="5" fill="#ef4444" />
+                    <text x="180" y="85" fill="#ef4444" font-weight="bold" font-size="9" text-anchor="middle">Optimum Struktury</text>
+                </svg>
+            </div>`;
+            modifiedHtml += waccChart;
+        }
+
+        return modifiedHtml;
+    },
+
+    // === 26 UNIKALNYCH BIOMÓW (jeden na rozdział) — sterowane danymi, bez 26 PNG ===
+    // n=nazwa, a=akcent, sky=[gora,srodek,dol] gradientu sceny, glow='r,g,b' poswiata,
+    // motion=ruch czastek, cols=palety czastek 'r,g,b', con=linie konstelacji.
+    BIOMES: {
+        fundament: { n:'Świątynia Wiedzy', a:'#f5c977', sky:['#1a1206','#2a1d0a','#3a2810'], glow:'245,201,119', motion:'rise', cols:['255,201,119','255,170,80','255,215,0'], con:true },
+        stopy:     { n:'Mennica Liczb', a:'#d4af37', sky:['#14110a','#221b0d','#2e2410'], glow:'212,175,55', motion:'fall', cols:['212,175,55','245,200,90'], con:true },
+        k5:        { n:'Rzeka Czasu', a:'#2dd4bf', sky:['#06141a','#0a2230','#0e3040'], glow:'45,212,191', motion:'drift', cols:['45,212,191','94,234,212'], con:false },
+        k1:        { n:'Biblioteka Ksiąg', a:'#c89b6a', sky:['#15100a','#241a10','#322417'], glow:'200,155,106', motion:'drift', cols:['200,155,106','222,180,130'], con:false },
+        k2:        { n:'Skarbiec Aktywów', a:'#5ad19a', sky:['#08160f','#0e241a','#143024'], glow:'90,209,154', motion:'rise', cols:['90,209,154','245,200,90'], con:true },
+        k3:        { n:'Wieża Obserwacji', a:'#818cf8', sky:['#0a0c18','#121634','#1a2044'], glow:'129,140,248', motion:'fall', cols:['129,140,248','100,116,180'], con:false },
+        k4:        { n:'Kuźnia Kosztów', a:'#fb923c', sky:['#180a06','#2a120a','#3a1810'], glow:'251,146,60', motion:'rise', cols:['251,146,60','255,100,60','255,180,80'], con:true },
+        k6:        { n:'Wieża Kapitału', a:'#a78bfa', sky:['#100a18','#1e1230','#2a1a44'], glow:'167,139,250', motion:'rise', cols:['167,139,250','196,160,255'], con:true },
+        k7:        { n:'Młyn Płynności', a:'#38bdf8', sky:['#06101a','#0a1e30','#0e2c44'], glow:'56,189,248', motion:'drift', cols:['56,189,248','120,210,255'], con:false },
+        k8:        { n:'Tron Wyceny', a:'#c084fc', sky:['#120a1a','#221033','#301848'], glow:'192,132,252', motion:'rise', cols:['192,132,252','245,200,90'], con:true },
+        k9:        { n:'Wielka Giełda', a:'#22d3ee', sky:['#06121a','#0a2030','#0e2e44'], glow:'34,211,238', motion:'spark', cols:['34,211,238','120,230,255','94,234,212'], con:true },
+        k10:       { n:'Bank Centralny', a:'#93c5fd', sky:['#0c1118','#161f30','#202c44'], glow:'147,197,253', motion:'fall', cols:['147,197,253','255,255,255','245,200,90'], con:false },
+        k11:       { n:'Skarb Państwa', a:'#f87171', sky:['#180809','#2a0d10','#3a1216'], glow:'248,113,113', motion:'rise', cols:['248,113,113','245,200,90','255,255,255'], con:true },
+        k12:       { n:'Krajobraz Gospodarki', a:'#34d399', sky:['#08140e','#0e261a','#143024'], glow:'52,211,153', motion:'drift', cols:['52,211,153','134,239,172'], con:false },
+        t1:        { n:'Burza Ryzyka', a:'#ef4444', sky:['#140608','#240a0e','#300e14'], glow:'239,68,68', motion:'swirl', cols:['239,68,68','255,120,80','120,120,140'], con:false },
+        t2:        { n:'Sąd Kredytowy', a:'#d97706', sky:['#150f06','#251a0a','#322410'], glow:'217,119,6', motion:'fall', cols:['217,119,6','245,180,80'], con:true },
+        t3:        { n:'Skarbiec Banku', a:'#cbd5e1', sky:['#0c0f14','#181d26','#242c38'], glow:'203,213,225', motion:'fall', cols:['203,213,225','245,200,90'], con:true },
+        t4:        { n:'Komnata Świec', a:'#4ade80', sky:['#08120c','#0c2014','#10160e'], glow:'74,222,128', motion:'spark', cols:['74,222,128','248,113,113'], con:true },
+        t5:        { n:'Laboratorium Wyceny', a:'#c026d3', sky:['#120818','#220e30','#2e1444'], glow:'192,38,211', motion:'rise', cols:['192,38,211','216,120,240'], con:true },
+        t6:        { n:'Hala Bankowa', a:'#60a5fa', sky:['#0a0f1a','#101d30','#162844'], glow:'96,165,250', motion:'fall', cols:['96,165,250','245,200,90'], con:false },
+        t7:        { n:'Tarcza Ochrony', a:'#2dd4bf', sky:['#06140f','#0c241c','#103028'], glow:'45,212,191', motion:'drift', cols:['45,212,191','134,239,172'], con:false },
+        t8:        { n:'Pulpit Kontrolera', a:'#06b6d4', sky:['#06121a','#0a222e','#0e2e3e'], glow:'6,182,212', motion:'spark', cols:['6,182,212','103,232,249'], con:true },
+        t9:        { n:'Mapa Planów', a:'#eab308', sky:['#15110a','#241c0e','#322814'], glow:'234,179,8', motion:'drift', cols:['234,179,8','250,210,100'], con:false },
+        t10:       { n:'Targ Walut', a:'#fbbf24', sky:['#120e06','#221a0c','#2e2410'], glow:'251,191,36', motion:'swirl', cols:['251,191,36','52,211,153','248,113,113','96,165,250'], con:false },
+        t11:       { n:'Most Walutowy', a:'#8b5cf6', sky:['#0a0e1a','#161830','#202844'], glow:'139,92,246', motion:'drift', cols:['139,92,246','45,212,191'], con:true },
+        t12:       { n:'Kuźnia Derywatów', a:'#ec4899', sky:['#160814','#2a0d24','#380f30'], glow:'236,72,153', motion:'rise', cols:['236,72,153','255,140,200','167,139,250'], con:true }
+    },
+
+    updateBiome() {
+        let chapter = 'fundament';
+        if (this.activeQuest) chapter = this.activeQuest.chapter;
+        else if (this.activeBoss) chapter = this.activeBoss.chapter;
+        else {
+            const f = document.getElementById('learn-chapter-filter')?.value;
+            if (f && f !== 'all') chapter = f;
+        }
+
+        const b = this.BIOMES[chapter] || this.BIOMES.fundament;
+        const view = document.getElementById('view-learn');
+        if (view && view.dataset.biome !== chapter) {
+            view.dataset.biome = chapter;
+            view.style.background = `radial-gradient(135% 95% at 50% 113%, rgba(${b.glow},.34) 0%, rgba(${b.glow},.10) 34%, transparent 60%), linear-gradient(177deg, ${b.sky[0]} 0%, ${b.sky[1]} 48%, ${b.sky[2]} 100%)`;
+            view.style.setProperty('--biome-accent', b.a);
+            view.style.setProperty('--biome-glow', `rgba(${b.glow},.55)`);
+            // Przejmij zmienne motywu — cały panel (karty/ramki/tytul) zmienia kolor per rozdzial
+            view.style.setProperty('--primary', b.a);
+            view.style.setProperty('--primary-glow', `rgba(${b.glow},.40)`);
+            view.style.setProperty('--border-glass', `rgba(${b.glow},.28)`);
+            const t = document.getElementById('learn-view-title');
+            if (t) t.textContent = b.n;
+        }
+
+        if (typeof Anim !== 'undefined' && typeof Anim.setBiome === 'function') {
+            Anim.setBiome({ key: chapter, motion: b.motion, colors: b.cols, connect: b.con, connColor: b.cols[0] });
+        }
+    },
+
+    toggleCharacterPanel() {
+        Store._data.panelCollapsed = !Store._data.panelCollapsed;
+        Store.save();
+        this.renderRPGPanel();
+    },
+
     // --- RPG Character Creator Screen ---
     renderCreator() {
         const container = document.getElementById('learn-container');
@@ -570,22 +863,22 @@ window.Learn = {
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; text-align: left; width: 100%;">
                     
                     <!-- Class 1 -->
-                    <div class="glass-card class-card-rpg ripple" style="cursor:pointer; border-color: rgba(255, 234, 0, 0.2); padding: 1.5rem; transition: all 0.3s; display:flex; flex-direction:column; align-items:center; text-align:center;" onclick="window.Learn.createHero('audytor')">
-                        <img src="assets/avatars/audytor.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); box-shadow: 0 0 15px var(--primary-glow); margin-bottom: 1.2rem;" alt="Audytor" />
+                    <div class="class-card-rpg ripple" onclick="window.Learn.createHero('audytor')">
+                        <img src="assets/avatars/audytor.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); margin-bottom: 1.2rem;" alt="Audytor" />
                         <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Wielki Audytor</h3>
                         <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Ekspert bilansów i WACC. Rozpoczyna ze <b>Złotym Kalkulatorem</b> (+15% XP) i <b>Garniturem Audytora</b> (+25 max HP).</p>
                     </div>
 
                     <!-- Class 2 -->
-                    <div class="glass-card class-card-rpg ripple" style="cursor:pointer; border-color: rgba(0, 255, 100, 0.2); padding: 1.5rem; transition: all 0.3s; display:flex; flex-direction:column; align-items:center; text-align:center;" onclick="window.Learn.createHero('kinezjolog')">
-                        <img src="assets/avatars/kinezjolog.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--success); box-shadow: 0 0 15px rgba(0,255,100,0.3); margin-bottom: 1.2rem;" alt="Kinezjolog" />
+                    <div class="class-card-rpg ripple" onclick="window.Learn.createHero('kinezjolog')">
+                        <img src="assets/avatars/kinezjolog.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--success); margin-bottom: 1.2rem;" alt="Kinezjolog" />
                         <h3 style="color: var(--success); margin-bottom: 0.5rem;">Kinezjolog</h3>
                         <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Mistrz fizjologii i biomechaniki. Otrzymuje <b>Hantel 50kg</b> (+20% obrażeń) oraz <b>Pas Kulturystyczny</b> (redukuje straty HP).</p>
                     </div>
 
                     <!-- Class 3 -->
-                    <div class="glass-card class-card-rpg ripple" style="cursor:pointer; border-color: rgba(0, 229, 255, 0.2); padding: 1.5rem; transition: all 0.3s; display:flex; flex-direction:column; align-items:center; text-align:center;" onclick="window.Learn.createHero('strateg')">
-                        <img src="assets/avatars/strateg.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--secondary); box-shadow: 0 0 15px rgba(0,229,255,0.3); margin-bottom: 1.2rem;" alt="Strateg" />
+                    <div class="class-card-rpg ripple" onclick="window.Learn.createHero('strateg')">
+                        <img src="assets/avatars/strateg.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--secondary); margin-bottom: 1.2rem;" alt="Strateg" />
                         <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">Strateg Rynkowy</h3>
                         <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Optymalizuje rynki rygoru. Otrzymuje <b>Notatnik Rynkowy</b> (+20% zysku XP) oraz <b>Kamizelkę Finansisty</b> (+15 max HP).</p>
                     </div>
@@ -601,19 +894,19 @@ window.Learn = {
     },
 
     createHero(className) {
-        let eq = { head: null, weapon: null, chest: null };
+        let eq = { head: 'Sygnet Analityka', weapon: null, chest: null };
         let maxHp = 100;
         
         if (className === 'audytor') {
-            eq.weapon = 'Złoty Kalkulator';
-            eq.chest = 'Garnitur Audytora';
+            eq.weapon = 'Kostur Kalkulacji';
+            eq.chest = 'Zbroja Audytora';
             maxHp = 125;
         } else if (className === 'kinezjolog') {
-            eq.weapon = 'Hantel 50kg';
-            eq.chest = 'Pas Kulturystyczny';
+            eq.weapon = 'Młot Kinetyczny';
+            eq.chest = 'Pas Siły';
         } else if (className === 'strateg') {
-            eq.weapon = 'Notatnik Rynkowy';
-            eq.chest = 'Kamizelka Finansisty';
+            eq.weapon = 'Grymuar Rynkowy';
+            eq.chest = 'Buty Finansisty';
             maxHp = 115;
         }
 
@@ -654,18 +947,18 @@ window.Learn = {
 
         // --- BONFIRE (Ognisko) & LEVEL UP CARD ---
         let bonfireHTML = `
-            <div class="glass-card bonfire-card fade-in" style="width: 100%; margin-bottom: 2rem; padding: 2rem; border-color: #ff5722; text-align: center; box-shadow: 0 0 20px rgba(255, 87, 34, 0.2);">
-                <div style="width: 90px; height: 90px; margin: 0 auto 1rem auto; filter: drop-shadow(0 0 15px #ff5722); animation: pulse 2s infinite; border-radius: 50%; overflow: hidden;">
+            <div class="glass-card bonfire-card fade-in" style="width: 100%; padding: 1.2rem; border-color: #ff5722; text-align: center; box-shadow: 0 0 20px rgba(255, 87, 34, 0.2);">
+                <div style="width: 70px; height: 70px; margin: 0 auto 0.8rem auto; filter: drop-shadow(0 0 10px #ff5722); animation: pulse 2s infinite; border-radius: 50%; overflow: hidden;">
                     <img src="assets/avatars/bonfire.png?v=2026" style="width: 100%; height: 100%; object-fit: cover;" />
                 </div>
-                <h3 style="color: #ff5722; margin: 0 0 0.5rem 0; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">Ognisko Ocalenia (Bonfire)</h3>
-                <p class="text-muted" style="font-size: 0.9rem; max-width: 500px; margin: 0 auto 1.5rem auto; line-height: 1.5;">
-                    Odpocznij, aby uleczyć rany i odzyskać witalność. Odpoczynek przywraca 100% HP i Energii, ale <b>wszystkie codzienne powtórki (przeciwnicy) natychmiast odrodzą się na mapie!</b>
+                <h4 style="color: #ff5722; margin: 0 0 0.4rem 0; font-weight: 900; letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.95rem;">Ognisko Ocalenia</h4>
+                <p class="text-muted" style="font-size: 0.75rem; margin: 0 auto 1.2rem auto; line-height: 1.4;">
+                    Odpoczynek przywraca 100% HP i Energii, ale <b>odradza wszystkie powtórki!</b>
                 </p>
                 
-                <div style="display:flex; justify-content:center; gap: 1rem; flex-wrap:wrap; margin-bottom:1rem;">
-                    <button class="btn warning ripple" style="font-weight: bold; border-color:#ff5722; background:rgba(255,87,34,0.15); padding: 0.8rem 1.5rem; border-radius:30px;" onclick="window.Learn.restAtBonfire()">Odpocznij (Ulecz HP i Energię)</button>
-                    <button class="btn primary ripple" style="font-weight: bold; padding: 0.8rem 1.5rem; border-radius:30px;" ${souls >= soulsNeeded ? '' : 'disabled'} onclick="window.Learn.buyLevelUp()">Awansuj Poziom (Koszt: ${soulsNeeded} Duszy)</button>
+                <div style="display:flex; flex-direction: column; gap: 0.6rem; width: 100%;">
+                    <button class="btn warning ripple" style="font-weight: bold; font-size: 0.8rem; padding: 0.7rem;" onclick="window.Learn.restAtBonfire()">Odpocznij przy Ognisku</button>
+                    <button class="btn primary ripple" style="font-weight: bold; font-size: 0.8rem; padding: 0.7rem;" ${souls >= soulsNeeded ? '' : 'disabled'} onclick="window.Learn.buyLevelUp()">Awansuj poziom (${soulsNeeded} 🔥)</button>
                 </div>
             </div>
         `;
@@ -673,13 +966,19 @@ window.Learn = {
         let dailiesHTML = '';
         if (this.queue.length > 0) {
             dailiesHTML = `
-                <div class="glass-card fade-in" style="width: 100%; border-color: var(--warning); background: rgba(255, 234, 0, 0.02); margin-bottom: 2rem; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; box-shadow: 0 0 15px rgba(255,234,0,0.05);">
-                    <div>
-                        <h3 style="color: var(--warning); display: flex; align-items: center; gap: 0.5rem; margin: 0;">⏱️ Zjawy Pamięciowe (Powtórki)</h3>
-                        <p class="text-muted" style="font-size: 0.9rem; margin-top: 0.3rem;">Masz <b>${this.queue.length}</b> aktywnych zjaw kognitywnych do pokonania w celu regeneracji witalności.</p>
-                    </div>
-                    <button class="btn warning ripple" style="font-weight: bold; padding: 0.8rem 1.5rem; border-radius:30px;" onclick="window.Learn.startDailies()">Rozpocznij Walkę (+20⚡)</button>
+                <div class="glass-card fade-in" style="width: 100%; border-color: var(--warning); background: rgba(255, 234, 0, 0.02); margin-bottom: 1.5rem; padding: 1.2rem; box-shadow: 0 0 15px rgba(255,234,0,0.05); text-align: center;">
+                    <h4 style="color: var(--warning); display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin: 0 0 0.5rem 0; font-size: 1rem;">⏱️ Zjawy Pamięciowe</h4>
+                    <p class="text-muted" style="font-size: 0.8rem; margin-bottom: 1rem; line-height: 1.4;">Zmagasz się z <b>${this.queue.length}</b> zjawami. Pokonaj je, aby zregenerować witalność.</p>
+                    <button class="btn warning ripple" style="font-weight: bold; width: 100%; font-size: 0.85rem; padding: 0.7rem;" onclick="window.Learn.startDailies()">Rozpocznij Walkę (+20⚡)</button>
                 </div>
+            `;
+        }
+
+        const rightSidebar = document.getElementById('learn-right-sidebar');
+        if (rightSidebar) {
+            rightSidebar.innerHTML = `
+                ${dailiesHTML}
+                ${bonfireHTML}
             `;
         }
 
@@ -697,7 +996,7 @@ window.Learn = {
             const totalMastery = chapterLessons.reduce((acc, l) => acc + (Store.getLessonState(l.id).mastery || 0), 0);
             const avgMastery = chapterLessons.length > 0 ? Math.round(totalMastery / chapterLessons.length) : 0;
 
-            const boss = BOSS_TEMPLATES[ch] || { name: 'Strażnik Działu', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Tajemniczy strażnik kognitywny.', rewardItem: 'Złoty Kalkulator' };
+            const boss = BOSS_TEMPLATES[ch] || { name: 'Strażnik Działu', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Tajemniczy strażnik kognitywny.', rewardItem: 'Kostur Kalkulacji' };
             const isBossUnlocked = avgMastery >= 50;
 
             let lessonsListHTML = '';
@@ -765,8 +1064,6 @@ window.Learn = {
         });
 
         container.innerHTML = `
-            ${bonfireHTML}
-            ${dailiesHTML}
             <div class="quest-list-container">
                 ${mapHTML}
             </div>
@@ -871,7 +1168,10 @@ window.Learn = {
     renderIntro() {
         const container = document.getElementById('learn-container');
         const controls = document.getElementById('learn-controls');
+        const rightSidebar = document.getElementById('learn-right-sidebar');
         if (!container || !this.activeQuest) return;
+
+        if (rightSidebar) rightSidebar.innerHTML = ''; // Clear right sidebar to focus attention on intro
 
         const lesson = this.activeQuest;
         const firstTeach = lesson.steps.find(s => s.type === 'teach')?.html || '<p>Gotów na nową wiedzę?</p>';
@@ -884,7 +1184,7 @@ window.Learn = {
                 
                 <div style="text-align: left; background: rgba(0,0,0,0.3); padding: 2rem; border-radius: var(--radius-md); margin-bottom: 2.5rem; border: 1px solid var(--border-glass); box-shadow: inset 0 0 15px rgba(0,0,0,0.4);">
                     <h4 style="color: var(--primary); margin-bottom: 1.2rem; opacity: 0.9; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; font-weight: 800;">Czego się nauczysz:</h4>
-                    <div class="text-lg" style="line-height: 1.8; font-size: 1.15rem;">${firstTeach}</div>
+                    <div class="text-lg" style="line-height: 1.8; font-size: 1.15rem;">${this.injectHelpfulGraphics(firstTeach)}</div>
                 </div>
             </div>
         `;
@@ -915,7 +1215,10 @@ window.Learn = {
     renderStep() {
         const container = document.getElementById('learn-container');
         const controls = document.getElementById('learn-controls');
+        const rightSidebar = document.getElementById('learn-right-sidebar');
         if (!container || !this.activeQuest) return;
+
+        if (rightSidebar) rightSidebar.innerHTML = ''; // Clear right sidebar to focus attention on step
 
         const lesson = this.activeQuest;
         const step = lesson.steps[this.currentStepIndex];
@@ -953,7 +1256,7 @@ window.Learn = {
                     </div>
                     <div>
                         <div style="font-weight: bold; color: var(--primary); font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: 0.5px;">💬 ${npcName}</div>
-                        <div class="text-lg" style="line-height: 1.8; font-size: 1.1rem;">${step.html}</div>
+                        <div class="text-lg" style="line-height: 1.8; font-size: 1.1rem;">${this.injectHelpfulGraphics(step.html)}</div>
                     </div>
                 </div>
             `;
@@ -1482,7 +1785,7 @@ window.Learn = {
         const avatar = Store._data.avatar;
         if (!avatar) return;
 
-        if (avatar.eq && avatar.eq.chest === 'Pas Kulturystyczny') {
+        if (avatar.eq && (avatar.eq.chest === 'Pas Siły' || avatar.eq.chest === 'Pas Kulturystyczny')) {
             amount = Math.max(5, amount - 5);
         }
 
@@ -1699,9 +2002,9 @@ window.Learn = {
         let soulsEarned = Math.round(avgQuality * 15);
 
         const avatar = Store._data.avatar;
-        if (avatar && avatar.eq && avatar.eq.weapon === 'Notatnik Rynkowy') {
+        if (avatar && avatar.eq && (avatar.eq.weapon === 'Grymuar Rynkowy' || avatar.eq.weapon === 'Notatnik Rynkowy')) {
             soulsEarned = Math.round(soulsEarned * 1.2);
-        } else if (avatar && avatar.eq && avatar.eq.weapon === 'Złoty Kalkulator') {
+        } else if (avatar && avatar.eq && (avatar.eq.weapon === 'Kostur Kalkulacji' || avatar.eq.weapon === 'Złoty Kalkulator')) {
             soulsEarned = Math.round(soulsEarned * 1.1);
         }
 
@@ -1774,7 +2077,7 @@ window.Learn = {
     // BOSS FIGHT / ARENA GAMEPLAY
     // ==========================================================================
     challengeBoss(ch) {
-        const template = BOSS_TEMPLATES[ch] || { name: 'Strażnik Wiedzy', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Generowany strażnik kognitywny.', rewardItem: 'Złoty Kalkulator' };
+        const template = BOSS_TEMPLATES[ch] || { name: 'Strażnik Wiedzy', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Generowany strażnik kognitywny.', rewardItem: 'Kostur Kalkulacji' };
         
         this.activeBoss = {
             name: template.name,
@@ -1837,7 +2140,10 @@ window.Learn = {
     renderBossBattle() {
         const container = document.getElementById('learn-container');
         const controls = document.getElementById('learn-controls');
+        const rightSidebar = document.getElementById('learn-right-sidebar');
         if (!container || !this.activeBoss) return;
+
+        if (rightSidebar) rightSidebar.innerHTML = ''; // Clear right sidebar to focus attention on boss fight
 
         const boss = this.activeBoss;
         const bossHpPercent = Math.min(100, Math.round((boss.hp / boss.maxHp) * 100));
@@ -2031,9 +2337,9 @@ window.Learn = {
 
         const avatar = Store._data.avatar;
         if (avatar && avatar.eq) {
-            if (avatar.eq.weapon === 'Hantel 50kg') {
+            if (avatar.eq.weapon === 'Młot Kinetyczny' || avatar.eq.weapon === 'Hantel 50kg') {
                 amount = Math.round(amount * 1.2);
-            } else if (avatar.eq.weapon === 'Złoty Kalkulator') {
+            } else if (avatar.eq.weapon === 'Kostur Kalkulacji' || avatar.eq.weapon === 'Złoty Kalkulator') {
                 amount = Math.round(amount * 1.1);
             }
         }

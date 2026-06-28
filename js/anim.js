@@ -36,6 +36,47 @@ const Anim = {
         this.animateCanvas();
     },
 
+    activeBiome: 'castle',
+    biomeCfg: { connect: true, connColor: '255, 87, 34' },
+    // Konfiguracja obiektowa: setBiome({key, motion, colors:['r,g,b',...], connect, connColor})
+    // motion: 'rise' (zarzace wegielki), 'fall' (snieg/pyl), 'drift' (motyle/liscie),
+    //         'swirl' (chaos/burza), 'spark' (szybkie neony). Wstecznie: string => legacy.
+    setBiome(cfg) {
+        if (typeof cfg === 'string') {
+            const legacy = { castle:{motion:'rise',colors:['255,87,34','255,23,68','255,215,0'],connect:true},
+                mine:{motion:'rise',colors:['212,175,55','245,158,11'],connect:true},
+                snow:{motion:'fall',colors:['255,255,255','147,197,253']},
+                forest:{motion:'drift',colors:['16,185,129','52,211,153']} };
+            cfg = Object.assign({ key: cfg }, legacy[cfg] || legacy.castle);
+        }
+        const key = cfg.key || 'default';
+        if (this.activeBiome === key) return;
+        this.activeBiome = key;
+
+        const motion = cfg.motion || 'rise';
+        const colors = (cfg.colors && cfg.colors.length) ? cfg.colors : ['255,215,0'];
+        this.biomeCfg = { connect: !!cfg.connect, connColor: cfg.connColor || colors[0] };
+        if (!this.canvas) return;
+        this.particles = [];
+
+        const rnd = (lo, hi) => lo + Math.random() * (hi - lo);
+        for (let i = 0; i < this.numParticles; i++) {
+            let vx, vy, radius;
+            if (motion === 'fall') { vy = rnd(0.4, 1.2); vx = (Math.random() - 0.5) * 0.4; radius = rnd(1, 4); }
+            else if (motion === 'drift') { vx = -rnd(0.2, 0.7); vy = rnd(0.08, 0.4); radius = rnd(0.5, 2.5); }
+            else if (motion === 'swirl') { vx = (Math.random() - 0.5) * 1.2; vy = (Math.random() - 0.5) * 1.2; radius = rnd(0.5, 2.2); }
+            else if (motion === 'spark') { vy = -rnd(0.5, 1.6); vx = (Math.random() - 0.5) * 0.5; radius = rnd(0.4, 1.8); }
+            else { vy = -rnd(0.2, 1.0); vx = (Math.random() - 0.5) * 0.3; radius = rnd(0.5, 3); }
+            const rgb = colors[Math.floor(Math.random() * colors.length)];
+            this.particles.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                radius, vx, vy,
+                color: `rgba(${rgb}, ${(Math.random() * 0.5 + 0.15).toFixed(2)})`
+            });
+        }
+    },
+
     resize() {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
@@ -44,20 +85,23 @@ const Anim = {
     animateCanvas() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Draw connections (subtle glowing warmth lines)
-        for (let i = 0; i < this.particles.length; i++) {
-            for (let j = i + 1; j < this.particles.length; j++) {
-                const dx = this.particles[i].x - this.particles[j].x;
-                const dy = this.particles[i].y - this.particles[j].y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
+        // Draw connections (subtle glowing constellation lines - per-biome toggle)
+        if (this.biomeCfg && this.biomeCfg.connect) {
+            const connColor = this.biomeCfg.connColor;
+            for (let i = 0; i < this.particles.length; i++) {
+                for (let j = i + 1; j < this.particles.length; j++) {
+                    const dx = this.particles[i].x - this.particles[j].x;
+                    const dy = this.particles[i].y - this.particles[j].y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
 
-                if (dist < 80) {
-                    this.ctx.beginPath();
-                    this.ctx.strokeStyle = `rgba(255, 87, 34, ${0.05 - dist/1600})`;
-                    this.ctx.lineWidth = 0.3;
-                    this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
-                    this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
-                    this.ctx.stroke();
+                    if (dist < 80) {
+                        this.ctx.beginPath();
+                        this.ctx.strokeStyle = `rgba(${connColor}, ${0.05 - dist/1600})`;
+                        this.ctx.lineWidth = 0.3;
+                        this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+                        this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
+                        this.ctx.stroke();
+                    }
                 }
             }
         }
@@ -69,10 +113,20 @@ const Anim = {
             // Warp around sides
             if (p.x < 0) p.x = this.canvas.width;
             if (p.x > this.canvas.width) p.x = 0;
-            // Respawn at bottom when reaching the top
-            if (p.y < 0) {
-                p.y = this.canvas.height;
-                p.x = Math.random() * this.canvas.width;
+            
+            // Warp vertically
+            if (p.vy < 0) {
+                // Drifting up
+                if (p.y < 0) {
+                    p.y = this.canvas.height;
+                    p.x = Math.random() * this.canvas.width;
+                }
+            } else {
+                // Drifting down
+                if (p.y > this.canvas.height) {
+                    p.y = 0;
+                    p.x = Math.random() * this.canvas.width;
+                }
             }
 
             this.ctx.beginPath();
