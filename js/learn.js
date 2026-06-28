@@ -845,18 +845,25 @@ window.Learn = {
         }
     },
 
-    // Probe FOTO: KAZDY rozdzial ma WLASNE, inne assets/biomes/<id>.jpg.
-    // Gdy plik istnieje => podklada sie pod gradient-tint biomu; brak pliku => zostaje sam gradient (0 bledow 404 w UI).
+    // Probe FOTO: KAZDY rozdzial ma WLASNE assets/biomes/<id>.jpg (zoptymalizowane <=1600px).
+    // Probe order: JPG first (wszystkie tla sa jpg), PNG jako fallback. Brak pliku => zostaje gradient (0 bledow 404 w UI).
     applyScene(view, chapter, b) {
         if (!view) return;
+        const V = '23';
         const tint = `radial-gradient(135% 95% at 50% 113%, rgba(${b.glow},.28) 0%, rgba(${b.glow},.08) 38%, transparent 64%), linear-gradient(177deg, ${b.sky[0]}e6 0%, ${b.sky[1]}cc 48%, ${b.sky[2]}cc 100%)`;
-        const img = new Image();
-        img.onload = () => {
+        const applyBg = (ext) => {
             if (view.dataset.biome === chapter) {
-                view.style.background = `${tint}, url('assets/biomes/${chapter}.jpg?v=21') center/cover no-repeat`;
+                view.style.background = `${tint}, url('assets/biomes/${chapter}.${ext}?v=${V}') center/cover no-repeat`;
             }
         };
-        img.src = `assets/biomes/${chapter}.jpg?v=21`;
+        const imgJpg = new Image();
+        imgJpg.onload = () => applyBg('jpg');
+        imgJpg.onerror = () => {
+            const imgPng = new Image();
+            imgPng.onload = () => applyBg('png');
+            imgPng.src = `assets/biomes/${chapter}.png?v=${V}`;
+        };
+        imgJpg.src = `assets/biomes/${chapter}.jpg?v=${V}`;
     },
 
     toggleCharacterPanel() {

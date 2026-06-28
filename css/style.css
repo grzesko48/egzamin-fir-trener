@@ -104,10 +104,11 @@ body {
         position: relative;
         flex-direction: column;
         justify-content: flex-start;
-        width: 280px; height: 100vh;
+        align-items: center;
+        width: 80px; height: 100vh;
         border-right: 1px solid var(--border-glass);
         border-top: none;
-        padding: 3rem 1.5rem;
+        padding: 2rem 0.5rem;
     }
 }
 
@@ -120,7 +121,7 @@ body {
 }
 .brand-glow { color: var(--text-main); text-shadow: 0 0 15px var(--primary); }
 
-@media (min-width: 992px) { .nav-brand { display: block; } }
+@media (min-width: 992px) { .nav-brand { display: none; } }
 
 .nav-links {
     display: flex; gap: 0.5rem;
@@ -169,12 +170,18 @@ body {
 }
 @media (min-width: 992px) {
     .nav-btn {
-        flex-direction: row;
-        padding: 1.1rem 1.5rem;
-        font-size: 1.15rem;
-        justify-content: flex-start; gap: 1.2rem;
-        border-radius: 0;
+        flex-direction: column;
+        padding: 1rem 0;
+        font-size: 1.5rem;
+        justify-content: center; gap: 0;
+        border-radius: 12px;
+        margin-bottom: 0.5rem;
+        border-left: none;
+        border-bottom: 3px solid transparent;
     }
+    .nav-btn .label { display: none; }
+    .nav-btn:hover { border-bottom-color: rgba(197, 168, 128, 0.3); border-left-color: transparent; }
+    .nav-btn.active { border-bottom-color: var(--primary) !important; border-left-color: transparent !important; }
 }
 .nav-btn:hover { background: rgba(255, 255, 255, 0.02); color: var(--text-main); border-left-color: rgba(197, 168, 128, 0.3); }
 .nav-btn.active { 
@@ -914,8 +921,8 @@ body {
 /* --- Baldur's Gate 3 Dynamic Layout Grid (3 Columns) --- */
 .rpg-split-layout {
     display: grid;
-    grid-template-columns: 310px 1fr 340px;
-    gap: 1.5rem;
+    grid-template-columns: 240px 1fr 240px;
+    gap: 1.2rem;
     width: 100%;
     align-items: flex-start;
 }
@@ -1139,6 +1146,52 @@ body {
 #view-learn .quest-map-card.unlocked:hover {
     border-color: var(--biome-accent, #c5a880) !important;
     box-shadow: 0 0 24px var(--biome-glow, rgba(255, 215, 0, 0.3)) !important;
+}
+
+/* === LAYOUT POZIOMY: wąski icon-rail nav + szersza treść (czerwiec 2026) === */
+@media (min-width: 992px) {
+    /* Lewy pasek -> wąska szyna z samymi ikonami (z 280px na 78px) */
+    .glass-nav {
+        width: 78px !important;
+        padding: 1.4rem 0 !important;
+        align-items: center;
+    }
+    .nav-brand {
+        display: block !important;                  /* nadpisz ukrycie z Antigravity — male "FiR" dla identyfikacji */
+        font-size: 1.15rem !important;
+        font-weight: 900;
+        margin: 0 0 1.4rem !important;
+        text-align: center;
+        line-height: 1;
+    }
+    .nav-brand .brand-word { display: none; }      /* ukryj " Trener", zostaje glow "FiR" */
+    .nav-links { align-items: center; gap: 0.45rem; padding: 0; }
+    .nav-btn {
+        width: 60px !important;
+        justify-content: center !important;
+        align-items: center;
+        flex-direction: column !important;
+        gap: 0.18rem;
+        padding: 0.55rem 0.3rem !important;
+        border-radius: 14px !important;
+        border-left: none !important;
+    }
+    .nav-btn .label { display: none !important; }  /* tylko ikona; opis w tooltipie (title) */
+    .nav-btn .icon { font-size: 1.5rem; }
+    .nav-btn.active {
+        background: rgba(255, 255, 255, 0.07) !important;
+        border-left: none !important;
+        box-shadow: inset 0 0 0 1px var(--border-glass) !important;
+    }
+    .theme-toggle { display: flex; margin: 0.6rem auto 0; }
+
+    /* Odzyskany poziom: dużo mniej paddingu wokół treści */
+    .view-container { padding: 1.5rem 2rem !important; }
+    /* Karta postaci węższa, środek (nauka) szerszy */
+    .rpg-split-layout { grid-template-columns: 270px 1fr 300px !important; gap: 1.2rem !important; }
+}
+@media (min-width: 1500px) {
+    .view-container { padding: 1.8rem 2.6rem !important; }
 }
 
 /* Medieval Chart Styling */
