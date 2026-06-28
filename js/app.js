@@ -41,7 +41,9 @@ const App = {
             deferredPrompt = e;
             const promptEl = document.getElementById('pwa-prompt');
             if(promptEl) promptEl.style.display = 'flex';
-            
+            const pwaClose = document.getElementById('pwa-close-btn');
+            if(pwaClose) pwaClose.onclick = () => { if(promptEl) promptEl.style.display = 'none'; };
+
             document.getElementById('pwa-install-btn').addEventListener('click', async () => {
                 promptEl.style.display = 'none';
                 deferredPrompt.prompt();
