@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fir-trener-v45-cache';
+const CACHE_NAME = 'fir-trener-v46-cache';
 const urlsToCache = [
   './',
   './index.html',
@@ -35,7 +35,6 @@ const urlsToCache = [
   './assets/avatars/audytor.png',
   './assets/avatars/kinezjolog.png',
   './assets/avatars/strateg.png',
-  './assets/avatars/boss_bilans.png',
   './assets/avatars/boss_golem.png',
   './assets/avatars/item_kalkulator.png',
   './assets/avatars/item_hantel.png',
@@ -53,11 +52,13 @@ const urlsToCache = [
 ];
 
 self.addEventListener('install', event => {
+  self.skipWaiting(); // nowy SW przejmuje od razu (koniec z zawieszonym starym cache)
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
+    caches.open(CACHE_NAME).then(cache =>
+      // Odporna instalacja: cache po jednym URL. addAll jest ATOMOWE — jeden brakujacy plik (404)
+      // wywalalby cala instalacje SW. allSettled + catch sprawia, ze pojedynczy brak nic nie psuje.
+      Promise.allSettled(urlsToCache.map(u => cache.add(u).catch(e => console.warn('SW: pominieto', u))))
+    )
   );
 });
 
@@ -94,14 +95,12 @@ self.addEventListener('fetch', event => {
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    caches.keys().then(cacheNames => Promise.all(
+      cacheNames.map(cacheName => {
+        if (cacheWhitelist.indexOf(cacheName) === -1) {
+          return caches.delete(cacheName);
+        }
+      })
+    )).then(() => self.clients.claim()) // od razu przejmij otwarte karty (szybsza aktualizacja)
   );
 });

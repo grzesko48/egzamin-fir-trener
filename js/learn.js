@@ -1120,14 +1120,16 @@ window.Learn = {
 
         window.LearnSound.playLevelUp();
         
-        // Dark Souls enemy respawn logic: Resets all daily queues, reshuffling reviews back to map!
+        // Dark Souls enemy respawn: powtorki wracaja na mape (staja sie wymagalne TERAZ).
+        // WAZNE: zmieniamy TYLKO harmonogram (nextReview), NIE ruszamy mastery/biegłości.
+        // (Poprzednio wolano Store.updateLesson(l.id, state.mastery) — mastery 0-100 trafialo jako
+        //  quality 1-5, co nadpisywalo biegłość i psulo wskrzeszanie powtorek.)
         if (window.LESSONS && window.LESSONS.lessons) {
             window.LESSONS.lessons.forEach(l => {
-                const state = Store.getLessonState(l.id);
-                // Reshuffle review times to current time, making Dailies active again!
-                state.nextReview = Date.now();
-                Store.updateLesson(l.id, state.mastery);
+                const state = Store._data.lessons[l.id];
+                if (state && state.nextReview) { state.nextReview = Date.now(); state.interval = 0; }
             });
+            Store.save();
         }
         
         alert("🔥 Odpocząłeś przy Ognisku. Twoje zdrowie i energia kognitywna zostały w pełni odnowione. Uważaj: cienie przeszłości (powtórki) odrodziły się!");
