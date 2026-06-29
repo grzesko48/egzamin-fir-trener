@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Learn Mode Engine V4 Premium - RPG & Active Learning Super-App
  * HARDCORE DARK SOULS EDITION (2026 AAAA Edition).
  * Features: Souls & Bloodstains, Bonfires, Hardcore damage scaling, audio synth, GSAP animations.
@@ -6,32 +6,32 @@
 
 // Boss templates for all chapters
 const BOSS_TEMPLATES = {
-    'fundament': { name: 'Architekt Bilansu', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Strażnik zasad memoriałowych i WACC. Zmierzy się z Tobą w bezlitosnym starciu z podstaw finansowych.', rewardItem: 'Kostur Kalkulacji' },
-    'stopy': { name: 'Kolekcjoner Stóp NBP', hp: 320, image: 'boss_bilans.png', hue: 45, desc: 'Pan korytarza stóp procentowych. Czy potrafisz obliczyć stopę lombardową i depozytową w locie?', rewardItem: 'Sygnet Analityka' },
-    'k5': { name: 'Dyskontowy Demon NPV', hp: 340, image: 'boss_golem.png', hue: 120, desc: 'Władca przyszłej wartości pieniądza. Będzie rzucał w Ciebie trudnymi wzorami NPV i IRR.', rewardItem: 'Kostur Kalkulacji' },
-    'k1': { name: 'Cenzor Memoriału', hp: 300, image: 'boss_bilans.png', hue: 180, desc: 'Bezlitosny strażnik zasady współmierności przychodów i kosztów. Uważaj na podejście kasowe!', rewardItem: 'Zbroja Audytora' },
-    'k2': { name: 'Wyceniacz Pasywów', hp: 350, image: 'boss_golem.png', hue: 200, desc: 'Stoi na straży wyceny aktywów w bilansie według kosztu historycznego i wartości godziwej.', rewardItem: 'Zbroja Audytora' },
-    'k3': { name: 'Golem Upadłości', hp: 380, image: 'boss_golem.png', hue: 0, desc: 'Monstrum zasilane wskaźnikiem Altmana. Zmierzy się z Tobą w analizie rentowności i płynności.', rewardItem: 'Pas Siły' },
-    'k4': { name: 'Mistrz Kosztów Zmiennych', hp: 330, image: 'boss_bilans.png', hue: 240, desc: 'Sprawdza próg rentowności i marżę pokrycia. Każda pomyłka obniży Twój BEP do zera.', rewardItem: 'Pas Siły' },
-    'k6': { name: 'Kapitalista WACC', hp: 360, image: 'boss_golem.png', hue: 280, desc: 'Tarcza podatkowa to jego zbroja. Spróbuje zniszczyć Twój portfel kosztem kapitału obcego.', rewardItem: 'Buty Finansisty' },
-    'k7': { name: 'Pożeracz Płynności KON', hp: 320, image: 'boss_bilans.png', hue: 300, desc: 'Zamraża gotówkę w cyklu konwersji. Musisz skrócić DSO i DIO, aby zadać mu obrażenia.', rewardItem: 'Grymuar Rynkowy' },
-    'k8': { name: 'Wyceniacz DCF', hp: 400, image: 'boss_golem.png', hue: 90, desc: 'Wycenia firmy dochodowo i porównawczo. Wymaga znajomości NOPAT, WACC oraz EVA.', rewardItem: 'Grymuar Rynkowy' },
-    'k9': { name: 'Arbitrażowy Arbitr', hp: 350, image: 'boss_bilans.png', hue: 150, desc: 'Strażnik prawa jednej ceny. Zmusi Cię do wyłapania okazji arbitrażowych na rynku.', rewardItem: 'Grymuar Rynkowy' },
-    'k10': { name: 'Gubernator Monetarny', hp: 370, image: 'boss_golem.png', hue: 60, desc: 'Kontroluje podaż pieniądza. Będzie walczył stopami procentowymi i rezerwą obowiązkową.', rewardItem: 'Sygnet Analityka' },
-    'k11': { name: 'Poborca Podatkowy CIT', hp: 340, image: 'boss_bilans.png', hue: 320, desc: 'Ściąga podatki bezpośrednie i pośrednie. Zmierzy się z Tobą w kalkulacji dochodu CIT.', rewardItem: 'Zbroja Audytora' },
-    'k12': { name: 'Tytan Recesji', hp: 420, image: 'boss_golem.png', hue: 340, desc: 'Władca cyklu koniunkturalnego. Musisz przetrwać jego recesję, odpowiadając na pytania PKB.', rewardItem: 'Pas Siły' },
-    't1': { name: 'Władca Value at Risk (VaR)', hp: 400, image: 'boss_golem.png', hue: 200, desc: 'Mierzy maksymalną stratę z określonym prawdopodobieństwem. Czy przetrwasz jego test stresu?', rewardItem: 'Sygnet Analityka' },
-    't2': { name: 'Audytor Kredytowy', hp: 360, image: 'boss_bilans.png', hue: 210, desc: 'Sprawdza zdolność kredytową i asymetrię informacji. Uważaj na selekcję negatywną!', rewardItem: 'Zbroja Audytora' },
-    't5': { name: 'Syntetyk Opcji', hp: 380, image: 'boss_golem.png', hue: 130, desc: 'Tworzy skomplikowane struktury opcyjne. Będziesz musiał wycenić opcje i spłacić premię.', rewardItem: 'Grymuar Rynkowy' },
-    't11': { name: 'Kosztodawca Międzynarodowy', hp: 350, image: 'boss_bilans.png', hue: 160, desc: 'Liczy koszt kapitału w transgranicznych fuzjach. Przygotuj się na parytet inflacji.', rewardItem: 'Buty Finansisty' },
-    't3': { name: 'Inspektor MSR', hp: 360, image: 'boss_golem.png', hue: 180, desc: 'Weryfikuje zgodność z Międzynarodowymi Standardami Rachunkowości bankowej.', rewardItem: 'Zbroja Audytora' },
-    't4': { name: 'Wykresowy Manipulator', hp: 330, image: 'boss_bilans.png', hue: 250, desc: 'Mistrz formacji świecowych i średnich kroczących. Przetestuje Twoją analizę techniczną.', rewardItem: 'Grymuar Rynkowy' },
-    't6': { name: 'Bankier Produktowy', hp: 340, image: 'boss_golem.png', hue: 270, desc: 'Zna na pamięć każdy produkt bankowy i prowizję. Spróbuje obciążyć Cię kosztami.', rewardItem: 'Sygnet Analityka' },
-    't8': { name: 'Kontroler Odchyleń', hp: 350, image: 'boss_bilans.png', hue: 80, desc: 'Porównuje plany z wykonaniem. Każda odchyłka od normy to obrażenia dla Twojego HP.', rewardItem: 'Pas Siły' },
-    't9': { name: 'Strażnik Budżetu', hp: 370, image: 'boss_golem.png', hue: 110, desc: 'Pilnuje dyscypliny budżetowej w przedsiębiorstwie. Wymaga precyzyjnych prognoz.', rewardItem: 'Buty Finansisty' },
-    't7': { name: 'Likwidator Szkód OFE', hp: 380, image: 'boss_bilans.png', hue: 140, desc: 'Władca ubezpieczeń i funduszy emerytalnych. Oblicz renty dożywotnie, by go pokonać.', rewardItem: 'Pas Siły' },
-    't10': { name: 'Spekulant Forex', hp: 410, image: 'boss_golem.png', hue: 220, desc: 'Manipuluje kursami walut. Musisz przewidzieć ruchy par walutowych Forex.', rewardItem: 'Sygnet Analityka' },
-    't12': { name: 'Władca Swapów i Futures', hp: 450, image: 'boss_golem.png', hue: 310, desc: 'Ostateczny boss instrumentów pochodnych. Zabezpiecz pozycje, aby przeżyć.', rewardItem: 'Grymuar Rynkowy' }
+    'fundament': { name: 'Architekt Bilansu', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'StraĹĽnik zasad memoriaĹ‚owych i WACC. Zmierzy siÄ™ z TobÄ… w bezlitosnym starciu z podstaw finansowych.', rewardItem: 'Kostur Kalkulacji' },
+    'stopy': { name: 'Kolekcjoner StĂłp NBP', hp: 320, image: 'boss_bilans.png', hue: 45, desc: 'Pan korytarza stĂłp procentowych. Czy potrafisz obliczyÄ‡ stopÄ™ lombardowÄ… i depozytowÄ… w locie?', rewardItem: 'Sygnet Analityka' },
+    'k5': { name: 'Dyskontowy Demon NPV', hp: 340, image: 'boss_golem.png', hue: 120, desc: 'WĹ‚adca przyszĹ‚ej wartoĹ›ci pieniÄ…dza. BÄ™dzie rzucaĹ‚ w Ciebie trudnymi wzorami NPV i IRR.', rewardItem: 'Kostur Kalkulacji' },
+    'k1': { name: 'Cenzor MemoriaĹ‚u', hp: 300, image: 'boss_bilans.png', hue: 180, desc: 'Bezlitosny straĹĽnik zasady wspĂłĹ‚miernoĹ›ci przychodĂłw i kosztĂłw. UwaĹĽaj na podejĹ›cie kasowe!', rewardItem: 'Zbroja Audytora' },
+    'k2': { name: 'Wyceniacz PasywĂłw', hp: 350, image: 'boss_golem.png', hue: 200, desc: 'Stoi na straĹĽy wyceny aktywĂłw w bilansie wedĹ‚ug kosztu historycznego i wartoĹ›ci godziwej.', rewardItem: 'Zbroja Audytora' },
+    'k3': { name: 'Golem UpadĹ‚oĹ›ci', hp: 380, image: 'boss_golem.png', hue: 0, desc: 'Monstrum zasilane wskaĹşnikiem Altmana. Zmierzy siÄ™ z TobÄ… w analizie rentownoĹ›ci i pĹ‚ynnoĹ›ci.', rewardItem: 'Pas SiĹ‚y' },
+    'k4': { name: 'Mistrz KosztĂłw Zmiennych', hp: 330, image: 'boss_bilans.png', hue: 240, desc: 'Sprawdza prĂłg rentownoĹ›ci i marĹĽÄ™ pokrycia. KaĹĽda pomyĹ‚ka obniĹĽy TwĂłj BEP do zera.', rewardItem: 'Pas SiĹ‚y' },
+    'k6': { name: 'Kapitalista WACC', hp: 360, image: 'boss_golem.png', hue: 280, desc: 'Tarcza podatkowa to jego zbroja. SprĂłbuje zniszczyÄ‡ TwĂłj portfel kosztem kapitaĹ‚u obcego.', rewardItem: 'Buty Finansisty' },
+    'k7': { name: 'PoĹĽeracz PĹ‚ynnoĹ›ci KON', hp: 320, image: 'boss_bilans.png', hue: 300, desc: 'ZamraĹĽa gotĂłwkÄ™ w cyklu konwersji. Musisz skrĂłciÄ‡ DSO i DIO, aby zadaÄ‡ mu obraĹĽenia.', rewardItem: 'Grymuar Rynkowy' },
+    'k8': { name: 'Wyceniacz DCF', hp: 400, image: 'boss_golem.png', hue: 90, desc: 'Wycenia firmy dochodowo i porĂłwnawczo. Wymaga znajomoĹ›ci NOPAT, WACC oraz EVA.', rewardItem: 'Grymuar Rynkowy' },
+    'k9': { name: 'ArbitraĹĽowy Arbitr', hp: 350, image: 'boss_bilans.png', hue: 150, desc: 'StraĹĽnik prawa jednej ceny. Zmusi CiÄ™ do wyĹ‚apania okazji arbitraĹĽowych na rynku.', rewardItem: 'Grymuar Rynkowy' },
+    'k10': { name: 'Gubernator Monetarny', hp: 370, image: 'boss_golem.png', hue: 60, desc: 'Kontroluje podaĹĽ pieniÄ…dza. BÄ™dzie walczyĹ‚ stopami procentowymi i rezerwÄ… obowiÄ…zkowÄ….', rewardItem: 'Sygnet Analityka' },
+    'k11': { name: 'Poborca Podatkowy CIT', hp: 340, image: 'boss_bilans.png', hue: 320, desc: 'ĹšciÄ…ga podatki bezpoĹ›rednie i poĹ›rednie. Zmierzy siÄ™ z TobÄ… w kalkulacji dochodu CIT.', rewardItem: 'Zbroja Audytora' },
+    'k12': { name: 'Tytan Recesji', hp: 420, image: 'boss_golem.png', hue: 340, desc: 'WĹ‚adca cyklu koniunkturalnego. Musisz przetrwaÄ‡ jego recesjÄ™, odpowiadajÄ…c na pytania PKB.', rewardItem: 'Pas SiĹ‚y' },
+    't1': { name: 'WĹ‚adca Value at Risk (VaR)', hp: 400, image: 'boss_golem.png', hue: 200, desc: 'Mierzy maksymalnÄ… stratÄ™ z okreĹ›lonym prawdopodobieĹ„stwem. Czy przetrwasz jego test stresu?', rewardItem: 'Sygnet Analityka' },
+    't2': { name: 'Audytor Kredytowy', hp: 360, image: 'boss_bilans.png', hue: 210, desc: 'Sprawdza zdolnoĹ›Ä‡ kredytowÄ… i asymetriÄ™ informacji. UwaĹĽaj na selekcjÄ™ negatywnÄ…!', rewardItem: 'Zbroja Audytora' },
+    't5': { name: 'Syntetyk Opcji', hp: 380, image: 'boss_golem.png', hue: 130, desc: 'Tworzy skomplikowane struktury opcyjne. BÄ™dziesz musiaĹ‚ wyceniÄ‡ opcje i spĹ‚aciÄ‡ premiÄ™.', rewardItem: 'Grymuar Rynkowy' },
+    't11': { name: 'Kosztodawca MiÄ™dzynarodowy', hp: 350, image: 'boss_bilans.png', hue: 160, desc: 'Liczy koszt kapitaĹ‚u w transgranicznych fuzjach. Przygotuj siÄ™ na parytet inflacji.', rewardItem: 'Buty Finansisty' },
+    't3': { name: 'Inspektor MSR', hp: 360, image: 'boss_golem.png', hue: 180, desc: 'Weryfikuje zgodnoĹ›Ä‡ z MiÄ™dzynarodowymi Standardami RachunkowoĹ›ci bankowej.', rewardItem: 'Zbroja Audytora' },
+    't4': { name: 'Wykresowy Manipulator', hp: 330, image: 'boss_bilans.png', hue: 250, desc: 'Mistrz formacji Ĺ›wiecowych i Ĺ›rednich kroczÄ…cych. Przetestuje TwojÄ… analizÄ™ technicznÄ….', rewardItem: 'Grymuar Rynkowy' },
+    't6': { name: 'Bankier Produktowy', hp: 340, image: 'boss_golem.png', hue: 270, desc: 'Zna na pamiÄ™Ä‡ kaĹĽdy produkt bankowy i prowizjÄ™. SprĂłbuje obciÄ…ĹĽyÄ‡ CiÄ™ kosztami.', rewardItem: 'Sygnet Analityka' },
+    't8': { name: 'Kontroler OdchyleĹ„', hp: 350, image: 'boss_bilans.png', hue: 80, desc: 'PorĂłwnuje plany z wykonaniem. KaĹĽda odchyĹ‚ka od normy to obraĹĽenia dla Twojego HP.', rewardItem: 'Pas SiĹ‚y' },
+    't9': { name: 'StraĹĽnik BudĹĽetu', hp: 370, image: 'boss_golem.png', hue: 110, desc: 'Pilnuje dyscypliny budĹĽetowej w przedsiÄ™biorstwie. Wymaga precyzyjnych prognoz.', rewardItem: 'Buty Finansisty' },
+    't7': { name: 'Likwidator SzkĂłd OFE', hp: 380, image: 'boss_bilans.png', hue: 140, desc: 'WĹ‚adca ubezpieczeĹ„ i funduszy emerytalnych. Oblicz renty doĹĽywotnie, by go pokonaÄ‡.', rewardItem: 'Pas SiĹ‚y' },
+    't10': { name: 'Spekulant Forex', hp: 410, image: 'boss_golem.png', hue: 220, desc: 'Manipuluje kursami walut. Musisz przewidzieÄ‡ ruchy par walutowych Forex.', rewardItem: 'Sygnet Analityka' },
+    't12': { name: 'WĹ‚adca SwapĂłw i Futures', hp: 450, image: 'boss_golem.png', hue: 310, desc: 'Ostateczny boss instrumentĂłw pochodnych. Zabezpiecz pozycje, aby przeĹĽyÄ‡.', rewardItem: 'Grymuar Rynkowy' }
 };
 
 // Web Audio API Synthesizer for offline haptic feedback
@@ -233,7 +233,7 @@ window.Learn = {
     populateFilters() {
         const filterEl = document.getElementById('learn-chapter-filter');
         if (!filterEl) return;
-        filterEl.innerHTML = '<option value="all">Wszystkie działy</option>';
+        filterEl.innerHTML = '<option value="all">Wszystkie dziaĹ‚y</option>';
         
         const chapters = [...new Set(this.data.map(l => l.chapter))];
         chapters.forEach(ch => {
@@ -242,7 +242,7 @@ window.Learn = {
             const chapterDef = typeof App !== 'undefined' && App.data && App.data.chapters 
                 ? App.data.chapters.find(c => c.id === ch) 
                 : null;
-            opt.textContent = chapterDef ? chapterDef.title : `Dział: ${ch}`;
+            opt.textContent = chapterDef ? chapterDef.title : `DziaĹ‚: ${ch}`;
             filterEl.appendChild(opt);
         });
         
@@ -275,7 +275,7 @@ window.Learn = {
     // --- Dynamic Character Titles based on level ---
     getCharacterRank(className, level) {
         if (className === 'audytor') {
-            if (level < 3) return 'Młodszy Księgowy';
+            if (level < 3) return 'MĹ‚odszy KsiÄ™gowy';
             if (level < 6) return 'Starszy Analityk';
             if (level < 10) return 'Wielki Audytor';
             return 'Wiceprezes ds. Fuzji';
@@ -285,7 +285,7 @@ window.Learn = {
             if (level < 10) return 'Kinezjolog Kliniczny';
             return 'Mistrz Biomechaniki';
         } else {
-            if (level < 3) return 'Stażysta Rynkowy';
+            if (level < 3) return 'StaĹĽysta Rynkowy';
             if (level < 6) return 'Doradca Inwestycyjny';
             if (level < 10) return 'Strateg Rynkowy';
             return 'Prezes Funduszu';
@@ -294,9 +294,9 @@ window.Learn = {
 
     getItemGraphic(itemName, slotType) {
         if (!itemName) {
-            if (slotType === 'head') return '⚪';
-            if (slotType === 'weapon') return '⚔️';
-            return '🛡️';
+            if (slotType === 'head') return 'âšŞ';
+            if (slotType === 'weapon') return 'âš”ď¸Ź';
+            return 'đź›ˇď¸Ź';
         }
 
         if (itemName === 'Okulary Analityka' || itemName === 'Sygnet Analityka' || itemName === 'Wizor Rynkowy') {
@@ -308,7 +308,7 @@ window.Learn = {
             </svg>`;
         }
 
-        if (itemName === 'Złoty Kalkulator' || itemName === 'Kostur Kalkulacji') {
+        if (itemName === 'ZĹ‚oty Kalkulator' || itemName === 'Kostur Kalkulacji') {
             return `
             <svg viewBox="0 0 64 64" style="width:100%; height:100%; filter: drop-shadow(0 0 6px rgba(212,175,55,0.7));">
                 <line x1="14" y1="50" x2="42" y2="22" stroke="#78350f" stroke-width="4.5" stroke-linecap="round" />
@@ -317,7 +317,7 @@ window.Learn = {
                 <line x1="40" y1="24" x2="44" y2="20" stroke="#ffffff" stroke-width="1" />
             </svg>`;
         }
-        if (itemName === 'Hantel 50kg' || itemName === 'Młot Kinetyczny') {
+        if (itemName === 'Hantel 50kg' || itemName === 'MĹ‚ot Kinetyczny') {
             return `
             <svg viewBox="0 0 64 64" style="width:100%; height:100%; filter: drop-shadow(0 0 6px rgba(239,68,68,0.7));">
                 <line x1="15" y1="49" x2="45" y2="19" stroke="#4b5563" stroke-width="5" stroke-linecap="round" />
@@ -342,7 +342,7 @@ window.Learn = {
                 <circle cx="32" cy="28" r="4" fill="#ef4444" />
             </svg>`;
         }
-        if (itemName === 'Pas Kulturystyczny' || itemName === 'Pas Siły') {
+        if (itemName === 'Pas Kulturystyczny' || itemName === 'Pas SiĹ‚y') {
             return `
             <svg viewBox="0 0 64 64" style="width:100%; height:100%; filter: drop-shadow(0 0 6px rgba(245,158,11,0.5));">
                 <rect x="10" y="24" width="44" height="16" rx="2" fill="#78350f" stroke="#451a03" stroke-width="2" />
@@ -359,7 +359,7 @@ window.Learn = {
             </svg>`;
         }
 
-        return '⚪';
+        return 'âšŞ';
     },
 
     // --- RPG Panel Renderer ---
@@ -385,7 +385,7 @@ window.Learn = {
         if (isCollapsed) {
             panel.style.display = 'none';
             if (layout) layout.style.gridTemplateColumns = '0px 1fr 340px';
-            if (toggleLabel) toggleLabel.textContent = 'Pokaż profil';
+            if (toggleLabel) toggleLabel.textContent = 'PokaĹĽ profil';
             if (mainArea) mainArea.style.width = '100%';
         } else {
             panel.style.display = 'flex';
@@ -418,14 +418,14 @@ window.Learn = {
                     <img src="assets/avatars/${avatar.class}.png?v=2026" style="width:100%; height:100%; object-fit:cover;" alt="Avatar" />
                 </div>
                 <h3 style="margin: 0.5rem 0 0 0;" class="gradient-text">${name}</h3>
-                <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Poziom ${currentLevel} • ${rank}</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Poziom ${currentLevel} â€˘ ${rank}</div>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
                 <!-- HP Bar -->
                 <div class="rpg-stat-bar bar-hp">
                     <div class="bar-label">
-                        <span>❤️ Punkty Życia</span>
+                        <span>âť¤ď¸Ź Punkty Ĺ»ycia</span>
                         <span>${hp} / ${maxHp}</span>
                     </div>
                     <div class="bar-track">
@@ -436,7 +436,7 @@ window.Learn = {
                 <!-- Vitality Bar -->
                 <div class="rpg-stat-bar bar-vitality">
                     <div class="bar-label">
-                        <span>⚡ Witalność (Energia)</span>
+                        <span>âšˇ WitalnoĹ›Ä‡ (Energia)</span>
                         <span>${vit} / 100</span>
                     </div>
                     <div class="bar-track">
@@ -447,7 +447,7 @@ window.Learn = {
                 <!-- Souls (XP) Bar -->
                 <div class="rpg-stat-bar bar-xp">
                     <div class="bar-label">
-                        <span style="color:#ffa726;">🔥 Zebrane Dusze (Souls)</span>
+                        <span style="color:#ffa726;">đź”Ą Zebrane Dusze (Souls)</span>
                         <span>${souls} / ${soulsNeeded}</span>
                     </div>
                     <div class="bar-track">
@@ -470,18 +470,18 @@ window.Learn = {
                         <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 4px;">
                             ${this.getItemGraphic(eq.weapon, 'weapon')}
                         </div>
-                        <div class="slot-name">Broń</div>
+                        <div class="slot-name">BroĹ„</div>
                     </div>
                     <div class="rpg-eq-slot ${eq.chest ? 'equipped' : ''}" onclick="window.Learn.inspectItem('chest')">
                         <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 4px;">
                             ${this.getItemGraphic(eq.chest, 'chest')}
                         </div>
-                        <div class="slot-name">Ubiór</div>
+                        <div class="slot-name">UbiĂłr</div>
                     </div>
                 </div>
             </div>
             
-            <button class="btn secondary ripple" style="width: 100%; font-size: 0.85rem; padding: 0.6rem;" onclick="window.Learn.resetAvatar()">Zresetuj Postać</button>
+            <button class="btn secondary ripple" style="width: 100%; font-size: 0.85rem; padding: 0.6rem;" onclick="window.Learn.resetAvatar()">Zresetuj PostaÄ‡</button>
         `;
     },
 
@@ -501,38 +501,38 @@ window.Learn = {
         modal.style.justifyContent = 'center';
 
         let itemTitle = item || 'Pusty Slot';
-        let itemDesc = 'Zdobądź przedmioty za pokonywanie bossów lub awans poziomu!';
+        let itemDesc = 'ZdobÄ…dĹş przedmioty za pokonywanie bossĂłw lub awans poziomu!';
 
         if (slot === 'head') {
             if (item) {
                 itemTitle = 'Sygnet Analityka';
-                itemDesc = 'Mityczny złoty pierścień z szafirem. Chroni umysł przed kognitywnym zmęczeniem i dodaje +10% do zyskiwanego XP.';
+                itemDesc = 'Mityczny zĹ‚oty pierĹ›cieĹ„ z szafirem. Chroni umysĹ‚ przed kognitywnym zmÄ™czeniem i dodaje +10% do zyskiwanego XP.';
             } else {
                 itemTitle = 'Pusty Slot Sygnetu';
             }
         } else if (slot === 'weapon') {
-            if (item === 'Złoty Kalkulator' || item === 'Kostur Kalkulacji') { 
+            if (item === 'ZĹ‚oty Kalkulator' || item === 'Kostur Kalkulacji') { 
                 itemTitle = 'Kostur Kalkulacji';
-                itemDesc = 'Kostur zwieńczony złotą kulą i runami matematycznymi. Zwiększa obrażenia zadawane Bossom o 15% oraz dodaje 10% XP za poprawne odpowiedzi.'; 
-            } else if (item === 'Hantel 50kg' || item === 'Młot Kinetyczny') { 
-                itemTitle = 'Młot Kinetyczny';
-                itemDesc = 'Ciężki żelazny młot bojowy kinezjologa. Każde uderzenie w Bossa zadaje 20% więcej obrażeń.'; 
+                itemDesc = 'Kostur zwieĹ„czony zĹ‚otÄ… kulÄ… i runami matematycznymi. ZwiÄ™ksza obraĹĽenia zadawane Bossom o 15% oraz dodaje 10% XP za poprawne odpowiedzi.'; 
+            } else if (item === 'Hantel 50kg' || item === 'MĹ‚ot Kinetyczny') { 
+                itemTitle = 'MĹ‚ot Kinetyczny';
+                itemDesc = 'CiÄ™ĹĽki ĹĽelazny mĹ‚ot bojowy kinezjologa. KaĹĽde uderzenie w Bossa zadaje 20% wiÄ™cej obraĹĽeĹ„.'; 
             } else if (item === 'Notatnik Rynkowy' || item === 'Grymuar Rynkowy') { 
                 itemTitle = 'Grymuar Rynkowy';
-                itemDesc = 'Grymuar oprawiony w skórę ze spisem zaklęć rynkowych. Zwiększa zysk punktów XP o 20% na wszystkich zadaniach.'; 
+                itemDesc = 'Grymuar oprawiony w skĂłrÄ™ ze spisem zaklÄ™Ä‡ rynkowych. ZwiÄ™ksza zysk punktĂłw XP o 20% na wszystkich zadaniach.'; 
             } else { 
                 itemTitle = 'Pusty Slot Broni'; 
             }
         } else if (slot === 'chest') {
             if (item === 'Garnitur Audytora' || item === 'Zbroja Audytora') { 
                 itemTitle = 'Zbroja Audytora';
-                itemDesc = 'Wykuta ze stali i złota zbroja płytowa. Zwiększa maksymalne HP postaci o 25 punktów.'; 
-            } else if (item === 'Pas Kulturystyczny' || item === 'Pas Siły') { 
-                itemTitle = 'Pas Siły';
-                itemDesc = 'Skórzany pas nabijany żelaznymi nitami. Chroni przed obrażeniami z błędnych odpowiedzi (redukuje straty HP o 5 punktów).'; 
+                itemDesc = 'Wykuta ze stali i zĹ‚ota zbroja pĹ‚ytowa. ZwiÄ™ksza maksymalne HP postaci o 25 punktĂłw.'; 
+            } else if (item === 'Pas Kulturystyczny' || item === 'Pas SiĹ‚y') { 
+                itemTitle = 'Pas SiĹ‚y';
+                itemDesc = 'SkĂłrzany pas nabijany ĹĽelaznymi nitami. Chroni przed obraĹĽeniami z bĹ‚Ä™dnych odpowiedzi (redukuje straty HP o 5 punktĂłw).'; 
             } else if (item === 'Kamizelka Finansisty' || item === 'Buty Finansisty') { 
                 itemTitle = 'Buty Finansisty';
-                itemDesc = 'Fioletowe buty z magicznej skóry. Zwiększają maksymalne HP o 15 punktów.'; 
+                itemDesc = 'Fioletowe buty z magicznej skĂłry. ZwiÄ™kszajÄ… maksymalne HP o 15 punktĂłw.'; 
             } else { 
                 itemTitle = 'Pusty Slot Ubioru'; 
             }
@@ -545,7 +545,7 @@ window.Learn = {
             <div class="glass-card inspect-item-modal fade-in" style="width:100%; max-width:440px; text-align:center; padding: 2.5rem; border-color: rgba(197, 168, 128, 0.4); box-shadow: 0 0 25px rgba(197, 168, 128, 0.25);">
                 <div style="margin-bottom: 1.5rem; display:flex; justify-content:center;">${iconContainer}</div>
                 <h3 class="gradient-text" style="font-size:1.6rem; margin-bottom:0.3rem;">${itemTitle}</h3>
-                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom:1.5rem;">Slot: ${slot === 'head' ? 'Sygnet' : (slot === 'weapon' ? 'Broń' : 'Ubiór')}</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom:1.5rem;">Slot: ${slot === 'head' ? 'Sygnet' : (slot === 'weapon' ? 'BroĹ„' : 'UbiĂłr')}</div>
                 <p class="text-muted" style="line-height: 1.6; font-size:1rem; margin-bottom: 2rem;">${itemDesc}</p>
                 <button class="btn primary ripple" style="width:100%; border-radius:24px; padding:0.8rem 1.5rem;">Zamknij Panel</button>
             </div>
@@ -570,7 +570,7 @@ window.Learn = {
     },
 
     resetAvatar() {
-        if (confirm("Czy na pewno chcesz usunąć swojego bohatera RPG i zresetować jego statystyki?")) {
+        if (confirm("Czy na pewno chcesz usunÄ…Ä‡ swojego bohatera RPG i zresetowaÄ‡ jego statystyki?")) {
             Store._data.avatar = null;
             Store.save();
             this.lessonState = 'creator';
@@ -582,7 +582,7 @@ window.Learn = {
     // --- Cinematic GSAP Transition Wrapper ---
     animateTransition(updateCallback) {
         const container = document.getElementById('learn-container');
-        // ZAWSZE renderuj treść NATYCHMIAST (niezawodnie), animację rób na gotowej treści.
+        // ZAWSZE renderuj treĹ›Ä‡ NATYCHMIAST (niezawodnie), animacjÄ™ rĂłb na gotowej treĹ›ci.
         updateCallback();
         if (container && typeof gsap !== 'undefined') {
             gsap.fromTo(container,
@@ -652,7 +652,7 @@ window.Learn = {
         if (html.includes('CAPM') && !html.includes('id="chart-capm"')) {
             const capmChart = `
             <div id="chart-capm" class="medieval-chart-container" style="margin: 1.5rem 0; padding: 1.2rem; background: rgba(0,0,0,0.4); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 12px; text-align: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.6);">
-                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 1. Linia Rynku Papierów Wartościowych (SML - CAPM)</div>
+                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 1. Linia Rynku PapierĂłw WartoĹ›ciowych (SML - CAPM)</div>
                 <svg viewBox="0 0 400 200" style="width: 100%; max-width: 380px; height: auto;">
                     <!-- Grid Lines -->
                     <line x1="50" y1="150" x2="350" y2="150" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
@@ -686,7 +686,7 @@ window.Learn = {
         if (html.includes('NPV') && !html.includes('id="chart-npv"')) {
             const npvChart = `
             <div id="chart-npv" class="medieval-chart-container" style="margin: 1.5rem 0; padding: 1.2rem; background: rgba(0,0,0,0.4); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 12px; text-align: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.6);">
-                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 2. Profil Wartości Bieżącej Netto (NPV vs Stopa Dyskontowa)</div>
+                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 2. Profil WartoĹ›ci BieĹĽÄ…cej Netto (NPV vs Stopa Dyskontowa)</div>
                 <svg viewBox="0 0 400 200" style="width: 100%; max-width: 380px; height: auto;">
                     <!-- Grid Lines -->
                     <line x1="50" y1="100" x2="350" y2="100" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
@@ -694,12 +694,12 @@ window.Learn = {
                     
                     <!-- Axes labels -->
                     <text x="350" y="120" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="'Cinzel', serif">Stopa dyskontowa (r)</text>
-                    <text x="40" y="25" fill="var(--text-muted)" font-size="10" text-anchor="end" font-family="'Cinzel', serif">NPV (zł)</text>
+                    <text x="40" y="25" fill="var(--text-muted)" font-size="10" text-anchor="end" font-family="'Cinzel', serif">NPV (zĹ‚)</text>
                     
                     <!-- Ticks -->
                     <text x="45" y="103" fill="var(--text-muted)" font-size="9" text-anchor="end">0</text>
                     <text x="45" y="40" fill="var(--text-muted)" font-size="9" text-anchor="end">+CF</text>
-                    <text x="45" y="160" fill="var(--text-muted)" font-size="9" text-anchor="end">-Nakład</text>
+                    <text x="45" y="160" fill="var(--text-muted)" font-size="9" text-anchor="end">-NakĹ‚ad</text>
                     
                     <!-- Curve representing NPV Profile -->
                     <path d="M 50,40 Q 150,70 240,100 T 330,150" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" style="filter: drop-shadow(0 0 4px rgba(56,189,248,0.4));" />
@@ -709,7 +709,7 @@ window.Learn = {
                     <text x="245" y="93" fill="#ef4444" font-weight="bold" font-size="10">IRR (NPV = 0)</text>
                     
                     <!-- NPV > 0 and NPV < 0 Zones -->
-                    <text x="120" y="75" fill="var(--success)" font-size="9" font-weight="bold">Obszar Opłacalności (NPV > 0)</text>
+                    <text x="120" y="75" fill="var(--success)" font-size="9" font-weight="bold">Obszar OpĹ‚acalnoĹ›ci (NPV > 0)</text>
                     <text x="270" y="135" fill="var(--danger)" font-size="9" font-weight="bold">NPV < 0</text>
                 </svg>
             </div>`;
@@ -717,10 +717,10 @@ window.Learn = {
         }
 
         // 3. NBP rates corridor chart
-        if ((html.includes('lombard') || html.includes('depozyt') || html.includes('korytarz stóp')) && !html.includes('id="chart-corridor"')) {
+        if ((html.includes('lombard') || html.includes('depozyt') || html.includes('korytarz stĂłp')) && !html.includes('id="chart-corridor"')) {
             const corridorChart = `
             <div id="chart-corridor" class="medieval-chart-container" style="margin: 1.5rem 0; padding: 1.2rem; background: rgba(0,0,0,0.4); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 12px; text-align: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.6);">
-                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 3. Korytarz stóp procentowych NBP</div>
+                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 3. Korytarz stĂłp procentowych NBP</div>
                 <svg viewBox="0 0 400 200" style="width: 100%; max-width: 380px; height: auto;">
                     <!-- Axis -->
                     <line x1="50" y1="170" x2="350" y2="170" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
@@ -732,11 +732,11 @@ window.Learn = {
                     
                     <!-- Reference rate (center) -->
                     <line x1="50" y1="90" x2="350" y2="90" stroke="#eab308" stroke-width="2" />
-                    <text x="340" y="82" fill="#eab308" font-size="9" font-weight="bold" text-anchor="end">Stopa Referencyjna (Cena pieniądza)</text>
+                    <text x="340" y="82" fill="#eab308" font-size="9" font-weight="bold" text-anchor="end">Stopa Referencyjna (Cena pieniÄ…dza)</text>
                     
                     <!-- Deposit rate (floor) -->
                     <line x1="50" y1="140" x2="350" y2="140" stroke="#10b981" stroke-width="2" stroke-dasharray="3,3" />
-                    <text x="340" y="132" fill="#10b981" font-size="9" font-weight="bold" text-anchor="end">Stopa Depozytowa (Podłoga)</text>
+                    <text x="340" y="132" fill="#10b981" font-size="9" font-weight="bold" text-anchor="end">Stopa Depozytowa (PodĹ‚oga)</text>
                     
                     <!-- Market rate (fluctuating) -->
                     <path d="M 50,110 T 100,85 T 150,95 T 200,60 T 250,90 T 300,105 T 350,92" fill="none" stroke="#38bdf8" stroke-width="2.5" style="filter: drop-shadow(0 0 3px rgba(56,189,248,0.6));" />
@@ -750,26 +750,26 @@ window.Learn = {
         if (html.includes('WACC') && !html.includes('id="chart-wacc"')) {
             const waccChart = `
             <div id="chart-wacc" class="medieval-chart-container" style="margin: 1.5rem 0; padding: 1.2rem; background: rgba(0,0,0,0.4); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 12px; text-align: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.6);">
-                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 4. Koszt kapitału a dzwignia finansowa</div>
+                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 4. Koszt kapitaĹ‚u a dzwignia finansowa</div>
                 <svg viewBox="0 0 400 200" style="width: 100%; max-width: 380px; height: auto;">
                     <!-- Axis -->
                     <line x1="50" y1="160" x2="350" y2="160" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
                     <line x1="50" y1="20" x2="50" y2="160" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
                     
-                    <text x="350" y="175" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="'Cinzel', serif">Udział długu (D/V)</text>
-                    <text x="40" y="25" fill="var(--text-muted)" font-size="10" text-anchor="end" font-family="'Cinzel', serif">Koszt kapitału (%)</text>
+                    <text x="350" y="175" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="'Cinzel', serif">UdziaĹ‚ dĹ‚ugu (D/V)</text>
+                    <text x="40" y="25" fill="var(--text-muted)" font-size="10" text-anchor="end" font-family="'Cinzel', serif">Koszt kapitaĹ‚u (%)</text>
                     
                     <!-- Cost of Equity (re) -> going up -->
                     <path d="M 50,70 Q 200,90 350,130" fill="none" stroke="#f43f5e" stroke-width="2" />
-                    <text x="320" y="145" fill="#f43f5e" font-size="9" font-weight="bold">Re (Koszt kapitału własnego)</text>
+                    <text x="320" y="145" fill="#f43f5e" font-size="9" font-weight="bold">Re (Koszt kapitaĹ‚u wĹ‚asnego)</text>
                     
                     <!-- Cost of Debt (rd) -> constant / slightly up -->
                     <path d="M 50,120 Q 200,125 350,135" fill="none" stroke="#10b981" stroke-width="2" />
-                    <text x="320" y="125" fill="#10b981" font-size="9" font-weight="bold">Rd (Koszt długu po opodatkowaniu)</text>
+                    <text x="320" y="125" fill="#10b981" font-size="9" font-weight="bold">Rd (Koszt dĹ‚ugu po opodatkowaniu)</text>
                     
                     <!-- WACC -> U-shape curve (Trade-off theory) -->
                     <path d="M 50,70 Q 180,105 350,90" fill="none" stroke="#eab308" stroke-width="3.5" style="filter: drop-shadow(0 0 4px rgba(234,179,8,0.5));" />
-                    <text x="210" y="118" fill="#eab308" font-size="11" font-weight="bold">WACC (Średni koszt)</text>
+                    <text x="210" y="118" fill="#eab308" font-size="11" font-weight="bold">WACC (Ĺšredni koszt)</text>
                     
                     <!-- Optimal Point -->
                     <circle cx="180" cy="103" r="5" fill="#ef4444" />
@@ -782,36 +782,36 @@ window.Learn = {
         return modifiedHtml;
     },
 
-    // === 26 UNIKALNYCH BIOMÓW (jeden na rozdział) — sterowane danymi, bez 26 PNG ===
+    // === 26 UNIKALNYCH BIOMĂ“W (jeden na rozdziaĹ‚) â€” sterowane danymi, bez 26 PNG ===
     // n=nazwa, a=akcent, sky=[gora,srodek,dol] gradientu sceny, glow='r,g,b' poswiata,
     // motion=ruch czastek, cols=palety czastek 'r,g,b', con=linie konstelacji.
     BIOMES: {
-        fundament: { n:'Świątynia Wiedzy', a:'#f5c977', sky:['#1a1206','#2a1d0a','#3a2810'], glow:'245,201,119', motion:'rise', cols:['255,201,119','255,170,80','255,215,0'], con:true },
+        fundament: { n:'ĹšwiÄ…tynia Wiedzy', a:'#f5c977', sky:['#1a1206','#2a1d0a','#3a2810'], glow:'245,201,119', motion:'rise', cols:['255,201,119','255,170,80','255,215,0'], con:true },
         stopy:     { n:'Mennica Liczb', a:'#d4af37', sky:['#14110a','#221b0d','#2e2410'], glow:'212,175,55', motion:'fall', cols:['212,175,55','245,200,90'], con:true },
         k5:        { n:'Rzeka Czasu', a:'#2dd4bf', sky:['#06141a','#0a2230','#0e3040'], glow:'45,212,191', motion:'drift', cols:['45,212,191','94,234,212'], con:false },
-        k1:        { n:'Biblioteka Ksiąg', a:'#c89b6a', sky:['#15100a','#241a10','#322417'], glow:'200,155,106', motion:'drift', cols:['200,155,106','222,180,130'], con:false },
-        k2:        { n:'Skarbiec Aktywów', a:'#5ad19a', sky:['#08160f','#0e241a','#143024'], glow:'90,209,154', motion:'rise', cols:['90,209,154','245,200,90'], con:true },
-        k3:        { n:'Wieża Obserwacji', a:'#818cf8', sky:['#0a0c18','#121634','#1a2044'], glow:'129,140,248', motion:'fall', cols:['129,140,248','100,116,180'], con:false },
-        k4:        { n:'Kuźnia Kosztów', a:'#fb923c', sky:['#180a06','#2a120a','#3a1810'], glow:'251,146,60', motion:'rise', cols:['251,146,60','255,100,60','255,180,80'], con:true },
-        k6:        { n:'Wieża Kapitału', a:'#a78bfa', sky:['#100a18','#1e1230','#2a1a44'], glow:'167,139,250', motion:'rise', cols:['167,139,250','196,160,255'], con:true },
-        k7:        { n:'Młyn Płynności', a:'#38bdf8', sky:['#06101a','#0a1e30','#0e2c44'], glow:'56,189,248', motion:'drift', cols:['56,189,248','120,210,255'], con:false },
+        k1:        { n:'Biblioteka KsiÄ…g', a:'#c89b6a', sky:['#15100a','#241a10','#322417'], glow:'200,155,106', motion:'drift', cols:['200,155,106','222,180,130'], con:false },
+        k2:        { n:'Skarbiec AktywĂłw', a:'#5ad19a', sky:['#08160f','#0e241a','#143024'], glow:'90,209,154', motion:'rise', cols:['90,209,154','245,200,90'], con:true },
+        k3:        { n:'WieĹĽa Obserwacji', a:'#818cf8', sky:['#0a0c18','#121634','#1a2044'], glow:'129,140,248', motion:'fall', cols:['129,140,248','100,116,180'], con:false },
+        k4:        { n:'KuĹşnia KosztĂłw', a:'#fb923c', sky:['#180a06','#2a120a','#3a1810'], glow:'251,146,60', motion:'rise', cols:['251,146,60','255,100,60','255,180,80'], con:true },
+        k6:        { n:'WieĹĽa KapitaĹ‚u', a:'#a78bfa', sky:['#100a18','#1e1230','#2a1a44'], glow:'167,139,250', motion:'rise', cols:['167,139,250','196,160,255'], con:true },
+        k7:        { n:'MĹ‚yn PĹ‚ynnoĹ›ci', a:'#38bdf8', sky:['#06101a','#0a1e30','#0e2c44'], glow:'56,189,248', motion:'drift', cols:['56,189,248','120,210,255'], con:false },
         k8:        { n:'Tron Wyceny', a:'#c084fc', sky:['#120a1a','#221033','#301848'], glow:'192,132,252', motion:'rise', cols:['192,132,252','245,200,90'], con:true },
-        k9:        { n:'Wielka Giełda', a:'#22d3ee', sky:['#06121a','#0a2030','#0e2e44'], glow:'34,211,238', motion:'spark', cols:['34,211,238','120,230,255','94,234,212'], con:true },
+        k9:        { n:'Wielka GieĹ‚da', a:'#22d3ee', sky:['#06121a','#0a2030','#0e2e44'], glow:'34,211,238', motion:'spark', cols:['34,211,238','120,230,255','94,234,212'], con:true },
         k10:       { n:'Bank Centralny', a:'#93c5fd', sky:['#0c1118','#161f30','#202c44'], glow:'147,197,253', motion:'fall', cols:['147,197,253','255,255,255','245,200,90'], con:false },
-        k11:       { n:'Skarb Państwa', a:'#f87171', sky:['#180809','#2a0d10','#3a1216'], glow:'248,113,113', motion:'rise', cols:['248,113,113','245,200,90','255,255,255'], con:true },
+        k11:       { n:'Skarb PaĹ„stwa', a:'#f87171', sky:['#180809','#2a0d10','#3a1216'], glow:'248,113,113', motion:'rise', cols:['248,113,113','245,200,90','255,255,255'], con:true },
         k12:       { n:'Krajobraz Gospodarki', a:'#34d399', sky:['#08140e','#0e261a','#143024'], glow:'52,211,153', motion:'drift', cols:['52,211,153','134,239,172'], con:false },
         t1:        { n:'Burza Ryzyka', a:'#ef4444', sky:['#140608','#240a0e','#300e14'], glow:'239,68,68', motion:'swirl', cols:['239,68,68','255,120,80','120,120,140'], con:false },
-        t2:        { n:'Sąd Kredytowy', a:'#d97706', sky:['#150f06','#251a0a','#322410'], glow:'217,119,6', motion:'fall', cols:['217,119,6','245,180,80'], con:true },
+        t2:        { n:'SÄ…d Kredytowy', a:'#d97706', sky:['#150f06','#251a0a','#322410'], glow:'217,119,6', motion:'fall', cols:['217,119,6','245,180,80'], con:true },
         t3:        { n:'Skarbiec Banku', a:'#cbd5e1', sky:['#0c0f14','#181d26','#242c38'], glow:'203,213,225', motion:'fall', cols:['203,213,225','245,200,90'], con:true },
-        t4:        { n:'Komnata Świec', a:'#4ade80', sky:['#08120c','#0c2014','#10160e'], glow:'74,222,128', motion:'spark', cols:['74,222,128','248,113,113'], con:true },
+        t4:        { n:'Komnata Ĺšwiec', a:'#4ade80', sky:['#08120c','#0c2014','#10160e'], glow:'74,222,128', motion:'spark', cols:['74,222,128','248,113,113'], con:true },
         t5:        { n:'Laboratorium Wyceny', a:'#c026d3', sky:['#120818','#220e30','#2e1444'], glow:'192,38,211', motion:'rise', cols:['192,38,211','216,120,240'], con:true },
         t6:        { n:'Hala Bankowa', a:'#60a5fa', sky:['#0a0f1a','#101d30','#162844'], glow:'96,165,250', motion:'fall', cols:['96,165,250','245,200,90'], con:false },
         t7:        { n:'Tarcza Ochrony', a:'#2dd4bf', sky:['#06140f','#0c241c','#103028'], glow:'45,212,191', motion:'drift', cols:['45,212,191','134,239,172'], con:false },
         t8:        { n:'Pulpit Kontrolera', a:'#06b6d4', sky:['#06121a','#0a222e','#0e2e3e'], glow:'6,182,212', motion:'spark', cols:['6,182,212','103,232,249'], con:true },
-        t9:        { n:'Mapa Planów', a:'#eab308', sky:['#15110a','#241c0e','#322814'], glow:'234,179,8', motion:'drift', cols:['234,179,8','250,210,100'], con:false },
+        t9:        { n:'Mapa PlanĂłw', a:'#eab308', sky:['#15110a','#241c0e','#322814'], glow:'234,179,8', motion:'drift', cols:['234,179,8','250,210,100'], con:false },
         t10:       { n:'Targ Walut', a:'#fbbf24', sky:['#120e06','#221a0c','#2e2410'], glow:'251,191,36', motion:'swirl', cols:['251,191,36','52,211,153','248,113,113','96,165,250'], con:false },
         t11:       { n:'Most Walutowy', a:'#8b5cf6', sky:['#0a0e1a','#161830','#202844'], glow:'139,92,246', motion:'drift', cols:['139,92,246','45,212,191'], con:true },
-        t12:       { n:'Kuźnia Derywatów', a:'#ec4899', sky:['#160814','#2a0d24','#380f30'], glow:'236,72,153', motion:'rise', cols:['236,72,153','255,140,200','167,139,250'], con:true }
+        t12:       { n:'KuĹşnia DerywatĂłw', a:'#ec4899', sky:['#160814','#2a0d24','#380f30'], glow:'236,72,153', motion:'rise', cols:['236,72,153','255,140,200','167,139,250'], con:true }
     },
 
     updateBiome() {
@@ -830,7 +830,7 @@ window.Learn = {
             view.style.background = `radial-gradient(135% 95% at 50% 113%, rgba(${b.glow},.34) 0%, rgba(${b.glow},.10) 34%, transparent 60%), linear-gradient(177deg, ${b.sky[0]} 0%, ${b.sky[1]} 48%, ${b.sky[2]} 100%)`;
             view.style.setProperty('--biome-accent', b.a);
             view.style.setProperty('--biome-glow', `rgba(${b.glow},.55)`);
-            // Przejmij zmienne motywu — cały panel (karty/ramki/tytul) zmienia kolor per rozdzial
+            // Przejmij zmienne motywu â€” caĹ‚y panel (karty/ramki/tytul) zmienia kolor per rozdzial
             view.style.setProperty('--primary', b.a);
             view.style.setProperty('--primary-glow', `rgba(${b.glow},.40)`);
             view.style.setProperty('--border-glass', `rgba(${b.glow},.28)`);
@@ -849,7 +849,7 @@ window.Learn = {
     // Probe order: JPG first (wszystkie tla sa jpg), PNG jako fallback. Brak pliku => zostaje gradient (0 bledow 404 w UI).
     applyScene(view, chapter, b) {
         if (!view) return;
-        const V = '25';
+        const V = '26';
         const tint = `radial-gradient(135% 95% at 50% 113%, rgba(${b.glow},.28) 0%, rgba(${b.glow},.08) 38%, transparent 64%), linear-gradient(177deg, ${b.sky[0]}e6 0%, ${b.sky[1]}cc 48%, ${b.sky[2]}cc 100%)`;
         const applyBg = (ext) => {
             if (view.dataset.biome === chapter) {
@@ -879,9 +879,9 @@ window.Learn = {
 
         container.innerHTML = `
             <div class="glass-card" style="width:100%; text-align:center; padding: 2.5rem;">
-                <div style="font-size: 4.5rem; margin-bottom: 1rem; filter: drop-shadow(0 0 15px var(--primary));">⚔️</div>
-                <h2 style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary);">Rozpocznij Kognitywną Przygodę</h2>
-                <p class="text-muted" style="margin-bottom: 2.5rem;">Wybierz klasę swojego bohatera. Każda klasa posiada unikalne bonusy ułatwiające opanowanie materiału w 7 dni.</p>
+                <div style="font-size: 4.5rem; margin-bottom: 1rem; filter: drop-shadow(0 0 15px var(--primary));">âš”ď¸Ź</div>
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary);">Rozpocznij KognitywnÄ… PrzygodÄ™</h2>
+                <p class="text-muted" style="margin-bottom: 2.5rem;">Wybierz klasÄ™ swojego bohatera. KaĹĽda klasa posiada unikalne bonusy uĹ‚atwiajÄ…ce opanowanie materiaĹ‚u w 7 dni.</p>
                 
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; text-align: left; width: 100%;">
                     
@@ -889,21 +889,21 @@ window.Learn = {
                     <div class="class-card-rpg ripple" onclick="window.Learn.createHero('audytor')">
                         <img src="assets/avatars/audytor.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); margin-bottom: 1.2rem;" alt="Audytor" />
                         <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Wielki Audytor</h3>
-                        <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Ekspert bilansów i WACC. Rozpoczyna ze <b>Złotym Kalkulatorem</b> (+15% XP) i <b>Garniturem Audytora</b> (+25 max HP).</p>
+                        <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Ekspert bilansĂłw i WACC. Rozpoczyna ze <b>ZĹ‚otym Kalkulatorem</b> (+15% XP) i <b>Garniturem Audytora</b> (+25 max HP).</p>
                     </div>
 
                     <!-- Class 2 -->
                     <div class="class-card-rpg ripple" onclick="window.Learn.createHero('kinezjolog')">
                         <img src="assets/avatars/kinezjolog.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--success); margin-bottom: 1.2rem;" alt="Kinezjolog" />
                         <h3 style="color: var(--success); margin-bottom: 0.5rem;">Kinezjolog</h3>
-                        <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Mistrz fizjologii i biomechaniki. Otrzymuje <b>Hantel 50kg</b> (+20% obrażeń) oraz <b>Pas Kulturystyczny</b> (redukuje straty HP).</p>
+                        <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Mistrz fizjologii i biomechaniki. Otrzymuje <b>Hantel 50kg</b> (+20% obraĹĽeĹ„) oraz <b>Pas Kulturystyczny</b> (redukuje straty HP).</p>
                     </div>
 
                     <!-- Class 3 -->
                     <div class="class-card-rpg ripple" onclick="window.Learn.createHero('strateg')">
                         <img src="assets/avatars/strateg.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--secondary); margin-bottom: 1.2rem;" alt="Strateg" />
                         <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">Strateg Rynkowy</h3>
-                        <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Optymalizuje rynki rygoru. Otrzymuje <b>Notatnik Rynkowy</b> (+20% zysku XP) oraz <b>Kamizelkę Finansisty</b> (+15 max HP).</p>
+                        <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Optymalizuje rynki rygoru. Otrzymuje <b>Notatnik Rynkowy</b> (+20% zysku XP) oraz <b>KamizelkÄ™ Finansisty</b> (+15 max HP).</p>
                     </div>
 
                 </div>
@@ -925,8 +925,8 @@ window.Learn = {
             eq.chest = 'Zbroja Audytora';
             maxHp = 125;
         } else if (className === 'kinezjolog') {
-            eq.weapon = 'Młot Kinetyczny';
-            eq.chest = 'Pas Siły';
+            eq.weapon = 'MĹ‚ot Kinetyczny';
+            eq.chest = 'Pas SiĹ‚y';
         } else if (className === 'strateg') {
             eq.weapon = 'Grymuar Rynkowy';
             eq.chest = 'Buty Finansisty';
@@ -976,12 +976,12 @@ window.Learn = {
                 </div>
                 <h4 style="color: #ff5722; margin: 0 0 0.4rem 0; font-weight: 900; letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.95rem;">Ognisko Ocalenia</h4>
                 <p class="text-muted" style="font-size: 0.75rem; margin: 0 auto 1.2rem auto; line-height: 1.4;">
-                    Odpoczynek przywraca 100% HP i Energii, ale <b>odradza wszystkie powtórki!</b>
+                    Odpoczynek przywraca 100% HP i Energii, ale <b>odradza wszystkie powtĂłrki!</b>
                 </p>
                 
                 <div style="display:flex; flex-direction: column; gap: 0.6rem; width: 100%;">
                     <button class="btn warning ripple" style="font-weight: bold; font-size: 0.8rem; padding: 0.7rem;" onclick="window.Learn.restAtBonfire()">Odpocznij przy Ognisku</button>
-                    <button class="btn primary ripple" style="font-weight: bold; font-size: 0.8rem; padding: 0.7rem;" ${souls >= soulsNeeded ? '' : 'disabled'} onclick="window.Learn.buyLevelUp()">Awansuj poziom (${soulsNeeded} 🔥)</button>
+                    <button class="btn primary ripple" style="font-weight: bold; font-size: 0.8rem; padding: 0.7rem;" ${souls >= soulsNeeded ? '' : 'disabled'} onclick="window.Learn.buyLevelUp()">Awansuj poziom (${soulsNeeded} đź”Ą)</button>
                 </div>
             </div>
         `;
@@ -990,9 +990,9 @@ window.Learn = {
         if (this.queue.length > 0) {
             dailiesHTML = `
                 <div class="glass-card fade-in" style="width: 100%; border-color: var(--warning); background: rgba(255, 234, 0, 0.02); margin-bottom: 1.5rem; padding: 1.2rem; box-shadow: 0 0 15px rgba(255,234,0,0.05); text-align: center;">
-                    <h4 style="color: var(--warning); display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin: 0 0 0.5rem 0; font-size: 1rem;">⏱️ Zjawy Pamięciowe</h4>
-                    <p class="text-muted" style="font-size: 0.8rem; margin-bottom: 1rem; line-height: 1.4;">Zmagasz się z <b>${this.queue.length}</b> zjawami. Pokonaj je, aby zregenerować witalność.</p>
-                    <button class="btn warning ripple" style="font-weight: bold; width: 100%; font-size: 0.85rem; padding: 0.7rem;" onclick="window.Learn.startDailies()">Rozpocznij Walkę (+20⚡)</button>
+                    <h4 style="color: var(--warning); display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin: 0 0 0.5rem 0; font-size: 1rem;">âŹ±ď¸Ź Zjawy PamiÄ™ciowe</h4>
+                    <p class="text-muted" style="font-size: 0.8rem; margin-bottom: 1rem; line-height: 1.4;">Zmagasz siÄ™ z <b>${this.queue.length}</b> zjawami. Pokonaj je, aby zregenerowaÄ‡ witalnoĹ›Ä‡.</p>
+                    <button class="btn warning ripple" style="font-weight: bold; width: 100%; font-size: 0.85rem; padding: 0.7rem;" onclick="window.Learn.startDailies()">Rozpocznij WalkÄ™ (+20âšˇ)</button>
                 </div>
             `;
         }
@@ -1019,7 +1019,7 @@ window.Learn = {
             const totalMastery = chapterLessons.reduce((acc, l) => acc + (Store.getLessonState(l.id).mastery || 0), 0);
             const avgMastery = chapterLessons.length > 0 ? Math.round(totalMastery / chapterLessons.length) : 0;
 
-            const boss = BOSS_TEMPLATES[ch] || { name: 'Strażnik Działu', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Tajemniczy strażnik kognitywny.', rewardItem: 'Kostur Kalkulacji' };
+            const boss = BOSS_TEMPLATES[ch] || { name: 'StraĹĽnik DziaĹ‚u', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Tajemniczy straĹĽnik kognitywny.', rewardItem: 'Kostur Kalkulacji' };
             const isBossUnlocked = avgMastery >= 50;
 
             let lessonsListHTML = '';
@@ -1037,7 +1037,7 @@ window.Learn = {
                     <div class="quest-map-card ${mastery >= 100 ? 'completed' : 'unlocked'} ${hasBloodstain ? 'bloodstain-active' : ''}" onclick="window.Learn.selectLesson('${lesson.id}')" style="margin-bottom:0.8rem;">
                         <div style="display: flex; flex-direction: column; gap: 0.3rem; max-width: 70%;">
                             <div style="font-size: 0.75rem; color: var(--primary); font-weight: bold; letter-spacing:0.5px; display:flex; align-items:center; flex-wrap:wrap; gap:0.5rem;">
-                                DZIEŃ ${lesson.day} • MISJA GŁÓWNA ${bloodstainBadge}
+                                DZIEĹ ${lesson.day} â€˘ MISJA GĹĂ“WNA ${bloodstainBadge}
                             </div>
                             <h4 style="margin: 0; font-size: 1.1rem;">${lesson.title}</h4>
                         </div>
@@ -1057,7 +1057,7 @@ window.Learn = {
                     <div style="display:flex; justify-content:between; align-items:center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
                         <div>
                             <h3 style="margin: 0; font-size:1.25rem;" class="gradient-text">${chapterTitle}</h3>
-                            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">Dział: ${ch.toUpperCase()} • Opanowanie: ${avgMastery}%</div>
+                            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">DziaĹ‚: ${ch.toUpperCase()} â€˘ Opanowanie: ${avgMastery}%</div>
                         </div>
                     </div>
                     
@@ -1073,13 +1073,13 @@ window.Learn = {
                             </div>
                             <div style="text-align: left;">
                                 <h4 style="margin: 0; color: ${isBossUnlocked ? 'var(--danger)' : 'var(--text-muted)'}; font-size:1.1rem; font-weight:800; display:flex; align-items:center; gap:0.5rem;">
-                                    ⚔️ BOSS: ${boss.name}
+                                    âš”ď¸Ź BOSS: ${boss.name}
                                 </h4>
-                                <p class="text-muted" style="font-size: 0.8rem; line-height:1.4; margin-top: 0.3rem;">${isBossUnlocked ? boss.desc : `Aura Bossa zablokowana. Osiągnij minimum <b>50% opanowania działu</b>, aby wyzwać go na starcie.`}</p>
+                                <p class="text-muted" style="font-size: 0.8rem; line-height:1.4; margin-top: 0.3rem;">${isBossUnlocked ? boss.desc : `Aura Bossa zablokowana. OsiÄ…gnij minimum <b>50% opanowania dziaĹ‚u</b>, aby wyzwaÄ‡ go na starcie.`}</p>
                             </div>
                         </div>
                         <button class="btn ${isBossUnlocked ? 'danger' : 'secondary'} ripple" ${isBossUnlocked ? '' : 'disabled'} style="font-weight: bold; padding: 0.7rem 1.4rem; border-radius:24px; font-size: 0.85rem;" onclick="window.Learn.challengeBoss('${ch}')">
-                            ${isBossUnlocked ? 'Rzuć Wyzwanie' : '🔒 Zablokowane'}
+                            ${isBossUnlocked ? 'RzuÄ‡ Wyzwanie' : 'đź”’ Zablokowane'}
                         </button>
                     </div>
                 </div>
@@ -1114,7 +1114,7 @@ window.Learn = {
             });
         }
         
-        alert("🔥 Odpocząłeś przy Ognisku. Twoje zdrowie i energia kognitywna zostały w pełni odnowione. Uważaj: cienie przeszłości (powtórki) odrodziły się!");
+        alert("đź”Ą OdpoczÄ…Ĺ‚eĹ› przy Ognisku. Twoje zdrowie i energia kognitywna zostaĹ‚y w peĹ‚ni odnowione. UwaĹĽaj: cienie przeszĹ‚oĹ›ci (powtĂłrki) odrodziĹ‚y siÄ™!");
         
         this.loadQueue();
         this.renderRPGPanel();
@@ -1129,7 +1129,7 @@ window.Learn = {
         const soulsNeeded = Math.floor(100 * Math.pow(currentLevel, 1.5));
 
         if (avatar.souls < soulsNeeded) {
-            alert("🔥 Masz zbyt mało dusz, by połączyć się z płomieniem.");
+            alert("đź”Ą Masz zbyt maĹ‚o dusz, by poĹ‚Ä…czyÄ‡ siÄ™ z pĹ‚omieniem.");
             return;
         }
 
@@ -1172,7 +1172,7 @@ window.Learn = {
 
         const vit = Store._data.vitality || 0;
         if (vit < 20) {
-            alert("⚡ Brak witalności! Odpocznij przy ognisku (Bonfire) lub pokonaj zjawy pamięciowe.");
+            alert("âšˇ Brak witalnoĹ›ci! Odpocznij przy ognisku (Bonfire) lub pokonaj zjawy pamiÄ™ciowe.");
             return;
         }
 
@@ -1197,16 +1197,16 @@ window.Learn = {
         if (rightSidebar) rightSidebar.innerHTML = ''; // Clear right sidebar to focus attention on intro
 
         const lesson = this.activeQuest;
-        const firstTeach = lesson.steps.find(s => s.type === 'teach')?.html || '<p>Gotów na nową wiedzę?</p>';
+        const firstTeach = lesson.steps.find(s => s.type === 'teach')?.html || '<p>GotĂłw na nowÄ… wiedzÄ™?</p>';
 
         container.innerHTML = `
             <div class="glass-card fade-in" style="width: 100%; text-align: center; padding: 2.5rem;">
-                <div style="font-size: 4rem; margin-bottom: 1rem; filter: drop-shadow(0 0 10px var(--primary-glow));">🎓</div>
+                <div style="font-size: 4rem; margin-bottom: 1rem; filter: drop-shadow(0 0 10px var(--primary-glow));">đźŽ“</div>
                 <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem; color: var(--primary);">${lesson.title}</h2>
-                <div class="text-muted" style="margin-bottom: 2rem; font-weight: 500;">Dział: ${lesson.chapter}</div>
+                <div class="text-muted" style="margin-bottom: 2rem; font-weight: 500;">DziaĹ‚: ${lesson.chapter}</div>
                 
                 <div style="text-align: left; background: rgba(0,0,0,0.3); padding: 2rem; border-radius: var(--radius-md); margin-bottom: 2.5rem; border: 1px solid var(--border-glass); box-shadow: inset 0 0 15px rgba(0,0,0,0.4);">
-                    <h4 style="color: var(--primary); margin-bottom: 1.2rem; opacity: 0.9; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; font-weight: 800;">Czego się nauczysz:</h4>
+                    <h4 style="color: var(--primary); margin-bottom: 1.2rem; opacity: 0.9; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; font-weight: 800;">Czego siÄ™ nauczysz:</h4>
                     <div class="text-lg lesson-body" style="line-height: 1.65; font-size: 1.25rem; max-width: 68ch; margin-inline: auto;">${this.injectHelpfulGraphics(firstTeach)}</div>
                 </div>
             </div>
@@ -1249,9 +1249,9 @@ window.Learn = {
 
         container.innerHTML = `
             <div class="glass-card fade-in hardcore-step" style="width: 100%; position: relative;">
-                <!-- Postęp w lekcji -->
+                <!-- PostÄ™p w lekcji -->
                 <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">
-                    <span>Postęp starcia</span>
+                    <span>PostÄ™p starcia</span>
                     <span>${this.currentStepIndex + 1} / ${lesson.steps.length}</span>
                 </div>
                 <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; margin-bottom: 2rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.03);">
@@ -1274,11 +1274,11 @@ window.Learn = {
 
             contentEl.innerHTML = `
                 <div style="display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 1rem; background: rgba(255,255,255,0.01); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.03); box-shadow: inset 0 0 15px rgba(0,0,0,0.3);">
-                    <div style="font-size: 2.8rem; background: rgba(0,229,255,0.1); width: 68px; height: 68px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid var(--primary-glow); overflow:hidden;">
+                    <div class="npc-portrait" style="width: 112px; height: 112px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 3px solid var(--primary); overflow:hidden; box-shadow: 0 0 0 4px rgba(0,0,0,0.45), 0 0 20px var(--primary-glow), inset 0 0 14px rgba(0,0,0,0.45);">
                         <img src="assets/avatars/${lesson.chapter === 'fundament' || lesson.chapter === 'stopy' ? 'audytor' : 'kinezjolog'}.png" style="width:100%; height:100%; object-fit:cover;" />
                     </div>
                     <div>
-                        <div style="font-weight: bold; color: var(--primary); font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: 0.5px;">💬 ${npcName}</div>
+                        <div style="font-weight: bold; color: var(--primary); font-size: 1.3rem; font-family: 'Cinzel','Marcellus',serif; margin-bottom: 0.6rem; letter-spacing: 0.5px;">đź’¬ ${npcName}</div>
                         <div class="text-lg lesson-body" style="line-height: 1.65; font-size: 1.25rem; max-width: 68ch;">${this.injectHelpfulGraphics(step.html)}</div>
                     </div>
                 </div>
@@ -1287,7 +1287,7 @@ window.Learn = {
             const btn = document.createElement('button');
             btn.className = 'btn primary ripple';
             btn.style.borderRadius = '24px';
-            btn.textContent = 'Zrozumiałem, dalej (Enter)';
+            btn.textContent = 'ZrozumiaĹ‚em, dalej (Enter)';
             btn.onclick = () => this.nextStep(5);
             controls.appendChild(btn);
 
@@ -1316,7 +1316,7 @@ window.Learn = {
                             btn.style.background = 'rgba(0, 255, 100, 0.12)';
                             btn.style.borderColor = 'var(--success)';
                             btn.style.boxShadow = '0 0 15px rgba(0,255,100,0.2)';
-                            Gamify.awardXP(15, 'Szybki strzał');
+                            Gamify.awardXP(15, 'Szybki strzaĹ‚');
                             if (this.activeBoss) this.damageBoss(50);
                             setTimeout(() => this.nextStep(5), 1000);
                         } else {
@@ -1327,7 +1327,7 @@ window.Learn = {
                             grid.children[step.correct].style.border = '2px solid var(--success)';
                             
                             this.takeDamage(35); // Hardcore Damage
-                            this.showContextualHint(step.explain || 'Błąd. Zrozum zasady, zanim spróbujesz ponownie.');
+                            this.showContextualHint(step.explain || 'BĹ‚Ä…d. Zrozum zasady, zanim sprĂłbujesz ponownie.');
                         }
                     };
                     grid.appendChild(btn);
@@ -1350,7 +1350,7 @@ window.Learn = {
                 const btn = document.createElement('button');
                 btn.className = 'btn primary ripple';
                 btn.style.borderRadius = '24px';
-                btn.textContent = 'Zatwierdź Wynik (Enter)';
+                btn.textContent = 'ZatwierdĹş Wynik (Enter)';
 
                 const handleNumSubmit = () => {
                     const val = parseFloat(input.value);
@@ -1361,7 +1361,7 @@ window.Learn = {
                         window.LearnSound.playSuccess();
                         input.style.borderColor = 'var(--success)';
                         input.style.color = 'var(--success)';
-                        Gamify.awardXP(20, 'Liczenie bezbłędne');
+                        Gamify.awardXP(20, 'Liczenie bezbĹ‚Ä™dne');
                         if (this.activeBoss) this.damageBoss(50);
                         setTimeout(() => this.nextStep(5), 1000);
                     } else {
@@ -1369,7 +1369,7 @@ window.Learn = {
                         input.style.borderColor = 'var(--danger)';
                         input.style.color = 'var(--danger)';
                         this.takeDamage(35); // Hardcore Damage
-                        this.showContextualHint(`Poprawna odpowiedź to: <b>${step.answer}</b>.<br><br>${step.explain || ''}`);
+                        this.showContextualHint(`Poprawna odpowiedĹş to: <b>${step.answer}</b>.<br><br>${step.explain || ''}`);
                     }
                 };
 
@@ -1385,7 +1385,7 @@ window.Learn = {
                 grid.style.gridTemplateColumns = '1fr 1fr';
                 grid.style.gap = '12px';
 
-                [['Prawda', true], ['Fałsz', false]].forEach(([label, val], idx) => {
+                [['Prawda', true], ['FaĹ‚sz', false]].forEach(([label, val], idx) => {
                     const btn = document.createElement('button');
                     btn.className = 'btn secondary ripple';
                     btn.style.padding = '1.8rem';
@@ -1410,7 +1410,7 @@ window.Learn = {
                             btn.style.borderColor = 'var(--danger)';
                             btn.style.boxShadow = '0 0 15px rgba(255,23,68,0.2)';
                             this.takeDamage(35); // Hardcore Damage
-                            this.showContextualHint(step.explain || 'Błąd logiczny. Skup się.');
+                            this.showContextualHint(step.explain || 'BĹ‚Ä…d logiczny. Skup siÄ™.');
                         }
                     };
                     grid.appendChild(btn);
@@ -1418,12 +1418,12 @@ window.Learn = {
                 contentEl.appendChild(grid);
 
             } else if (step.kind === 'cloze') {
-                contentEl.innerHTML = `${heading}<p class="text-muted" style="margin-top: -0.8rem; margin-bottom: 1.8rem;">Uzupełnij brakujące słowo / pojęcie.</p>`;
+                contentEl.innerHTML = `${heading}<p class="text-muted" style="margin-top: -0.8rem; margin-bottom: 1.8rem;">UzupeĹ‚nij brakujÄ…ce sĹ‚owo / pojÄ™cie.</p>`;
                 
                 const input = document.createElement('input');
                 input.type = 'text';
                 input.className = 'glass-input';
-                input.placeholder = 'Twoja odpowiedź...';
+                input.placeholder = 'Twoja odpowiedĹş...';
                 input.style.width = '100%';
                 input.style.padding = '1.2rem';
                 input.style.fontSize = '1.15rem';
@@ -1432,8 +1432,8 @@ window.Learn = {
                 contentEl.appendChild(input);
 
                 const norm = s => (s || '').toString().trim().toLowerCase()
-                    .replace(/[ąàáä]/g, 'a').replace(/ć/g, 'c').replace(/ę/g, 'e').replace(/ł/g, 'l')
-                    .replace(/ń/g, 'n').replace(/[óòöô]/g, 'o').replace(/ś/g, 's').replace(/[żź]/g, 'z')
+                    .replace(/[Ä…Ă ĂˇĂ¤]/g, 'a').replace(/Ä‡/g, 'c').replace(/Ä™/g, 'e').replace(/Ĺ‚/g, 'l')
+                    .replace(/Ĺ„/g, 'n').replace(/[ĂłĂ˛Ă¶Ă´]/g, 'o').replace(/Ĺ›/g, 's').replace(/[ĹĽĹş]/g, 'z')
                     .replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ');
 
                 const checkCloze = () => {
@@ -1448,7 +1448,7 @@ window.Learn = {
                         window.LearnSound.playSuccess();
                         input.style.borderColor = 'var(--success)';
                         input.style.color = 'var(--success)';
-                        Gamify.awardXP(20, 'Dokładna pamięć');
+                        Gamify.awardXP(20, 'DokĹ‚adna pamiÄ™Ä‡');
                         if (this.activeBoss) this.damageBoss(50);
                         setTimeout(() => this.nextStep(5), 1000);
                     } else {
@@ -1456,14 +1456,14 @@ window.Learn = {
                         input.style.borderColor = 'var(--danger)';
                         input.style.color = 'var(--danger)';
                         this.takeDamage(35); // Hardcore Damage
-                        this.showContextualHint(`Prawidłowe słowo: <b>${step.cloze_answer}</b>.<br><br>${step.explain || ''}`);
+                        this.showContextualHint(`PrawidĹ‚owe sĹ‚owo: <b>${step.cloze_answer}</b>.<br><br>${step.explain || ''}`);
                     }
                 };
 
                 const btn = document.createElement('button');
                 btn.className = 'btn primary ripple';
                 btn.style.borderRadius = '24px';
-                btn.textContent = 'Sprawdź (Enter)';
+                btn.textContent = 'SprawdĹş (Enter)';
                 btn.onclick = checkCloze;
                 input.addEventListener('keydown', e => { if (e.key === 'Enter') checkCloze(); });
                 controls.appendChild(btn);
@@ -1479,8 +1479,8 @@ window.Learn = {
                 this.selectedFeynmanOrder = [];
 
                 contentEl.innerHTML = `
-                    <h3 style="margin-bottom: 0.5rem; font-size: 1.4rem; font-weight:700;">🧩 Technika Feynmana (Logiczne Wyjaśnianie)</h3>
-                    <p class="text-muted" style="margin-bottom: 1.8rem; font-size: 0.95rem;">Ułóż poniższe zdania we właściwym logicznym ciągu, aby precyzyjnie wyjaśnić zagadnienie: <b>${step.prompt}</b>.</p>
+                    <h3 style="margin-bottom: 0.5rem; font-size: 1.4rem; font-weight:700;">đź§© Technika Feynmana (Logiczne WyjaĹ›nianie)</h3>
+                    <p class="text-muted" style="margin-bottom: 1.8rem; font-size: 0.95rem;">UĹ‚ĂłĹĽ poniĹĽsze zdania we wĹ‚aĹ›ciwym logicznym ciÄ…gu, aby precyzyjnie wyjaĹ›niÄ‡ zagadnienie: <b>${step.prompt}</b>.</p>
                     <div class="feynman-blocks-container" id="feynman-blocks-list"></div>
                 `;
 
@@ -1499,7 +1499,7 @@ window.Learn = {
                 const btn = document.createElement('button');
                 btn.className = 'btn primary ripple';
                 btn.style.borderRadius = '24px';
-                btn.textContent = 'Zatwierdź Kolejność';
+                btn.textContent = 'ZatwierdĹş KolejnoĹ›Ä‡';
                 btn.onclick = () => this.checkFeynmanSequence();
                 controls.appendChild(btn);
 
@@ -1508,14 +1508,14 @@ window.Learn = {
                 contentEl.innerHTML = `
                     <h3 style="font-size: 1.45rem; margin-bottom: 1.8rem; line-height: 1.5; font-weight:700;">${step.prompt}</h3>
                     <p class="text-muted" style="margin-bottom:2rem; font-size: 1.05rem; border-left: 3px solid var(--primary); padding-left: 1.2rem; line-height:1.7;">
-                        <i>Zastanów się przez chwilę, sformułuj odpowiedź w pamięci, a następnie odsłoń wzorzec do weryfikacji.</i>
+                        <i>ZastanĂłw siÄ™ przez chwilÄ™, sformuĹ‚uj odpowiedĹş w pamiÄ™ci, a nastÄ™pnie odsĹ‚oĹ„ wzorzec do weryfikacji.</i>
                     </p>
                 `;
 
                 const btn = document.createElement('button');
                 btn.className = 'btn primary ripple';
                 btn.style.borderRadius = '24px';
-                btn.textContent = 'Pokaż wzorzec odpowiedzi (Enter)';
+                btn.textContent = 'PokaĹĽ wzorzec odpowiedzi (Enter)';
                 btn.onclick = () => {
                     contentEl.innerHTML += `
                         <div class="fade-in" style="margin-top:2rem; padding:1.8rem; background: rgba(0,0,0,0.3); border-radius: var(--radius-md); border: 1px solid rgba(0, 229, 255, 0.15); box-shadow: inset 0 0 15px rgba(0,229,255,0.03);">
@@ -1528,7 +1528,7 @@ window.Learn = {
                     const btnForgot = document.createElement('button');
                     btnForgot.className = 'btn btn-srs btn-forgot ripple';
                     btnForgot.style.borderRadius = '20px';
-                    btnForgot.innerHTML = '<strong>1.</strong> Zapomniałem';
+                    btnForgot.innerHTML = '<strong>1.</strong> ZapomniaĹ‚em';
                     btnForgot.onclick = () => {
                         window.LearnSound.playDamage();
                         this.takeDamage(35); // Hardcore Damage
@@ -1538,7 +1538,7 @@ window.Learn = {
                     const btnHazy = document.createElement('button');
                     btnHazy.className = 'btn btn-srs btn-hazy ripple';
                     btnHazy.style.borderRadius = '20px';
-                    btnHazy.innerHTML = '<strong>2.</strong> Z mgłą';
+                    btnHazy.innerHTML = '<strong>2.</strong> Z mgĹ‚Ä…';
                     btnHazy.onclick = () => {
                         this.takeDamage(10); // Hardcore Damage
                         this.nextStep(3); 
@@ -1550,7 +1550,7 @@ window.Learn = {
                     btnSolid.innerHTML = '<strong>3.</strong> Solidnie';
                     btnSolid.onclick = () => {
                         window.LearnSound.playSuccess();
-                        Gamify.awardXP(25, 'Silny ślad pamięciowy');
+                        Gamify.awardXP(25, 'Silny Ĺ›lad pamiÄ™ciowy');
                         if (this.activeBoss) this.damageBoss(60);
                         this.nextStep(5); 
                     };
@@ -1568,16 +1568,16 @@ window.Learn = {
 
         } else if (step.type === 'blurt') {
             contentEl.innerHTML = `
-                <h3 style="margin-bottom: 0.5rem; font-size: 1.4rem; font-weight:700;">✍️ Metoda Blurtingu</h3>
-                <p class="text-muted" style="margin-bottom: 1.2rem; font-size: 0.95rem;">Zrób maksymalnie dokładny zrzut z pamięci w poniższym polu tekstowym dla tematu: <b>${step.prompt}</b>.</p>
-                <textarea id="blurting-textarea" class="glass-input" style="width:100%; height:180px; padding:1.2rem; font-size:1.05rem; resize:none; line-height: 1.6; border-radius:14px; margin-bottom:1.5rem; box-shadow: inset 0 0 15px rgba(0,0,0,0.3);" placeholder="Pisz swoimi słowami definicje, powiązania, mechanizmy..."></textarea>
+                <h3 style="margin-bottom: 0.5rem; font-size: 1.4rem; font-weight:700;">âśŤď¸Ź Metoda Blurtingu</h3>
+                <p class="text-muted" style="margin-bottom: 1.2rem; font-size: 0.95rem;">ZrĂłb maksymalnie dokĹ‚adny zrzut z pamiÄ™ci w poniĹĽszym polu tekstowym dla tematu: <b>${step.prompt}</b>.</p>
+                <textarea id="blurting-textarea" class="glass-input" style="width:100%; height:180px; padding:1.2rem; font-size:1.05rem; resize:none; line-height: 1.6; border-radius:14px; margin-bottom:1.5rem; box-shadow: inset 0 0 15px rgba(0,0,0,0.3);" placeholder="Pisz swoimi sĹ‚owami definicje, powiÄ…zania, mechanizmy..."></textarea>
                 <div class="blurting-checklist" id="blurt-checklist-box" style="display: none;"></div>
             `;
 
             const btn = document.createElement('button');
             btn.className = 'btn primary ripple';
             btn.style.borderRadius = '24px';
-            btn.textContent = 'Sprawdź Pamięć (Ctrl + Enter)';
+            btn.textContent = 'SprawdĹş PamiÄ™Ä‡ (Ctrl + Enter)';
             btn.onclick = () => this.checkBlurtingText();
             controls.appendChild(btn);
             setTimeout(() => document.getElementById('blurting-textarea')?.focus(), 100);
@@ -1585,11 +1585,11 @@ window.Learn = {
         } else if (step.type === 'capstone') {
             const chap = this.activeQuest.chapter;
             const aiOn = (typeof GeminiAI !== 'undefined' && GeminiAI.hasKey());
-            contentEl.innerHTML = `<h3 style="margin-bottom: 1rem; font-size: 1.4rem; font-weight:700;">🎤 Pytanie komisji (ustne)</h3><div class="text-lg" style="line-height:1.7;">${step.q}</div>
-                <p class="text-muted" style="margin-top:.8rem;font-size:.9rem">${aiOn ? '🛡️ Egzaminator AI (Gemini) oceni Twoją odpowiedź — surowo, ale kulturalnie.' : '<i>Odpowiedz jak przed komisją, potem porównaj z wzorcem. (Włącz Egzaminatora AI w zakładce „Postępy", by oceniał prawdziwy AI.)</i>'}</p>`;
+            contentEl.innerHTML = `<h3 style="margin-bottom: 1rem; font-size: 1.4rem; font-weight:700;">đźŽ¤ Pytanie komisji (ustne)</h3><div class="text-lg" style="line-height:1.7;">${step.q}</div>
+                <p class="text-muted" style="margin-top:.8rem;font-size:.9rem">${aiOn ? 'đź›ˇď¸Ź Egzaminator AI (Gemini) oceni TwojÄ… odpowiedĹş â€” surowo, ale kulturalnie.' : '<i>Odpowiedz jak przed komisjÄ…, potem porĂłwnaj z wzorcem. (WĹ‚Ä…cz Egzaminatora AI w zakĹ‚adce â€žPostÄ™py", by oceniaĹ‚ prawdziwy AI.)</i>'}</p>`;
             const input = document.createElement('textarea');
             input.className = 'glass-input';
-            input.placeholder = 'Wpisz swoją odpowiedź ustną...';
+            input.placeholder = 'Wpisz swojÄ… odpowiedĹş ustnÄ…...';
             input.style.cssText = 'width:100%;margin-top:1rem;padding:1rem;min-height:120px;border-radius:14px;font-family:inherit;line-height:1.6';
             contentEl.appendChild(input);
 
@@ -1599,7 +1599,7 @@ window.Learn = {
             };
             const selfGrade = () => {
                 controls.innerHTML = '';
-                const ok = document.createElement('button'); ok.className = 'btn success ripple'; ok.style.borderRadius = '20px'; ok.textContent = 'Zgadza się z moją';
+                const ok = document.createElement('button'); ok.className = 'btn success ripple'; ok.style.borderRadius = '20px'; ok.textContent = 'Zgadza siÄ™ z mojÄ…';
                 ok.onclick = () => { Gamify.awardXP(40, 'Capstone'); if (this.activeBoss) this.damageBoss(100); if (typeof Study !== 'undefined') Study.recordAnswer(true); this.nextStep(5); };
                 const bad = document.createElement('button'); bad.className = 'btn danger ripple'; bad.style.borderRadius = '20px'; bad.textContent = 'Mam luki';
                 bad.onclick = () => { this.takeDamage(35); if (typeof Study !== 'undefined') { Study.recordAnswer(false); Study.addImprove(chap, 'Pytanie komisji: ' + (this.activeQuest.title || chap)); } this.nextStep(2); };
@@ -1608,7 +1608,7 @@ window.Learn = {
 
             const btn = document.createElement('button');
             btn.className = 'btn primary ripple'; btn.style.borderRadius = '24px';
-            btn.textContent = aiOn ? 'Wyślij do komisji AI' : 'Pokaż wzorzec';
+            btn.textContent = aiOn ? 'WyĹ›lij do komisji AI' : 'PokaĹĽ wzorzec';
             btn.onclick = async () => {
                 const ans = input.value.trim();
                 if (!aiOn) { revealModel(); selfGrade(); btn.remove(); return; }
@@ -1617,18 +1617,18 @@ window.Learn = {
                 const r = await GeminiAI.gradeOral(step.q, step.model, ans);
                 btn.remove();
                 if (r.error) {
-                    contentEl.insertAdjacentHTML('beforeend', `<div style="margin-top:1rem;color:var(--warning)">Egzaminator AI niedostępny (${r.error}). Oceń się sam wzorcem.</div>`);
+                    contentEl.insertAdjacentHTML('beforeend', `<div style="margin-top:1rem;color:var(--warning)">Egzaminator AI niedostÄ™pny (${r.error}). OceĹ„ siÄ™ sam wzorcem.</div>`);
                     revealModel(); selfGrade(); return;
                 }
                 const g = r.ok, pass = !!g.pass;
                 contentEl.insertAdjacentHTML('beforeend', `<div class="fade-in glass-card" style="margin-top:1.5rem;border-color:${pass ? 'var(--success)' : 'var(--danger)'}">
-                    <div style="display:flex;justify-content:space-between;align-items:center"><b style="color:${pass ? 'var(--success)' : 'var(--danger)'};font-size:1.2rem">🎓 ${g.verdict || (pass ? 'Zaliczone' : 'Wymaga uzupełnienia')}</b><b style="font-size:1.4rem">${g.score}%</b></div>
-                    <p style="margin-top:.6rem"><b>👍 Dobrze:</b> ${g.good || '—'}</p>
-                    ${(g.missing && g.missing.length) ? `<p style="margin-top:.4rem"><b>⚠️ Czego zabrakło:</b></p><ul>${g.missing.map(m => `<li>${m}</li>`).join('')}</ul>` : ''}
-                    ${g.tip ? `<p style="margin-top:.4rem"><b>💡 Wskazówka:</b> ${g.tip}</p>` : ''}</div>`);
+                    <div style="display:flex;justify-content:space-between;align-items:center"><b style="color:${pass ? 'var(--success)' : 'var(--danger)'};font-size:1.2rem">đźŽ“ ${g.verdict || (pass ? 'Zaliczone' : 'Wymaga uzupeĹ‚nienia')}</b><b style="font-size:1.4rem">${g.score}%</b></div>
+                    <p style="margin-top:.6rem"><b>đź‘Ť Dobrze:</b> ${g.good || 'â€”'}</p>
+                    ${(g.missing && g.missing.length) ? `<p style="margin-top:.4rem"><b>âš ď¸Ź Czego zabrakĹ‚o:</b></p><ul>${g.missing.map(m => `<li>${m}</li>`).join('')}</ul>` : ''}
+                    ${g.tip ? `<p style="margin-top:.4rem"><b>đź’ˇ WskazĂłwka:</b> ${g.tip}</p>` : ''}</div>`);
                 revealModel();
                 if (typeof Study !== 'undefined') { Study.recordAnswer(pass); (g.missing || []).forEach(m => Study.addImprove(chap, m)); }
-                if (pass) { Gamify.awardXP(Math.round(g.score / 2), 'Komisja AI zaliczyła'); if (this.activeBoss) this.damageBoss(g.score); } else { this.takeDamage(35); }
+                if (pass) { Gamify.awardXP(Math.round(g.score / 2), 'Komisja AI zaliczyĹ‚a'); if (this.activeBoss) this.damageBoss(g.score); } else { this.takeDamage(35); }
                 controls.innerHTML = '';
                 const next = document.createElement('button'); next.className = 'btn primary ripple'; next.textContent = 'Dalej (Enter)';
                 next.onclick = () => this.nextStep(pass ? 5 : 2);
@@ -1678,7 +1678,7 @@ window.Learn = {
 
     checkFeynmanSequence() {
         if (this.selectedFeynmanOrder.length < this.scrambledFeynmanBlocks.length) {
-            alert("Uporządkuj najpierw WSZYSTKIE zdania, zanim zatwierdzisz.");
+            alert("UporzÄ…dkuj najpierw WSZYSTKIE zdania, zanim zatwierdzisz.");
             return;
         }
 
@@ -1723,7 +1723,7 @@ window.Learn = {
                 .join('');
 
             this.takeDamage(40); // Feynman Error Damage
-            this.showContextualHint(`Niepoprawna sekwencja logiczna. Prawidłowy ciąg to:<br><ol style="margin-left: 1.5rem; margin-top: 0.5rem; line-height: 1.6;">${correctOrderTexts}</ol>`);
+            this.showContextualHint(`Niepoprawna sekwencja logiczna. PrawidĹ‚owy ciÄ…g to:<br><ol style="margin-left: 1.5rem; margin-top: 0.5rem; line-height: 1.6;">${correctOrderTexts}</ol>`);
         }
     },
 
@@ -1739,10 +1739,10 @@ window.Learn = {
 
         const step = this.activeQuest.steps[this.currentStepIndex];
         const checklist = step.checklist || [
-            "wartość pieniądza", "czas", "dyskontowanie", "przyszłe", "kapitał", "stopa", "odsetki"
+            "wartoĹ›Ä‡ pieniÄ…dza", "czas", "dyskontowanie", "przyszĹ‚e", "kapitaĹ‚", "stopa", "odsetki"
         ]; 
 
-        const normalize = str => str.toLowerCase().replace(/[^a-z0-9ąéółźżśńć]/gi, '');
+        const normalize = str => str.toLowerCase().replace(/[^a-z0-9Ä…Ă©ĂłĹ‚ĹşĹĽĹ›Ĺ„Ä‡]/gi, '');
         const normalizedText = normalize(text);
 
         let hits = 0;
@@ -1762,7 +1762,7 @@ window.Learn = {
                 itemDiv.className = `checklist-item ${item.hit ? 'hit' : 'miss'} blurt-item-${i}`;
                 itemDiv.style.opacity = '0';
                 itemDiv.style.transform = 'translateY(10px)';
-                itemDiv.innerHTML = `<span class="badge">${item.hit ? '✓' : '✗'}</span> <span>${item.word}</span>`;
+                itemDiv.innerHTML = `<span class="badge">${item.hit ? 'âś“' : 'âś—'}</span> <span>${item.word}</span>`;
                 box.appendChild(itemDiv);
                 
                 if (typeof gsap !== 'undefined') {
@@ -1785,15 +1785,15 @@ window.Learn = {
             
             if (pct >= 70) { // Hardcore threshold raised to 70%
                 window.LearnSound.playSuccess();
-                btn.textContent = 'Świetny blurt! Dalej (Enter)';
+                btn.textContent = 'Ĺšwietny blurt! Dalej (Enter)';
                 btn.onclick = () => {
-                    Gamify.awardXP(Math.round(pct * 0.4), 'Szeroka pamięć');
+                    Gamify.awardXP(Math.round(pct * 0.4), 'Szeroka pamiÄ™Ä‡');
                     if (this.activeBoss) this.damageBoss(pct);
                     this.nextStep(5);
                 };
             } else {
                 window.LearnSound.playDamage();
-                btn.textContent = 'Brak kluczowych pojęć. Dalej (Enter)';
+                btn.textContent = 'Brak kluczowych pojÄ™Ä‡. Dalej (Enter)';
                 btn.onclick = () => {
                     this.takeDamage(35); // Hardcore Damage
                     this.nextStep(2);
@@ -1808,7 +1808,7 @@ window.Learn = {
         const avatar = Store._data.avatar;
         if (!avatar) return;
 
-        if (avatar.eq && (avatar.eq.chest === 'Pas Siły' || avatar.eq.chest === 'Pas Kulturystyczny')) {
+        if (avatar.eq && (avatar.eq.chest === 'Pas SiĹ‚y' || avatar.eq.chest === 'Pas Kulturystyczny')) {
             amount = Math.max(5, amount - 5);
         }
 
@@ -1908,10 +1908,10 @@ window.Learn = {
                 </div>
                 <div class="you-died-title" style="margin-bottom: 2rem;">YOU DIED</div>
                 <p class="text-lg text-muted" style="margin-bottom: 2.5rem; line-height:1.7; max-width:560px; margin-left:auto; margin-right:auto;">
-                    Straciłeś wszystkie zgromadzone dusze. Twoja plama krwi została upuszczona na polu bitwy. Odrodziłeś się przy ognisku z 50% HP.
+                    StraciĹ‚eĹ› wszystkie zgromadzone dusze. Twoja plama krwi zostaĹ‚a upuszczona na polu bitwy. OdrodziĹ‚eĹ› siÄ™ przy ognisku z 50% HP.
                 </p>
                 <div style="background: rgba(255,255,255,0.02); padding: 1.2rem; border-radius: 14px; font-size: 0.9rem; border: 1px dashed rgba(255,255,255,0.1); margin-bottom: 2rem; max-width:560px; text-align:left; line-height:1.6; margin-left:auto; margin-right:auto;">
-                    💡 <b>Zasada Plamy Krwi:</b> Wejdź ponownie do lekcji, w której poległeś, i ukończ ją pomyślnie, aby odzyskać stracone dusze. Kolejna śmierć przed odzyskaniem plamy wymaże ją na zawsze.
+                    đź’ˇ <b>Zasada Plamy Krwi:</b> WejdĹş ponownie do lekcji, w ktĂłrej polegĹ‚eĹ›, i ukoĹ„cz jÄ… pomyĹ›lnie, aby odzyskaÄ‡ stracone dusze. Kolejna Ĺ›mierÄ‡ przed odzyskaniem plamy wymaĹĽe jÄ… na zawsze.
                 </div>
             </div>
         `;
@@ -1923,7 +1923,7 @@ window.Learn = {
             btn.className = 'btn primary ripple';
             btn.style.borderRadius = '30px';
             btn.style.padding = '1rem 2.5rem';
-            btn.textContent = 'Powróć do Ogniska (Enter)';
+            btn.textContent = 'PowrĂłÄ‡ do Ogniska (Enter)';
             btn.onclick = () => {
                 this.lessonState = 'map';
                 this.activeQuest = null;
@@ -1958,7 +1958,7 @@ window.Learn = {
         hintDiv.style.borderLeft = '5px solid var(--danger)';
         hintDiv.style.boxShadow = 'inset 0 0 15px rgba(0,0,0,0.3)';
         hintDiv.innerHTML = `
-            <div style="font-weight: 800; color: var(--danger); font-size: 0.85rem; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 1.5px; display:flex; align-items:center; gap:0.5rem;">⚠️ Merytoryczne uderzenie zwrotne:</div>
+            <div style="font-weight: 800; color: var(--danger); font-size: 0.85rem; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 1.5px; display:flex; align-items:center; gap:0.5rem;">âš ď¸Ź Merytoryczne uderzenie zwrotne:</div>
             <div class="text-muted" style="font-size: 1.05rem; line-height: 1.7;">${htmlContent}</div>
         `;
         contentEl.appendChild(hintDiv);
@@ -1967,7 +1967,7 @@ window.Learn = {
         const nextBtn = document.createElement('button');
         nextBtn.className = 'btn primary';
         nextBtn.style.borderRadius = '24px';
-        nextBtn.textContent = 'Zrozumiałem, kontynuuj (Enter)';
+        nextBtn.textContent = 'ZrozumiaĹ‚em, kontynuuj (Enter)';
         nextBtn.onclick = () => this.nextStep(2);
         controls.appendChild(nextBtn);
 
@@ -1983,12 +1983,12 @@ window.Learn = {
     // --- Ribbon Generator Helper ---
     getRibbonHTML(type) {
         let text = '', bg = '', icon = '';
-        if (type === 'teach') { text = 'LEKCJA'; bg = 'rgba(0, 240, 255, 0.15)'; icon = '📖'; }
-        else if (type === 'example') { text = 'PRZYKŁAD'; bg = 'rgba(255, 170, 0, 0.15)'; icon = '🔍'; }
-        else if (type === 'check') { text = 'STARCIE KONTROLNE'; bg = 'rgba(255, 23, 68, 0.15)'; icon = '⚔️'; }
-        else if (type === 'recall') { text = 'AKTYWNY RECALL'; bg = 'rgba(200, 50, 255, 0.15)'; icon = '💬'; }
-        else if (type === 'blurt') { text = 'PRÓBA DUSZY (BLURTING)'; bg = 'rgba(255, 0, 150, 0.15)'; icon = '✍️'; }
-        else if (type === 'capstone') { text = 'WERYFIKACJA OSTATECZNA'; bg = 'rgba(255, 120, 0, 0.15)'; icon = '🎯'; }
+        if (type === 'teach') { text = 'LEKCJA'; bg = 'rgba(0, 240, 255, 0.15)'; icon = 'đź“–'; }
+        else if (type === 'example') { text = 'PRZYKĹAD'; bg = 'rgba(255, 170, 0, 0.15)'; icon = 'đź”Ť'; }
+        else if (type === 'check') { text = 'STARCIE KONTROLNE'; bg = 'rgba(255, 23, 68, 0.15)'; icon = 'âš”ď¸Ź'; }
+        else if (type === 'recall') { text = 'AKTYWNY RECALL'; bg = 'rgba(200, 50, 255, 0.15)'; icon = 'đź’¬'; }
+        else if (type === 'blurt') { text = 'PRĂ“BA DUSZY (BLURTING)'; bg = 'rgba(255, 0, 150, 0.15)'; icon = 'âśŤď¸Ź'; }
+        else if (type === 'capstone') { text = 'WERYFIKACJA OSTATECZNA'; bg = 'rgba(255, 120, 0, 0.15)'; icon = 'đźŽŻ'; }
         
         return `<div style="
             display: inline-flex; align-items: center; gap: 0.5rem;
@@ -2001,7 +2001,7 @@ window.Learn = {
     nextStep(quality) {
         this.earnedQuality.push(quality);
         const lesson = this.activeQuest;
-        // Celnosc: poprawna odpowiedz na sprawdzian/blurt (blędne licza sie w showContextualHint/capstone)
+        // Celnosc: poprawna odpowiedz na sprawdzian/blurt (blÄ™dne licza sie w showContextualHint/capstone)
         const st = lesson.steps[this.currentStepIndex];
         if (typeof Study !== 'undefined' && st && (st.type === 'check' || st.type === 'blurt') && quality >= 4) Study.recordAnswer(true);
 
@@ -2027,7 +2027,7 @@ window.Learn = {
         const avatar = Store._data.avatar;
         if (avatar && avatar.eq && (avatar.eq.weapon === 'Grymuar Rynkowy' || avatar.eq.weapon === 'Notatnik Rynkowy')) {
             soulsEarned = Math.round(soulsEarned * 1.2);
-        } else if (avatar && avatar.eq && (avatar.eq.weapon === 'Kostur Kalkulacji' || avatar.eq.weapon === 'Złoty Kalkulator')) {
+        } else if (avatar && avatar.eq && (avatar.eq.weapon === 'Kostur Kalkulacji' || avatar.eq.weapon === 'ZĹ‚oty Kalkulator')) {
             soulsEarned = Math.round(soulsEarned * 1.1);
         }
 
@@ -2044,7 +2044,7 @@ window.Learn = {
                     <div style="width: 50px; height: 50px; margin-bottom: 0.5rem; border-radius: 50%; overflow: hidden;">
                         <img src="assets/avatars/bloodstain.png?v=2026" style="width:100%; height:100%; object-fit:cover;" />
                     </div>
-                    <span style="font-size: 0.85rem; font-weight: 800; color: var(--success); letter-spacing: 1px;">ODZYSKANO PLAMĘ KRWI!</span>
+                    <span style="font-size: 0.85rem; font-weight: 800; color: var(--success); letter-spacing: 1px;">ODZYSKANO PLAMÄ KRWI!</span>
                     <span style="font-size: 1.5rem; font-weight: 900; color: #fff; margin-top: 0.3rem;">+${recoveredSouls} Duszy</span>
                 </div>
             `;
@@ -2053,9 +2053,9 @@ window.Learn = {
 
         container.innerHTML = `
             <div class="glass-card fade-in flex-center" style="width: 100%; min-height: 380px; text-align: center; padding: 2.5rem; border-color:var(--success); background: linear-gradient(135deg, rgba(0,255,100,0.03) 0%, transparent 100%);">
-                <div style="font-size: 5rem; margin-bottom: 1rem; filter: drop-shadow(0 0 15px rgba(0,255,100,0.4));">🎉</div>
+                <div style="font-size: 5rem; margin-bottom: 1rem; filter: drop-shadow(0 0 15px rgba(0,255,100,0.4));">đźŽ‰</div>
                 <h2 style="font-size: 2.2rem; color: var(--success); text-shadow: 0 0 10px rgba(0, 255, 100, 0.2); font-weight:900;">POLE WALKI OPANOWANE</h2>
-                <p class="text-lg text-muted" style="margin-top: 1rem; margin-bottom: 2rem; line-height:1.7;">Zwyciężyłeś starcie merytoryczne w lekcji <b>${lesson.title}</b>.</p>
+                <p class="text-lg text-muted" style="margin-top: 1rem; margin-bottom: 2rem; line-height:1.7;">ZwyciÄ™ĹĽyĹ‚eĹ› starcie merytoryczne w lekcji <b>${lesson.title}</b>.</p>
                 
                 <div style="display: flex; flex-direction:column; gap: 1rem; align-items:center; justify-content: center; margin-bottom: 2rem; width:100%;">
                     <div style="background: rgba(255,87,34,0.06); padding: 1.2rem 2.5rem; border-radius: 16px; border: 1px solid rgba(255,87,34,0.25); box-shadow: 0 0 15px rgba(255,87,34,0.05); text-align:center; max-width:260px; width:100%;">
@@ -2068,7 +2068,7 @@ window.Learn = {
         `;
 
         window.LearnSound.playVictory();
-        Gamify.awardXP(soulsEarned, 'Zwycięstwo');
+        Gamify.awardXP(soulsEarned, 'ZwyciÄ™stwo');
         this.healHero(25);
 
         if (window.Anim) {
@@ -2084,7 +2084,7 @@ window.Learn = {
             btn.style.borderRadius = '30px';
             btn.style.padding = '1rem 2rem';
             btn.style.fontSize = '1.1rem';
-            btn.textContent = 'Powróć z Tarczą (Enter)';
+            btn.textContent = 'PowrĂłÄ‡ z TarczÄ… (Enter)';
             btn.onclick = () => {
                 Store.updateLesson(lesson.id, Math.round(avgQuality));
                 this.lessonState = 'map';
@@ -2100,7 +2100,7 @@ window.Learn = {
     // BOSS FIGHT / ARENA GAMEPLAY
     // ==========================================================================
     challengeBoss(ch) {
-        const template = BOSS_TEMPLATES[ch] || { name: 'Strażnik Wiedzy', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Generowany strażnik kognitywny.', rewardItem: 'Kostur Kalkulacji' };
+        const template = BOSS_TEMPLATES[ch] || { name: 'StraĹĽnik Wiedzy', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Generowany straĹĽnik kognitywny.', rewardItem: 'Kostur Kalkulacji' };
         
         this.activeBoss = {
             name: template.name,
@@ -2134,7 +2134,7 @@ window.Learn = {
                             q: p.question,
                             answer: p.answer,
                             tol: p.tol || 0.1,
-                            explain: 'Zadanie z bazy problemów obliczeniowych.'
+                            explain: 'Zadanie z bazy problemĂłw obliczeniowych.'
                         },
                         lessonId: 'problem'
                     });
@@ -2207,7 +2207,7 @@ window.Learn = {
                 
                 <!-- Active Challenge -->
                 <div id="boss-challenge-area" style="background: rgba(0,0,0,0.4); padding: 1.8rem; border-radius: 16px; border:1px solid rgba(255,23,68,0.25); text-align: left; box-shadow: inset 0 0 15px rgba(0,0,0,0.5);">
-                    <div style="font-size: 0.8rem; color: var(--danger); font-weight: 800; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px;">⚔️ WYZWANIE BOSSA:</div>
+                    <div style="font-size: 0.8rem; color: var(--danger); font-weight: 800; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px;">âš”ď¸Ź WYZWANIE BOSSA:</div>
                     <div id="step-content"></div>
                 </div>
             </div>
@@ -2242,7 +2242,7 @@ window.Learn = {
                         btn.style.borderColor = 'var(--danger)';
                         grid.children[step.correct].style.border = '2px solid var(--success)';
                         this.takeDamage(40); // Hardcore Boss Damage
-                        this.showBossExplanation(step.explain || 'Błędna odpowiedź.');
+                        this.showBossExplanation(step.explain || 'BĹ‚Ä™dna odpowiedĹş.');
                     }
                 };
                 grid.appendChild(btn);
@@ -2253,7 +2253,7 @@ window.Learn = {
             contentEl.innerHTML = heading;
             const grid = document.createElement('div');
             grid.style.display = 'grid'; grid.style.gridTemplateColumns = '1fr 1fr'; grid.style.gap = '10px';
-            [['Prawda', true], ['Fałsz', false]].forEach(([label, val], idx) => {
+            [['Prawda', true], ['FaĹ‚sz', false]].forEach(([label, val], idx) => {
                 const btn = document.createElement('button');
                 btn.className = 'btn secondary ripple';
                 btn.style.borderRadius = '12px';
@@ -2269,7 +2269,7 @@ window.Learn = {
                         btn.style.background = 'rgba(255, 23, 68, 0.12)';
                         btn.style.borderColor = 'var(--danger)';
                         this.takeDamage(40); // Hardcore Boss Damage
-                        this.showBossExplanation(step.explain || 'Niestety błąd.');
+                        this.showBossExplanation(step.explain || 'Niestety bĹ‚Ä…d.');
                     }
                 };
                 grid.appendChild(btn);
@@ -2297,14 +2297,14 @@ window.Learn = {
                 } else {
                     input.style.borderColor = 'var(--danger)';
                     this.takeDamage(45); // Hardcore Boss Damage
-                    this.showBossExplanation(`Poprawna wartość: <b>${step.answer}</b>.<br><br>${step.explain || ''}`);
+                    this.showBossExplanation(`Poprawna wartoĹ›Ä‡: <b>${step.answer}</b>.<br><br>${step.explain || ''}`);
                 }
             };
 
             const btn = document.createElement('button');
             btn.className = 'btn primary ripple';
             btn.style.borderRadius = '24px';
-            btn.textContent = 'Zatwierdź';
+            btn.textContent = 'ZatwierdĹş';
             btn.onclick = checkNum;
             input.addEventListener('keydown', e => { if (e.key === 'Enter') checkNum(); });
             controls.appendChild(btn);
@@ -2314,13 +2314,13 @@ window.Learn = {
             const input = document.createElement('input');
             input.type = 'text';
             input.className = 'glass-input';
-            input.placeholder = 'Twoja odpowiedź...';
+            input.placeholder = 'Twoja odpowiedĹş...';
             input.style.width = '100%'; input.style.marginTop = '1rem'; input.style.padding = '1rem'; input.style.borderRadius = '12px';
             contentEl.appendChild(input);
 
             const norm = s => (s || '').toString().trim().toLowerCase()
-                .replace(/[ąàáä]/g, 'a').replace(/ć/g, 'c').replace(/ę/g, 'e').replace(/ł/g, 'l')
-                .replace(/ń/g, 'n').replace(/[óòöô]/g, 'o').replace(/ś/g, 's').replace(/[żź]/g, 'z')
+                .replace(/[Ä…Ă ĂˇĂ¤]/g, 'a').replace(/Ä‡/g, 'c').replace(/Ä™/g, 'e').replace(/Ĺ‚/g, 'l')
+                .replace(/Ĺ„/g, 'n').replace(/[ĂłĂ˛Ă¶Ă´]/g, 'o').replace(/Ĺ›/g, 's').replace(/[ĹĽĹş]/g, 'z')
                 .replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ');
 
             const checkCloze = () => {
@@ -2335,14 +2335,14 @@ window.Learn = {
                 } else {
                     input.style.borderColor = 'var(--danger)';
                     this.takeDamage(40); // Hardcore Boss Damage
-                    this.showBossExplanation(`Prawidłowe pojęcie: <b>${step.cloze_answer}</b>.<br><br>${step.explain || ''}`);
+                    this.showBossExplanation(`PrawidĹ‚owe pojÄ™cie: <b>${step.cloze_answer}</b>.<br><br>${step.explain || ''}`);
                 }
             };
 
             const btn = document.createElement('button');
             btn.className = 'btn primary ripple';
             btn.style.borderRadius = '24px';
-            btn.textContent = 'Zatwierdź';
+            btn.textContent = 'ZatwierdĹş';
             btn.onclick = checkCloze;
             input.addEventListener('keydown', e => { if (e.key === 'Enter') checkCloze(); });
             controls.appendChild(btn);
@@ -2360,9 +2360,9 @@ window.Learn = {
 
         const avatar = Store._data.avatar;
         if (avatar && avatar.eq) {
-            if (avatar.eq.weapon === 'Młot Kinetyczny' || avatar.eq.weapon === 'Hantel 50kg') {
+            if (avatar.eq.weapon === 'MĹ‚ot Kinetyczny' || avatar.eq.weapon === 'Hantel 50kg') {
                 amount = Math.round(amount * 1.2);
-            } else if (avatar.eq.weapon === 'Kostur Kalkulacji' || avatar.eq.weapon === 'Złoty Kalkulator') {
+            } else if (avatar.eq.weapon === 'Kostur Kalkulacji' || avatar.eq.weapon === 'ZĹ‚oty Kalkulator') {
                 amount = Math.round(amount * 1.1);
             }
         }
@@ -2410,7 +2410,7 @@ window.Learn = {
         hintDiv.style.borderLeft = '3px solid var(--danger)';
         hintDiv.style.borderRadius = '8px';
         hintDiv.innerHTML = `
-            <div style="font-weight:bold; color:var(--danger); font-size:0.8rem; margin-bottom: 0.3rem;">KONTRAATAK BOSSA (Wyjaśnienie):</div>
+            <div style="font-weight:bold; color:var(--danger); font-size:0.8rem; margin-bottom: 0.3rem;">KONTRAATAK BOSSA (WyjaĹ›nienie):</div>
             <div style="font-size: 0.95rem; line-height: 1.5; color: var(--text-muted);">${htmlContent}</div>
         `;
         box.appendChild(hintDiv);
@@ -2460,9 +2460,9 @@ window.Learn = {
                 this.renderRPGPanel();
                 itemClaimedMsg = `
                     <div style="margin-top: 1.5rem; display: flex; flex-direction: column; align-items: center; background: rgba(0,229,255,0.06); padding: 1.2rem; border-radius: 16px; border: 1px dashed var(--primary); box-shadow: 0 0 15px rgba(0,229,255,0.1);">
-                        <span style="font-size: 0.8rem; font-weight: 800; letter-spacing: 1px; color: var(--primary);">🎁 NOWY ŁUP ZDOBYTY!</span>
+                        <span style="font-size: 0.8rem; font-weight: 800; letter-spacing: 1px; color: var(--primary);">đźŽ NOWY ĹUP ZDOBYTY!</span>
                         <span style="font-size: 1.25rem; font-weight: 900; color: #fff; margin-top: 0.3rem;">${rewardItem}</span>
-                        <span style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem; text-align: center;">Przedmiot został automatycznie wyposażony w slot: ${slot === 'head' ? 'Głowa' : (slot === 'weapon' ? 'Broń' : 'Klatka')}. Sprawdź kartę postaci!</span>
+                        <span style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem; text-align: center;">Przedmiot zostaĹ‚ automatycznie wyposaĹĽony w slot: ${slot === 'head' ? 'GĹ‚owa' : (slot === 'weapon' ? 'BroĹ„' : 'Klatka')}. SprawdĹş kartÄ™ postaci!</span>
                     </div>
                 `;
             }
@@ -2472,13 +2472,13 @@ window.Learn = {
 
         container.innerHTML = `
             <div class="glass-card fade-in flex-center" style="width: 100%; text-align: center; padding: 3rem; border-color: var(--success); background: linear-gradient(135deg, rgba(0,255,100,0.05) 0%, transparent 100%); box-shadow: 0 0 25px rgba(0,255,100,0.2);">
-                <div style="font-size: 5.5rem; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(0,255,100,0.4));">🏆</div>
+                <div style="font-size: 5.5rem; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(0,255,100,0.4));">đźŹ†</div>
                 <h2 style="font-size: 2.5rem; color: var(--success); text-shadow: 0 0 10px rgba(0,255,100,0.3); font-weight:900;">BOSSA POKONANO!</h2>
-                <p class="text-lg text-muted" style="margin-top: 1rem; margin-bottom: 2rem; line-height:1.7;">Udało Ci się ostatecznie zwyciężyć <b>${bossName}</b>. Poziomy Twojej wiedzy osiągnęły pełne mistrzostwo.</p>
+                <p class="text-lg text-muted" style="margin-top: 1rem; margin-bottom: 2rem; line-height:1.7;">UdaĹ‚o Ci siÄ™ ostatecznie zwyciÄ™ĹĽyÄ‡ <b>${bossName}</b>. Poziomy Twojej wiedzy osiÄ…gnÄ™Ĺ‚y peĹ‚ne mistrzostwo.</p>
                 
                 <div style="display: flex; flex-direction: column; gap: 1rem; justify-content: center; align-items: center; width: 100%;">
                     <div style="background: rgba(255,87,34,0.06); padding: 1.2rem 2.2rem; border-radius: 16px; border: 1px solid rgba(255,87,34,0.25); box-shadow: 0 0 15px rgba(255,87,34,0.05); text-align: center; max-width: 300px;">
-                        <div style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.4rem; font-weight:800; text-transform: uppercase;">ZWYCIĘSKIE DUSZE</div>
+                        <div style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.4rem; font-weight:800; text-transform: uppercase;">ZWYCIÄSKIE DUSZE</div>
                         <div style="font-size: 2.2rem; font-weight: 900; color: #ff5722;">+${rewardXP} Duszy</div>
                     </div>
                     ${itemClaimedMsg}
@@ -2506,7 +2506,7 @@ window.Learn = {
             btn.style.borderRadius = '30px';
             btn.style.padding = '1rem 2rem';
             btn.style.fontSize = '1.1rem';
-            btn.textContent = 'Powróć do Ogniska (Enter)';
+            btn.textContent = 'PowrĂłÄ‡ do Ogniska (Enter)';
             btn.onclick = () => {
                 this.lessonState = 'map';
                 this.activeQuest = null;

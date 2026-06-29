@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pl" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EgzaminFiR — Trener V2</title>
+    <title>EgzaminFiR â€” Trener V2</title>
     
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css?v=25">
+    <link rel="stylesheet" href="css/style.css?v=26">
 </head>
 <body>
     <!-- Fullscreen animated background -->
@@ -31,51 +31,51 @@
             <div class="nav-brand"><span class="brand-glow">FiR</span><span class="brand-word"> Trener</span></div>
             <div class="nav-links">
                 <button class="nav-btn active" data-view="learn" title="Lekcje">
-                    <span class="icon">🎓</span><span class="label">Lekcje</span>
+                    <span class="icon">đźŽ“</span><span class="label">Lekcje</span>
                 </button>
-                <button class="nav-btn" data-view="progress" title="Postępy">
-                    <span class="icon">📈</span><span class="label">Postępy</span>
+                <button class="nav-btn" data-view="progress" title="PostÄ™py">
+                    <span class="icon">đź“</span><span class="label">PostÄ™py</span>
                 </button>
                 <button class="nav-btn" data-view="improve" title="Do poprawy">
-                    <span class="icon">🎯</span><span class="label">Do poprawy</span>
+                    <span class="icon">đźŽŻ</span><span class="label">Do poprawy</span>
                 </button>
                 <button class="nav-btn" data-view="tasks" title="Zadania" style="display:none">
-                    <span class="icon">✍️</span><span class="label">Zadania</span>
+                    <span class="icon">âśŤď¸Ź</span><span class="label">Zadania</span>
                 </button>
                 <button class="nav-btn" data-view="dashboard" title="Pulpit" style="display:none">
-                    <span class="icon">📊</span><span class="label">Pulpit</span>
+                    <span class="icon">đź“Š</span><span class="label">Pulpit</span>
                 </button>
                 <button class="nav-btn" data-view="flashcards" title="Fiszki" style="display:none">
-                    <span class="icon">📇</span><span class="label">Fiszki</span>
+                    <span class="icon">đź“‡</span><span class="label">Fiszki</span>
                 </button>
                 <button class="nav-btn" data-view="quiz" title="Quiz" style="display:none">
-                    <span class="icon">❓</span><span class="label">Quiz</span>
+                    <span class="icon">âť“</span><span class="label">Quiz</span>
                 </button>
                 <button class="nav-btn" data-view="match" title="Pary" style="display:none">
-                    <span class="icon">🔗</span><span class="label">Pary</span>
+                    <span class="icon">đź”—</span><span class="label">Pary</span>
                 </button>
                 <button class="nav-btn" data-view="reader" title="Czytaj" style="display:none">
-                    <span class="icon">📖</span><span class="label">Czytaj</span>
+                    <span class="icon">đź“–</span><span class="label">Czytaj</span>
                 </button>
                 <button class="nav-btn" data-view="commission" title="Komisja" style="display:none">
-                    <span class="icon">⚠️</span><span class="label">Komisja</span>
+                    <span class="icon">âš ď¸Ź</span><span class="label">Komisja</span>
                 </button>
                 <button class="nav-btn" data-view="analytics" title="Analityka" style="display:none">
-                    <span class="icon">📈</span><span class="label">Analityka</span>
+                    <span class="icon">đź“</span><span class="label">Analityka</span>
                 </button>
                 <button class="nav-btn" data-view="formulas" title="Wzory" style="display:none">
-                    <span class="icon">∑</span><span class="label">Wzory</span>
+                    <span class="icon">â‘</span><span class="label">Wzory</span>
                 </button>
                 <button class="nav-btn" data-view="search" title="Szukaj" style="display:none">
-                    <span class="icon">🔍</span><span class="label">Szukaj</span>
+                    <span class="icon">đź”Ť</span><span class="label">Szukaj</span>
                 </button>
                 <button class="nav-btn" data-view="settings" title="Ustawienia" style="display:none">
-                    <span class="icon">⚙️</span><span class="label">Ustawienia</span>
+                    <span class="icon">âš™ď¸Ź</span><span class="label">Ustawienia</span>
                 </button>
             </div>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Przełącz motyw">
-                <span class="icon light-icon">☀️</span>
-                <span class="icon dark-icon">🌙</span>
+            <button id="theme-toggle" class="theme-toggle" aria-label="PrzeĹ‚Ä…cz motyw">
+                <span class="icon light-icon">â€ď¸Ź</span>
+                <span class="icon dark-icon">đźŚ™</span>
             </button>
         </nav>
 
@@ -85,7 +85,7 @@
             <section id="hero-section" class="hero-section flex-center">
                 <div class="hero-content">
                     <h1 class="hero-title">EGZAMIN <br><span class="gradient-text">FiR</span></h1>
-                    <p class="hero-subtitle">Trener Premium 2026. Zdobądź licencję.</p>
+                    <p class="hero-subtitle">Trener Premium 2026. ZdobÄ…dĹş licencjÄ™.</p>
                 </div>
             </section>
 
@@ -96,8 +96,8 @@
             
             <div id="error" class="view-container flex-center" style="display:none;">
                 <div class="glass-card error-card">
-                    <h3>❌ Awaria Systemu</h3>
-                    <p>Brak pliku `data/content.json` lub blokada CORS. Użyj pliku `data/content.js`.</p>
+                    <h3>âťŚ Awaria Systemu</h3>
+                    <p>Brak pliku `data/content.json` lub blokada CORS. UĹĽyj pliku `data/content.js`.</p>
                 </div>
             </div>
 
@@ -116,10 +116,10 @@
                             <h1 class="view-title gradient-text" id="learn-view-title" style="font-size: 2rem;">Lekcje</h1>
                             <div class="header-controls" id="learn-filter-container" style="display: flex; gap: 10px; align-items: center;">
                                 <button id="toggle-character-panel-btn" class="btn secondary btn-sm ripple" onclick="window.Learn.toggleCharacterPanel()" style="border-radius: 12px; font-size: 0.85rem; padding: 0.5rem 1rem; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap;">
-                                    <span>👤</span> <span id="toggle-panel-label">Ukryj profil</span>
+                                    <span>đź‘¤</span> <span id="toggle-panel-label">Ukryj profil</span>
                                 </button>
                                 <select id="learn-chapter-filter" class="glass-input" style="padding: 0.5rem 1rem; border-radius: 12px;">
-                                    <option value="all">Wszystkie działy</option>
+                                    <option value="all">Wszystkie dziaĹ‚y</option>
                                 </select>
                             </div>
                         </header>
@@ -144,10 +144,10 @@
             <!-- View: Match (Pary) -->
             <section id="view-match" class="view-container">
                 <header class="view-header">
-                    <h1 class="view-title">Połącz w pary</h1>
+                    <h1 class="view-title">PoĹ‚Ä…cz w pary</h1>
                     <div class="header-controls">
                         <select id="match-chapter-filter" class="glass-input">
-                            <option value="all">Wszystkie działy</option>
+                            <option value="all">Wszystkie dziaĹ‚y</option>
                         </select>
                     </div>
                 </header>
@@ -159,10 +159,10 @@
             <!-- View: Tasks (Zadania) -->
             <section id="view-tasks" class="view-container">
                 <header class="view-header">
-                    <h1 class="view-title">Rozwiązywanie Zadań</h1>
+                    <h1 class="view-title">RozwiÄ…zywanie ZadaĹ„</h1>
                     <div class="header-controls">
                         <select id="tasks-chapter-filter" class="glass-input">
-                            <option value="all">Wszystkie działy</option>
+                            <option value="all">Wszystkie dziaĹ‚y</option>
                         </select>
                     </div>
                 </header>
@@ -170,8 +170,8 @@
                     <!-- Dynamic task content will be injected here -->
                 </div>
                 <div id="tasks-controls" class="flashcard-controls" style="display: none;">
-                    <input type="number" id="task-answer-input" class="glass-input" placeholder="Twój wynik..." step="any">
-                    <button id="task-submit-btn" class="btn primary ripple">Sprawdź</button>
+                    <input type="number" id="task-answer-input" class="glass-input" placeholder="TwĂłj wynik..." step="any">
+                    <button id="task-submit-btn" class="btn primary ripple">SprawdĹş</button>
                 </div>
             </section>
 
@@ -180,7 +180,7 @@
                 <header class="view-header split">
                     <div>
                         <h1 class="view-title">Pulpit</h1>
-                        <div class="countdown-badge">⏳ Egzamin za: <span id="days-to-exam">...</span></div>
+                        <div class="countdown-badge">âŹł Egzamin za: <span id="days-to-exam">...</span></div>
                     </div>
                 </header>
                 
@@ -211,13 +211,13 @@
                     
                     <!-- Streak & Heatmap -->
                     <div class="glass-card span-2">
-                        <h2>Aktywność 🔥 <span id="streak-counter" class="gradient-text">0</span> dni</h2>
+                        <h2>AktywnoĹ›Ä‡ đź”Ą <span id="streak-counter" class="gradient-text">0</span> dni</h2>
                         <div id="heatmap" class="heatmap-grid"></div>
                     </div>
 
                     <!-- Today's Plan -->
                     <div class="glass-card span-full">
-                        <h2>Dziś uczysz się:</h2>
+                        <h2>DziĹ› uczysz siÄ™:</h2>
                         <div id="today-plan" class="plan-list"></div>
                     </div>
                 </div>
@@ -240,7 +240,7 @@
                 <div class="reader-layout">
                     <aside class="chapters-list glass-card scroll-area" id="chapters-list"></aside>
                     <article class="chapter-content glass-card scroll-area" id="chapter-content">
-                        <div class="placeholder-text">Wybierz rozdział.</div>
+                        <div class="placeholder-text">Wybierz rozdziaĹ‚.</div>
                     </article>
                 </div>
             </section>
@@ -251,17 +251,17 @@
                     <h1 class="view-title">Fiszki <span class="badge" id="fc-queue-count">0</span></h1>
                     <div class="flashcards-filters">
                         <select id="flashcard-chapter-filter" class="glass-input">
-                            <option value="all">Wszystkie działy</option>
+                            <option value="all">Wszystkie dziaĹ‚y</option>
                         </select>
                         <select id="flashcard-mode-filter" class="glass-input">
-                            <option value="today">Algorytm SM-2 (Na Dziś)</option>
-                            <option value="all">Tryb Przeglądu (Wszystkie)</option>
+                            <option value="today">Algorytm SM-2 (Na DziĹ›)</option>
+                            <option value="all">Tryb PrzeglÄ…du (Wszystkie)</option>
                         </select>
                     </div>
                 </header>
                 <div class="flashcards-layout flex-center">
                     <div class="flashcard-container swipe-area" id="flashcard-container">
-                        <div class="placeholder-text">Brak fiszek na teraz. Świetna robota!</div>
+                        <div class="placeholder-text">Brak fiszek na teraz. Ĺšwietna robota!</div>
                     </div>
                     <div class="flashcard-controls" id="flashcard-controls" style="display:none;">
                         <button id="fc-btn-flip" class="btn secondary wide-btn ripple">Odkryj [Spacja]</button>
@@ -278,11 +278,11 @@
             <section id="view-quiz" class="view-container">
                 <header class="view-header split">
                     <h1 class="view-title">Quiz</h1>
-                    <button id="quiz-exam-mode" class="btn primary ripple">🔥 Symulacja Egzaminu</button>
+                    <button id="quiz-exam-mode" class="btn primary ripple">đź”Ą Symulacja Egzaminu</button>
                 </header>
                 <div class="quiz-controls-top glass-card">
                     <select id="quiz-chapter-filter" class="glass-input">
-                        <option value="all">Cały materiał</option>
+                        <option value="all">CaĹ‚y materiaĹ‚</option>
                     </select>
                     <button id="quiz-start" class="btn secondary ripple">Trening (Bez presji)</button>
                 </div>
@@ -291,7 +291,7 @@
                 </div>
                 <div class="quiz-layout">
                     <div class="quiz-card" id="quiz-container">
-                        <div class="glass-card placeholder-text">Kliknij przycisk powyżej, by rozpocząć.</div>
+                        <div class="glass-card placeholder-text">Kliknij przycisk powyĹĽej, by rozpoczÄ…Ä‡.</div>
                     </div>
                 </div>
             </section>
@@ -299,8 +299,8 @@
             <!-- View: Commission (Gdzie dociska) -->
             <section id="view-commission" class="view-container">
                 <header class="view-header">
-                    <h1 class="view-title warning-text">⚠️ Gdzie komisja dociska</h1>
-                    <p>Zestawienie najtrudniejszych pułapek i haków egzaminacyjnych.</p>
+                    <h1 class="view-title warning-text">âš ď¸Ź Gdzie komisja dociska</h1>
+                    <p>Zestawienie najtrudniejszych puĹ‚apek i hakĂłw egzaminacyjnych.</p>
                 </header>
                 <div class="commission-grid" id="commission-list"></div>
             </section>
@@ -356,8 +356,8 @@
                 </header>
                 <div class="bento-grid">
                     <div class="glass-card">
-                        <h2>Eksport / Import postępu</h2>
-                        <p class="small-text">Zapisz lub wczytaj swój stan nauki (fiszki, streak, plan).</p>
+                        <h2>Eksport / Import postÄ™pu</h2>
+                        <p class="small-text">Zapisz lub wczytaj swĂłj stan nauki (fiszki, streak, plan).</p>
                         <div style="margin-top:1rem; display:flex; gap:1rem;">
                             <button id="btn-export" class="btn secondary">Eksportuj (JSON)</button>
                             <button id="btn-import" class="btn primary">Importuj</button>
@@ -365,21 +365,21 @@
                     </div>
                     <div class="glass-card">
                         <h2>Reset aplikacji</h2>
-                        <p class="small-text warning-text">Ta akcja nieodwracalnie skasuje cały Twój postęp.</p>
-                        <button id="btn-reset" class="btn danger" style="margin-top:1rem;">Wyczyść wszystko</button>
+                        <p class="small-text warning-text">Ta akcja nieodwracalnie skasuje caĹ‚y TwĂłj postÄ™p.</p>
+                        <button id="btn-reset" class="btn danger" style="margin-top:1rem;">WyczyĹ›Ä‡ wszystko</button>
                     </div>
                 </div>
             </section>
 
-            <!-- View: Postępy -->
+            <!-- View: PostÄ™py -->
             <section id="view-progress" class="view-container" style="max-width:900px;margin:0 auto">
-                <header class="view-header"><h1 class="view-title gradient-text">Postępy do obrony</h1></header>
+                <header class="view-header"><h1 class="view-title gradient-text">PostÄ™py do obrony</h1></header>
                 <div id="progress-container"></div>
             </section>
 
             <!-- View: Do poprawy -->
             <section id="view-improve" class="view-container" style="max-width:900px;margin:0 auto">
-                <header class="view-header"><h1 class="view-title gradient-text">To musisz jeszcze poprawić</h1></header>
+                <header class="view-header"><h1 class="view-title gradient-text">To musisz jeszcze poprawiÄ‡</h1></header>
                 <div id="improve-container"></div>
             </section>
         </main>
@@ -387,9 +387,9 @@
 
     <!-- PWA Install Prompt -->
     <div id="pwa-prompt" class="glass-card pwa-prompt" style="display:none;">
-        <div>📲 Zainstaluj (offline)</div>
+        <div>đź“˛ Zainstaluj (offline)</div>
         <button id="pwa-install-btn" class="btn primary btn-sm">Zainstaluj</button>
-        <button id="pwa-close-btn" class="pwa-close" aria-label="Zamknij">✕</button>
+        <button id="pwa-close-btn" class="pwa-close" aria-label="Zamknij">âś•</button>
     </div>
 
     <!-- Scripts CDN -->
@@ -399,33 +399,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
     <!-- Data (Fallback) -->
-    <script src="data/content.js?v=25"></script>
-    <script src="data/lessons.js?v=25"></script>
-    <script src="data/problems.js?v=25"></script>
-    <script src="data/exam.js?v=25"></script>
+    <script src="data/content.js?v=26"></script>
+    <script src="data/lessons.js?v=26"></script>
+    <script src="data/problems.js?v=26"></script>
+    <script src="data/exam.js?v=26"></script>
 
     <!-- App Scripts -->
-    <script src="js/anim.js?v=25"></script>
-    <script src="js/fsrs.js?v=25"></script>
-    <script src="js/store.js?v=25"></script>
-    <script src="js/gamify.js?v=25"></script>
-    <script src="js/dashboard.js?v=25"></script>
-    <script src="js/learn.js?v=25"></script>
-    <script src="js/problems_ui.js?v=25"></script>
-    <script src="js/reader.js?v=25"></script>
-    <script src="js/flashcards.js?v=25"></script>
-    <script src="js/quiz.js?v=25"></script>
-    <script src="js/commission.js?v=25"></script>
-    <script src="js/analytics.js?v=25"></script>
-    <script src="js/formulas.js?v=25"></script>
-    <script src="js/search.js?v=25"></script>
-    <script src="js/settings.js?v=25"></script>
-    <script src="js/ui_select.js?v=25"></script>
-    <script src="js/match.js?v=25"></script>
-    <script src="js/boss.js?v=25"></script>
-    <script src="js/gemini.js?v=25"></script>
-    <script src="js/study.js?v=25"></script>
-    <script src="js/app.js?v=25"></script>
+    <script src="js/anim.js?v=26"></script>
+    <script src="js/fsrs.js?v=26"></script>
+    <script src="js/store.js?v=26"></script>
+    <script src="js/gamify.js?v=26"></script>
+    <script src="js/dashboard.js?v=26"></script>
+    <script src="js/learn.js?v=26"></script>
+    <script src="js/problems_ui.js?v=26"></script>
+    <script src="js/reader.js?v=26"></script>
+    <script src="js/flashcards.js?v=26"></script>
+    <script src="js/quiz.js?v=26"></script>
+    <script src="js/commission.js?v=26"></script>
+    <script src="js/analytics.js?v=26"></script>
+    <script src="js/formulas.js?v=26"></script>
+    <script src="js/search.js?v=26"></script>
+    <script src="js/settings.js?v=26"></script>
+    <script src="js/ui_select.js?v=26"></script>
+    <script src="js/match.js?v=26"></script>
+    <script src="js/boss.js?v=26"></script>
+    <script src="js/gemini.js?v=26"></script>
+    <script src="js/study.js?v=26"></script>
+    <script src="js/app.js?v=26"></script>
     
     <script>
         if ('serviceWorker' in navigator) {
