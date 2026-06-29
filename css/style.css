@@ -1588,3 +1588,17 @@ button:focus-visible,
 .lesson-siderail .medieval-chart-container svg { max-width: 100% !important; width: 100% !important; }
 .medieval-chart-container svg text { font-size: 15px !important; }
 .medieval-chart-container svg text[font-weight="bold"] { font-size: 16px !important; }
+
+/* ============================================================
+   GEMINI nano banana — runda 5: PRAWDZIWA wygenerowana rama (border-image 9-slice)
+   ============================================================ */
+.lesson-dialog-text {
+  border-style: solid !important;
+  border-width: 40px 36px !important;
+  border-image: url('assets/frames/frame-iron.jpg?v=30') 235 fill stretch !important;
+  background: none !important;
+  box-shadow: 0 12px 44px rgba(0,0,0,0.75) !important;
+  border-radius: 0 !important;
+}
+.lesson-dialog-text::before, .lesson-dialog-text::after { display: none !important; }
+.lesson-dialog .lesson-body { padding: 0.4rem 0.8rem; }

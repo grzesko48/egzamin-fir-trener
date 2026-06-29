@@ -293,6 +293,9 @@ window.Learn = {
     },
 
     getItemGraphic(itemName, slotType) {
+        // Recznie malowane ikony (Gemini nano banana) zamiast plaskich wektorow
+        const __pi = ({ head: 'ring', weapon: 'tome', chest: 'boot' })[slotType] || 'ring';
+        return `<img src="assets/items/${__pi}.jpg?v=30" alt="${slotType}" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.75));">`;
         if (!itemName) {
             if (slotType === 'head') return '⚪';
             if (slotType === 'weapon') return '⚔️';
@@ -849,7 +852,7 @@ window.Learn = {
     // Probe order: JPG first (wszystkie tla sa jpg), PNG jako fallback. Brak pliku => zostaje gradient (0 bledow 404 w UI).
     applyScene(view, chapter, b) {
         if (!view) return;
-        const V = '29';
+        const V = '30';
         const tint = `radial-gradient(135% 95% at 50% 113%, rgba(${b.glow},.28) 0%, rgba(${b.glow},.08) 38%, transparent 64%), linear-gradient(177deg, ${b.sky[0]}e6 0%, ${b.sky[1]}cc 48%, ${b.sky[2]}cc 100%)`;
         const applyBg = (ext) => {
             if (view.dataset.biome === chapter) {
