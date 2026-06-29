@@ -849,7 +849,7 @@ window.Learn = {
     // Probe order: JPG first (wszystkie tla sa jpg), PNG jako fallback. Brak pliku => zostaje gradient (0 bledow 404 w UI).
     applyScene(view, chapter, b) {
         if (!view) return;
-        const V = '28';
+        const V = '29';
         const tint = `radial-gradient(135% 95% at 50% 113%, rgba(${b.glow},.28) 0%, rgba(${b.glow},.08) 38%, transparent 64%), linear-gradient(177deg, ${b.sky[0]}e6 0%, ${b.sky[1]}cc 48%, ${b.sky[2]}cc 100%)`;
         const applyBg = (ext) => {
             if (view.dataset.biome === chapter) {
@@ -1311,14 +1311,15 @@ window.Learn = {
                             <button class="btn primary" style="padding: 0.5rem;">=</button>
                             <button class="btn warning" style="padding: 0.5rem;">+</button>
                         </div>
-                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #78350f; color: #a8a29e; font-size: 0.9rem; text-align: center; line-height: 1.8;">
-                            <div style="font-weight: 800; color: #fcd34d; margin-bottom: 0.5rem; text-transform: uppercase;">Złote Wzory</div>
-                            <span style="color: #fcd34d;">NPV</span> = Σ [ CFt / (1+r)^t ] - I0<br/>
-                            <span style="color: #fcd34d;">CAPM</span> = Rf + β*(Rm - Rf)<br/>
-                            <span style="color: #fcd34d;">ROE</span> = Zysk Netto / Kapitał Własny
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #78350f; color: #d6cdb8; font-size: 1rem; text-align: center; line-height: 1.5;">
+                            <div style="font-weight: 800; color: #fcd34d; margin-bottom: 0.7rem; text-transform: uppercase; font-family:'Cinzel','Marcellus',serif; letter-spacing:1px;">Złote Wzory</div>
+                            <div style="margin-bottom:.5rem;">$$NPV = \\sum_{t}\\frac{CF_t}{(1+r)^t} - I_0$$</div>
+                            <div style="margin-bottom:.5rem;">$$r_i = R_f + \\beta\\,(R_m - R_f)$$</div>
+                            <div>$$ROE = \\frac{\\text{Zysk netto}}{\\text{Kapitał własny}}$$</div>
                         </div>
                     </div>
                 `;
+                if (typeof renderMathInElement === 'function') renderMathInElement(rightSidebar, { delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}] });
             }
             
             const btn = document.createElement('button');

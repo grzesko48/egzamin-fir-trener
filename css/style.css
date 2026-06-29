@@ -1528,3 +1528,63 @@ button:focus-visible,
 
 /* #11 słowa kluczowe — złote (sugeruja interaktywnosc/tooltip) */
 .lesson-body b, .lesson-body strong, .lesson-body .keyterm { color: var(--gold-text,#E8C76A) !important; font-weight:700; cursor:help; border-bottom:1px dotted rgba(212,175,55,0.4); }
+
+
+/* ============================================================
+   GEMINI PRO — runda 4: PRAWDZIWE TEKSTURY (PIL assety) + dark-fantasy kalkulator
+   ============================================================ */
+
+/* #13 okno lekcji: faktura ciemnej skóry/kamienia pod ciemnym tintem (nie goła plama) */
+.lesson-dialog-text {
+  background-image: linear-gradient(rgba(10,8,12,0.80), rgba(10,8,12,0.86)), url('assets/textures/leather.jpg') !important;
+  background-size: cover, 300px 300px !important;
+  background-blend-mode: normal;
+}
+
+/* #5 ribbon "LEKCJA": kamień + faza + pęknięcia */
+.lesson-ribbon {
+  background-image: linear-gradient(rgba(36,33,30,0.45), rgba(10,9,8,0.6)), url('assets/textures/stone.jpg') !important;
+  background-size: cover, 200px !important;
+  border-color: #6b5836 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -3px 6px rgba(0,0,0,0.7), 0 3px 8px rgba(0,0,0,0.6) !important;
+  text-shadow: 0 2px 3px #000 !important;
+}
+
+/* #9 NPC: mosiężna szczotkowana rama (border-image z tekstury) */
+.npc-portrait-frame {
+  border: 7px solid transparent !important;
+  border-image: url('assets/textures/brass.jpg') 30 stretch !important;
+  box-shadow: 0 0 0 2px #1a1410, 0 0 24px rgba(185,146,63,0.55), inset 0 0 16px rgba(0,0,0,0.65) !important;
+}
+
+/* #6 paski statystyk: mosiężna rama na tracku (rzeźbiony metal) */
+#rpg-character-panel .bar-track {
+  border: 3px solid transparent !important;
+  border-image: url('assets/textures/brass.jpg') 8 stretch !important;
+}
+
+/* #1 Tablica Biegłości (prawy sidebar) — kamień zamiast czarnego plastiku */
+#learn-right-sidebar > .glass-card {
+  background-image: linear-gradient(rgba(22,18,14,0.80), rgba(8,7,6,0.88)), url('assets/textures/stone.jpg') !important;
+  background-size: cover, 260px !important;
+  border-image: url('assets/textures/brass.jpg') 10 stretch !important; border-width: 3px !important; border-style: solid !important;
+}
+/* #1 kalkulator — dark-fantasy metalowe klawisze (nie pomarańczowy iOS numpad) */
+#learn-right-sidebar .btn {
+  background: linear-gradient(180deg, #2c2720, #14100b) !important;
+  border: 1px solid #5c4a32 !important; color: #e8d9b5 !important;
+  border-radius: 5px !important; font-family: 'Cinzel','Marcellus',serif !important; font-weight: 700 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -2px 3px rgba(0,0,0,0.6), 0 2px 3px rgba(0,0,0,0.6) !important;
+  text-shadow: 0 1px 2px #000 !important;
+}
+#learn-right-sidebar .btn:hover { background: linear-gradient(180deg, #3a342a, #1d1812) !important; }
+#learn-right-sidebar .btn.warning { color: #e8a23c !important; }
+#learn-right-sidebar .btn.primary { color: #ffe9a8 !important; border-color: #b9923f !important; box-shadow: inset 0 0 10px rgba(185,146,63,0.3), 0 2px 4px rgba(0,0,0,0.6) !important; }
+#learn-right-sidebar h3 { text-shadow: 0 2px 4px #000 !important; }
+
+/* #3 wykresy CAPM/NPV — większe i czytelne (nie znaczek pocztowy) */
+.lesson-dialog.has-side { grid-template-columns: minmax(0,1fr) 380px !important; }
+.lesson-siderail .medieval-chart-container { padding: 1rem !important; }
+.lesson-siderail .medieval-chart-container svg { max-width: 100% !important; width: 100% !important; }
+.medieval-chart-container svg text { font-size: 15px !important; }
+.medieval-chart-container svg text[font-weight="bold"] { font-size: 16px !important; }
