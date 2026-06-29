@@ -1,7 +1,9 @@
 const Store = {
     _data: {
         progress: {}, // chapter_id -> boolean
-        streak: { count: 0, lastDate: null },
+        // streak: count = kolejne dni z rzedu; freezes = "zamrozenia serii" (ochrona przed rage-quit);
+        // best = rekord; goalDate = dzien, w ktorym domknieto cel (by nie nagradzac 2x).
+        streak: { count: 0, lastDate: null, freezes: 0, best: 0, goalDate: null },
         flashcards: {}, // fc_id -> { interval: 0, repetition: 0, efactor: 2.5, nextReview: 0 }
         lessons: {}, // lesson_id -> { interval: 0, repetition: 0, efactor: 2.5, nextReview: 0, mastery: 0 }
         gamify: { xp: 0, level: 1, dailyQuests: { date: null, completed: 0 } },
@@ -25,6 +27,8 @@ const Store = {
                 this._data.gamify = { ...this._data.gamify, ...(parsed.gamify || {}) };
                 this._data.progress = { ...this._data.progress, ...(parsed.progress || {}) };
                 this._data.settings = { ...this._data.settings, ...(parsed.settings || {}) };
+                // streak: deep-merge, by stare zapisy (bez freezes/best/goalDate) dostaly nowe pola
+                this._data.streak = { ...this._data.streak, ...(parsed.streak || {}) };
             } catch (e) {
                 console.error("Store V2 parsing error", e);
             }
@@ -78,6 +82,7 @@ const Store = {
             this._data.history.push(entry);
         }
         entry.itemsDone++;
+        this._maybeAwardDailyGoal();
         this.save();
     },
 
@@ -86,38 +91,94 @@ const Store = {
     },
 
     // --- Streak ---
+    // Klucz dnia w czasie LOKALNYM (nie UTC) -> "YYYY-MM-DD". Liczymy w pelnych dniach
+    // kalendarzowych, a nie w roznicy milisekund (stary blad: wizyta nastepnego dnia dawala
+    // ceil(>1)=2 i kasowala serie, przez co streak NIGDY nie przekraczal 1).
+    _dayKey(ms) {
+        const d = new Date(ms);
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${d.getFullYear()}-${m}-${day}`;
+    },
+    // Roznica w pelnych dniach kalendarzowych miedzy dwoma kluczami/datami.
+    _daysBetween(aKey, bKey) {
+        const a = new Date((aKey.length === 10 ? aKey + 'T00:00:00' : aKey));
+        const b = new Date((bKey.length === 10 ? bKey + 'T00:00:00' : bKey));
+        a.setHours(0, 0, 0, 0); b.setHours(0, 0, 0, 0);
+        return Math.round((b - a) / 86400000);
+    },
+
+    // Wolane przy starcie: jesli minal CALY dzien bez aktywnosci, zuzyj "zamrozenie" (freeze),
+    // a gdy go brak — zerwij serie. Empatia anty-rage-quit ([#duolingo-gamifikacja]).
     updateStreak() {
-        const todayStr = new Date().toDateString();
-        const last = this._data.streak.lastDate;
-        
-        if (last !== todayStr) {
-            if (last) {
-                const lastDateObj = new Date(last);
-                const diffTime = Math.abs(new Date() - lastDateObj);
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                
-                if (diffDays > 1) {
-                    this._data.streak.count = 0;
-                }
+        const s = this._data.streak;
+        if (!s || !s.lastDate) return;
+        const todayKey = this._dayKey(Date.now());
+        const prevKey = this._dayKey(new Date(s.lastDate).getTime()); // normalizuj stary format
+        s.lastDate = prevKey;
+        if (prevKey === todayKey) { this.save(); return; }
+        const gap = this._daysBetween(prevKey, todayKey);
+        if (gap >= 2) {
+            const missed = gap - 1;          // ile PELNYCH dni opuszczono
+            if ((s.freezes || 0) >= missed) {
+                s.freezes -= missed;
+                // "most": udawaj, ze ostatnia nauka byla wczoraj, by dzisiejsza akcja kontynuowala serie
+                s.lastDate = this._dayKey(Date.now() - 86400000);
             } else {
-                this._data.streak.count = 0;
+                s.count = 0;
+                s.lastDate = null;           // czysty restart przy pierwszej dzisiejszej aktywnosci
             }
             this.save();
         }
     },
-    
+
     incrementStreak() {
-        const todayStr = new Date().toDateString();
-        if (this._data.streak.lastDate !== todayStr) {
-            this._data.streak.count++;
-            this._data.streak.lastDate = todayStr;
+        const s = this._data.streak;
+        const todayKey = this._dayKey(Date.now());
+        if (s.lastDate === todayKey) { this.logActivity(); return true; } // dzis juz policzone
+        const prevKey = s.lastDate ? this._dayKey(new Date(s.lastDate).getTime()) : null;
+        const gap = prevKey ? this._daysBetween(prevKey, todayKey) : 1;
+        if (!prevKey) {
+            s.count = 1;
+        } else if (gap === 1) {
+            s.count = (s.count || 0) + 1;                    // kolejny dzien z rzedu
+        } else if (gap >= 2) {
+            const missed = gap - 1;
+            if ((s.freezes || 0) >= missed) { s.freezes -= missed; s.count = (s.count || 0) + 1; }
+            else { s.count = 1; }                            // seria zerwana -> start od dzis
+        } else {
+            s.count = Math.max(1, s.count || 0);             // anomalia zegara
         }
+        s.lastDate = todayKey;
+        s.best = Math.max(s.best || 0, s.count);
         this.logActivity();
         this.save();
         return true;
     },
 
     getStreak() { return this._data.streak.count; },
+    getFreezes() { return (this._data.streak && this._data.streak.freezes) || 0; },
+    getBestStreak() { return (this._data.streak && this._data.streak.best) || 0; },
+
+    // --- Cel dnia (petla nawyku: wyzwalacz -> akcja -> mikronagroda, [#playbook-nawyk-30-dni]) ---
+    getDailyGoal() { return (this._data.settings && this._data.settings.dailyGoal) || 10; },
+    setDailyGoal(n) { this._data.settings.dailyGoal = Math.max(1, Math.min(100, n | 0)); this.save(); },
+    getItemsToday() {
+        const today = new Date().toISOString().split('T')[0];
+        const e = (this._data.history || []).find(h => h.date === today);
+        return e ? e.itemsDone : 0;
+    },
+    // Domkniecie celu dnia -> +1 freeze (max 5) + sygnal dla UI (toast/konfetti). Raz dziennie.
+    _maybeAwardDailyGoal() {
+        const today = this._dayKey(Date.now());
+        const s = this._data.streak;
+        if (s.goalDate === today) return;
+        if (this.getItemsToday() >= this.getDailyGoal()) {
+            s.goalDate = today;
+            s.freezes = Math.min(5, (s.freezes || 0) + 1);
+            try { document.dispatchEvent(new CustomEvent('fir:dailygoal', { detail: { freezes: s.freezes } })); } catch (e) {}
+        }
+    },
 
     // --- Progress ---
     markChapterDone(chapterId) {

@@ -7,6 +7,32 @@ window.Study = {
     this.data = data;
     if (!Store._data.toImprove) Store._data.toImprove = [];
     if (!Store._data.answered) Store._data.answered = { ok: 0, bad: 0 };
+    // Nagroda za domkniecie celu dnia (natychmiastowy feedback -> dopamina, [#duolingo-gamifikacja]).
+    if (!this._goalBound) {
+      this._goalBound = true;
+      document.addEventListener('fir:dailygoal', (e) => {
+        const fr = (e.detail && e.detail.freezes) || Store.getFreezes();
+        if (typeof Gamify !== 'undefined' && Gamify.awardXP) Gamify.awardXP(25, 'Cel dnia domknięty! +❄️');
+        if (typeof Anim !== 'undefined' && Anim.fireConfetti) Anim.fireConfetti();
+        this.toast(`🎯 Cel dnia domknięty! Masz ${fr} ❄️ zamrożeń serii.`);
+        if (App.currentView === 'progress') this.renderProgress();
+      });
+    }
+  },
+
+  // Lekki, samoznikajacy komunikat (bez ingerencji w style.css).
+  toast(msg) {
+    const t = document.createElement('div');
+    t.textContent = msg;
+    t.style.cssText = 'position:fixed;left:50%;bottom:6%;transform:translateX(-50%);z-index:10001;' +
+      'background:rgba(12,10,16,.95);color:#ECE6D8;border:1px solid rgba(212,175,55,.5);' +
+      'padding:.7rem 1.2rem;border-radius:10px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.6);' +
+      "font-family:'Outfit',sans-serif;max-width:90vw;text-align:center";
+    document.body.appendChild(t);
+    if (typeof gsap !== 'undefined') {
+      gsap.fromTo(t, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .35 });
+      gsap.to(t, { opacity: 0, y: 20, duration: .4, delay: 3, onComplete: () => t.remove() });
+    } else { setTimeout(() => t.remove(), 3400); }
   },
 
   chapterTitle(ch) {
@@ -34,6 +60,75 @@ window.Study = {
     if (Store._data.toImprove) { Store._data.toImprove.splice(idx, 1); Store.save(); this.renderImprove(); }
   },
 
+  // --- "DZIŚ": petla nawyku (streak + freeze + cel dnia) i KOLEJKA POWTÓREK ---
+  // Spaced repetition liczy nextReview, ale nic nie zmuszalo do powtorek. Tu zamieniam
+  // martwy harmonogram w codzienna, PRZEPLATANA sesje recall ([#szybka-nauka]).
+  todayPanelHTML(rows, now) {
+    const streak = Store.getStreak ? Store.getStreak() : 0;
+    const best = Store.getBestStreak ? Store.getBestStreak() : 0;
+    const freezes = Store.getFreezes ? Store.getFreezes() : 0;
+    const goal = Store.getDailyGoal ? Store.getDailyGoal() : 10;
+    const done = Store.getItemsToday ? Store.getItemsToday() : 0;
+    const pct = Math.min(100, Math.round(100 * done / Math.max(1, goal)));
+    const goalDone = done >= goal;
+
+    // Kolejka powtorek: dzialy, ktorych nextReview juz minal (przeplatane = posortowane wg "jak dawno").
+    const due = rows.filter(r => r.nr > 0 && r.nr <= now && r.reps > 0).sort((a, b) => a.nr - b.nr);
+    // Co dalej, gdy brak powtorek: pierwszy nieruszony dzial (active recall na nowym materiale).
+    const fresh = rows.filter(r => !r.reps && r.m === 0).sort((a, b) => a.day - b.day)[0];
+
+    const ring = `<div style="position:relative;width:88px;height:88px;flex-shrink:0;border-radius:50%;
+        background:conic-gradient(${goalDone ? 'var(--success,#3ec97a)' : 'var(--primary,#E8C76A)'} ${pct * 3.6}deg, rgba(255,255,255,.08) 0)">
+        <div style="position:absolute;inset:6px;border-radius:50%;background:rgba(10,8,12,.92);display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <b style="font-size:1.15rem;line-height:1">${done}/${goal}</b>
+          <span style="font-size:.58rem;letter-spacing:.12em;opacity:.7">CEL DNIA</span>
+        </div></div>`;
+
+    const queueHTML = due.length
+      ? `<div style="margin-top:1rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+            <b style="font-size:.95rem">🗓️ Powtórki na dziś — ${due.length} (przeplatane)</b>
+            <button class="btn primary" style="padding:.4rem 1rem;font-size:.85rem" onclick="window.Study.goLesson('${due[0].id}')">Powtórz teraz ▶</button>
+          </div>
+          ${due.slice(0, 8).map(r => `<div style="display:flex;justify-content:space-between;align-items:center;padding:.35rem .2rem;border-top:1px solid rgba(255,255,255,.05);cursor:pointer" onclick="window.Study.goLesson('${r.id}')">
+              <span style="font-size:.9rem">Dzień ${r.day} • ${r.title}</span>
+              <span style="font-size:.75rem;opacity:.7">${this.dueLabel(r.nr, now)}</span>
+            </div>`).join('')}
+        </div>`
+      : `<div style="margin-top:1rem;padding:.7rem .9rem;background:rgba(62,201,122,.08);border:1px solid rgba(62,201,122,.25);border-radius:10px;font-size:.9rem">
+          ✅ Brak zaległych powtórek. ${fresh ? `Czas na nowy materiał: <b style="cursor:pointer;color:var(--primary,#E8C76A)" onclick="window.Study.goLesson('${fresh.id}')">Dzień ${fresh.day} • ${fresh.title} ▶</b>` : 'Pięknie — wszystko ruszone. Wróć po powtórki, gdy dojrzeją.'}
+        </div>`;
+
+    return `<div class="glass-card" style="margin-bottom:1.5rem">
+      <div style="display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap">
+        ${ring}
+        <div style="flex:1;min-width:200px">
+          <div style="display:flex;align-items:baseline;gap:.6rem">
+            <span style="font-size:1.8rem;line-height:1">🔥</span>
+            <b style="font-size:1.8rem;line-height:1;color:var(--primary,#E8C76A)">${streak}</b>
+            <span style="opacity:.8">dni z rzędu</span>
+            ${best > streak ? `<span class="text-muted" style="font-size:.8rem">(rekord ${best})</span>` : ''}
+          </div>
+          <div style="margin-top:.45rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+            <span title="Zamrożenia chronią serię, gdy opuścisz dzień">${'❄️'.repeat(Math.max(0, freezes)) || '—'} <span class="text-muted" style="font-size:.8rem">${freezes} zamrożeń serii</span></span>
+          </div>
+          <div class="text-muted" style="font-size:.82rem;margin-top:.45rem">
+            ${goalDone ? 'Cel dnia domknięty — seria bezpieczna. ' : `Zrób jeszcze <b>${goal - done}</b> dziś, by domknąć cel i zdobyć ❄️. `}Nie przerywaj łańcucha; jeden opuszczony dzień łapie zamrożenie.
+          </div>
+        </div>
+      </div>
+      ${queueHTML}
+    </div>`;
+  },
+
+  // "zaległe 2 dni" / "na teraz" — czytelna etykieta zamiast surowego timestampu.
+  dueLabel(nr, now) {
+    const days = Math.floor((now - nr) / 86400000);
+    if (days >= 1) return `zaległe ${days} dn.`;
+    const hrs = Math.floor((now - nr) / 3600000);
+    return hrs >= 1 ? `zaległe ${hrs} h` : 'na teraz';
+  },
+
   // --- POSTĘPY ---
   renderProgress() {
     const el = document.getElementById('progress-container');
@@ -58,6 +153,7 @@ window.Study = {
 
     const weak = rows.slice().sort((a, b) => a.m - b.m).filter(r => r.m < 80).slice(0, 6);
     el.innerHTML = `
+      ${this.todayPanelHTML(rows, now)}
       <div class="glass-card" style="text-align:center;margin-bottom:1.5rem">
         <div style="font-size:.85rem;opacity:.8;text-transform:uppercase;letter-spacing:1px">Gotowość do obrony</div>
         <div class="huge-number" style="color:${col(readiness)}">${readiness}%</div>
