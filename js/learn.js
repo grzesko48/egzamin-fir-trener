@@ -418,7 +418,7 @@ window.Learn = {
                     <img src="assets/avatars/${avatar.class}.png?v=2026" style="width:100%; height:100%; object-fit:cover;" alt="Avatar" />
                 </div>
                 <h3 style="margin: 0.5rem 0 0 0;" class="gradient-text">${name}</h3>
-                <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Poziom ${currentLevel} • ${rank}</div>
+                <div style="font-size: 0.95rem; color: #fde047; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; text-shadow: 0 0 10px rgba(253, 224, 71, 0.4), 0 2px 4px #000;">Poziom ${currentLevel} • ${rank}</div>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
@@ -451,7 +451,7 @@ window.Learn = {
                         <span>${souls} / ${soulsNeeded}</span>
                     </div>
                     <div class="bar-track">
-                        <div class="bar-fill" style="width: ${xpPercent}%; background: linear-gradient(90deg, #ff5722, #ffb74d); box-shadow: 0 0 8px rgba(255,87,34,0.5);"></div>
+                        <div class="bar-fill" style="width: ${xpPercent}%;"></div>
                     </div>
                 </div>
             </div>
@@ -481,7 +481,7 @@ window.Learn = {
                 </div>
             </div>
             
-            <button class="btn secondary ripple" style="width: 100%; font-size: 0.85rem; padding: 0.6rem;" onclick="window.Learn.resetAvatar()">Zresetuj Postać</button>
+            <button class="btn danger ripple" style="width: 100%; font-size: 0.9rem; padding: 0.6rem; font-weight: 700; background: #991b1b; color: #fecaca; border: 1px solid #f87171;" onclick="if(confirm('⚠️ Czy na pewno chcesz wyzerować całą postać?')) window.Learn.resetAvatar()">⚠️ Zresetuj Postać</button>
         `;
     },
 
@@ -644,9 +644,9 @@ window.Learn = {
         });
     },
 
-    injectHelpfulGraphics(html) {
-        if (!html) return html;
-        let modifiedHtml = html;
+    injectHelpfulGraphics(html, sideOnly) {
+        if (!html) return sideOnly ? '' : html;
+        let modifiedHtml = sideOnly ? '' : html;
 
         // 1. CAPM / SML Chart
         if (html.includes('CAPM') && !html.includes('id="chart-capm"')) {
@@ -849,7 +849,7 @@ window.Learn = {
     // Probe order: JPG first (wszystkie tla sa jpg), PNG jako fallback. Brak pliku => zostaje gradient (0 bledow 404 w UI).
     applyScene(view, chapter, b) {
         if (!view) return;
-        const V = '27';
+        const V = '28';
         const tint = `radial-gradient(135% 95% at 50% 113%, rgba(${b.glow},.28) 0%, rgba(${b.glow},.08) 38%, transparent 64%), linear-gradient(177deg, ${b.sky[0]}e6 0%, ${b.sky[1]}cc 48%, ${b.sky[2]}cc 100%)`;
         const applyBg = (ext) => {
             if (view.dataset.biome === chapter) {
@@ -1248,14 +1248,14 @@ window.Learn = {
         const pct = Math.round((this.currentStepIndex / lesson.steps.length) * 100);
 
         container.innerHTML = `
-            <div class="glass-card fade-in hardcore-step" style="width: 100%; position: relative;">
+            <div class="glass-card fade-in hardcore-step lesson-window" style="width: 100%; position: relative;">
                 <!-- Postęp w lekcji -->
                 <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">
-                    <span>Postęp starcia</span>
+                    <span>POSTĘP STARCIA</span>
                     <span>${this.currentStepIndex + 1} / ${lesson.steps.length}</span>
                 </div>
-                <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; margin-bottom: 2rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.03);">
-                    <div style="width: ${pct}%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 0.3s ease;"></div>
+                <div class="progress-fuse-container">
+                    <div class="progress-fuse-fill" style="width: ${pct}%;"></div>
                 </div>
 
                 ${this.getRibbonHTML(step.type)}
@@ -1271,18 +1271,55 @@ window.Learn = {
 
         if (step.type === 'teach' || step.type === 'example') {
             const npcName = lesson.chapter === 'fundament' || lesson.chapter === 'stopy' ? 'Wielki Audytor' : 'Trener-Mistrz';
+            const npcImg = lesson.chapter === 'fundament' || lesson.chapter === 'stopy' ? 'audytor' : 'kinezjolog';
+            const side = this.injectHelpfulGraphics(step.html, true);
 
             contentEl.innerHTML = `
-                <div style="display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 1rem; background: rgba(255,255,255,0.01); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.03); box-shadow: inset 0 0 15px rgba(0,0,0,0.3);">
-                    <div class="npc-portrait" style="width: 112px; height: 112px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 3px solid var(--primary); overflow:hidden; box-shadow: 0 0 0 4px rgba(0,0,0,0.45), 0 0 20px var(--primary-glow), inset 0 0 14px rgba(0,0,0,0.45);">
-                        <img src="assets/avatars/${lesson.chapter === 'fundament' || lesson.chapter === 'stopy' ? 'audytor' : 'kinezjolog'}.png" style="width:100%; height:100%; object-fit:cover;" />
+                <div class="npc-dialog-box ${side ? 'has-side' : ''}">
+                    <div class="lesson-dialog-text">
+                        <div class="npc-head" style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+                            <div class="npc-portrait">
+                                <img src="assets/avatars/${npcImg}.png" alt="${npcName}" />
+                            </div>
+                            <div class="npc-name" style="font-weight: bold; color: #d97706; font-size: 1.4rem; font-family: 'Cinzel','Marcellus',serif; letter-spacing: 0.5px; text-shadow: 0 2px 4px #000;">${npcName}</div>
+                        </div>
+                        <div class="text-lg lesson-body" style="line-height: 1.7; font-size: 1.15rem; max-width: 68ch; color: #e5e5e5;">${step.html}</div>
                     </div>
-                    <div>
-                        <div style="font-weight: bold; color: var(--primary); font-size: 1.3rem; font-family: 'Cinzel','Marcellus',serif; margin-bottom: 0.6rem; letter-spacing: 0.5px;">💬 ${npcName}</div>
-                        <div class="text-lg lesson-body" style="line-height: 1.65; font-size: 1.25rem; max-width: 68ch;">${this.injectHelpfulGraphics(step.html)}</div>
-                    </div>
+                    ${side ? `<aside class="lesson-siderail">${side}</aside>` : ''}
                 </div>
             `;
+            
+            if (rightSidebar) {
+                rightSidebar.innerHTML = `
+                    <div class="glass-card fade-in" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; border: 3px solid #44403c; border-bottom-color: #292524; border-right-color: #292524; background: linear-gradient(135deg, #1c1917, #0c0a09); box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 5px 15px rgba(0,0,0,0.6);">
+                        <h3 style="font-family: 'Cinzel', serif; color: #d97706; text-align: center; border-bottom: 2px solid #78350f; padding-bottom: 0.8rem; margin-bottom: 0.5rem; text-shadow: 0 2px 2px #000;">Tablica Biegłości</h3>
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; background: #000; padding: 1rem; border-radius: 8px; box-shadow: inset 0 0 10px rgba(0,0,0,0.9);">
+                            <button class="btn secondary" style="padding: 0.5rem;">7</button>
+                            <button class="btn secondary" style="padding: 0.5rem;">8</button>
+                            <button class="btn secondary" style="padding: 0.5rem;">9</button>
+                            <button class="btn warning" style="padding: 0.5rem;">/</button>
+                            <button class="btn secondary" style="padding: 0.5rem;">4</button>
+                            <button class="btn secondary" style="padding: 0.5rem;">5</button>
+                            <button class="btn secondary" style="padding: 0.5rem;">6</button>
+                            <button class="btn warning" style="padding: 0.5rem;">*</button>
+                            <button class="btn secondary" style="padding: 0.5rem;">1</button>
+                            <button class="btn secondary" style="padding: 0.5rem;">2</button>
+                            <button class="btn secondary" style="padding: 0.5rem;">3</button>
+                            <button class="btn warning" style="padding: 0.5rem;">-</button>
+                            <button class="btn secondary" style="padding: 0.5rem;">0</button>
+                            <button class="btn secondary" style="padding: 0.5rem;">.</button>
+                            <button class="btn primary" style="padding: 0.5rem;">=</button>
+                            <button class="btn warning" style="padding: 0.5rem;">+</button>
+                        </div>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #78350f; color: #a8a29e; font-size: 0.9rem; text-align: center; line-height: 1.8;">
+                            <div style="font-weight: 800; color: #fcd34d; margin-bottom: 0.5rem; text-transform: uppercase;">Złote Wzory</div>
+                            <span style="color: #fcd34d;">NPV</span> = Σ [ CFt / (1+r)^t ] - I0<br/>
+                            <span style="color: #fcd34d;">CAPM</span> = Rf + β*(Rm - Rf)<br/>
+                            <span style="color: #fcd34d;">ROE</span> = Zysk Netto / Kapitał Własny
+                        </div>
+                    </div>
+                `;
+            }
             
             const btn = document.createElement('button');
             btn.className = 'btn primary ripple';
@@ -1982,20 +2019,15 @@ window.Learn = {
 
     // --- Ribbon Generator Helper ---
     getRibbonHTML(type) {
-        let text = '', bg = '', icon = '';
-        if (type === 'teach') { text = 'LEKCJA'; bg = 'rgba(0, 240, 255, 0.15)'; icon = '📖'; }
-        else if (type === 'example') { text = 'PRZYKŁAD'; bg = 'rgba(255, 170, 0, 0.15)'; icon = '🔍'; }
-        else if (type === 'check') { text = 'STARCIE KONTROLNE'; bg = 'rgba(255, 23, 68, 0.15)'; icon = '⚔️'; }
-        else if (type === 'recall') { text = 'AKTYWNY RECALL'; bg = 'rgba(200, 50, 255, 0.15)'; icon = '💬'; }
-        else if (type === 'blurt') { text = 'PRÓBA DUSZY (BLURTING)'; bg = 'rgba(255, 0, 150, 0.15)'; icon = '✍️'; }
-        else if (type === 'capstone') { text = 'WERYFIKACJA OSTATECZNA'; bg = 'rgba(255, 120, 0, 0.15)'; icon = '🎯'; }
+        let text = '', icon = '';
+        if (type === 'teach') { text = 'LEKCJA'; icon = '📖'; }
+        else if (type === 'example') { text = 'PRZYKŁAD'; icon = '🔍'; }
+        else if (type === 'check') { text = 'STARCIE KONTROLNE'; icon = '⚔️'; }
+        else if (type === 'recall') { text = 'AKTYWNY RECALL'; icon = '🧠'; }
+        else if (type === 'blurt') { text = 'PRÓBA DUSZY (BLURTING)'; icon = '✍️'; }
+        else if (type === 'capstone') { text = 'WERYFIKACJA OSTATECZNA'; icon = '🎯'; }
         
-        return `<div style="
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            background: ${bg}; padding: 0.4rem 1.1rem; border-radius: 20px;
-            font-size: 0.8rem; font-weight: 800; letter-spacing: 1px; color: var(--text);
-            margin-bottom: 1.8rem; border: 1px solid rgba(255,255,255,0.05);
-        ">${icon} ${text}</div>`;
+        return `<div class="lesson-ribbon">${icon} ${text}</div>`;
     },
 
     nextStep(quality) {

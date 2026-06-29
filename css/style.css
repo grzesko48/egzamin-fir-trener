@@ -50,6 +50,12 @@ body {
     overflow-x: hidden;
 }
 
+/* Scrollbar Dark Fantasy */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: rgba(10, 10, 15, 0.9); border-left: 1px solid var(--border-glass); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #5c4a3d, #3e2e21); border-radius: 4px; border: 1px solid rgba(197, 168, 128, 0.3); }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #8a705a, #5c4a3d); }
+
 /* Canvas Background */
 #hero-canvas {
     position: fixed;
@@ -62,10 +68,11 @@ body {
 }
 
 .gradient-text {
-    background: linear-gradient(90deg, var(--primary), var(--success));
+    background: linear-gradient(180deg, #fef3c7 0%, #d97706 70%, #92400e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-weight: 800;
+    font-weight: 900;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
 }
 .glow-text {
     text-shadow: 0 0 10px var(--primary-glow);
@@ -570,11 +577,14 @@ body {
 
 .rpg-stat-bar .bar-track {
     width: 100%;
-    height: 10px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 5px;
+    height: 14px;
+    background: #0f0f12;
+    border-radius: 4px;
+    border: 2px solid #292524;
+    border-bottom-color: #44403c;
+    border-right-color: #44403c;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.8), 0 1px 1px rgba(255,255,255,0.05);
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.05);
 }
 
 .rpg-stat-bar .bar-fill {
@@ -584,18 +594,21 @@ body {
 }
 
 .bar-hp .bar-fill {
-    background: linear-gradient(90deg, #8b0000, #d32f2f);
-    box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+    background: linear-gradient(180deg, #f87171 0%, #dc2626 40%, #7f1d1d 100%);
+    box-shadow: inset 0 2px 2px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.5);
+    border-right: 2px solid #fecaca;
 }
 
 .bar-xp .bar-fill {
-    background: linear-gradient(90deg, #b45309, #d4af37);
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+    background: linear-gradient(180deg, #fde047 0%, #d97706 40%, #78350f 100%);
+    box-shadow: inset 0 2px 2px rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.5);
+    border-right: 2px solid #fef08a;
 }
 
 .bar-vitality .bar-fill {
-    background: linear-gradient(90deg, #4338ca, #38bdf8);
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+    background: linear-gradient(180deg, #7dd3fc 0%, #0ea5e9 40%, #0369a1 100%);
+    box-shadow: inset 0 2px 2px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.5);
+    border-right: 2px solid #bae6fd;
 }
 
 /* Equipment slots */
@@ -608,31 +621,34 @@ body {
 
 .rpg-eq-slot {
     aspect-ratio: 1;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px dashed rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
+    background: linear-gradient(135deg, #1c1917, #0c0a09);
+    border: 3px solid #44403c;
+    border-bottom-color: #292524;
+    border-right-color: #292524;
+    border-radius: 8px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.9), 0 4px 6px rgba(0,0,0,0.6);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
-    color: var(--text-muted);
+    font-size: 2.2rem;
+    color: #78716c;
     position: relative;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .rpg-eq-slot:hover {
-    background: rgba(0, 229, 255, 0.05);
-    border-color: var(--primary);
-    color: var(--text-main);
+    border-color: #78350f;
+    background: linear-gradient(135deg, #292524, #1c1917);
+    color: #d97706;
 }
 
 .rpg-eq-slot.equipped {
-    border-style: solid;
-    border-color: var(--success);
-    background: radial-gradient(circle at center, rgba(0, 230, 118, 0.1), transparent);
-    box-shadow: 0 0 10px rgba(0, 230, 118, 0.1);
+    border-color: #d97706;
+    background: radial-gradient(circle at center, rgba(217, 119, 6, 0.2), #0c0a09);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.9), 0 0 15px rgba(217, 119, 6, 0.4);
+    color: #fcd34d;
 }
 
 .rpg-eq-slot .slot-name {
@@ -1323,5 +1339,192 @@ button:focus-visible,
     transition: opacity 0.25s ease, transform 0.3s ease;
 }
 
+/* --- Audyt 11/10 UI Fixes --- */
+.lesson-body strong {
+    color: #fcd34d;
+    font-weight: 800;
+    text-shadow: 0 0 8px rgba(252, 211, 77, 0.4), 0 2px 2px #000;
+}
+
+.npc-dialog-box {
+    display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 1rem;
+    background: linear-gradient(135deg, rgba(30, 30, 35, 0.85) 0%, rgba(15, 15, 20, 0.95) 100%);
+    padding: 2.5rem 3.5rem;
+    border-radius: 8px;
+    border: 2px solid #3e2e21;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.8), 0 10px 30px rgba(0,0,0,0.6);
+    position: relative;
+}
+
+.npc-dialog-box::before, .npc-dialog-box::after {
+    content: ''; position: absolute; width: 20px; height: 20px;
+    border: 3px solid #78350f;
+}
+.npc-dialog-box::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+.npc-dialog-box::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+.npc-portrait {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: #000;
+    border: 4px solid transparent;
+    background-image: linear-gradient(#121316, #121316), linear-gradient(135deg, #d97706, #78350f, #d97706);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.9), 0 10px 25px rgba(0,0,0,0.8), 0 0 0 2px #451a03;
+    overflow: hidden;
+}
+
+.npc-portrait img {
+    width: 100%; height: 100%; object-fit: cover;
+}
+
+.ribbon-lesson {
+    position: absolute;
+    top: -15px; left: -15px;
+    background: linear-gradient(135deg, #b45309, #78350f);
+    color: #fef3c7;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    padding: 0.5rem 1.2rem;
+    border: 2px solid #d97706;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    z-index: 10;
+}
+.ribbon-lesson::after {
+    content: ''; position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px;
+    border: 1px dashed rgba(255,255,255,0.2); pointer-events: none;
+}
+
+.progress-fuse-container {
+    width: 100%; height: 12px;
+    background: #121316;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+    border: 2px solid #3e2e21;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.9), 0 2px 4px rgba(255,255,255,0.05);
+    position: relative; overflow: visible;
+}
+
+.progress-fuse-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #991b1b, #ea580c, #fde047);
+    border-radius: 4px;
+    box-shadow: 0 0 15px rgba(234, 88, 12, 0.8);
+    position: relative;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-fuse-fill::after {
+    content: ''; position: absolute; right: -5px; top: -4px; bottom: -4px; width: 10px; height: 16px;
+    background: #fff; filter: blur(3px);
+    box-shadow: 0 0 10px #fde047, 0 0 20px #ea580c;
+    border-radius: 50%;
+}
 
 
+/* ============================================================
+   GEMINI PRO — runda 3: pełny redesign 16 pkt (Claude)
+   Dopisane na końcu => wygrywa kaskadą nad bazą i zmianami Antigravity.
+   ============================================================ */
+
+/* #14 ukryj przełącznik trybu jasnego (light mode = zbrodnia na dark fantasy) */
+.theme-toggle { display: none !important; }
+
+/* #16 brand "FiR Trener" — szeryfowy Cinzel + złota poświata (tożsamość) */
+@media (min-width: 992px) {
+  .glass-nav .nav-brand { display: block !important; font-family: 'Cinzel','Marcellus',serif !important; font-size: 1.35rem !important; letter-spacing: 0.04em !important; margin: 0 0 1.6rem 0.2rem !important; }
+  .glass-nav .nav-brand .brand-glow { color: var(--gold-text, #E8C76A); text-shadow: 0 0 14px rgba(212,175,55,0.6); }
+  .glass-nav .nav-brand .brand-word { display: inline !important; color: #d8d2c4; }
+}
+
+/* #3 nav: surowe metalowo-złote glify zamiast kolorowych emoji */
+@media (min-width: 992px) {
+  .nav-btn .icon { filter: grayscale(1) brightness(1.5) sepia(0.55) saturate(1.3) hue-rotate(3deg) !important; opacity: 0.8; }
+  .nav-btn.active .icon, .nav-btn:hover .icon { filter: grayscale(1) brightness(1.7) sepia(0.8) saturate(2.2) !important; opacity: 1; }
+}
+
+/* #7 PASEK POSTĘPU "Postęp starcia" — gruby, rzeźbiony, złoty blask */
+.quest-progress-head { display:flex; justify-content:space-between; font-family:'Cinzel','Marcellus',serif; font-size:0.78rem; font-weight:700; letter-spacing:0.12em; color:var(--gold-text,#E8C76A); margin-bottom:0.55rem; }
+.quest-progress-track {
+  position:relative; width:100%; height:18px; margin-bottom:2rem; border-radius:10px;
+  background: linear-gradient(180deg,#05050a,#15131c);
+  border:1px solid #000;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(212,175,55,0.22), 0 1px 0 rgba(255,255,255,0.05);
+}
+.quest-progress-fill {
+  height:100%; border-radius:9px;
+  background: linear-gradient(180deg,#ffe9a8 0%,#e0b33c 45%,#a6781f 100%);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.6), 0 0 14px rgba(224,179,60,0.75);
+  transition: width 0.45s cubic-bezier(.4,0,.2,1);
+}
+
+/* #1 + #2 + #13 OKNO LEKCJI — kute ramy + oddech + 2 kolumny (tekst + szyna na wzory) */
+.lesson-dialog { display:grid; grid-template-columns: minmax(0,1fr); gap:1.6rem; align-items:start; }
+.lesson-dialog.has-side { grid-template-columns: minmax(0,1fr) 340px; }
+@media (max-width: 1150px) { .lesson-dialog.has-side { grid-template-columns: minmax(0,1fr); } }
+.lesson-dialog-text {
+  padding: 2rem 2.3rem; position: relative;
+  background: rgba(8,7,12,0.5);
+  border: 1px solid rgba(212,175,55,0.30);
+  border-radius: 14px;
+  box-shadow: inset 0 0 26px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,0,0,0.6);
+}
+.lesson-dialog-text::before, .lesson-dialog-text::after {
+  content:""; position:absolute; width:20px; height:20px; border:2px solid var(--gold-text,#E8C76A); opacity:0.5;
+}
+.lesson-dialog-text::before { top:9px; left:9px; border-right:none; border-bottom:none; border-top-left-radius:6px; }
+.lesson-dialog-text::after { bottom:9px; right:9px; border-left:none; border-top:none; border-bottom-right-radius:6px; }
+.lesson-dialog .lesson-body { max-width: 74ch; font-size: clamp(1.12rem, 0.9rem + 0.4vw, 1.25rem); line-height: 1.7; }
+.lesson-siderail { display:flex; flex-direction:column; gap:1rem; }
+.lesson-siderail .medieval-chart-container { margin:0 !important; }
+
+/* #9 NPC — ciężka rzeźbiona rama mosiężno-stalowa (wyrwij z tła) */
+.npc-head { display:flex; align-items:center; gap:1.2rem; margin-bottom:1.4rem; }
+.npc-portrait-frame {
+  width:104px; height:104px; flex-shrink:0; border-radius:50%; overflow:hidden;
+  border:3px solid #2a2620;
+  box-shadow: 0 0 0 3px #b9923f, 0 0 0 6px #4a3a22, 0 0 22px rgba(185,146,63,0.5), inset 0 0 16px rgba(0,0,0,0.6);
+}
+.npc-portrait-frame img { width:100%; height:100%; object-fit:cover; }
+.npc-name { font-family:'Cinzel','Marcellus',serif; font-size:1.4rem; font-weight:700; color:var(--gold-text,#E8C76A); text-shadow:0 2px 5px rgba(0,0,0,0.9); letter-spacing:0.5px; }
+
+/* #6 PASKI STATYSTYK — efekt płynu w fiolce + metalowa rama + połysk */
+#rpg-character-panel .bar-track {
+  height:16px !important; border-radius:9px !important; overflow:hidden; position:relative;
+  background: linear-gradient(180deg,#050509,#14121a) !important;
+  border:1px solid #000 !important;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(212,175,55,0.25), 0 1px 0 rgba(255,255,255,0.06) !important;
+}
+#rpg-character-panel .bar-fill { position:relative; border-radius:8px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.5), inset 0 -5px 8px rgba(0,0,0,0.45) !important; }
+#rpg-character-panel .bar-fill::after { content:""; position:absolute; inset:0; border-radius:8px;
+  background: repeating-linear-gradient(115deg, rgba(255,255,255,0.12) 0 5px, transparent 5px 13px); }
+#rpg-character-panel .bar-hp .bar-fill { background: linear-gradient(180deg,#ff8a7a,#d6342a 55%,#7e1810) !important; }
+#rpg-character-panel .bar-vitality .bar-fill { background: linear-gradient(180deg,#7ff0c0,#1fa866 55%,#0d6a3e) !important; }
+
+/* #5 RIBBON "LEKCJA" — kamienna tabliczka zamiast bootstrap-badge */
+.lesson-ribbon {
+  display:inline-flex; align-items:center; gap:0.5rem; margin-bottom:1.4rem;
+  font-family:'Cinzel','Marcellus',serif; font-weight:700; font-size:0.8rem; letter-spacing:0.16em; text-transform:uppercase;
+  color:#f0e2bd; padding:0.5rem 1.3rem; border-radius:4px;
+  background: linear-gradient(180deg,#2b2620,#191510);
+  border:1px solid #5c4a32;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -2px 4px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* #4 reset — destrukcyjny i dyskretny (nie przypadkowy klik) */
+#rpg-character-panel .reset-danger {
+  background: transparent !important; color: rgba(239,68,68,0.65) !important;
+  border: 1px solid rgba(239,68,68,0.22) !important; font-size: 0.7rem !important;
+  padding: 0.38rem !important; opacity: 0.55; letter-spacing: 0.06em; font-weight: 600;
+}
+#rpg-character-panel .reset-danger:hover { opacity: 1; background: rgba(239,68,68,0.14) !important; color:#ff6b6b !important; }
+
+/* #11 słowa kluczowe — złote (sugeruja interaktywnosc/tooltip) */
+.lesson-body b, .lesson-body strong, .lesson-body .keyterm { color: var(--gold-text,#E8C76A) !important; font-weight:700; cursor:help; border-bottom:1px dotted rgba(212,175,55,0.4); }
