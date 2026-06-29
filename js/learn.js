@@ -1085,7 +1085,7 @@ window.Learn = {
                     <div class="boss-chapter-card ${isBossUnlocked ? 'unlocked' : 'locked'}" style="margin-top: 1.2rem; border: 1px solid ${isBossUnlocked ? 'rgba(255,23,68,0.4)' : 'rgba(255,255,255,0.05)'}; background: ${isBossUnlocked ? 'linear-gradient(135deg, rgba(255,23,68,0.04) 0%, transparent 100%)' : 'rgba(0,0,0,0.1)'}; padding: 1.2rem; border-radius: 14px; display: flex; align-items: center; gap: 1.2rem; justify-content: space-between; flex-wrap: wrap;">
                         <div style="display:flex; align-items:center; gap:1.2rem; max-width: 70%;">
                             <div style="width:68px; height:68px; border-radius:50%; overflow:hidden; border: 2px solid ${isBossUnlocked ? 'var(--danger)' : '#666'}; filter: ${isBossUnlocked ? 'none' : 'grayscale(0.75) brightness(0.5)'}; flex-shrink: 0;">
-                                <img src="assets/avatars/boss_${ch}.png?v=43" onerror="this.onerror=null;this.src='assets/avatars/boss_golem.png?v=2026'" style="width:100%; height:100%; object-fit:cover;" />
+                                <img src="assets/avatars/boss_${ch}.png?v=45" onerror="this.onerror=null;this.src='assets/avatars/boss_golem.png?v=2026'" style="width:100%; height:100%; object-fit:cover;" />
                             </div>
                             <div style="text-align: left;">
                                 <h4 style="margin: 0; color: ${isBossUnlocked ? 'var(--danger)' : 'var(--text-muted)'}; font-size:1.1rem; font-weight:800; display:flex; align-items:center; gap:0.5rem;">
@@ -2301,7 +2301,7 @@ window.Learn = {
                 </div>
 
                 <div class="boss-avatar-box" style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; border: 4px solid var(--danger); box-shadow: 0 0 25px rgba(255, 23, 68, 0.6); margin: 0 auto 2rem auto;">
-                    <img src="assets/avatars/boss_${boss.chapter}.png?v=43" onerror="this.onerror=null;this.src='assets/avatars/boss_golem.png?v=2026'" style="width:100%; height:100%; object-fit:cover;" alt="Boss" />
+                    <img src="assets/avatars/boss_${boss.chapter}.png?v=45" onerror="this.onerror=null;this.src='assets/avatars/boss_golem.png?v=2026'" style="width:100%; height:100%; object-fit:cover;" alt="Boss" />
                 </div>
                 
                 <!-- Active Challenge -->
