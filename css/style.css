@@ -1659,3 +1659,40 @@ button:focus-visible,
 .strefa-cwiczen > .glass-card { display: grid !important; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)) !important; gap: 1.4rem !important; align-items: start; }
 .strefa-cwiczen > .glass-card > h3:first-child { grid-column: 1 / -1; }
 .strefa-cwiczen .medieval-chart-container { margin: 0 !important; }
+
+/* ============================================================
+   runda 10 (architektura Gemini 11/10): szerokie kute okno + grid 65/35 (tekst|Archiwum) + Strefa Starcia na dole
+   ============================================================ */
+.lesson-window-frame {
+  border-style: solid; border-width: 34px 30px;
+  border-image: url('assets/frames/frame-iron.jpg?v=33') 186 fill stretch;
+  background: none; box-shadow: 0 14px 50px rgba(0,0,0,0.8);
+}
+.lesson-inner-grid { display: grid; grid-template-columns: minmax(0,1fr) 340px; gap: 2rem; align-items: start; }
+@media (max-width: 1150px){ .lesson-inner-grid { grid-template-columns: 1fr; } }
+.lesson-main-col { min-width: 0; }
+.lesson-main-col .lesson-body { max-width: 700px; font-size: 1.18rem; line-height: 1.75; color: var(--ink, #ECE6D8); }
+.lesson-main-col .npc-head { display:flex; align-items:center; gap:1rem; margin-bottom:1.4rem; }
+.lesson-main-col .npc-name { font-family:'Cinzel','Marcellus',serif; color:var(--gold-text,#E8C76A); font-size:1.4rem; font-weight:700; text-shadow:0 2px 4px #000; }
+
+.lesson-archiwum { border-left: 2px solid rgba(212,175,55,0.25); padding-left: 1.5rem; display:flex; flex-direction:column; gap:1.2rem; min-width:0; }
+.archiwum-title { font-family:'Cinzel',serif; color:var(--gold-text,#E8C76A); font-size:0.85rem; letter-spacing:0.12em; text-transform:uppercase; }
+.archiwum-wzory { background: rgba(0,0,0,0.35); border:1px solid rgba(212,175,55,0.2); border-radius:10px; padding:1rem; text-align:center; }
+.archiwum-wzory .aw-label { color:var(--gold-text,#E8C76A); font-family:'Cinzel',serif; font-weight:700; margin-bottom:0.6rem; font-size:0.9rem; letter-spacing:1px; }
+.lesson-archiwum .medieval-chart-container { margin:0 !important; max-width:100% !important; }
+.lesson-archiwum .medieval-chart-container svg text { font-size:14px !important; }
+
+.strefa-starcia { margin-top:1.8rem; background: linear-gradient(rgba(18,14,10,0.6), rgba(8,7,6,0.72)), url('assets/textures/stone.jpg'); background-size: cover, 260px; border:1px solid rgba(212,175,55,0.3); border-radius:14px; padding:1.5rem 1.8rem; box-shadow: inset 0 0 24px rgba(0,0,0,0.6); }
+.starcia-head { font-family:'Cinzel',serif; color:var(--gold-text,#E8C76A); font-size:1.1rem; letter-spacing:0.08em; margin-bottom:1.2rem; text-shadow:0 2px 4px #000; }
+.starcia-grid { display:grid; grid-template-columns: 1fr 320px; gap:1.8rem; align-items:start; }
+@media (max-width: 900px){ .starcia-grid { grid-template-columns:1fr; } }
+.starcia-zadanie .sz-label { color:var(--gold-text,#E8C76A); font-weight:700; text-transform:uppercase; letter-spacing:1px; font-size:0.8rem; margin-bottom:0.5rem; }
+.starcia-zadanie p { color:#d6cdb8; line-height:1.6; }
+
+.strefa-kalkulator { background: linear-gradient(#15110c,#0a0806); border:3px solid transparent; border-image:url('assets/textures/brass.jpg') 10 stretch; border-radius:10px; padding:0.9rem; box-shadow: inset 0 0 16px rgba(0,0,0,0.8); }
+.kalk-display { background:#05060a; color:#7ff0c0; font-family:'Outfit',monospace; font-size:1.4rem; text-align:right; padding:0.6rem 0.9rem; border-radius:6px; margin-bottom:0.7rem; box-shadow: inset 0 2px 6px rgba(0,0,0,0.9); border:1px solid rgba(127,240,192,0.2); min-height:1.6em; overflow:hidden; }
+.kalk-grid { display:grid; grid-template-columns: repeat(4,1fr); gap:0.5rem; }
+.kalk-key { font-family:'Cinzel',serif; font-weight:700; font-size:1.05rem; color:#e8d9b5; cursor:pointer; padding:0.75rem 0; border-radius:6px; background: linear-gradient(180deg,#3a342a,#1a150f); border:1px solid #000; box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -3px 5px rgba(0,0,0,0.6), 0 3px 5px rgba(0,0,0,0.6); transition: transform 0.06s; }
+.kalk-key:active { transform: translateY(2px); box-shadow: inset 0 2px 5px rgba(0,0,0,0.8); }
+.kalk-key.op { color:#e8a23c; }
+.kalk-key.eq { color:#0a0806; background: linear-gradient(180deg,#f0c66a,#b9923f); border-color:#7a5e22; }

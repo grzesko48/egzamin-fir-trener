@@ -852,7 +852,7 @@ window.Learn = {
     // Probe order: JPG first (wszystkie tla sa jpg), PNG jako fallback. Brak pliku => zostaje gradient (0 bledow 404 w UI).
     applyScene(view, chapter, b) {
         if (!view) return;
-        const V = '33';
+        const V = '34';
         const tint = `radial-gradient(135% 95% at 50% 113%, rgba(${b.glow},.28) 0%, rgba(${b.glow},.08) 38%, transparent 64%), linear-gradient(177deg, ${b.sky[0]}e6 0%, ${b.sky[1]}cc 48%, ${b.sky[2]}cc 100%)`;
         const applyBg = (ext) => {
             if (view.dataset.biome === chapter) {
@@ -1277,59 +1277,62 @@ window.Learn = {
             const npcImg = lesson.chapter === 'fundament' || lesson.chapter === 'stopy' ? 'audytor' : 'kinezjolog';
             const side = this.injectHelpfulGraphics(step.html, true);
 
+            const keys = ['7','8','9','/','4','5','6','*','1','2','3','-','0','.','=','+'];
             contentEl.innerHTML = `
-                <div class="npc-dialog-box ${side ? 'has-side' : ''}">
-                    <div class="lesson-dialog-text">
-                        <div class="npc-head" style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
-                            <div class="npc-portrait">
-                                <img src="assets/avatars/${npcImg}.png" alt="${npcName}" />
+                <div class="lesson-window-frame">
+                    <div class="lesson-inner-grid">
+                        <div class="lesson-main-col">
+                            <div class="npc-head">
+                                <div class="npc-portrait-frame"><img src="assets/avatars/${npcImg}.png" alt="${npcName}" /></div>
+                                <div class="npc-name">${npcName}</div>
                             </div>
-                            <div class="npc-name" style="font-weight: bold; color: #d97706; font-size: 1.4rem; font-family: 'Cinzel','Marcellus',serif; letter-spacing: 0.5px; text-shadow: 0 2px 4px #000;">${npcName}</div>
+                            <div class="text-lg lesson-body">${step.html}</div>
                         </div>
-                        <div class="text-lg lesson-body" style="line-height: 1.7; font-size: 1.15rem; max-width: 68ch; color: #e5e5e5;">${step.html}</div>
+                        <aside class="lesson-archiwum">
+                            <div class="archiwum-title">📜 Archiwum</div>
+                            <div class="archiwum-wzory">
+                                <div class="aw-label">Złote Wzory</div>
+                                <div>$$NPV = \\sum_{t}\\frac{CF_t}{(1+r)^t} - I_0$$</div>
+                                <div>$$r_i = R_f + \\beta\\,(R_m - R_f)$$</div>
+                                <div>$$ROE = \\frac{\\text{Zysk netto}}{\\text{Kapitał własny}}$$</div>
+                            </div>
+                            ${side || ''}
+                        </aside>
                     </div>
-                    ${side ? `<aside class="lesson-siderail">${side}</aside>` : ''}
+                </div>
+                <div class="strefa-starcia">
+                    <div class="starcia-head">⚔️ Strefa Starcia — Praktyka</div>
+                    <div class="starcia-grid">
+                        <div class="starcia-zadanie">
+                            <div class="sz-label">Zadanie bojowe</div>
+                            <p>Wykorzystaj <b>Złote Wzory</b> z Archiwum oraz kamienny kalkulator obok, by przeliczyć przykład z tego działu. Przećwicz liczby, zanim staniesz przed komisją.</p>
+                        </div>
+                        <div class="strefa-kalkulator">
+                            <div class="kalk-display" id="kalk-display">0</div>
+                            <div class="kalk-grid">
+                                ${keys.map(k => `<button class="kalk-key${'/*-+'.includes(k) ? ' op' : (k === '=' ? ' eq' : '')}" data-k="${k}">${k}</button>`).join('')}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             `;
-            
-            if (rightSidebar) {
-                rightSidebar.innerHTML = `
-                    <div class="glass-card fade-in" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; border: 3px solid #44403c; border-bottom-color: #292524; border-right-color: #292524; background: linear-gradient(135deg, #1c1917, #0c0a09); box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 5px 15px rgba(0,0,0,0.6);">
-                        <h3 style="font-family: 'Cinzel', serif; color: #d97706; text-align: center; border-bottom: 2px solid #78350f; padding-bottom: 0.8rem; margin-bottom: 0.5rem; text-shadow: 0 2px 2px #000;">Tablica Biegłości</h3>
-                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; background: #000; padding: 1rem; border-radius: 8px; box-shadow: inset 0 0 10px rgba(0,0,0,0.9);">
-                            <button class="btn secondary" style="padding: 0.5rem;">7</button>
-                            <button class="btn secondary" style="padding: 0.5rem;">8</button>
-                            <button class="btn secondary" style="padding: 0.5rem;">9</button>
-                            <button class="btn warning" style="padding: 0.5rem;">/</button>
-                            <button class="btn secondary" style="padding: 0.5rem;">4</button>
-                            <button class="btn secondary" style="padding: 0.5rem;">5</button>
-                            <button class="btn secondary" style="padding: 0.5rem;">6</button>
-                            <button class="btn warning" style="padding: 0.5rem;">*</button>
-                            <button class="btn secondary" style="padding: 0.5rem;">1</button>
-                            <button class="btn secondary" style="padding: 0.5rem;">2</button>
-                            <button class="btn secondary" style="padding: 0.5rem;">3</button>
-                            <button class="btn warning" style="padding: 0.5rem;">-</button>
-                            <button class="btn secondary" style="padding: 0.5rem;">0</button>
-                            <button class="btn secondary" style="padding: 0.5rem;">.</button>
-                            <button class="btn primary" style="padding: 0.5rem;">=</button>
-                            <button class="btn warning" style="padding: 0.5rem;">+</button>
-                        </div>
-                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #78350f; color: #d6cdb8; font-size: 1rem; text-align: center; line-height: 1.5;">
-                            <div style="font-weight: 800; color: #fcd34d; margin-bottom: 0.7rem; text-transform: uppercase; font-family:'Cinzel','Marcellus',serif; letter-spacing:1px;">Złote Wzory</div>
-                            <div style="margin-bottom:.5rem;">$$NPV = \\sum_{t}\\frac{CF_t}{(1+r)^t} - I_0$$</div>
-                            <div style="margin-bottom:.5rem;">$$r_i = R_f + \\beta\\,(R_m - R_f)$$</div>
-                            <div>$$ROE = \\frac{\\text{Zysk netto}}{\\text{Kapitał własny}}$$</div>
-                        </div>
-                    </div>
-                `;
-                // Wykresy CAPM/NPV w Tablicy (kolumna narzedzi) - porzadnie, nie schowane
-                const __side = this.injectHelpfulGraphics(step.html, true);
-                if (__side) rightSidebar.innerHTML += `<div style="margin-top:1.1rem; padding-top:1rem; border-top:1px dashed #78350f;">${__side}</div>`;
-                if (typeof renderMathInElement === 'function') renderMathInElement(rightSidebar, { delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}] });
-                // ZMIANA UKLADU (zyczenie usera): kalkulator/wzory NA DOL jako Strefa Cwiczen, tresc szeroko w prawo.
-                contentEl.insertAdjacentHTML('beforeend', `<div class="strefa-cwiczen">${rightSidebar.innerHTML}</div>`);
-                rightSidebar.innerHTML = '';
-            }
+            if (typeof renderMathInElement === 'function') renderMathInElement(contentEl, { delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}] });
+            if (rightSidebar) rightSidebar.innerHTML = '';
+            // Funkcjonalny kalkulator
+            (() => {
+                const kd = document.getElementById('kalk-display');
+                if (!kd) return;
+                contentEl.querySelectorAll('.kalk-key').forEach(b => b.onclick = () => {
+                    const k = b.dataset.k;
+                    const cur = kd.dataset.expr || '';
+                    if (k === '=') {
+                        try { const r = Function('"use strict";return (' + (cur || '0') + ')')(); kd.textContent = String(r); kd.dataset.expr = String(r); }
+                        catch (e) { kd.textContent = 'Błąd'; kd.dataset.expr = ''; }
+                    } else {
+                        kd.dataset.expr = cur + k; kd.textContent = kd.dataset.expr;
+                    }
+                });
+            })();
 
             const btn = document.createElement('button');
             btn.className = 'btn primary ripple';
