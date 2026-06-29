@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fir-trener-v32-cache';
+const CACHE_NAME = 'fir-trener-v33-cache';
 const urlsToCache = [
   './',
   './index.html',

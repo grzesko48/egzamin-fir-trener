@@ -852,7 +852,7 @@ window.Learn = {
     // Probe order: JPG first (wszystkie tla sa jpg), PNG jako fallback. Brak pliku => zostaje gradient (0 bledow 404 w UI).
     applyScene(view, chapter, b) {
         if (!view) return;
-        const V = '32';
+        const V = '33';
         const tint = `radial-gradient(135% 95% at 50% 113%, rgba(${b.glow},.28) 0%, rgba(${b.glow},.08) 38%, transparent 64%), linear-gradient(177deg, ${b.sky[0]}e6 0%, ${b.sky[1]}cc 48%, ${b.sky[2]}cc 100%)`;
         const applyBg = (ext) => {
             if (view.dataset.biome === chapter) {
@@ -1326,8 +1326,11 @@ window.Learn = {
                 const __side = this.injectHelpfulGraphics(step.html, true);
                 if (__side) rightSidebar.innerHTML += `<div style="margin-top:1.1rem; padding-top:1rem; border-top:1px dashed #78350f;">${__side}</div>`;
                 if (typeof renderMathInElement === 'function') renderMathInElement(rightSidebar, { delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}] });
+                // ZMIANA UKLADU (zyczenie usera): kalkulator/wzory NA DOL jako Strefa Cwiczen, tresc szeroko w prawo.
+                contentEl.insertAdjacentHTML('beforeend', `<div class="strefa-cwiczen">${rightSidebar.innerHTML}</div>`);
+                rightSidebar.innerHTML = '';
             }
-            
+
             const btn = document.createElement('button');
             btn.className = 'btn primary ripple';
             btn.style.borderRadius = '24px';

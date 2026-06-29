@@ -1646,3 +1646,16 @@ button:focus-visible,
 .lesson-siderail { display:none !important; }
 #learn-right-sidebar .medieval-chart-container { margin-top: 1rem !important; }
 #learn-right-sidebar .medieval-chart-container svg text { font-size: 14px !important; }
+
+/* ============================================================
+   runda 9 (zyczenie usera): kalkulator/wzory NA DOL (Strefa Cwiczen), tresc SZEROKO
+   ============================================================ */
+/* prawy sidebar pusty (widok lekcji) -> 2 kolumny, tresc dostaje cala szerokosc */
+.rpg-split-layout:has(#learn-right-sidebar:empty) { grid-template-columns: 300px minmax(0,1fr) !important; }
+/* tresc szeroka ALE linia tekstu <=80ch (Klatwa Dlugiej Linii - Gemini) */
+.lesson-dialog-text .lesson-body, .npc-dialog-box .lesson-body { max-width: 80ch !important; }
+/* Strefa Cwiczen na dole: poziomo kalkulator | wzory | wykresy */
+.strefa-cwiczen { margin-top: 1.6rem; }
+.strefa-cwiczen > .glass-card { display: grid !important; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)) !important; gap: 1.4rem !important; align-items: start; }
+.strefa-cwiczen > .glass-card > h3:first-child { grid-column: 1 / -1; }
+.strefa-cwiczen .medieval-chart-container { margin: 0 !important; }
