@@ -1391,8 +1391,60 @@ window.Learn = {
                 input.style.padding = '1.2rem';
                 input.style.fontSize = '1.25rem';
                 input.style.borderRadius = '14px';
-                input.style.marginBottom = '1.5rem';
+                input.style.marginBottom = '1rem';
                 contentEl.appendChild(input);
+
+                // --- KALKULATOR w Starciu Kontrolnym (samodzielny; style inline, by nie kolidowac z style.css) ---
+                // Bez niego pytania obliczeniowe (np. procent skladany 2000*1,1^2) sa nie do zrobienia w glowie.
+                const calc = document.createElement('div');
+                calc.style.cssText = 'margin:0 0 1.5rem;padding:1rem;border:1px solid rgba(212,175,55,.25);border-radius:14px;background:rgba(10,8,12,.55);box-shadow:inset 0 0 24px rgba(0,0,0,.45)';
+                const calcHint = document.createElement('div');
+                calcHint.textContent = '🧮 Kalkulator — „=" wpisze wynik do pola powyżej (^ = potęga)';
+                calcHint.style.cssText = 'font-size:.78rem;opacity:.65;margin-bottom:.6rem;letter-spacing:.02em';
+                calc.appendChild(calcHint);
+                const disp = document.createElement('div');
+                disp.style.cssText = "min-height:2.4rem;display:flex;align-items:center;justify-content:flex-end;padding:.4rem .8rem;margin-bottom:.7rem;font-family:'Outfit',monospace;font-size:1.3rem;color:#E8C76A;background:rgba(0,0,0,.45);border:1px solid rgba(212,175,55,.18);border-radius:8px;overflow-x:auto;white-space:nowrap";
+                disp.textContent = '0';
+                calc.appendChild(disp);
+                let expr = '';
+                const sync = () => { disp.textContent = expr || '0'; };
+                const grid = document.createElement('div');
+                grid.style.cssText = 'display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem';
+                const keys = ['7','8','9','÷','C', '4','5','6','×','⌫', '1','2','3','−','^', '0',',','(',')','='];
+                keys.forEach(k => {
+                    const b = document.createElement('button');
+                    b.type = 'button';
+                    b.textContent = k;
+                    const eq = (k === '='), op = ('÷×−^()C⌫'.indexOf(k) >= 0);
+                    b.style.cssText = 'padding:.85rem 0;font-size:1.15rem;font-weight:700;cursor:pointer;border-radius:8px;' +
+                        "font-family:'Cinzel','Marcellus',serif;color:" + (eq ? '#140f08' : (op ? '#e8a23c' : '#e8d9b5')) + ';' +
+                        'border:1px solid ' + (eq ? '#E8C76A' : '#5c4a32') + ';' +
+                        'background:' + (eq ? 'linear-gradient(180deg,#ffe9a8,#d6ad3c)' : 'linear-gradient(180deg,#2c2720,#14100b)') + ';' +
+                        'box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 2px 3px rgba(0,0,0,.5)';
+                    b.onmousedown = e => e.preventDefault(); // nie zabieraj fokusu z pola odpowiedzi
+                    b.onclick = () => {
+                        if (k === 'C') { expr = ''; sync(); return; }
+                        if (k === '⌫') { expr = expr.slice(0, -1); sync(); return; }
+                        if (k === '=') {
+                            try {
+                                const js = expr.replace(/\^/g, '**').replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-').replace(/,/g, '.');
+                                const safe = js.replace(/[^0-9+\-*/(). ]/g, ''); // bialalista znakow (** przetrwa)
+                                const r = Function('"use strict";return(' + safe + ')')();
+                                if (typeof r === 'number' && isFinite(r)) {
+                                    const rounded = Math.round(r * 1e6) / 1e6;
+                                    expr = String(rounded); sync();
+                                    input.value = rounded;        // wynik laduje do pola odpowiedzi
+                                    input.style.borderColor = 'var(--primary)';
+                                } else { disp.textContent = 'błąd'; }
+                            } catch (e) { disp.textContent = 'błąd'; }
+                            return;
+                        }
+                        expr += k; sync();
+                    };
+                    grid.appendChild(b);
+                });
+                calc.appendChild(grid);
+                contentEl.appendChild(calc);
 
                 const btn = document.createElement('button');
                 btn.className = 'btn primary ripple';
