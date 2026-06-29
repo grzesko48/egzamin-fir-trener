@@ -1631,3 +1631,18 @@ button:focus-visible,
 .lesson-siderail { display: none !important; }
 .lesson-dialog-text { max-width: 880px; margin: 0 auto; }
 .lesson-dialog .lesson-body { max-width: 70ch; margin-inline: auto; }
+
+/* ============================================================
+   GEMINI nano banana — runda 8: rama z czystym ciemnym wnetrzem (fill), koniec musztardowego pasa
+   ============================================================ */
+.lesson-dialog-text {
+  border-width: 32px 30px !important;
+  border-image: url('assets/frames/frame-iron.jpg?v=31') 186 fill stretch !important;
+  background: none !important;
+  padding: 1.6rem 1.9rem !important;
+}
+.lesson-dialog-text::before, .lesson-dialog-text::after { display:none !important; }
+/* wykresy wracaja - w Tablicy (kolumna narzedzi), porzadnie */
+.lesson-siderail { display:none !important; }
+#learn-right-sidebar .medieval-chart-container { margin-top: 1rem !important; }
+#learn-right-sidebar .medieval-chart-container svg text { font-size: 14px !important; }
