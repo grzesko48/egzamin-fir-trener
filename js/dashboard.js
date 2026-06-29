@@ -83,7 +83,7 @@ const Dashboard = {
                             <span class="text-muted">${xpNeeded} XP</span>
                         </div>
                         <div style="width: 100%; height: 12px; background: rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
-                            <div style="width: ${progress}%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 10px var(--primary);"></div>
+                            <div style="width: ${progress}%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary, #a78bfa)); transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 10px var(--primary);"></div>
                         </div>
                     </div>
                     <button id="btn-boss" class="btn danger ripple" style="padding: 1rem 2rem; font-size: 1.1rem; font-weight: bold; border-radius: 30px;">🔥 Walcz z Bossem</button>

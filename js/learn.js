@@ -868,8 +868,8 @@ window.Learn = {
 
                     <!-- Class 3 -->
                     <div class="class-card-rpg ripple" onclick="window.Learn.createHero('strateg')">
-                        <img src="assets/avatars/strateg.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--secondary); margin-bottom: 1.2rem;" alt="Strateg" />
-                        <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">Strateg Rynkowy</h3>
+                        <img src="assets/avatars/strateg.png?v=2026" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--secondary, #a78bfa); margin-bottom: 1.2rem;" alt="Strateg" />
+                        <h3 style="color: var(--secondary, #a78bfa); margin-bottom: 0.5rem;">Strateg Rynkowy</h3>
                         <p class="text-muted" style="font-size: 0.85rem; line-height:1.5;">Optymalizuje rynki rygoru. Otrzymuje <b>Notatnik Rynkowy</b> (+20% zysku XP) oraz <b>Kamizelkę Finansisty</b> (+15 max HP).</p>
                     </div>
 
