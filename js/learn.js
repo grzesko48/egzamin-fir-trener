@@ -647,9 +647,17 @@ window.Learn = {
         });
     },
 
-    injectHelpfulGraphics(html, sideOnly) {
-        if (!html) return sideOnly ? '' : html;
-        let modifiedHtml = sideOnly ? '' : html;
+    injectHelpfulGraphics(html) {
+        if (!html) return html;
+        let modifiedHtml = html;
+        // Wstaw wykres TUZ PO akapicie zawierajacym slowo-klucz (wykresy MIEDZY akapitami tekstu)
+        const ins = (kw, chart) => {
+            const i = modifiedHtml.indexOf(kw);
+            if (i < 0) { modifiedHtml += chart; return; }
+            const pe = modifiedHtml.indexOf('</p>', i);
+            const at = pe < 0 ? modifiedHtml.length : pe + 4;
+            modifiedHtml = modifiedHtml.slice(0, at) + chart + modifiedHtml.slice(at);
+        };
 
         // 1. CAPM / SML Chart
         if (html.includes('CAPM') && !html.includes('id="chart-capm"')) {
@@ -682,7 +690,7 @@ window.Learn = {
                     <text x="210" y="65" fill="#ef4444" font-weight="bold" font-size="10">Portfel Rynkowy</text>
                 </svg>
             </div>`;
-            modifiedHtml += capmChart;
+            ins('CAPM', capmChart);
         }
 
         // 2. NPV Profile Chart
@@ -716,7 +724,7 @@ window.Learn = {
                     <text x="270" y="135" fill="var(--danger)" font-size="9" font-weight="bold">NPV < 0</text>
                 </svg>
             </div>`;
-            modifiedHtml += npvChart;
+            ins('NPV', npvChart);
         }
 
         // 3. NBP rates corridor chart
@@ -746,7 +754,7 @@ window.Learn = {
                     <text x="140" y="55" fill="#38bdf8" font-size="9" font-weight="bold">Stawka Rynkowa (WIBOR/Overnight)</text>
                 </svg>
             </div>`;
-            modifiedHtml += corridorChart;
+            ins('lombard', corridorChart);
         }
 
         // 4. WACC / Capital Structure Chart
@@ -779,7 +787,7 @@ window.Learn = {
                     <text x="180" y="85" fill="#ef4444" font-weight="bold" font-size="9" text-anchor="middle">Optimum Struktury</text>
                 </svg>
             </div>`;
-            modifiedHtml += waccChart;
+            ins('WACC', waccChart);
         }
 
         return modifiedHtml;
@@ -852,7 +860,7 @@ window.Learn = {
     // Probe order: JPG first (wszystkie tla sa jpg), PNG jako fallback. Brak pliku => zostaje gradient (0 bledow 404 w UI).
     applyScene(view, chapter, b) {
         if (!view) return;
-        const V = '34';
+        const V = '35';
         const tint = `radial-gradient(135% 95% at 50% 113%, rgba(${b.glow},.28) 0%, rgba(${b.glow},.08) 38%, transparent 64%), linear-gradient(177deg, ${b.sky[0]}e6 0%, ${b.sky[1]}cc 48%, ${b.sky[2]}cc 100%)`;
         const applyBg = (ext) => {
             if (view.dataset.biome === chapter) {
@@ -1275,37 +1283,26 @@ window.Learn = {
         if (step.type === 'teach' || step.type === 'example') {
             const npcName = lesson.chapter === 'fundament' || lesson.chapter === 'stopy' ? 'Wielki Audytor' : 'Trener-Mistrz';
             const npcImg = lesson.chapter === 'fundament' || lesson.chapter === 'stopy' ? 'audytor' : 'kinezjolog';
-            const side = this.injectHelpfulGraphics(step.html, true);
-
             const keys = ['7','8','9','/','4','5','6','*','1','2','3','-','0','.','=','+'];
             contentEl.innerHTML = `
-                <div class="lesson-window-frame">
-                    <div class="lesson-inner-grid">
-                        <div class="lesson-main-col">
-                            <div class="npc-head">
-                                <div class="npc-portrait-frame"><img src="assets/avatars/${npcImg}.png" alt="${npcName}" /></div>
-                                <div class="npc-name">${npcName}</div>
-                            </div>
-                            <div class="text-lg lesson-body">${step.html}</div>
-                        </div>
-                        <aside class="lesson-archiwum">
-                            <div class="archiwum-title">📜 Archiwum</div>
-                            <div class="archiwum-wzory">
-                                <div class="aw-label">Złote Wzory</div>
-                                <div>$$NPV = \\sum_{t}\\frac{CF_t}{(1+r)^t} - I_0$$</div>
-                                <div>$$r_i = R_f + \\beta\\,(R_m - R_f)$$</div>
-                                <div>$$ROE = \\frac{\\text{Zysk netto}}{\\text{Kapitał własny}}$$</div>
-                            </div>
-                            ${side || ''}
-                        </aside>
+                <div class="lesson-scroll">
+                    <div class="npc-head">
+                        <div class="npc-portrait-frame"><img src="assets/avatars/${npcImg}.png" alt="${npcName}" /></div>
+                        <div class="npc-name">${npcName}</div>
                     </div>
+                    <div class="text-lg lesson-body">${this.injectHelpfulGraphics(step.html)}</div>
                 </div>
                 <div class="strefa-starcia">
                     <div class="starcia-head">⚔️ Strefa Starcia — Praktyka</div>
                     <div class="starcia-grid">
                         <div class="starcia-zadanie">
-                            <div class="sz-label">Zadanie bojowe</div>
-                            <p>Wykorzystaj <b>Złote Wzory</b> z Archiwum oraz kamienny kalkulator obok, by przeliczyć przykład z tego działu. Przećwicz liczby, zanim staniesz przed komisją.</p>
+                            <div class="sz-label">Złote Wzory</div>
+                            <div class="archiwum-wzory">
+                                <div>$$NPV = \\sum_{t}\\frac{CF_t}{(1+r)^t} - I_0$$</div>
+                                <div>$$r_i = R_f + \\beta\\,(R_m - R_f)$$</div>
+                                <div>$$ROE = \\frac{\\text{Zysk netto}}{\\text{Kapitał własny}}$$</div>
+                            </div>
+                            <p style="margin-top:1rem; color:#d6cdb8;">Użyj wzorów i kamiennego kalkulatora obok, by przeliczyć przykład z tego działu. Przećwicz liczby, zanim staniesz przed komisją.</p>
                         </div>
                         <div class="strefa-kalkulator">
                             <div class="kalk-display" id="kalk-display">0</div>

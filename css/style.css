@@ -1696,3 +1696,28 @@ button:focus-visible,
 .kalk-key:active { transform: translateY(2px); box-shadow: inset 0 2px 5px rgba(0,0,0,0.8); }
 .kalk-key.op { color:#e8a23c; }
 .kalk-key.eq { color:#0a0806; background: linear-gradient(180deg,#f0c66a,#b9923f); border-color:#7a5e22; }
+
+/* ============================================================
+   runda 11 (user): BEZ ramki w obszarze nauki, wykresy MIEDZY akapitami, Archiwum usuniete
+   ============================================================ */
+.lesson-window-frame, .lesson-inner-grid, .lesson-archiwum { all: unset; }   /* wylacz stary uklad gdyby gdzies zostal */
+.lesson-scroll {
+  max-width: 920px; margin: 0 auto;
+  background: rgba(10,8,12,0.45);
+  border: 1px solid rgba(212,175,55,0.16);
+  border-radius: 14px;
+  padding: 2rem 2.4rem;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+}
+.lesson-scroll .npc-head { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; }
+.lesson-scroll .npc-name { font-family:'Cinzel','Marcellus',serif; color:var(--gold-text,#E8C76A); font-size:1.45rem; font-weight:700; text-shadow:0 2px 4px #000; }
+.lesson-scroll .lesson-body { max-width: 760px; font-size: 1.18rem; line-height: 1.8; color: var(--ink,#ECE6D8); }
+.lesson-scroll .lesson-body p { margin-bottom: 1.1em; }
+.lesson-scroll .lesson-body b, .lesson-scroll .lesson-body strong { color: var(--gold-text,#E8C76A); }
+/* wykresy MIEDZY akapitami: wysrodkowane, czytelne, z oddechem */
+.lesson-body .medieval-chart-container {
+  max-width: 580px; margin: 1.8rem auto !important; padding: 1.2rem !important;
+  border: 1px solid rgba(212,175,55,0.3) !important; background: rgba(0,0,0,0.5) !important;
+}
+.lesson-body .medieval-chart-container svg { width: 100% !important; max-width: 100% !important; height: auto; }
+.lesson-body .medieval-chart-container svg text { font-size: 13px !important; }
