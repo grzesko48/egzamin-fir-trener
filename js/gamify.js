@@ -5,8 +5,11 @@
 
 window.Gamify = {
     awardXP(amount, reason = "") {
+        // Bonus XP z ekwipunku (np. Złoty Kalkulator +15%, Notatnik Rynkowy +20%).
+        const xpMult = (typeof Store !== 'undefined' && Store.equipBonus) ? Store.equipBonus().xpMult : 0;
+        if (xpMult) amount = Math.round(amount * (1 + xpMult));
         const result = Store.addXP(amount);
-        
+
         // Show floating text
         this.showFloatingXP(amount, reason);
         

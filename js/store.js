@@ -172,6 +172,29 @@ const Store = {
     markBossDefeated(ch) { if (!this._data.bossDefeated) this._data.bossDefeated = {}; this._data.bossDefeated[ch] = true; this.save(); },
     isBossDefeated(ch) { return !!(this._data.bossDefeated && this._data.bossDefeated[ch]); },
 
+    // --- Ekwipunek: jedno zrodlo prawdy o bonusach (XP / obrazenia / obrona) ---
+    // Pokrywa zarowno przedmioty startowe klas, jak i lupy od bossow.
+    equipBonus() {
+        const eq = (this._data.avatar && this._data.avatar.eq) || {};
+        let xpMult = 0, dmgMult = 0, dmgReduce = 0;
+        [eq.head, eq.weapon, eq.chest].forEach(it => {
+            if (!it) return;
+            // XP (przedmioty wiedzy)
+            if (it === 'Notatnik Rynkowy') xpMult += 0.20;
+            else if (it === 'Złoty Kalkulator') xpMult += 0.15;
+            else if (it === 'Grymuar Rynkowy') xpMult += 0.15;
+            else if (it === 'Kostur Kalkulacji') xpMult += 0.10;
+            // Obrazenia bossa (bron)
+            if (it === 'Hantel 50kg' || it === 'Młot Kinetyczny') dmgMult += 0.20;
+            else if (it === 'Złoty Kalkulator' || it === 'Kostur Kalkulacji') dmgMult += 0.10;
+            // Redukcja obrazen (pancerz)
+            if (it === 'Garnitur Audytora' || it === 'Zbroja Audytora') dmgReduce += 8;
+            else if (it === 'Pas Kulturystyczny' || it === 'Pas Siły') dmgReduce += 5;
+            else if (it === 'Kamizelka Finansisty' || it === 'Buty Finansisty') dmgReduce += 4;
+        });
+        return { xpMult, dmgMult, dmgReduce };
+    },
+
     // --- Cel dnia (petla nawyku: wyzwalacz -> akcja -> mikronagroda, [#playbook-nawyk-30-dni]) ---
     getDailyGoal() { return (this._data.settings && this._data.settings.dailyGoal) || 10; },
     setDailyGoal(n) { this._data.settings.dailyGoal = Math.max(1, Math.min(100, n | 0)); this.save(); },

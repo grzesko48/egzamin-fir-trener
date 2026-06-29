@@ -935,17 +935,18 @@ window.Learn = {
         let eq = { head: 'Sygnet Analityka', weapon: null, chest: null };
         let maxHp = 100;
         
+        // Przedmioty startowe zgodne z opisami klas (i z bonusami w Store.equipBonus).
         if (className === 'audytor') {
-            eq.weapon = 'Kostur Kalkulacji';
-            eq.chest = 'Zbroja Audytora';
-            maxHp = 125;
+            eq.weapon = 'Złoty Kalkulator';   // +15% XP, +10% obrazen
+            eq.chest = 'Garnitur Audytora';   // redukcja obrazen
+            maxHp = 125;                       // +25 max HP
         } else if (className === 'kinezjolog') {
-            eq.weapon = 'Młot Kinetyczny';
-            eq.chest = 'Pas Siły';
+            eq.weapon = 'Hantel 50kg';        // +20% obrazen
+            eq.chest = 'Pas Kulturystyczny';  // redukcja obrazen
         } else if (className === 'strateg') {
-            eq.weapon = 'Grymuar Rynkowy';
-            eq.chest = 'Buty Finansisty';
-            maxHp = 115;
+            eq.weapon = 'Notatnik Rynkowy';   // +20% XP
+            eq.chest = 'Kamizelka Finansisty';// redukcja obrazen
+            maxHp = 115;                       // +15 max HP
         }
 
         Store._data.avatar = {
@@ -1463,7 +1464,8 @@ window.Learn = {
                     if (isNaN(val)) return;
                     input.disabled = true;
                     const diff = Math.abs(val - step.answer);
-                    if (diff <= (step.tol || 0)) {
+                    const tol = Math.max(step.tol || 0, Math.abs(step.answer) * 0.01); // tolerancja wzgledna ±1% (zaokraglenia)
+                    if (diff <= tol + 1e-9) {
                         window.LearnSound.playSuccess();
                         input.style.borderColor = 'var(--success)';
                         input.style.color = 'var(--success)';
@@ -1914,9 +1916,8 @@ window.Learn = {
         const avatar = Store._data.avatar;
         if (!avatar) return;
 
-        if (avatar.eq && (avatar.eq.chest === 'Pas Siły' || avatar.eq.chest === 'Pas Kulturystyczny')) {
-            amount = Math.max(5, amount - 5);
-        }
+        const dmgReduce = Store.equipBonus ? Store.equipBonus().dmgReduce : 0; // pancerz redukuje obrazenia
+        if (dmgReduce) amount = Math.max(5, amount - dmgReduce);
 
         avatar.hp = Math.max(0, avatar.hp - amount);
         Store.save();
@@ -2392,7 +2393,8 @@ window.Learn = {
                 if (isNaN(val)) return;
                 input.disabled = true;
                 const diff = Math.abs(val - step.answer);
-                if (diff <= (step.tol || 0.1)) {
+                const tol = Math.max(step.tol || 0, Math.abs(step.answer) * 0.01); // tolerancja wzgledna ±1% (zaokraglenia)
+                if (diff <= tol + 1e-9) {
                     this.damageBoss(70);
                     setTimeout(() => { this.currentStepIndex++; this.renderBossBattle(); }, 1000);
                 } else {
@@ -2459,14 +2461,8 @@ window.Learn = {
         const boss = this.activeBoss;
         if (!boss) return;
 
-        const avatar = Store._data.avatar;
-        if (avatar && avatar.eq) {
-            if (avatar.eq.weapon === 'Młot Kinetyczny' || avatar.eq.weapon === 'Hantel 50kg') {
-                amount = Math.round(amount * 1.2);
-            } else if (avatar.eq.weapon === 'Kostur Kalkulacji' || avatar.eq.weapon === 'Złoty Kalkulator') {
-                amount = Math.round(amount * 1.1);
-            }
-        }
+        const dmgMult = Store.equipBonus ? Store.equipBonus().dmgMult : 0; // bron zwieksza obrazenia bossa
+        if (dmgMult) amount = Math.round(amount * (1 + dmgMult));
 
         boss.hp = Math.max(0, boss.hp - amount);
 
