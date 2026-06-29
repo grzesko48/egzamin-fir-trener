@@ -1602,3 +1602,32 @@ button:focus-visible,
 }
 .lesson-dialog-text::before, .lesson-dialog-text::after { display: none !important; }
 .lesson-dialog .lesson-body { padding: 0.4rem 0.8rem; }
+
+/* ============================================================
+   GEMINI nano banana — runda 6: NAPRAWA layoutu po dodaniu ramy
+   (rama najezdzala na szyne + oliwkowy margines od fill)
+   ============================================================ */
+.lesson-dialog { gap: 1.5rem !important; align-items: stretch !important; }
+.lesson-dialog.has-side { grid-template-columns: minmax(0, 1fr) 360px !important; }
+.lesson-dialog-text {
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  border-width: 30px 28px !important;
+  border-image: url('assets/frames/frame-iron.jpg?v=30') 235 stretch !important;   /* BEZ fill -> koniec oliwkowego marginesu */
+  background: linear-gradient(rgba(12,9,14,0.93), rgba(12,9,14,0.96)), url('assets/textures/leather.jpg') !important;
+  background-size: cover, 300px !important;
+}
+.lesson-siderail { min-width: 0 !important; overflow: hidden !important; }
+.lesson-siderail .medieval-chart-container { max-width: 100% !important; box-sizing: border-box !important; }
+@media (max-width: 1250px) { .lesson-dialog.has-side { grid-template-columns: minmax(0,1fr) !important; } }
+
+/* ============================================================
+   GEMINI nano banana — runda 7: SPOJNA ARCHITEKTURA
+   framed-tekst (pelna szerokosc col2) | Tablica (col3 = kalkulator+wzory)
+   chowam redundantna szyne wykresow (byla ciasna i nachodzila)
+   ============================================================ */
+.lesson-dialog { grid-template-columns: minmax(0,1fr) !important; display: block !important; }
+.lesson-siderail { display: none !important; }
+.lesson-dialog-text { max-width: 880px; margin: 0 auto; }
+.lesson-dialog .lesson-body { max-width: 70ch; margin-inline: auto; }
