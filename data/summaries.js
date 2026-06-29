@@ -1,37 +1,656 @@
-/* summaries.js — streszczenia rozdziałów (pytania egzaminacyjne z wzorcowymi odpowiedziami).
-   Dostępne w hubie POD OGNISKIEM dopiero po pokonaniu bossa danego działu.
-   Wyjątek: 'fundament' ma alwaysUnlocked:true (dostępne od startu).
-   Bramka (do wpięcia w render huba):
-     const unlocked = SUM.alwaysUnlocked || (Store._data.bossDefeated && Store._data.bossDefeated[chapterId]);
-   Typy pytań: 'definicyjne' | 'obliczeniowe' | 'porownawcze' | 'pulapka'. */
+/* summaries.js - streszczenia rozdzialow (pytania egzaminacyjne z wzorcowymi odpowiedziami).
+   Wygenerowane z kompendium (t1-t12) + content.json (fundament/stopy/k1-k12), fact-checked.
+   Dostepne w hubie POD OGNISKIEM po pokonaniu bossa dzialu; 'fundament' = alwaysUnlocked. */
 window.SUMMARIES = {
-  fundament: {
-    title: 'Fundamenty finansów',
-    alwaysUnlocked: true,
-    questions: [
-      { type: 'definicyjne', q: 'Czym jest wartość pieniądza w czasie (TVM)? Podaj wzory na FV i PV.',
-        a: 'Złotówka dziś jest warta więcej niż złotówka jutro, bo można ją zainwestować i da odsetki. Wartość przyszła: FV = PV·(1+r)ⁿ; wartość bieżąca (dyskontowanie): PV = FV/(1+r)ⁿ, gdzie r to stopa, n — liczba okresów. Przykład: 1000 zł na 10% przez 2 lata → FV = 1000·1,1² = 1210 zł.' },
-      { type: 'obliczeniowe', q: 'Wpłacasz 2000 zł na 10% rocznie (procent składany). Ile po 2 latach?',
-        a: 'FV = PV·(1+r)ⁿ = 2000·(1,10)² = 2000·1,21 = 2420 zł. Odsetki składane: 420 zł (przy prostym byłoby 400 zł — różnica 20 zł to odsetki od odsetek).' },
-      { type: 'porownawcze', q: 'Procent prosty vs składany — czym się różnią?',
-        a: 'Prosty: odsetki tylko od kapitału początkowego (FV = PV·(1+r·n)). Składany: odsetki też od narosłych odsetek (FV = PV·(1+r)ⁿ) — rośnie wykładniczo. Im dłuższy horyzont i wyższa stopa, tym większa przewaga składanego.' },
-      { type: 'pulapka', q: 'Najczęstszy błąd przy dyskontowaniu wielu przepływów?',
-        a: 'Dyskontowanie wszystkich CF tą samą liczbą lat. Każdy przepływ dyskontuje się o LICZBĘ OKRESÓW do niego: CF₁/(1+r)¹, CF₂/(1+r)², itd. NPV = Σ CFₜ/(1+r)ᵗ − I₀.' }
+  "fundament": {
+    "title": "Fundament finansów",
+    "alwaysUnlocked": true,
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Czym jest wartość pieniądza w czasie (TVM) i jak na jej gruncie definiujemy NPV oraz regułę decyzyjną tej metody?",
+        "a": "Wartość pieniądza w czasie to zasada, że złotówka dziś jest warta więcej niż złotówka jutro, bo dziś można ją zainwestować i pomnożyć — wartość przyszłą liczymy jako FV = PV·(1+r)ⁿ, a obecną przez dyskontowanie PV = FV/(1+r)ⁿ, gdzie r to stopa za okres, a n liczba okresów. NPV (wartość bieżąca netto) to suma zdyskontowanych przepływów pomniejszona o nakład początkowy: NPV = Σ CFₜ/(1+r)ᵗ − I₀, gdzie CFₜ to przepływ w roku t, r to stopa dyskonta (koszt kapitału), a I₀ nakład początkowy. Reguła decyzyjna: inwestycja jest opłacalna, gdy NPV jest większe niż 0; pokrewnie IRR to stopa, przy której NPV = 0, a projekt przyjmujemy, gdy IRR przewyższa koszt kapitału."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Firma rozważa projekt o nakładzie początkowym I₀ = 1000 zł, generujący przepływy 600 zł w roku 1 i 700 zł w roku 2, przy stopie dyskonta r = 10%. Oblicz NPV i oceń opłacalność.",
+        "a": "Dyskontujemy przepływy wzorem CFₜ/(1+r)ᵗ: rok 1 = 600/1,10 = 545,45 zł; rok 2 = 700/1,10² = 700/1,21 = 578,51 zł. Suma zdyskontowanych przepływów wynosi 545,45 + 578,51 = 1123,96 zł. NPV = 1123,96 − 1000 = 123,96 zł. Ponieważ NPV jest większe niż 0, projekt jest opłacalny i podnosi wartość firmy."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj własne i obce źródła finansowania przedsiębiorstwa — wskaż zaletę i wadę każdego, uwzględniając wpływ na koszt kapitału (WACC).",
+        "a": "Kapitał własny (zysk zatrzymany, emisja akcji) ma tę zaletę, że nie trzeba go zwracać ani spłacać odsetek, ale jest droższy — dawcy kapitału własnego oczekują wyższego zwrotu rₑ ze względu na większe ryzyko. Kapitał obcy (kredyt, obligacje, leasing, faktoring) jest tańszy, bo odsetki tworzą tarczę podatkową (1−T) widoczną we wzorze WACC = (E/V)·rₑ + (D/V)·r_d·(1−T), lecz jego wadą jest obowiązek zwrotu oraz wzrost ryzyka niewypłacalności i bankructwa. W praktyce dług obniża WACC dzięki tarczy podatkowej, ale tylko do momentu, gdy rosnące ryzyko bankructwa zaczyna podnosić koszty obu kapitałów (trade-off struktury kapitału)."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaka jest najczęstsza pułapka egzaminacyjna przy interpretacji nadrzędnej zasady memoriału w rachunkowości i jak jej uniknąć?",
+        "a": "Najczęstszy błąd to mylenie zasady memoriału z ujęciem kasowym — student twierdzi, że przychód lub koszt ujmuje się w momencie wpływu lub wypływu gotówki. Zgodnie z zasadą memoriału zdarzenie ujmuje się w okresie jego wystąpienia, niezależnie od momentu zapłaty, a powiązana zasada współmierności nakazuje dopasować koszty do przychodów tego samego okresu. Aby uniknąć pułapki, pamiętaj, że przepływy gotówkowe pokazuje dopiero rachunek przepływów pieniężnych, natomiast wynik w RZiS bazuje na memoriale — dlatego firma może wykazać zysk, mając jednocześnie niedobór gotówki."
+      }
     ]
   },
-
-  // Dział odblokowywany po pokonaniu bossa 't1' (Władca Value at Risk).
-  t1: {
-    title: 'Ryzyko rynkowe — Value at Risk (VaR)',
-    questions: [
-      { type: 'definicyjne', q: 'Czym jest Value at Risk (VaR)? Podaj definicję, trzy parametry oraz interpretację.',
-        a: 'VaR to maksymalna oczekiwana strata wartości portfela w zadanym horyzoncie czasowym, która nie zostanie przekroczona z określonym prawdopodobieństwem (poziomem ufności). Wymaga trzech parametrów: poziomu ufności (np. 95% lub 99%), horyzontu czasowego (np. 1 dzień, 10 dni) oraz waluty pomiaru. Interpretacja: 1-dniowy VaR = 1 mln zł przy 99% oznacza, że w ciągu jednego dnia z prawdopodobieństwem 99% strata nie przekroczy 1 mln zł (średnio 1 dzień na 100 strata będzie większa). VaR mierzy więc kwantyl rozkładu strat, a nie stratę przeciętną.' },
-      { type: 'obliczeniowe', q: 'Portfel 10 mln zł, dzienna zmienność (σ) 1,5%. Oblicz 1-dniowy VaR przy 99%, potem przeskaluj na 10 dni.',
-        a: 'Metoda parametryczna: VaR = wartość·z·σ. Kwantyl 99% rozkładu normalnego: z = 2,326. VaR(1d) = 10 000 000·2,326·0,015 = 348 900 zł (ok. 349 tys. zł). Skalowanie regułą √czasu: VaR(10d) = VaR(1d)·√10 = 348 900·3,162 = 1 103 200 zł (ok. 1,10 mln zł). Dla 95% z = 1,645.' },
-      { type: 'porownawcze', q: 'Porównaj trzy metody wyznaczania VaR: wariancji-kowariancji, symulacji historycznej i Monte Carlo.',
-        a: 'Wariancja-kowariancja (parametryczna): zakłada normalność i liniowość pozycji; zaleta — prosta i szybka, wada — zaniża ryzyko przy grubych ogonach i źle obsługuje opcje (nieliniowość). Symulacja historyczna: stosuje rzeczywiste zmiany czynników ryzyka, bez założenia o rozkładzie; zaleta — uwzględnia faktyczne grube ogony, wada — zależna od danych, zakłada że przeszłość reprezentuje przyszłość. Monte Carlo: generuje losowe scenariusze z modelu; zaleta — radzi sobie z opcjami i dowolnymi rozkładami, wada — kosztowna obliczeniowo i wrażliwa na błąd specyfikacji modelu.' },
-      { type: 'pulapka', q: 'Dlaczego VaR nie jest pełną miarą ryzyka i czym różni się Expected Shortfall (CVaR)?',
-        a: 'VaR mówi tylko o progu straty, ale NIC o tym, jak duża będzie strata, gdy ten próg zostanie przekroczony (ignoruje ogon poza kwantylem). Wady: (1) VaR nie jest miarą koherentną — nie spełnia subaddytywności, więc VaR portfela może być większy od sumy VaR składników, co zaprzecza dywersyfikacji; (2) niedoszacowuje ryzyka katastroficznych zdarzeń w ogonie. Expected Shortfall (CVaR) to średnia strata WARUNKOWA pod warunkiem przekroczenia VaR — jest koherentny i lepiej opisuje ogon, dlatego Bazylea (FRTB) przesunęła wymóg kapitałowy z VaR 99% na ES 97,5%.' }
+  "stopy": {
+    "title": "Stopy i liczby na pamięć",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Wymień i scharakteryzuj podstawowe stopy procentowe ustalane przez Radę Polityki Pieniężnej NBP oraz wyjaśnij logikę tzw. korytarza stóp.",
+        "a": "Stopa referencyjna to główna stopa — rentowność 7-dniowych operacji otwartego rynku, „cena pieniądza\" w gospodarce (ok. 5,75%). Stopa lombardowa stanowi górny pułap (≈ referencyjna + 1 pp), po niej NBP udziela bankom kredytu pod zastaw papierów, a stopa depozytowa to dolny pułap (≈ referencyjna − 1 pp), czyli oprocentowanie depozytu banków w NBP. Występują też stopy redyskontowa i dyskontowa weksli oraz stopa rezerwy obowiązkowej (ok. 3,5% depozytów utrzymywanych w NBP). Logika korytarza: depozytowa mniejsza lub równa referencyjnej, a ta mniejsza lub równa lombardowej — to widełki, w których utrzymuje się rynkowa stawka overnight."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Bank wyznacza dzienny VaR na poziomie 1 000 000 zł (okno overnight). Oblicz przybliżony 10-dniowy VaR przy założeniu skalowania pierwiastkiem czasu oraz wyznacz minimalny narzut kapitałowy wg reguły bazylejskiej (mnożnik 3×).",
+        "a": "Skalowanie czasowe VaR odbywa się przez pierwiastek czasu, a NIE przez mnożenie razy t: VaR(10) = VaR(1)·√t = 1 000 000 · √10. Ponieważ √10 ≈ 3,16, otrzymujemy VaR(10) ≈ 3 160 000 zł. Minimalny narzut kapitałowy wg Bazylei (ryzyko rynkowe) to co najmniej 3× VaR, czyli 3 · 3 160 000 ≈ 9 480 000 zł. Przy backtestingu na poziomie ufności 99% przez 250 dni oczekiwana liczba wyjątków wynosi ok. 2,5."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj opcję i kontrakt forward FX pod kątem charakteru zobowiązania, premii oraz sposobu wyceny kursu terminowego.",
+        "a": "Opcja daje jej posiadaczowi prawo (nie obowiązek) realizacji transakcji i wymaga zapłaty premii z góry — zaletą jest ograniczenie straty do premii, wadą jest sam koszt tej premii. Forward to obowiązek wykonania transakcji przez obie strony, bez premii — zaletą jest brak kosztu początkowego, wadą pełna ekspozycja na niekorzystny ruch kursu. Kurs terminowy forward wylicza się z różnicy stóp procentowych (parytet stóp), a nie z prognozy przyszłego kursu spot — to kluczowa różnica metodologiczna."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaki jest najczęstszy błąd egzaminacyjny przy zmiennej X4 w modelu Altmana oraz przy interpretacji jego stref granicznych, i jak go uniknąć?",
+        "a": "Najczęstsza pułapka to wstawianie do zmiennej X4 księgowej wartości kapitału własnego zamiast wartości rynkowej — poprawnie X4 = wartość RYNKOWA kapitału / zobowiązania. Druga pułapka to mylenie progów stref: wynik poniżej 1,81 oznacza zagrożenie, przedział 1,81–2,99 to szara strefa, a powyżej 2,99 strefa bezpieczna. Aby uniknąć błędu, należy zawsze stosować kapitalizację rynkową w liczniku X4 i pamiętać o dokładnych wartościach granicznych (1,81 i 2,99)."
+      }
+    ]
+  },
+  "k1": {
+    "title": "Rachunkowość: istota, funkcje i zasady nadrzędne",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj rachunkowosc i wymien jej cztery podstawowe funkcje, krotko charakteryzujac kazda z nich.",
+        "a": "Rachunkowosc to system informacyjny mierzacy i komunikujacy w pieniadzu zdarzenia gospodarcze jednostki na podstawie dowodow ksiegowych, ktorego celem nadrzednym jest rzetelny i wierny obraz sytuacji majatkowej i finansowej (\"true and fair view\"). Cztery podstawowe funkcje to: informacyjna (dostarczanie danych do decyzji uzytkownikom wewnetrznym i zewnetrznym), kontrolna (ochrona majatku i wykrywanie nieprawidlowosci przez ewidencje i inwentaryzacje), sprawozdawcza (sporzadzanie sprawozdan finansowych dla otoczenia) oraz dowodowa (ksiegi i dowody jako material dowodowy, m.in. w kontrolach Urzedu Skarbowego). Zrodlem nadrzednych zasad jest Ustawa o Rachunkowosci (UoR), a w jednostkach stosujacych standardy miedzynarodowe takze MSR/MSSF."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Firma sprzedala towar w grudniu 2025 za 10 000 zl, a zaplate otrzyma w styczniu 2026. Koszt zakupu tego towaru to 6 000 zl. Stosujac zasade memorialu i wspolmiernosci, oblicz wynik finansowy grudnia (WF = P - K) i wskaz, jak blednie pokazaloby go ujecie kasowe.",
+        "a": "Zgodnie z zasada memorialu przychod 10 000 zl ujmujemy w grudniu (data sprzedazy), niezaleznie od tego, ze zaplata wplynie dopiero w styczniu. Zgodnie z zasada wspolmiernosci do tego przychodu przypisujemy wspolmierny koszt jego osiagniecia, czyli 6 000 zl. Wynik finansowy grudnia: WF = P - K = 10 000 - 6 000 = 4 000 zl zysku. Ujecie kasowe blednie pokazaloby grudzien jako strate -6 000 zl (sam koszt zakupu, bez przychodu, ktory wplynalby dopiero w styczniu)."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porownaj zasade ciaglosci z zasada kontynuacji dzialania — czego dotyczy kazda z nich i czemu sluzy.",
+        "a": "Zasada ciaglosci nakazuje stosowac te same zasady (polityke) rachunkowosci w kolejnych latach obrotowych — jej celem jest zapewnienie porownywalnosci sprawozdan rok do roku. Zasada kontynuacji dzialania to zalozenie, ze jednostka bedzie kontynuowac dzialalnosc w dajacej sie przewidziec przyszlosci (min. 12 miesiecy), co warunkuje sposob wyceny aktywow i pasywow. Sa to dwa rozne pojecia: pierwsze dotyczy stalosci metod, drugie — zalozenia o trwaniu jednostki; ich mylenie jest czestym bledem egzaminacyjnym."
+      },
+      {
+        "type": "pulapka",
+        "q": "Na czym polega najczestsza pulapka przy zasadzie ostroznosci i jak jej uniknac na egzaminie?",
+        "a": "Pulapka polega na blednym streszczaniu ostroznosci jako \"zanizaj wszystko\", podczas gdy zasada ta dotyczy asymetrii: nakazuje ujmowac przewidywane straty i spadki wartosci (odpisy), ale zakazuje ujmowac niezrealizowane zyski. Aby uniknac bledu, nalezy podkreslic te asymetrie — straty tak, niezrealizowane zyski nie — co chroni przed zawyzaniem aktywow i wyniku finansowego. Warto tez pamietac, ze ostroznosc nie oznacza dowolnego pomniejszania liczb, lecz realistyczna wycene."
+      }
+    ]
+  },
+  "k2": {
+    "title": "Wycena aktywów i pasywów + sprawozdanie finansowe",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Czym jest cena nabycia w rozumieniu ustawy o rachunkowosci i z jakich elementow sie sklada?",
+        "a": "Cena nabycia to cena zakupu skladnika powiekszona o koszty bezposrednio zwiazane z zakupem i przystosowaniem do uzywania (np. transport, clo, montaz), a pomniejszona o rabaty i upusty. Formalnie: Cn = Cz + Kd - R, gdzie Cz to cena zakupu, Kd to koszty bezposrednie zakupu, a R to rabaty/upusty. Dotyczy ona skladnikow KUPIONYCH, w odroznieniu od kosztu wytworzenia, ktory stosuje sie do skladnikow wyprodukowanych we wlasnym zakresie. Jest jedna z metod wyceny opartych na koszcie historycznym, dominujacym w UoR."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Firma kupila maszyne za 100 000 PLN, poniosla koszty transportu i montazu 8 000 PLN oraz otrzymala rabat 3 000 PLN. Na dzien bilansowy wartosc mozliwa do uzyskania spadla do 98 000 PLN. Ustal cene nabycia oraz wartosc bilansowa zgodnie z zasada ostroznosci.",
+        "a": "Cena nabycia: Cn = Cz + Kd - R = 100 000 + 8 000 - 3 000 = 105 000 PLN. Zasada ostroznej wyceny aktywu nakazuje przyjac nizsza z dwoch wartosci: Wb = min(Cn, Wr) = min(105 000; 98 000) = 98 000 PLN. Roznice 7 000 PLN (105 000 - 98 000) ujmuje sie jako odpis aktualizujacy wartosc skladnika. Wartosc bilansowa maszyny wynosi zatem 98 000 PLN."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porownaj wycene wedlug kosztu historycznego (cena nabycia/koszt wytworzenia) z wycena wedlug wartosci godziwej. Wskaz zalety i wady kazdej metody.",
+        "a": "Koszt historyczny opiera sie na cenie z momentu nabycia lub wytworzenia, niezmienianej mimo wahan rynkowych: zaleta jest obiektywnosc, weryfikowalnosc dokumentami i zgodnosc z zasada ostroznosci, a wada brak odzwierciedlenia biezacej wartosci rynkowej. Wartosc godziwa to kwota, za jaka skladnik moglby byc wymieniony miedzy zainteresowanymi, dobrze poinformowanymi stronami w transakcji rynkowej: zaleta jest aktualnosc i realizm wyceny, a wada subiektywnosc oraz trudnosc ustalenia przy braku aktywnego rynku. W UoR dominuje koszt historyczny, a wartosc godziwa stosowana jest wybiorczo (np. niektore inwestycje, polaczenia jednostek), wiec nie jest metoda uniwersalna."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaki blad najczesciej popelniaja zdajacy przy omawianiu elementow rocznego sprawozdania finansowego i obowiazku jego badania, i jak go uniknac?",
+        "a": "Najczestsza pulapka jest twierdzenie, ze kazda jednostka sporzadza pelne, 5-elementowe sprawozdanie: w rzeczywistosci bilans, rachunek zyskow i strat oraz informacja dodatkowa sa zawsze, natomiast rachunek przeplywow pienieznych i zestawienie zmian w kapitale wlasnym sporzadzaja TYLKO jednostki badane obowiazkowo (mniejsze maja sprawozdanie okrojone). Drugi czesty blad to przypisywanie badania sprawozdania urzedowi skarbowemu: badanie wykonuje biegly rewident (audytor), a obowiazek powstaje dopiero po przekroczeniu progow (zatrudnienie, suma bilansowa, przychody). Aby uniknac wpadki, nalezy tez pamietac o terminach: sporzadzenie w 3 miesiace, a zatwierdzenie w 6 miesiecy od dnia bilansowego."
+      }
+    ]
+  },
+  "k3": {
+    "title": "Analiza finansowa sprawozdania + ryzyko upadłości",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Czym jest analiza finansowa sprawozdania i jakie cztery grupy (filary) wskaźników wyróżniamy w diagnozie kondycji firmy? Wymień, co mierzy każda z grup.",
+        "a": "Analiza finansowa to badanie kondycji firmy na podstawie sprawozdania (bilans, rachunek zysków i strat, rachunek przepływów pieniężnych) — \"badanie krwi\" przedsiębiorstwa. Cztery filary diagnozy to: płynność (zdolność do terminowego regulowania zobowiązań bieżących), zadłużenie/wypłacalność (relacja kapitału obcego do majątku i kapitału własnego oraz zdolność obsługi długu w długim okresie), rentowność (zdolność do generowania zysku w relacji do sprzedaży, aktywów lub kapitału) oraz sprawność/aktywność (efektywność wykorzystania zasobów, mierzona rotacją składników majątku). Analiza wstępna bada dynamikę i strukturę pozycji, a analiza wskaźnikowa odnosi pozycje do siebie nawzajem, dając porównywalne miary."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Dane z bilansu: aktywa obrotowe = 600, zapasy = 200, zobowiązania bieżące = 400. Oblicz wskaźnik płynności bieżącej (CR), wskaźnik płynności szybkiej (QR) oraz kapitał obrotowy netto i oceń wyniki względem norm.",
+        "a": "CR = aktywa obrotowe / zobowiązania bieżące = 600 / 400 = 1,5 — mieści się w normie ok. 1,2–2,0. QR = (aktywa obrotowe − zapasy) / zobowiązania bieżące = (600 − 200) / 400 = 1,0 — równe normie ok. 1,0, czyli dobra płynność szybka. Kapitał obrotowy netto = aktywa obrotowe − zobowiązania bieżące = 600 − 400 = 200, co oznacza dodatni bufor płynności. Firma reguluje zobowiązania bieżące bez zamrażania nadmiaru kapitału."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj analizę poziomą (dynamiki) i analizę pionową (struktury) sprawozdania finansowego — co bada każda z nich oraz jaka jest ich zaleta i ograniczenie?",
+        "a": "Analiza pozioma (dynamiki) porównuje te same pozycje w czasie, np. rok do roku, licząc zmiany kwotowe i tempo wzrostu wg wzoru Δ% = (P₁ − P₀) / P₀ · 100% — zaletą jest pokazanie trendu, lecz sama nie mówi nic o strukturze majątku. Analiza pionowa (struktury) pokazuje udział każdej pozycji w sumie, np. udział zapasów w sumie aktywów przyjętej za 100% — zaletą jest porównywalność i obraz proporcji, lecz w ujęciu jednego okresu nie ujawnia zmian w czasie. Obie są komplementarne i stanowią punkt wyjścia analizy wstępnej; pozioma odpowiada na pytanie \"jak się zmienia\", a pionowa \"z czego się składa\"."
+      },
+      {
+        "type": "pulapka",
+        "q": "Najczęstsza pułapka egzaminacyjna: dlaczego wysokie ROE i wysoka płynność nie świadczą automatycznie o sile firmy i jak uniknąć błędu w interpretacji?",
+        "a": "ROE rośnie przy wyższym zadłużeniu na skutek efektu dźwigni finansowej (ROE = zysk netto / kapitał własny · 100%), więc wysokie ROE samo w sobie nie dowodzi siły firmy — trzeba sprawdzić strukturę kapitału, bo może wynikać z dużego lewarowania. Analogicznie zasada \"więcej znaczy lepiej\" jest błędna: zbyt wysoka płynność oznacza zamrożony, nieefektywny kapitał (nadpłynność), a zbyt wysokie zadłużenie to ryzyko, lecz zbyt niskie to niewykorzystana dźwignia. Pamiętaj też, że płynność (krótki okres) to nie wypłacalność (długi okres) — firma rentowna może upaść z braku gotówki. Aby uniknąć błędu, nigdy nie interpretuj wskaźnika w próżni — zawsze odnoś go do normy, branży i trendu w czasie."
+      }
+    ]
+  },
+  "k4": {
+    "title": "Rachunek kosztów: pełny vs zmienny + CVP",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Czym różni się rachunek kosztów pełnych (RKP, absorpcyjny) od rachunku kosztów zmiennych (RKZ)? Podaj jedno kluczowe kryterium różnicujące i wskaż, który z nich obowiązuje w sprawozdawczości.",
+        "a": "Jedynym kryterium różnicującym jest traktowanie stałych kosztów produkcji: w RKP wchodzą one do kosztu wytworzenia wyrobu (są aktywowane w zapasie i czekają na sprzedaż), a w RKZ stanowią koszt okresu i od razu obciążają wynik. Kosztem wyrobu w RKZ są więc tylko koszty zmienne (np. materiały bezpośrednie, akord). W sprawozdawczości (bilans, RZiS) obowiązuje koszt wytworzenia wg RKP zgodnie z Ustawą o rachunkowości i MSR 2, natomiast RKZ jest narzędziem wewnętrznym (zarządczym), przydatnym do decyzji krótkookresowych."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Dla wyrobu: cena c = 100 zł/szt., jednostkowy koszt zmienny kz_j = 60 zł/szt., koszty stałe KS = 80 000 zł. Policz marżę pokrycia i wskaźnik marży, próg rentowności ilościowy i wartościowy, wolumen dla zysku Z = 20 000 zł oraz dźwignię operacyjną (DOL) przy sprzedaży 3 000 szt.",
+        "a": "Marża pokrycia jednostkowa cm = c − kz_j = 100 − 60 = 40 zł, a wskaźnik marży wcm = cm/c = 40/100 = 0,4. Próg rentowności: BEP_ilość = KS/cm = 80 000/40 = 2 000 szt., BEP_wartość = KS/wcm = 80 000/0,4 = 200 000 zł. Dla docelowego zysku Z = 20 000 zł: Q_Z = (KS + Z)/cm = (80 000 + 20 000)/40 = 2 500 szt. Przy sprzedaży 3 000 szt.: CM = 3 000·40 = 120 000 zł, zysk = CM − KS = 120 000 − 80 000 = 40 000 zł, więc DOL = CM/zysk = 120 000/40 000 = 3 (mnożnik 3 oznacza, że wzrost sprzedaży o 10% daje wzrost zysku operacyjnego o 30%)."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj podział kosztów na stałe/zmienne z podziałem na bezpośrednie/pośrednie oraz układ rodzajowy z układem funkcjonalnym (kalkulacyjnym). Wskaż istotę każdego kryterium.",
+        "a": "Podział stały/zmienny dotyczy reakcji kosztu na wolumen: koszty stałe (np. czynsz, amortyzacja liniowa) nie zmieniają się w danym przedziale, a koszty zmienne rosną proporcjonalnie do produkcji (np. materiały bezpośrednie, akord). Podział bezpośredni/pośredni dotyczy możliwości przypisania do wyrobu: bezpośrednie przypisuje się wprost i ekonomicznie (materiał, robocizna bezpośrednia), pośrednie są wspólne dla wielu wyrobów i wymagają rozliczenia kluczem (koszty wydziałowe) — co istotne, oba kryteria są niezależne (koszt może być zmienny i pośredni, np. energia wydziałowa). Z kolei układ rodzajowy klasyfikuje koszty wg natury zużytego zasobu (amortyzacja, materiały, wynagrodzenia, usługi obce) niezależnie od miejsca powstania, a układ funkcjonalny (kalkulacyjny) wg funkcji/miejsca: koszt wytworzenia, koszty sprzedaży, koszty ogólnego zarządu."
+      },
+      {
+        "type": "pulapka",
+        "q": "Najczęstsza pułapka egzaminacyjna: kiedy RKP i RKZ dają ten sam zysk, a kiedy się różnią i w którą stronę? Jak nie pomylić kierunku tej różnicy?",
+        "a": "Oba rachunki dają identyczny zysk tylko wtedy, gdy produkcja = sprzedaż (brak zmiany zapasu) — wówczas żadne stałe koszty nie zostają uwięzione w zapasie. Różnica pojawia się wraz ze zmianą zapasu i wynosi Zysk_RKP − Zysk_RKZ = ks_j · ΔQ_zapasu (gdzie ks_j to stały koszt produkcji na sztukę). Gdy produkcja jest większa niż sprzedaż, RKP pokazuje wyższy zysk niż RKZ (część kosztów stałych zostaje aktywowana w zapasie); gdy produkcja jest mniejsza niż sprzedaż — odwrotnie. Dodatkowo nie wolno mylić marży pokrycia z zyskiem: marża najpierw pokrywa koszty stałe, a zysk pojawia się dopiero po ich pokryciu."
+      }
+    ]
+  },
+  "k5": {
+    "title": "Wartość pieniądza w czasie + ocena inwestycji (NPV/IRR)",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Wyjasnij pojecie wartosci pieniadza w czasie (TVM) oraz omow dwie podstawowe operacje, ktore z niego wynikaja.",
+        "a": "Wartosc pieniadza w czasie (TVM, time value of money) to mechanizm przesuwania kwot w czasie, oparty na zasadzie, ze zlotowka dzis jest warta wiecej niz zlotowka jutro, bo dzis mozna ja zainwestowac i pomnozyc, a przyszla jest obarczona ryzykiem i inflacja. Dwie operacje to: kapitalizacja, ktora przesuwa kwote w przyszlosc przez procent skladany wedlug FV = PV·(1+r)ⁿ, oraz dyskontowanie, ktore sprowadza przyszle przeplywy do terazniejszosci wedlug PV = FV/(1+r)ⁿ. Dopiero po sprowadzeniu kwot na poziom wartosci biezacej (na ten sam moment) mozna je uczciwie zsumowac. Kluczowe parametry to PV (kwota dzis), FV (wartosc przyszla), r (stopa za okres) oraz n (liczba okresow)."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Projekt wymaga nakladu poczatkowego 1000 zl, a w latach 1 i 2 generuje wplywy po 600 zl. Przy stopie dyskontowej r = 10% policz NPV oraz wskaznik rentownosci PI i ocen oplacalnosc.",
+        "a": "NPV liczymy ze wzoru NPV = suma CF_t/(1+r)ᵗ, czyli NPV = -1000 + 600/1,1 + 600/1,21 = -1000 + 545,5 + 495,9 ≈ 41,4 zl. Poniewaz NPV jest wieksze niz 0, inwestycja jest oplacalna. Wskaznik rentownosci PI = zdyskontowane wplywy / wartosc bezwzgledna nakladu = 1041,4/1000 ≈ 1,04, czyli wieksze niz 1, co prowadzi do tego samego wniosku o oplacalnosci (kryterium PI wieksze lub rowne 1 jest rownowazne NPV wieksze lub rowne 0)."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porownaj metode NPV z metoda IRR oraz z prostym okresem zwrotu jako kryteriami oceny inwestycji, wskazujac zalety i wady kazdej.",
+        "a": "NPV (wartosc biezaca netto) jest addytywne, jednoznaczne i mierzy realny przyrost wartosci w zlotowkach, dlatego uznaje sie je za metode nadrzedna; jego wada to wrazliwosc na przyjeta stope dyskontowa. IRR (wewnetrzna stopa zwrotu) to stopa, przy ktorej NPV = 0, jest intuicyjne jako procent, ale moze dawac wiele rozwiazan przy zmiennych znakach przeplywow i myli przy projektach o roznej skali, a dodatkowo zaklada nierealna reinwestycje przeplywow po stopie IRR (stad MIRR jako poprawka). Prosty okres zwrotu jest latwy i informuje o plynnosci, lecz pomija wartosc pieniadza w czasie, przeplywy po terminie zwrotu oraz ryzyko, wiec nie mierzy rentownosci. Przy wyborze miedzy projektami decyduje NPV, a nie sam IRR."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaka jest najczestsza pulapka egzaminacyjna przy obliczaniu wartosci pieniadza w czasie zwiazana ze stopa procentowa i okresem, i jak jej uniknac?",
+        "a": "Najczestsza pulapka to niespojnosc stopy r z dlugoscia okresu — stopa roczna musi odpowiadac okresom rocznym. Przy kapitalizacji srodrocznej (np. kwartalnej czy miesiecznej) nalezy podzielic stope roczna przez liczbe podokresow i jednoczesnie pomnozyc liczbe okresow n przez te liczbe. Trzeba tez uwazac, by nie mylic stopy nominalnej z efektywna ani PV renty z FV renty. Aby uniknac bledu, zawsze sprowadza sie stope i liczbe okresow do tej samej jednostki czasu przed podstawieniem do wzoru FV = PV·(1+r)ⁿ lub PV = FV/(1+r)ⁿ."
+      }
+    ]
+  },
+  "k6": {
+    "title": "Decyzje finansowe: finansowanie, koszt kapitału, ryzyko",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Czym jest WACC (sredni wazony koszt kapitalu) i z jakich elementow sie sklada? Podaj definicje i wzor.",
+        "a": "WACC (Weighted Average Cost of Capital) to sredni wazony koszt wszystkich zrodel finansowania firmy, czyli minimalna stopa zwrotu, jaka projekt musi zarobic, by sie oplacac. Wzor: WACC = E/(E+D)·k_e + D/(E+D)·r_d·(1−T), gdzie E to wartosc kapitalu wlasnego, D to wartosc dlugu, k_e to koszt kapitalu wlasnego (zwykle z modelu CAPM), r_d to nominalne oprocentowanie dlugu, a T to stopa podatku CIT. Wagi to udzialy kapitalu wlasnego i dlugu w lacznym finansowaniu, a w czlonie dlugu wystepuje tarcza podatkowa (1−T). Optymalna struktura kapitalu minimalizuje WACC i maksymalizuje wartosc firmy."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Firma ma kapital wlasny E = 600 tys. zl i dlug D = 400 tys. zl. Koszt kapitalu wlasnego k_e = 12%, nominalne oprocentowanie dlugu r_d = 8%, a stopa CIT T = 0,19. Oblicz WACC i zinterpretuj wynik.",
+        "a": "Najpierw wagi: E/(E+D) = 600/1000 = 0,6 oraz D/(E+D) = 400/1000 = 0,4. Koszt dlugu po opodatkowaniu: r_d·(1−T) = 8%·(1−0,19) = 6,48%. WACC = 0,6·12% + 0,4·6,48% = 7,2% + 2,59% ≈ 9,79%. Interpretacja: projekt powinien zarabiac wiecej niz okolo 9,8%, aby zwiekszal wartosc firmy; ponizej tego progu niszczy wartosc dla dawcow kapitalu."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porownaj finansowanie kapitalem wlasnym i kapitalem obcym (dlugiem) — wskaz zalety i wady kazdego.",
+        "a": "Kapital wlasny (akcje, udzialy, zysk zatrzymany) nie wymaga zwrotu ani odsetek i nie grozi niewyplacalnoscia, ale jest drozszy (wlasciciel wymaga wyzszej premii za ryzyko, bo ma pierwszenstwo po wierzycielach) oraz oznacza dzielenie sie zyskiem i kontrola. Kapital obcy (kredyty, obligacje) jest tanszy, bo wierzyciel ryzykuje mniej (pierwszenstwo, zabezpieczenia), a odsetki daja tarcze podatkowa obnizajaca efektywny koszt do r_d·(1−T); jego wada to obowiazek zwrotu i obslugi odsetek oraz wzrost ryzyka finansowego i grozba niewyplacalnosci. Dlug do pewnego momentu obniza WACC, ale po przekroczeniu rozsadnego zadluzenia rosnie ryzyko bankructwa i koszt obu zrodel rosnie."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaki jest najczestszy blad egzaminacyjny dotyczacy tarczy podatkowej w koszcie kapitalu i jak go uniknac?",
+        "a": "Najczestsza pulapka to stosowanie czynnika (1−T) zarowno w koszcie dlugu, jak i w koszcie kapitalu wlasnego. Tarcza podatkowa dotyczy WYLACZNIE kosztu dlugu, poniewaz odsetki obnizaja podstawe opodatkowania CIT, dlatego efektywny koszt dlugu to r_d·(1−T). Dywidenda nie jest kosztem podatkowym, wiec w koszcie kapitalu wlasnego (k_e z CAPM) nie ma czynnika (1−T). Aby uniknac bledu: pomniejszaj o tarcze tylko czlon dlugu we wzorze na WACC, a koszt kapitalu wlasnego pozostaw bez korekty podatkowej."
+      }
+    ]
+  },
+  "k7": {
+    "title": "Kapitał obrotowy netto i zarządzanie nim",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Czym jest kapitał obrotowy netto (KON) i jak można go zmierzyć? Podaj oba ujęcia oraz kluczowe pojęcia z nim związane.",
+        "a": "Kapitał obrotowy netto to ta część aktywów obrotowych, która jest finansowana kapitałem stałym (długoterminowym), a nie zobowiązaniami bieżącymi — pełni rolę bufora (poduszki) bezpieczeństwa płynności. Mierzymy go w dwóch równoważnych ujęciach dających ten sam wynik: majątkowym KON = AO − ZK (aktywa obrotowe minus zobowiązania krótkoterminowe) oraz kapitałowym KON = (KW + ZD) − AT (kapitał własny plus zobowiązania długoterminowe minus aktywa trwałe). Kapitał stały to kapitał własny powiększony o zobowiązania długoterminowe (źródła finansowania na ponad 1 rok). Dodatni KON zwykle wiąże się ze wskaźnikiem płynności bieżącej CR powyżej 1."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Firma ma aktywa obrotowe AO = 800 tys. zł, zobowiązania krótkoterminowe ZK = 500 tys. zł, zapasy = 200 tys. zł, należności = 300 tys. zł, koszt sprzedaży = 1460 tys. zł, przychody = 2190 tys. zł oraz okres spłaty zobowiązań OZob = 40 dni. Oblicz KON, wskaźnik płynności bieżącej CR oraz cykl konwersji gotówki CCC (rok = 365 dni).",
+        "a": "KON = AO − ZK = 800 − 500 = 300 tys. zł (dodatni — bufor płynności istnieje). CR = AO/ZK = 800/500 = 1,6 (w normie orientacyjnej 1,2–2,0). Składowe cyklu: OZ = (Zapasy/Koszt sprzedaży)·365 = (200/1460)·365 = 50 dni; ON = (Należności/Przychody)·365 = (300/2190)·365 = 50 dni. Stąd CCC = OZ + ON − OZob = 50 + 50 − 40 = 60 dni — gotówka jest zamrożona średnio przez 60 dni, które firma musi sfinansować z własnych źródeł."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj trzy strategie zarządzania poziomem kapitału obrotowego netto: agresywną, umiarkowaną i konserwatywną. Wskaż zaletę i wadę każdej.",
+        "a": "Strategia agresywna utrzymuje KON niski lub ujemny, mocno opierając się na tanim finansowaniu krótkoterminowym (np. kredycie kupieckim od dostawców) — zaletą jest wyższa rentowność kapitału, wadą wysokie ryzyko utraty płynności. Strategia konserwatywna utrzymuje wysoki KON i duży udział kapitału stałego — zaletą jest wysokie bezpieczeństwo płynności, wadą niższa rentowność, bo drogi kapitał stały zamraża niepracujące zasoby. Strategia umiarkowana to wariant pośredni, równoważący bezpieczeństwo płynności z kosztem zamrożonego kapitału. Różnica dotyczy struktury finansowania (ile krótkim, ile stałym), a nie tylko wielkości aktywów."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jakie są najczęstsze pułapki egzaminacyjne przy kapitale obrotowym netto i cyklach, na które dociska komisja, i jak ich uniknąć?",
+        "a": "Po pierwsze, nie traktuj ujemnego KON jako zawsze złego — firmy o szybkim obrocie (sieci handlowe) celowo utrzymują KON poniżej zera, finansując aktywa tanim, krótkim kredytem kupieckim (strategia agresywna). Po drugie, nie myl cyklu operacyjnego z CCC: cykl operacyjny to OZ + ON (bez odejmowania zobowiązań), a CCC dodatkowo odejmuje okres spłaty zobowiązań OZob. Po trzecie, wyższy KON oznacza większe bezpieczeństwo, ale NIŻSZĄ rentowność kapitału — to trade-off, nie zasada „im więcej, tym lepiej”. Pamiętaj też, że zysk to nie gotówka: firma rentowna memoriałowo może utracić płynność przy złym zarządzaniu kapitałem obrotowym."
+      }
+    ]
+  },
+  "k8": {
+    "title": "Wycena przedsiębiorstw (FCFF/FCFE/EVA)",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj FCFF i FCFE oraz wskaż, jaką stopę dyskontową stosuje się do każdego z tych przepływów.",
+        "a": "FCFF (Free Cash Flow to Firm) to wolne przepływy pieniężne dostępne dla wszystkich dawców kapitału (właścicieli i wierzycieli), liczone przed spłatą długu i dyskontowane średnim ważonym kosztem kapitału WACC. FCFE (Free Cash Flow to Equity) to przepływy dostępne wyłącznie dla właścicieli, czyli już po odsetkach oraz po spłacie i zaciągnięciu długu, dyskontowane kosztem kapitału własnego rₑ. Sam FCFF wyznacza się ze wzoru: FCFF = EBIT·(1−T) + amortyzacja − zmiana kapitału obrotowego netto (ΔKON) − CAPEX. Dobranie niewłaściwej stopy (np. WACC do FCFE) jest błędem metodologicznym."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Firma generuje stały FCFF = 100 tys. zł rocznie, WACC = 10%, a stopa wzrostu g = 2%. Dług netto wynosi 275 tys. zł. Oblicz wartość przedsiębiorstwa (EV) i wartość kapitału własnego.",
+        "a": "Stosujemy wzór renty wieczystej rosnącej (model Gordona): EV = FCFF·(1+g) / (WACC − g) = 100·(1,02) / (0,10 − 0,02) = 102 / 0,08 = 1275 tys. zł. Wartość kapitału własnego otrzymujemy, odejmując dług netto: 1275 − 275 = 1000 tys. zł. Warunkiem poprawności jest g mniejsze niż WACC, bo w przeciwnym razie mianownik byłby zerowy lub ujemny."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj mnożniki P/E oraz EV/EBITDA jako narzędzia wyceny porównawczej — wskaż zaletę i wadę każdego.",
+        "a": "P/E odnosi się do kapitału własnego i zysku netto: jego zaletą jest prostota i powszechność, a wadą duża wrażliwość na strukturę finansowania (dług) oraz obciążenia podatkowe, co utrudnia porównania między firmami o różnym zadłużeniu. EV/EBITDA wycenia całe przedsiębiorstwo i jest niezależny od struktury finansowania oraz polityki amortyzacji, co stanowi jego zaletę przy porównaniach międzyfirmowych, natomiast wadą jest pomijanie nakładów inwestycyjnych odtworzeniowych i amortyzacji jako realnego zużycia majątku. Oba mnożniki wymagają porównywalnej grupy firm (branża, wielkość, rentowność), bo mnożnik przeniesiony z innej branży zafałszowuje wycenę."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaki jest najczęstszy błąd przy interpretacji wyniku wyceny dochodowej dotyczący wartości przedsiębiorstwa (EV) i jak go uniknąć?",
+        "a": "Najczęstsza pułapka, na której dociska komisja, to mylenie wartości całego przedsiębiorstwa (EV) z wartością kapitału własnego (equity). Aby jej uniknąć, należy pamiętać o zależności: wartość kapitału własnego = EV − dług netto, więc po wyliczeniu EV z dyskontowania FCFF trzeba jeszcze odjąć dług netto. Dodatkowo warto kojarzyć, że mnożnik P/E dotyczy equity, a EV/EBITDA całej firmy, co pomaga nie pomylić poziomów wyceny. Pominięcie tego odejmowania zawyża wartość dostępną dla właścicieli."
+      }
+    ]
+  },
+  "k9": {
+    "title": "Rynki finansowe i instrumenty",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj instrument pochodny (derywat) oraz wskaż kluczowe elementy odróżniające go od instrumentów bazowych. Podaj przykłady derywatów.",
+        "a": "Instrument pochodny (derywat) to instrument finansowy, którego wartość zależy od ceny instrumentu bazowego, takiego jak akcja, waluta, indeks lub surowiec. Kluczowym elementem jest więc pochodność wyceny — sam derywat nie reprezentuje bezpośredniego prawa własności do bazy, lecz kontrakt rozliczany w odniesieniu do jej ceny. Do derywatów zaliczamy kontrakty terminowe (forward, futures), swapy oraz opcje. Pełnią one dwie zasadnicze funkcje: zabezpieczającą (hedging) oraz spekulacyjną."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Bon skarbowy ma wartość nominalną N = 1000 PLN, rentowność roczną r = 5% (0,05) i d = 182 dni do wykupu. Oblicz cenę zakupu bonu (instrument dyskontowy) oraz zysk inwestora na dyskoncie.",
+        "a": "Stosujemy wzór na cenę instrumentu dyskontowego: P = N / (1 + r·(d/365)). Podstawiamy: P = 1000 / (1 + 0,05·(182/365)) = 1000 / 1,02493 ≈ 975,68 PLN. Inwestor płaci dziś około 975,68 PLN, a po pół roku otrzymuje pełny nominał 1000 PLN. Zysk na dyskoncie wynosi zatem ok. 1000 − 975,68 = 24,32 PLN."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj kontrakt forward i kontrakt futures — wskaż zalety i wady każdego z nich.",
+        "a": "Forward jest kontraktem pozagiełdowym (OTC) i niestandaryzowanym — jego zaletą jest elastyczne dopasowanie warunków do potrzeb stron, a wadą brak rozliczeń dziennych oraz wyższe ryzyko niewykonania (ryzyko kontrahenta) i niższa płynność. Futures jest kontraktem giełdowym i standaryzowanym, z depozytem zabezpieczającym i codziennym rozliczeniem (marking-to-market) — jego zaletą jest wysoka płynność i ograniczenie ryzyka kontrahenta przez izbę rozliczeniową, a wadą sztywne, standaryzowane parametry i konieczność utrzymywania depozytu. Oba instrumenty to zobowiązanie realizacji dla obu stron; różnią się głównie miejscem obrotu i sposobem rozliczania."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaka jest najczęstsza pułapka egzaminacyjna dotycząca rynku pierwotnego i wtórnego oraz jak jej uniknąć?",
+        "a": "Częstym błędem jest twierdzenie, że emitent pozyskuje kapitał również na rynku wtórnym. W rzeczywistości tylko na rynku pierwotnym emitent sprzedaje instrument po raz pierwszy i otrzymuje środki (np. IPO). Na rynku wtórnym instrument jedynie zmienia właściciela między inwestorami — emitent NIE dostaje wówczas żadnych środków, a rynek wtórny pełni funkcję zapewnienia płynności (np. GPW). Aby uniknąć pułapki, należy pamiętać prostą zasadę: kapitał trafia do emitenta wyłącznie na rynku pierwotnym."
+      }
+    ]
+  },
+  "k10": {
+    "title": "System bankowy, NBP, polityka monetarna i fiskalna",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Wyjasnij pojecie systemu dwuszczeblowego bankowosci oraz wymien i scharakteryzuj trzy podstawowe funkcje banku centralnego (NBP).",
+        "a": "System dwuszczeblowy to model bankowosci, w ktorym oddzielono bank centralny (I szczebel) od bankow komercyjnych (II szczebel) — bank centralny dba o wartosc pieniadza i stabilnosc systemu, a obsluga firm i osob prywatnych nalezy do bankow komercyjnych. Trzy funkcje banku centralnego to: bank emisyjny (monopol na emisje pieniadza), bank bankow (prowadzi rachunki bankow komercyjnych i jest pozyczkodawca ostatniej instancji) oraz bank panstwa (obsluguje budzet i zarzadza rezerwami dewizowymi). Nadrzednym celem NBP jest stabilnosc cen, a RPP ustala stopy procentowe autonomicznie, co gwarantuje wiarygodnosc antyinflacyjna."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Stopa rezerwy obowiazkowej wynosi r = 3,5%. Oblicz mnoznik kreacji pieniadza oraz maksymalny przyrost depozytow, jaki w systemie bankowym moze wygenerowac wklad poczatkowy 1000 zl. Skomentuj wplyw wysokosci rezerwy na podaz pieniadza.",
+        "a": "Mnoznik liczymy ze wzoru m = 1/r = 1/0,035 ≈ 28,6 (wielkosc bezwymiarowa). Maksymalny przyrost depozytow wynosi: ΔD = ΔR · (1/r) = 1000 · 28,6 = 28 600 zl. Wniosek: im wyzsza stopa rezerwy obowiazkowej, tym mniejszy mnoznik i mniej kreowanego pieniadza, dlatego podniesienie rezerwy jest narzedziem restrykcyjnym (uwaga: wartosc r = 3,5% nalezy zweryfikowac jako aktualna na egzaminie)."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porownaj polityke pieniezna (monetarna) i polityke fiskalna (budzetowa): wskaz podmiot, instrumenty oraz po jednej zalecie i ograniczeniu kazdej z nich.",
+        "a": "Polityke pieniezna prowadzi bank centralny (NBP) za pomoca stop procentowych, rezerwy obowiazkowej i operacji otwartego rynku; jej zaleta jest szybkosc decyzji i niezaleznosc od cyklu politycznego (RPP dziala autonomicznie), a ograniczeniem posredni i opozniony wplyw na realna gospodarke. Polityke fiskalna prowadzi rzad za pomoca podatkow (dochody) i wydatkow budzetowych; jej zaleta jest bezposrednie oddzialywanie na popyt, lecz ograniczeniem ryzyko narastania deficytu i dlugu publicznego oraz dlugi proces decyzyjny. Obie polityki tworza tzw. policy mix — moga dzialac zgodnie (oba luzowanie albo oba zacisniecie) albo w opozycji do siebie."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaka jest najczestsza pulapka egzaminacyjna przy operacjach otwartego rynku (OOR) i okreslaniu kierunku polityki pienieznej, i jak jej uniknac?",
+        "a": "Najczestszy blad to pomylenie kierunku dzialania OOR oraz mylenie polityki restrykcyjnej z ekspansywna. Nalezy zapamietac: sprzedaz papierow wartosciowych przez NBP sciaga pieniadz z rynku (polityka restrykcyjna, schladzajaca), a kupno papierow dostarcza plynnosc (polityka ekspansywna, pobudzajaca); analogicznie podniesienie stop i rezerwy oznacza restrykcje, a ich obnizenie ekspansje. Dodatkowo nie wolno mieszac polityki pienieznej (bank centralny, stopy oraz podaz pieniadza) z fiskalna (rzad, podatki oraz wydatki) ani sadzic, ze NBP obsluguje klientow indywidualnych — to robia banki komercyjne, bo NBP jest bankiem bankow."
+      }
+    ]
+  },
+  "k11": {
+    "title": "Finanse publiczne, budżet i podatki",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj podatek oraz wymień jego cechy konstytutywne. Wskaż też trzy funkcje podatków.",
+        "a": "Podatek to nieodpłatne, przymusowe i bezzwrotne świadczenie pieniężne na rzecz związku publicznoprawnego (państwa lub JST). Jego cechy konstytutywne to: przymusowość, nieodpłatność, bezzwrotność oraz charakter pieniężny. Podatki pełnią trzy funkcje: fiskalną (dostarczają dochodów budżetowi), redystrybucyjną (przesuwają dochody między grupami społecznymi) oraz stymulacyjną (zachęcają lub zniechęcają do określonych zachowań przez ulgi lub wyższe stawki)."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Spółka osiągnęła dochód do opodatkowania Dp = 500 000 zł. Oblicz należny podatek CIT przy stawce podstawowej p = 19% oraz przy stawce dla małego podatnika p = 9%. Podaj wzór. (Stawki zweryfikuj jako aktualne — podlegają zmianom.)",
+        "a": "Podatek liniowy CIT liczy się wzorem T = p · Dp, gdzie T to kwota podatku, p to stawka, a Dp to podstawa opodatkowania (dochód). Przy stawce podstawowej: T = 0,19 · 500 000 = 95 000 zł. Przy stawce dla małego podatnika: T = 0,09 · 500 000 = 45 000 zł. Różnica wynosi 50 000 zł, co pokazuje korzyść preferencyjnej stawki 9%; na egzaminie zaznacz, że stawki są aktualne na dany rok i podlegają zmianom."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj podatki bezpośrednie i pośrednie — podaj definicję, przykłady oraz kto ponosi ich ciężar ekonomiczny.",
+        "a": "Podatek bezpośredni obciąża wprost dochód lub majątek podatnika i jest nieprzerzucalny — ciężar ponosi ten, kto formalnie płaci (przykłady: PIT, CIT, podatek od nieruchomości). Podatek pośredni jest wliczony w cenę towaru lub usługi, więc formalnie odprowadza go przedsiębiorca, lecz ekonomicznie ponosi go konsument dzięki przerzucalności (przykłady: VAT, akcyza). Zaletą podatków bezpośrednich jest przejrzystość obciążenia i progresja sprzyjająca redystrybucji, a wadą — mniejsza wydajność poboru; podatki pośrednie są wydajne fiskalnie i łatwe w poborze, lecz regresywne i mniej widoczne dla płacącego."
+      },
+      {
+        "type": "pulapka",
+        "q": "Najczęstsza pułapka egzaminacyjna w temacie finansów publicznych: rozróżnienie dochodów i przychodów budżetowych oraz deficytu i długu publicznego. Wyjaśnij różnice i jak uniknąć błędu.",
+        "a": "Dochody budżetowe to wpływy bezzwrotne i definitywne (głównie podatki, cła, opłaty), których nie trzeba oddawać, natomiast przychody budżetowe są zwrotne i służą finansowaniu deficytu (emisja obligacji, kredyty, prywatyzacja) — to klasyczne pytanie dobijające. Drugą pułapką jest mylenie deficytu budżetowego (zjawisko roczne, strumień: ujemna różnica między dochodami a wydatkami) z długiem publicznym (stan skumulowany, zasób). Aby uniknąć błędu, zapamiętaj parę strumień–zasób oraz to, że przychody są zwrotne, a dochody definitywne; dodatkowo warto wskazać konstytucyjny limit długu DP/PKB mniejszy lub równy 0,6 (60% PKB, art. 216 Konstytucji)."
+      }
+    ]
+  },
+  "k12": {
+    "title": "Makroekonomia dla finansisty",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj PKB metodą wydatkową i wymień jego składniki w gospodarce otwartej.",
+        "a": "PKB (Produkt Krajowy Brutto) to wartość dóbr i usług finalnych wytworzonych na terytorium kraju w danym okresie (kryterium geograficzne). Metodą wydatkową liczy się go wzorem Y = C + I + G + (X − M), gdzie C to konsumpcja, I — inwestycje, G — wydatki rządowe, a (X − M) to eksport netto (różnica eksportu i importu). Wszystkie składniki wyrażone są w złotych i sumują się do wartości całego produktu krajowego."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Lokata jest oprocentowana nominalnie i = 6%, a inflacja wynosi π = 5%. Oblicz realną stopę procentową przed podatkiem oraz realną stopę po podatku Belki (19%). Jaki jest wniosek dla finansisty?",
+        "a": "Realna stopa przed podatkiem (efekt Fishera): r ≈ i − π = 6% − 5% = 1%. Po podatku Belki odsetki netto wynoszą 6% · (1 − 0,19) = 4,86%, więc realnie po opodatkowaniu r ≈ 4,86% − 5% = −0,14% — kapitał realnie traci na wartości. Wniosek: finansista ocenia inwestycję po stopie realnej po opodatkowaniu, a nie po nominalnej, bo dopiero ona pokazuje faktyczny zysk."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj PKB i PNB (DNB) oraz wskaż, jak zależność między nimi wygląda w kraju z dużym napływem kapitału zagranicznego.",
+        "a": "PKB stosuje kryterium geograficzne — mierzy produkcję wytworzoną na terytorium kraju, niezależnie od tego, kto jest właścicielem czynników wytwórczych. PNB/DNB stosuje kryterium własnościowe — mierzy dochód wytworzony przez rezydentów (obywateli) kraju, niezależnie od miejsca; różnicę stanowią dochody netto z zagranicy (PNB = PKB + dochody netto z zagranicy). W kraju z dużym kapitałem zagranicznym zwykle PKB jest większe niż PNB, ponieważ część zysków wytworzonych na jego terytorium jest transferowana za granicę do nierezydentów."
+      },
+      {
+        "type": "pulapka",
+        "q": "Najczęstsza pułapka egzaminacyjna: czym różni się deprecjacja od dewaluacji i w którą stronę słabsza waluta wpływa na eksport oraz import?",
+        "a": "Deprecjacja to spadek wartości waluty wynikający z mechanizmu rynkowego (kurs płynny), natomiast dewaluacja to administracyjna decyzja obniżająca kurs w systemie kursu stałego — mylenie tych pojęć to typowy błąd, na którym komisja dociska. Słabsza (zdeprecjonowana) waluta sprzyja eksporterom, bo czyni eksport tańszym dla zagranicy, a jednocześnie podraża import; aprecjacja działa odwrotnie. Aby uniknąć pułapki, należy pamiętać o kierunku: deprecjacja poprawia eksport netto (z opóźnieniem — efekt krzywej J), a nie odwrotnie."
+      }
+    ]
+  },
+  "t1": {
+    "title": "Value at Risk i ryzyka rynkowe banku",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj Value at Risk (VaR) i wymień trzy kluczowe parametry, które muszą być podane przy każdym podaniu VaR.",
+        "a": "VaR (wartość zagrożona ryzykiem) to maksymalna oczekiwana strata portfela w danym horyzoncie czasowym i przy danym poziomie ufności, w normalnych warunkach rynkowych; formalnie jest to kwantyl rozkładu strat, a NIE strata maksymalna. Trzy parametry, bez których liczba nic nie znaczy, to: wielkość straty (w zł), horyzont czasowy (np. 1 dzień, 10 dni) oraz poziom ufności (1−α), np. 99%. Przykładowy zapis „VaR = 1 mln zł, 99%, 1 dzień\" czytamy: z prawdopodobieństwem 99% strata dzienna nie przekroczy 1 mln zł, czyli średnio 1 dzień na 100 będzie gorszy. Wyższy poziom ufności daje wyższy VaR, bo odcinamy rzadsze, głębsze zdarzenie w lewym ogonie rozkładu."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Portfel ma wartość V = 1 000 000 zł, dzienna zmienność σ = 2% (0,02), poziom ufności 99% (z = 2,33). Oblicz VaR jednodniowy oraz VaR na 10 dni.",
+        "a": "Wzór parametryczny: VaR = z·σ·V = 2,33 · 0,02 · 1 000 000 = 46 600 zł (VaR jednodniowy). Skalowanie na t dni odbywa się regułą pierwiastka czasu: VaR(t) = VaR · √t, ponieważ wariancje niezależnych zwrotów dodają się liniowo. Dla t = 10: √10 ≈ 3,16, więc VaR(10d) = 46 600 · 3,16 ≈ 147 300 zł. Interpretacja: w 99 dniach na 100 dzienna strata nie powinna przekroczyć około 46,6 tys. zł."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj trzy metody wyznaczania VaR: parametryczną, historyczną i Monte Carlo. Podaj zaletę i wadę każdej.",
+        "a": "Parametryczna (delta-normal): szybka i prosta, bo wystarczą σ i korelacje, ale zakłada rozkład normalny, więc zaniża grube ogony i zawodzi przy opcjach (nieliniowa gamma). Historyczna: nie wymaga założeń o rozkładzie i naturalnie oddaje grube ogony, ale milcząco zakłada, że przyszłość powtórzy przeszłość (jest wrażliwa na dobór okna danych). Monte Carlo: najogólniejsza, radzi sobie z instrumentami nieliniowymi i opcjami dzięki pełnej rewycenie, ale jest kosztowna obliczeniowo i wrażliwa na przyjęty model generujący scenariusze. Dla opcji nie stosuje się delta-normal — trzeba symulacji z pełną rewyceną."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaki jest najczęstszy błąd egzaminacyjny dotyczący interpretacji VaR i skalowania w czasie, i jak go uniknąć?",
+        "a": "Pierwsza pułapka to twierdzenie, że VaR to strata maksymalna — to błąd: VaR podaje tylko próg w normalnych warunkach, a w tym najgorszym 1% strata bywa wielokrotnie wyższa (od mierzenia głębi ogona jest Expected Shortfall, czyli średnia strata po przekroczeniu VaR). Druga to mylenie kwantyli z = 1,65 (95%) z z = 2,33 (99%) — komisja prawie zawsze sprawdza ten odruch i pyta „dlaczego 2,33?\", bo prawdopodobieństwo, że R spadnie poniżej −2,33σ, wynosi 1%. Trzecia to skalowanie w czasie przez ×t zamiast przez √t, co przeszacowuje ryzyko — poprawnie wariancje dodają się liniowo, więc VaR rośnie jak √t. Warto też pamiętać, że VaR nie zawsze jest subaddytywny (dla grubych ogonów potrafi „karać dywersyfikację\"), co jest głównym powodem przejścia FRTB z VaR na Expected Shortfall na poziomie ufności 97,5%."
+      }
+    ]
+  },
+  "t2": {
+    "title": "Zdolność kredytowa i ryzyko kredytowe",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj zdolność kredytową zgodnie z Prawem bankowym i wymień jej trzy egzaminacyjnie istotne elementy. Czym różni się zdolność pierwotna od wtórnej?",
+        "a": "Zdolność kredytowa (art. 70 ust. 1 Prawa bankowego) to zdolność do spłaty zaciągniętego kredytu wraz z odsetkami w terminach określonych w umowie, z własnych przyszłych przepływów — jest to pojęcie prospektywne. Trzy elementy: spłata kapitału i odsetek (nie samej raty kapitałowej), terminowość (w terminach umownych) oraz źródło spłaty (własne przyszłe przepływy, a nie sprzedaż zabezpieczenia). Zdolność pierwotna to spłata z bieżących przepływów (główna podstawa decyzji), a wtórna to spłata z realizacji zabezpieczeń (plan B, kanał LGD). Bank ma ustawowy obowiązek zbadać zdolność przed udzieleniem kredytu, a wyjątkiem (art. 70 ust. 2) jest ustanowienie szczególnego zabezpieczenia wraz z programem naprawczym."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Dla kredytu 2 000 000 zł: PD = 0,03, EAD = 2 000 000 zł, zabezpieczenie hipoteczne o stopie odzysku RR = 0,55; CFADS = 650 000 zł, obsługa długu = 520 000 zł. Policz LGD, stratę oczekiwaną EL oraz DSCR i oceń wniosek.",
+        "a": "LGD = 1 − RR = 1 − 0,55 = 0,45. EL = PD · LGD · EAD = 0,03 · 0,45 · 2 000 000 = 27 000 zł rocznie (1,35% ekspozycji). DSCR = CFADS / obsługa długu = 650 000 / 520 000 = 1,25 — powyżej typowego kowenantu 1,2, z buforem 25%. Mierniki są spójne i umiarkowanie pozytywne, więc można udzielić kredytu z kowenantem DSCR co najmniej 1,2 i marżą pokrywającą EL plus zwrot na kapitale. Decyzja opiera się na zdolności pierwotnej (CFADS), a hipoteka to tylko plan B obniżający LGD."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj scoringowy (logitowy) model pomiaru ryzyka z modelem strukturalnym Mertona/KMV. Podaj zaletę i wadę każdego.",
+        "a": "Model scoringowy jest statystyczny: uczy się z danych historycznych o klientach i przewiduje default przez funkcję logistyczną PD = 1/(1+e^(−z)), nie tłumacząc przyczyny — zaletą jest masowość i automatyzacja (działa dla detalu i firm niegiełdowych), wadą brak interpretacji ekonomicznej oraz dryf w nowym reżimie (kryzys, inny segment) wymagający rekalibracji. Model strukturalny (Merton/KMV) wyprowadza PD z przyczyny ekonomicznej: default następuje, gdy rynkowa wartość aktywów spada poniżej wartości długu — zaletą jest oparcie na teorii i bieżącej wycenie rynkowej, wadą wymóg spółki notowanej (potrzebna rynkowa wartość kapitału), co wyklucza firmy niegiełdowe. W praktyce uzupełniają je modele dyskryminacyjne (Altman) i portfelowe (CreditMetrics, korelacje)."
+      },
+      {
+        "type": "pulapka",
+        "q": "Najczęstsza pułapka egzaminacyjna: czy ustanowienie hipoteki poprawia zdolność kredytową klienta? Jak uniknąć błędu?",
+        "a": "Nie — to klasyczny błąd punktowany ujemnie. Hipoteka nie sprawia, że klient częściej spłaca, więc nie obniża prawdopodobieństwa defaultu (PD); obniża jedynie stratę po defaulcie, czyli LGD (jest elementem zdolności wtórnej, nie pierwotnej). Test wrażliwości to potwierdza: przy RR = 0,20 zamiast 0,55 LGD rośnie do 0,80, a EL z 27 000 zł skacze do 48 000 zł — prawie dwukrotnie, przy PD bez zmian. Aby uniknąć błędu, trzymaj się zasady: zabezpieczenie tnie LGD, nie PD, a decyzja kredytowa opiera się na zdolności pierwotnej (przepływach), nie na licytacji zabezpieczenia (to byłby model lombardowy)."
+      }
+    ]
+  },
+  "t3": {
+    "title": "Rachunkowość bankowa (ustawa vs MSR)",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Czym jest model oczekiwanej straty kredytowej (ECL) wprowadzony przez MSSF 9 i jakie są jego trzy etapy (stage)? Wymień kluczowe parametry pomiaru.",
+        "a": "ECL (Expected Credit Loss) to oczekiwana strata kredytowa — strata, której bank spodziewa się statystycznie i na którą zawiązuje odpis z wyprzedzeniem, zanim default faktycznie nastąpi (model forward-looking zastępujący stratę poniesioną z MSR 39). Stage 1 (ekspozycja zdrowa): odpis = ECL 12-miesięczny, odsetki naliczane od wartości brutto. Stage 2 (istotny wzrost ryzyka kredytowego SICR, brak defaultu): odpis = ECL lifetime, odsetki nadal od wartości brutto. Stage 3 (default, ekspozycja credit-impaired): odpis lifetime, odsetki od wartości netto (brutto pomniejszone o odpis). Pomiar opiera się na trzech parametrach: PD (prawdopodobieństwo defaultu), LGD (strata na jednostkę ekspozycji przy defaulcie, gdzie LGD = 1 − RR) oraz EAD (ekspozycja w chwili defaultu)."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Ekspozycja BETA jest w Stage 2 (lifetime): EAD = 1 500 000 zł, PD lifetime = 12%, LGD = 50%. Oblicz odpis na oczekiwane straty kredytowe (ECL) według wzoru podstawowego.",
+        "a": "Stosujemy wzór podstawowy ECL = PD · LGD · EAD. Podstawiając: ECL = 0,12 · 0,50 · 1 500 000 = 90 000 zł. Wynik to odpis lifetime, ponieważ ekspozycja jest w Stage 2 po istotnym wzroście ryzyka kredytowego (SICR), więc liczymy stratę z całego życia kredytu, a nie wycinek 12-miesięczny. Odpis ten pomniejsza wartość kredytu po stronie aktywów (siedzi w aktywach ze znakiem minus), a odsetki w Stage 2 nadal naliczane są od wartości brutto."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj wycenę w zamortyzowanym koszcie z wyceną w wartości godziwej oraz strukturę bilansu banku na tle zwykłej firmy. Wskaż zaletę i wadę każdego ujęcia.",
+        "a": "Zamortyzowany koszt to wartość rozliczana do wykupu metodą efektywnej stopy procentowej (EIR), pomniejszona o odpis ECL — zaleta: stabilność i brak fikcyjnej zmienności dla kredytu trzymanego do spłaty; wada: nie pokazuje aktualnej ceny rynkowej. Wartość godziwa to zmienna cena rynkowa tu i teraz (MSSF 13) — zaleta: aktualność dla instrumentów do obrotu; wada: wnosi do wyniku zmienność niezrealizowaną (część przeszacowań FVOCI omija rachunek wyników i ląduje w OCI, więc zysk netto nie równa się całkowitemu dochodowi). W bilansie banku logika jest odwrócona: aktywa to głównie należności i kredyty (obietnice spłaty), a depozyt klienta jest zobowiązaniem banku (pasywem), podczas gdy w zwykłej firmie produkcyjnej majątek policzalny stanowią głównie towary w magazynie."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaki jest najczęstszy błąd przy wyliczaniu odpisu w Stage 3 i jak go uniknąć?",
+        "a": "Najczęstsza pułapka to pominięcie dyskonta — odpis Stage 3 to różnica między ekspozycją brutto a ZDYSKONTOWANĄ po EIR wartością przyszłych odzysków, a nie nominalny niedobór. Pominięcie dyskonta zaniża stratę, bo ignoruje wartość pieniądza w czasie (odzysk za 3 lata jest dziś wart mniej). Przykład GAMMA: EAD brutto = 800 000 zł, odzysk netto 470 000 zł za 3 lata przy EIR = 9%; PV = 470 000 / 1,09³ = 470 000 / 1,295029 ≈ 362 927 zł, więc poprawnie ECL = 800 000 − 362 927 = 437 073 zł, a nie błędnie 800 000 − 470 000 = 330 000 zł (różnica ponad 107 tys. zł zaniżenia). Aby uniknąć błędu, zawsze dyskontuj odzyski po efektywnej stopie procentowej przed odjęciem ich od ekspozycji brutto."
+      }
+    ]
+  },
+  "t4": {
+    "title": "Analiza techniczna",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Czym jest analiza techniczna (AT) i na jakich trzech założeniach (filarach teorii Dowa) się opiera? Wymień kluczowe elementy.",
+        "a": "Analiza techniczna to metoda prognozowania przyszłych ruchów cen wyłącznie na podstawie historycznych danych o cenie i wolumenie, przedstawionych graficznie; świadomie ignoruje fundamenty spółki, zakładając, że są już zawarte w cenie. Odpowiada na pytanie KIEDY (timing), w odróżnieniu od analizy fundamentalnej, która szacuje wartość wewnętrzną spółki ze sprawozdań (pytanie ILE warte). Opiera się na trzech aksjomatach teorii Dowa: (1) cena dyskontuje wszystko (cała informacja jest już w cenie), (2) ceny poruszają się w trendach (raz ustanowiony trend trwa, dopóki nie da sygnałów odwrócenia), (3) historia się powtarza (bo powtarza się psychologia tłumu — strach i chciwość). Narzędzia dzielą się na wskaźniki trendu (SMA, EMA), oscylatory momentum (RSI, MACD), wskaźniki zmienności (Wstęgi Bollingera, ATR) i wolumenu (OBV)."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "W oknie 14 sesji wystąpiło 9 sesji wzrostowych o łącznej zmianie +14,0 zł oraz 5 sesji spadkowych o łącznej zmianie -3,5 zł. Oblicz wskaźnik RSI i zinterpretuj wynik.",
+        "a": "Najpierw liczymy średni wzrost i średni spadek, dzieląc sumy zmian przez długość okna n = 14: U-średnie = 14,0 / 14 = 1,00 zł oraz D-średnie = 3,5 / 14 = 0,25 zł. Siła względna RS = U-średnie / D-średnie = 1,00 / 0,25 = 4,0. Następnie RSI = 100 - 100/(1 + RS) = 100 - 100/(1 + 4) = 100 - 20 = 80,0. RSI = 80 oznacza strefę silnego wykupienia (próg 70): trend jest rozgrzany i rośnie ryzyko korekty, ale w mocnym trendzie RSI potrafi tkwić powyżej 70 tygodniami, więc nie jest to automatyczny sygnał sprzedaży."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj wskaźnik a oscylator oraz formację odwrócenia a formację kontynuacji. Podaj cechy wyróżniające każde pojęcie.",
+        "a": "Wskaźnik (indicator) to pojęcie najszersze — dowolna wartość liczbowa wyliczona z ceny lub wolumenu (np. SMA, RSI, OBV); jego zaletą jest uniwersalność, wadą bywa brak ograniczonego zakresu (SMA rośnie bez ograniczeń, więc trudno z niej odczytać wykupienie). Oscylator to podzbiór wskaźników wahający się w ograniczonym przedziale (np. RSI w skali 0–100), mierzący momentum oraz wykupienie/wyprzedanie — każdy oscylator jest wskaźnikiem, ale nie odwrotnie. Formacja odwrócenia (głowa z ramionami, podwójny szczyt/dno) kończy dotychczasowy trend i zmienia jego kierunek, natomiast formacja kontynuacji (flagi, chorągiewki, trójkąty) to tylko przystanek na oddech w trwającym trendzie i z definicji zakłada wcześniejszy trend."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaka jest najważniejsza pułapka egzaminacyjna w krytyce analizy technicznej dotycząca hipotezy rynku efektywnego (EMH) i jak jej uniknąć?",
+        "a": "Najczęstszy błąd to wskazanie złej formy EMH jako głównego zarzutu wobec AT albo twierdzenie, że wskaźniki przewidują przyszłość. Poprawnie: najważniejszym zarzutem jest słaba forma hipotezy rynku efektywnego — skoro cała informacja z PRZESZŁYCH cen jest już w cenie, to AT, która bazuje wyłącznie na przeszłych cenach, nie powinna dawać trwałej przewagi; to właśnie forma SŁABA (nie półsilna ani silna) uderza bezpośrednio w AT. Aby uniknąć pułapki, mów o przewadze probabilistycznej, a nie o pewnej prognozie (wskaźniki są spóźnione, lagging), traktuj progi RSI 30/70 jako umowne i czytane w kontekście trendu, oraz uczciwie przyznaj słabość metodologiczną (formacje bywają rozpoznawane po fakcie, trudno je obiektywnie zdefiniować i przetestować — zarzut o brak falsyfikowalności) — to podnosi ocenę. AT broni się finansami behawioralnymi."
+      }
+    ]
+  },
+  "t5": {
+    "title": "Wycena instrumentów finansowych",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj instrument finansowy i wymień trzy podstawowe klasy instrumentów według natury roszczenia, podając naturę roszczenia każdej z nich.",
+        "a": "Instrument finansowy to kontrakt, który u jednej strony tworzy aktywo finansowe, a u drugiej zobowiązanie finansowe lub instrument kapitałowy (MSR 32) — kluczowe słowo to kontrakt, czyli relacja prawna, a nie rzecz materialna. Trzy klasy ze względu na naturę roszczenia to: udziałowe (akcja, udział) — roszczenie rezydualne (po wierzycielach), bezterminowe; dłużne (obligacja, bon, weksel) — roszczenie uprzywilejowane wobec akcjonariuszy, z terminem wykupu; oraz pochodne (forward, opcja, swap) — roszczenie warunkowe, którego wartość zależy od instrumentu bazowego, przy niewielkim nakładzie początkowym. Warto dodać, że bony skarbowe to dłużne instrumenty krótkoterminowe rynku pieniężnego (do 1 roku), a nie odrębna czwarta klasa."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Wyceń 3-letnią obligację o nominale 1000 zł i rocznym kuponie 6% (60 zł), jeśli YTM wynosi 8%. Podaj wynik i wyjaśnij, dlaczego cena różni się od nominału.",
+        "a": "Cenę liczymy jako sumę zdyskontowanych kuponów i nominału: P = 60/1,08 + 60/1,08² + 60/1,08³ + 1000/1,08³. Po podstawieniu: P = 55,56 + 51,44 + 47,63 + 793,83 = 948,46 zł. Cena jest niższa niż nominał (poniżej 1000 zł), ponieważ YTM (8%) jest większe niż kupon (6%) — przepływy są dyskontowane mocniej, niż wynika z kuponu, więc obligacja notowana jest z dyskontem. Gdyby YTM spadło do 4%, cena wzrosłaby do 1055,50 zł (z premią) — to ta sama obligacja, różni ją tylko stopa dyskontowa."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj kontrakt forward i kontrakt futures — wskaż różnice w mechanice oraz odpowiedz, czy ich teoretyczna cena jest taka sama.",
+        "a": "Forward jest instrumentem OTC (poza giełdą), niestandaryzowanym, bez rozliczeń dziennych — jego zaletą jest elastyczne dopasowanie do potrzeb stron, a wadą ryzyko kontrahenta i przepływ dopiero na koniec. Futures jest giełdowy i standaryzowany, z depozytem zabezpieczającym i codziennym mark-to-market przez izbę rozliczeniową — zaletą jest niemal wyeliminowane ryzyko kontrahenta i płynność, wadą codzienne przepływy (rozliczenia) oraz brak elastyczności. Teoretyczna cena obu jest w uproszczeniu egzaminacyjnym (stałe stopy) taka sama: F₀ = S₀·(1+r)ᵀ; różni je wyłącznie mechanika rozliczeń i ryzyko kontrahenta, a nie sam poziom wyceny."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaka jest najczęstsza pułapka egzaminacyjna przy relacji ceny obligacji do stóp procentowych i jak jej uniknąć?",
+        "a": "Najczęstszy błąd to odwracanie relacji: intuicja podpowiada, że wyższe stopy oznaczają wyższy zysk, więc wyższą cenę, podczas gdy jest odwrotnie — gdy stopy rynkowe rosną, ceny obligacji spadają. Powód: stopa siedzi w mianowniku czynnika dyskontowego 1/(1+r)ᵗ, więc wzrost r powiększa mianownik i obniża wartość bieżącą każdego przepływu. Aby uniknąć pułapki, należy uzasadnić mechanizmem dyskontowym i dodać, że relacja jest nie tylko odwrotna, ale i wypukła (convexity) — spadek YTM podnosi cenę nieco mocniej, niż ten sam wzrost YTM ją obniża. Pokrewną pułapką jest mylenie kuponu (stały, cecha emisji) z YTM (zmienna stopa rynkowa): reguła brzmi kupon równy YTM → cena = nominał, kupon mniejszy niż YTM → dyskonto, kupon większy niż YTM → premia."
+      }
+    ]
+  },
+  "t6": {
+    "title": "Produkty i usługi bankowe",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj operacje bankowe w podziale bilansowym i wskaż kluczowy element każdej z trzech grup (kto jest dłużnikiem/wierzycielem oraz skąd dochód).",
+        "a": "Operacje bierne (pasywne) to gromadzenie środków, w których bank jest dłużnikiem klienta (lokaty, rachunki, emisja własnych papierów) i ujmuje je po stronie pasywów. Operacje czynne (aktywne) to wykorzystanie środków, w których bank jest wierzycielem (kredyty, pożyczki, gwarancje) i które stoją po stronie aktywów jako należność pracująca na przychód odsetkowy. Operacje pośredniczące to przepływ pieniędzy za prowizję, neutralny bilansowo (przelewy, karty, wymiana walut, usługi inwestycyjne), generujący dochód pozaodsetkowy bez obciążania kapitału ryzykiem kredytowym. Kluczowy parametr rozróżnienia: czy z czynności powstaje należność lub zobowiązanie banku, czy jedynie strumień prowizji."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Bank ma średnie aktywa pracujące A = 10 mld zł, przychody odsetkowe 600 mln zł oraz koszty odsetkowe 250 mln zł. Oblicz marżę odsetkową netto (NIM) i zinterpretuj wynik.",
+        "a": "Wzór: NIM = (przychody odsetkowe − koszty odsetkowe) / A, gdzie A to średnie aktywa pracujące generujące odsetki. Krok 1 — wynik odsetkowy: 600 − 250 = 350 mln zł. Krok 2 — NIM = 350 000 000 / 10 000 000 000 = 0,035 = 3,5%. Interpretacja: na każdej złotówce aktywów pracujących bank zarabia rocznie 3,5 grosza — to liczbowa odpowiedź na pytanie „skąd zysk banku\", czyli marża odsetkowa jako serce modelu biznesowego (różnica: czynne drogie minus bierne tanie)."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj subemisję inwestycyjną z subemisją usługową w ramach underwritingu — wskaż mechanizm, zaletę i wadę (ekspozycję) każdej z nich.",
+        "a": "Subemisja inwestycyjna: bank zobowiązuje się objąć wyłącznie papiery nieobjęte przez inwestorów, więc jego ekspozycja kapitałowa ograniczona jest do nieuplasowanej reszty (np. ok. 3 mln zł) — zaletą jest mniejsze zaangażowanie kapitału, wadą węższa kontrola nad całością emisji. Subemisja usługowa: bank najpierw obejmuje całość emisji, a następnie odsprzedaje ją inwestorom, co daje emitentowi pewność pozyskania kapitału, ale za cenę pełnej, znacznie większej ekspozycji kapitałowej (np. ok. 20 mln zł). Istota różnicy nie tkwi w samej usłudze, lecz w wielkości zaangażowanego kapitału i wymogach kapitałowych (CRR/Bazylea III); w obu przypadkach za prowizję bank przejmuje ryzyko nieuplasowania i może wyjść na minus."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaki jest najczęstszy błąd przy klasyfikacji kredytu do operacji bankowych i jak go uniknąć?",
+        "a": "Najczęstsza pułapka to mylenie nazewnictwa „czynne/bierne\" z aktywnością klienta i w efekcie przyporządkowanie kredytu do operacji biernych. Określenie „czynne\" odnosi się do banku, nie do klienta: operacja czynna to ta, w której bank jest wierzycielem i udziela środków, więc kredyt jest zawsze operacją czynną (należność po stronie aktywów). Aby uniknąć błędu, pytaj nie „kto jest aktywny\", lecz „czy z czynności powstaje należność banku (czynna), czy zobowiązanie banku (bierna)\". Przyporządkowanie kredytu do biernych jest dla komisji natychmiastowym sygnałem mylenia strony bilansu."
+      }
+    ]
+  },
+  "t7": {
+    "title": "Ubezpieczenia i OFE",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj ubezpieczenie i wymień jego konstytutywne cechy oraz kluczowe parametry aktuarialne (składka, suma ubezpieczenia, zasada ekwiwalentności).",
+        "a": "Ubezpieczenie to transfer ryzyka z ubezpieczającego na ubezpieczyciela w zamian za składkę; mechanizm ekonomiczny polega na rozłożeniu skutków zdarzeń losowych na wspólnotę ryzyka (mutualizacja), działającym dzięki prawu wielkich liczb. Konstytutywne cechy to: losowość zdarzenia, wzajemność (wspólnota ryzyka) i ekwiwalentność (składka odpowiada wielkości ryzyka); dodatkowo wymienia się planowość i realność ochrony. Składka to cena ochrony, czyli ekwiwalent przyjętego ryzyka, a suma ubezpieczenia to górna granica odpowiedzialności zakładu (maksymalna wypłata). Zasada ekwiwalentności mówi, że łączne składki muszą w wartości oczekiwanej pokryć łączne świadczenia powiększone o koszty i zysk."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Polisa na życie ma sumę ubezpieczenia S = 200 000 zł, prawdopodobieństwo szkody q = 0,002, a narzut λ = 25% liczony od składki brutto. Oblicz składkę czystą i składkę brutto.",
+        "a": "Składkę czystą liczymy z zasady ekwiwalentności: P_czysta = q · S = 0,002 · 200 000 = 400 zł. Składkę brutto przy narzucie liczonym od brutto wyznaczamy przez dzielenie: P_brutto = P_czysta / (1 − λ) = 400 / (1 − 0,25) = 400 / 0,75 ≈ 533,33 zł. Uwaga: nie wolno mnożyć przez (1 + λ), bo 400 · 1,25 = 500 zł to wynik błędny. Składka czysta 400 zł to dopiero netto (sam ekwiwalent ryzyka); klient faktycznie płaci 533,33 zł brutto, gdyż narzut pokrywa koszty, bezpieczeństwo i zysk."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj trzy filary polskiego systemu emerytalnego (ZUS, OFE, IKE/IKZE/PPK) — wskaż charakter i mechanizm każdego oraz jego rolę.",
+        "a": "I filar (ZUS) jest obowiązkowy i repartycyjny (pokoleniowy) — bieżące składki pracujących finansują obecne emerytury; zaleta: oparcie o liczebność płatników, wada: silna wrażliwość na demografię. II filar (OFE) jest kapitałowy i zarządzany przez PTE (Powszechne Towarzystwo Emerytalne), inwestujący środki członków na rynku kapitałowym (głównie akcje GPW); zaleta: realny kapitał dywersyfikujący źródło emerytury, wada: ryzyko rynkowe oraz zmienny status prawny po reformie 2014 (przeniesienie części aktywów do ZUS, mechanizm suwaka). III filar (IKE/IKZE/PPK) jest dobrowolny z ulgami podatkowymi; zaleta: dodatkowe oszczędności i zachęty fiskalne, wada: zależność od indywidualnej decyzji oszczędzającego. Sens całości to dywersyfikacja: demografia (ZUS) plus realny kapitał (OFE/PPK). Status prawny OFE podawaj na dzień egzaminu, nie z pamięci."
+      },
+      {
+        "type": "pulapka",
+        "q": "Najczęstsza pułapka egzaminacyjna: jak poprawnie doliczyć narzut do składki czystej i dlaczego nie należy mylić składki czystej z ceną płaconą przez klienta?",
+        "a": "Pułapka polega na mnożeniu składki czystej przez (1 + λ) zamiast dzielenia przez (1 − λ), gdy narzut liczony jest od składki brutto: poprawnie P_brutto = P_czysta / (1 − λ), a nie P_czysta · (1 + λ). Druga pułapka to traktowanie składki czystej (q · S) jako ceny polisy — to dopiero netto, sam ekwiwalent ryzyka, podczas gdy klient płaci brutto z narzutami na koszty, bezpieczeństwo i zysk. Aby ich uniknąć, zawsze rozróżniaj netto od brutto i pamiętaj regułę „dzielić, nie mnożyć”. Dodatkowo nie myl odszkodowania (majątkowe, kompensata realnej straty) ze świadczeniem (osobowe, umówiona suma) oraz pamiętaj, że OFE to II filar kapitałowy, a nie ZUS."
+      }
+    ]
+  },
+  "t8": {
+    "title": "Rachunkowość zarządcza i controlling",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj controlling oraz controlling finansowy. Wskaż kluczowe elementy każdego z nich i podaj różnicę między ujęciem strategicznym a operacyjnym.",
+        "a": "Controlling to proces koordynacji planowania, sterowania i kontroli wyników oraz zasilania zarządzania w informacje; controller jest nawigatorem dostarczającym informacji i metodyki, a nie decydentem. Controlling strategiczny ma długi horyzont i dotyczy pozycji konkurencyjnej oraz potencjału firmy (robić właściwe rzeczy), a operacyjny ma krótki horyzont i obejmuje budżet roczny, bieżące wyniki oraz odchylenia (robić rzeczy właściwie). Controlling finansowy to odmiana skupiona na płynności, wyniku finansowym, strukturze kapitału i rentowności, operująca miernikami takimi jak cash flow, EBIT i ROI. Obejmuje budżetowanie, analizę odchyleń, mierniki KPI oraz sprawozdania pro forma (prognozowane bilans, RZiS i rachunek przepływów pieniężnych)."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Firma sprzedaje produkt po 50 zł/szt., koszt zmienny jednostkowy wynosi 30 zł, a koszty stałe okresu to 100 000 zł. Plan sprzedaży to 8 000 szt. Oblicz: jednostkową marżę pokrycia, próg rentowności ilościowy i wartościowy, wynik przy planie oraz margines bezpieczeństwa.",
+        "a": "Marża pokrycia jednostkowa: mj = c − kz = 50 − 30 = 20 zł/szt. Próg rentowności ilościowy: Q* = KS / mj = 100 000 / 20 = 5 000 szt. Próg wartościowy: 5 000 × 50 = 250 000 zł. Wynik przy planie: (c − kz)·Q − KS = 20 × 8 000 − 100 000 = 60 000 zł zysku. Margines bezpieczeństwa: (8 000 − 5 000) / 8 000 = 37,5 procent — o tyle sprzedaż może spaść względem planu, zanim pojawi się strata."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj rachunek kosztów pełnych (absorpcyjny) z rachunkiem kosztów zmiennych (variable costing). Czym różnią się w wycenie zapasów i w wyniku okresu? Podaj zaletę i wadę każdego.",
+        "a": "W rachunku kosztów pełnych produktowi przypisuje się także stałe koszty produkcji, które osadzają się w wartości zapasu wyrobów gotowych i są odraczane do okresu sprzedaży; zaleta — jest wymagany do wyceny zapasów w bilansie (MSR 2 / ustawa o rachunkowości), wada — gorszy do decyzji, bo zniekształca koszt jednostkowy stałymi kosztami. W rachunku kosztów zmiennych produktowi przypisuje się tylko koszty zmienne, a stałe traktuje się jako koszt okresu obciążający wynik wprost; zaleta — lepszy do decyzji (marża pokrycia, BEP, ceny minimalne), wada — niedozwolony do wyceny zapasów w sprawozdaniu. Skutek dla wyniku: gdy produkcja jest większa niż sprzedaż (zapas rośnie), koszt pełny daje wyższy wynik; gdy produkcja jest mniejsza niż sprzedaż, niższy; przy produkcji równej sprzedaży oba wyniki są równe. Różnicę liczy się wzorem: Różnica = ΔZapas · ks_prod (stały koszt produkcji na jednostkę)."
+      },
+      {
+        "type": "pulapka",
+        "q": "Firma ma wolne moce (12 000 szt. mocy, sprzedaje 8 000) i dostaje zapytanie na 3 000 szt. po 35 zł, podczas gdy koszt pełny jednostkowy wynosi 42,5 zł. Jaki błąd grozi przy tej decyzji i jak ją poprawnie rozstrzygnąć?",
+        "a": "Pułapką jest odrzucenie zamówienia tylko dlatego, że cena 35 zł jest poniżej kosztu pełnego 42,5 zł — to mechaniczne porównanie ceny z kosztem jednostkowym bez pytania, czy koszty stałe są istotne dla decyzji. Przy wolnych mocach koszty stałe ponosimy tak czy inaczej (są nieistotne), więc liczy się tylko marża pokrycia: 35 − 30 = 5 zł na sztuce, czyli 5 × 3 000 = +15 000 zł, a zysk rośnie z 60 000 do 75 000 zł — zamówienie należy przyjąć, bo ceną progową jest tu koszt zmienny 30 zł. Uwaga na wariant brzegowy: gdyby zabrakło wolnych mocy, trzeba dodać koszt utraconych korzyści (utraconą marżę 20 zł), przez co cena progowa rośnie do 50 zł."
+      }
+    ]
+  },
+  "t9": {
+    "title": "Planowanie, budżetowanie i analiza odchyleń",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj budżet wiodący (master budget) i wymień jego dwie główne części składowe wraz z dokumentami, którymi się domykają.",
+        "a": "Budżet wiodący to zintegrowany zestaw budżetów cząstkowych złożonych w jeden domykający się plan finansowy przedsiębiorstwa na dany okres. Część operacyjna obejmuje budżety sprzedaży, produkcji i kosztów (zmiennych oraz stałych) i kończy się prognozowanym rachunkiem zysków i strat (RZiS). Część finansowa obejmuje budżet środków pieniężnych (budżet kasowy, cash budget) oraz prognozowany bilans. Kolejność sporządzania wynika z zależności przyczynowych: prognoza sprzedaży jest driverem produkcji i kosztów, te z kolei wyznaczają należności (DSO), zapasy (DIO) i zobowiązania (DPO), a na końcu domyka się budżet kasowy."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Firma rośnie z 12 do 18 mln zł przychodu, koszt własny sprzedaży (KWS) rośnie z 8 do 12 mln zł, marża NOPAT wynosi 8 procent, dni obrotu są stałe (DSO 45, DIO 60, DPO 30), D&A = 200 tys. zł, CapEx = 500 tys. zł. WCR bazowy = 2 136 986 zł. Policz WCR po wzroście, ΔKON, NOPAT oraz FCF (FCF = NOPAT + D&A − CapEx − ΔKON).",
+        "a": "WCR po wzroście: należności = 18 mln · 45/365 = 2 219 178 zł; zapasy = 12 mln · 60/365 = 1 972 603 zł; zobowiązania handlowe = 12 mln · 30/365 = 986 301 zł, czyli WCR₁ = 2 219 178 + 1 972 603 − 986 301 = 3 205 480 zł. Stąd ΔKON = 3 205 480 − 2 136 986 = 1 068 494 zł, a NOPAT = 0,08 · 18 000 000 = 1 440 000 zł. FCF = 1 440 000 + 200 000 − 500 000 − 1 068 494 = 71 506 zł. Wniosek: firma jest wyraźnie rentowna (NOPAT 1,44 mln zł), lecz generuje niemal zero gotówki — sam ΔKON pochłonął około 74 procent NOPAT, co ilustruje mechanizm profitable but broke."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj budżet przyrostowy z budżetem opartym na zerze (ZBB) oraz budżet sztywny z elastycznym — podaj po jednej zalecie i wadzie każdego podejścia.",
+        "a": "Budżet przyrostowy wychodzi od poprzedniego okresu plus/minus korekta: zaletą jest szybkość i niski koszt sporządzenia, wadą — utrwalanie marnotrawstwa, bo zbędne pozycje przenoszą się z roku na rok. ZBB (zero-based budgeting) każe uzasadnić każdą pozycję od zera: zaletą jest tępienie zbędnych kosztów, wadą — duża pracochłonność. Budżet sztywny jest ustalony dla jednego poziomu aktywności (zaleta: prostota; wada: przy innym wolumenie obwinia menedżera za całe przekroczenie). Budżet elastyczny jest przeskalowany do faktycznego wolumenu, dzięki czemu rozdziela odchylenie wolumenu od odchylenia efektywności (zaleta), kosztem większego nakładu na przeliczenia (wada)."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaka jest najczęstsza pułapka egzaminacyjna przy rozliczaniu wyniku finansowego oraz przy dekompozycji odchyleń, i jak jej uniknąć?",
+        "a": "Najczęstszy błąd to mylenie zysku z gotówką — rentowna firma może utracić płynność, bo zysk jest memoriałowy, a wzrost zamraża gotówkę w należnościach i zapasach (ΔKON to wypływ w FCF), więc zawsze obok RZiS prowadź budżet kasowy i zaznacz, że rentowność nie gwarantuje płynności. Druga pułapka dotyczy dekompozycji odchyleń: odchylenie ceny = (c_rz − c_pl)·q_rz, a odchylenie ilości = (q_rz − q_pl)·c_pl, przy czym suma musi równać się odchyleniu całkowitemu (kontrola krzyżowa), a odchylenie interakcyjne konwencyjnie przypisuje się cenie (stąd cena razy ilość rzeczywista). Uważaj też, że dodatnie odchylenie ceny nie jest automatycznie sukcesem — wyższa cena mogła zdławić wolumen, więc oba odchylenia trzeba czytać łącznie."
+      }
+    ]
+  },
+  "t10": {
+    "title": "Ryzyko walutowe, kurs wymienny i Forex",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj ryzyko walutowe i wymień jego trzy podstawowe rodzaje. Wyjaśnij też, czym jest pozycja walutowa (długa, krótka, zamknięta).",
+        "a": "Ryzyko walutowe to ryzyko zmiany wyniku finansowego wskutek wahań kursu między momentem zawarcia a rozliczenia transakcji: liczba w umowie pozostaje ta sama, lecz jej wartość w walucie krajowej się zmienia. Wyróżniamy trzy rodzaje: transakcyjne (dotyczy realnych, zakontraktowanych przepływów pieniężnych), przeliczeniowe/translacyjne (księgowe, powstaje przy konsolidacji sprawozdań spółek zagranicznych) oraz ekonomiczne (wpływ kursu na długookresową konkurencyjność firmy). Pozycja walutowa to różnica między aktywami a pasywami w danej walucie: długa to nadwyżka aktywów (zyskuje na aprecjacji), krótka to nadwyżka pasywów (zyskuje na deprecjacji), a zamknięta oznacza ich zrównanie, czyli brak ryzyka."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Importer ma zobowiązanie 1 mln EUR płatne za 90 dni. Kurs spot EUR/PLN = 4,30, stopa PLN = 6%, stopa EUR = 3% (baza 360 dni). Oblicz kurs forward (CIP) oraz zamrożony koszt zobowiązania w PLN.",
+        "a": "Stosujemy parytet stóp procentowych: F = S · (1 + r_kw · t/360) / (1 + r_baz · t/360), gdzie waluta kwotowana to PLN, a bazowa to EUR. Dla t/360 = 90/360 = 0,25 otrzymujemy F = 4,30 · (1 + 0,06·0,25)/(1 + 0,03·0,25) = 4,30 · 1,015/1,0075 = 4,3320 PLN za 1 EUR. Importer (pozycja krótka, obawa przed aprecjacją EUR) kupuje EUR na termin, zamrażając koszt na 1 000 000 · 4,3320 = 4 332 000 PLN. Waluta o wyższej stopie (PLN) jest na termin słabsza (forward powyżej spotu), bo dyskonto kompensuje różnicę stóp i wyklucza darmowy arbitraż."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj forward i opcję walutową jako instrumenty zabezpieczające przed ryzykiem kursowym. Podaj zaletę i wadę każdego.",
+        "a": "Forward to obowiązek wymiany po kursie ustalonym dziś: zaletą jest brak premii i pełne zamrożenie wyniku (pewność kosztu), a wadą odebranie szansy na zysk z korzystnego ruchu kursu oraz ryzyko przy ekspozycji warunkowej (np. niewygrany przetarg). Opcja to prawo, nie obowiązek wymiany: zaletą jest pozostawienie korzyści z korzystnego ruchu kursu (asymetria wypłat), a wadą koszt z góry zapłaconej premii, która przepada, jeśli opcja nie zostanie wykonana. Kluczowe zdanie wzorcowe: zabezpieczenie kosztuje pewność, nie pieniądze — forward wymienia zmienność na pewność, a opcja zatrzymuje korzyść (upside) w zamian za premię."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaka jest najczęstsza pułapka egzaminacyjna przy określaniu kierunku pozycji walutowej importera i eksportera oraz doborze zabezpieczenia? Jak jej uniknąć?",
+        "a": "Najczęstszy błąd to odwrócenie kierunku pozycji: zdający zabezpiecza się w złą stronę, co podwaja ryzyko zamiast je znosić. Poprawnie: importer ma zobowiązanie w walucie obcej, więc pozycję krótką, obawia się aprecjacji waluty obcej i kupuje ją na termin; eksporter odwrotnie ma pozycję długą, obawia się deprecjacji i sprzedaje walutę na termin. Dodatkowo komisja dociska przy hierarchii zabezpieczeń: najpierw stosuje się narzędzia wewnętrzne (netting, matching, hedging naturalny, fakturowanie we własnej walucie), które nie kosztują premii ani spreadu, a dopiero na nadwyżkę netto instrumenty pochodne. Należy też unikać over-hedgingu (powyżej 100% ekspozycji), bo tworzy on nową otwartą pozycję, czyli spekulację w przebraniu."
+      }
+    ]
+  },
+  "t11": {
+    "title": "Koszt kapitału przedsiębiorstwa międzynarodowego",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Zdefiniuj koszt kapitału przedsiębiorstwa i wyjaśnij, z jakich elementów składa się WACC w wersji dla przedsiębiorstwa międzynarodowego. Podaj wzory i nazwij parametry.",
+        "a": "Koszt kapitału to wymagana (oczekiwana) stopa zwrotu z zaangażowanego kapitału, będąca zarazem stopą dyskontową przyszłych przepływów — jest to koszt alternatywny inwestora, a nie wydatek księgowy. WACC to średni ważony koszt kapitału: WACC = (E/V)·Ke + (D/V)·Kd·(1−T), gdzie E i D to rynkowe wartości kapitału własnego i długu, V = E+D, koszt długu liczony po tarczy podatkowej, a T to stawka podatku. Koszt kapitału własnego wycenia się CAPM-em rozszerzonym o premię kraju: Ke = Rf + β·(Rm−Rf) + CRP, gdzie Rf to stopa wolna od ryzyka, β mierzy ryzyko systematyczne, (Rm−Rf) to premia rynkowa MRP, a CRP to premia za ryzyko kraju. W wymiarze międzynarodowym dochodzą dwa źródła niepewności: ryzyko kraju (CRP) i ryzyko walutowe (transakcyjne, translacyjne, ekonomiczne)."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Spółka działa na rynku wschodzącym. Dane: Rf = 4,0%; β = 1,2; MRP = 5,5%; CRP = 2,5%; Kd = 7,0%; T = 19%; struktura E/V = 0,6 oraz D/V = 0,4. Oblicz koszt kapitału własnego Ke oraz WACC i podaj minimalną wymaganą stopę zwrotu projektu.",
+        "a": "Krok 1 — koszt kapitału własnego: Ke = Rf + β·MRP + CRP = 4,0% + 1,2·5,5% + 2,5% = 4,0% + 6,6% + 2,5% = 13,1%. Krok 2 — koszt długu po tarczy podatkowej: Kd·(1−T) = 7,0%·0,81 = 5,67%. Krok 3 — WACC = (E/V)·Ke + (D/V)·Kd·(1−T) = 0,6·13,1% + 0,4·5,67% = 7,86% + 2,27% = 10,13%. Projekt musi zarabiać co najmniej 10,13% w walucie przepływów, aby tworzyć wartość; bez doliczenia CRP Ke wyniosłoby 10,6%, a WACC około 8,63%, więc premia za ryzyko kraju podniosła poprzeczkę o około 1,5 p.p."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj koszt kapitału własnego (Ke) i koszt długu po tarczy (Kd·(1−T)) jako składniki WACC oraz wyjaśnij różnicę między rynkiem zintegrowanym a segmentowanym. Wskaż zalety i wady każdego ujęcia.",
+        "a": "Ke to stopa zwrotu wymagana przez właścicieli — nie ma „faktury”, jest kosztem alternatywnym szacowanym CAPM-em i służy do dyskontowania przepływów dla właścicieli (FCFE, dywidendy); jest droższy, bo właściciele nie mają gwarancji i ponoszą wyższe ryzyko. Kd·(1−T) to efektywne oprocentowanie marginalnego długu po uwzględnieniu tarczy podatkowej (odsetki są kosztem uzyskania przychodu) — jest tańszy, ale podnosi ryzyko bankructwa i zależy od waluty finansowania. Na rynku zintegrowanym do CAPM podstawia się globalną betę i globalną premię rynkową (zaleta: spójność z międzynarodowym kapitałem, wada: może nie doceniać lokalnego ryzyka), a na rynku segmentowanym betę i MRP lokalne (zaleta: oddaje realne ryzyko lokalne, wada: ogranicza porównywalność i może zawyżać koszt) — wybór reżimu zmienia same parametry CAPM."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaka jest najczęstsza pułapka egzaminacyjna przy liczeniu kosztu kapitału przedsiębiorstwa międzynarodowego dyskontującego przepływy w obcej walucie i jak jej uniknąć?",
+        "a": "Najczęstszy błąd to niespójność walutowa: dyskontowanie przepływów w EUR za pomocą WACC wyliczonego w PLN — daje to systematyczny błąd równy różnicy oczekiwanych inflacji obu walut, bo stopa dyskontowa zawiera inflację swojej waluty. Zasada: przepływy w danej walucie dyskontuj WACC-iem w tej samej walucie, a przeliczeń między walutami dokonuj przez parytet stóp procentowych (IRP). Tam, gdzie komisja dociska: końcową wartość projektu przewalutuj po kursie spot, a nie po stopie dyskontowej, ponieważ stopy dyskontują wyłącznie w obrębie jednej waluty. Należy też unikać podwójnego liczenia ryzyka walutowego — raz w CRP i drugi raz jako osobna „premia walutowa” zawyża WACC; lepiej wybrać jedno ujęcie albo zastosować hedging."
+      }
+    ]
+  },
+  "t12": {
+    "title": "Instrumenty pochodne: forward, futures, opcje, swapy",
+    "questions": [
+      {
+        "type": "definicyjne",
+        "q": "Czym jest instrument pochodny (derywat) i jakie trzy cele jego stosowania należy wymienić? Podaj też kluczowe parametry opcji.",
+        "a": "Instrument pochodny to kontrakt, którego wartość wynika z ceny innego aktywa bazowego (akcji, waluty, stopy, surowca) — to „zakład o przyszłą cenę czegoś innego\", sam nie ma wartości użytkowej. Trzy cele jego stosowania to: hedging (zabezpieczenie ekspozycji), spekulacja (otwarcie ekspozycji) oraz arbitraż (bezryzykowy zysk z różnicy cen). Kluczowe parametry opcji to: cena wykonania (strike K), premia płacona z góry, typ (call albo put) oraz data wygaśnięcia T. Na jej wartość wpływa pięć czynników: cena spot S, strike K, czas T, zmienność σ i stopa r — przy czym wzrost zmienności σ podnosi wartość każdej opcji (zarówno call, jak i put)."
+      },
+      {
+        "type": "obliczeniowe",
+        "q": "Inwestor kupuje opcję call ze strike K = 105 zł, płacąc premię 4 zł. Oblicz wynik nabywcy dla ceny spot w dniu wygaśnięcia S_T = 120 zł oraz wyznacz punkt opłacalności (break-even).",
+        "a": "Wypłata nabywcy call = max(S_T − K, 0) − premia. Dla S_T = 120 zł: max(120 − 105, 0) − 4 = 15 − 4 = +11 zł zysku. Punkt break-even = K + premia = 105 + 4 = 109 zł — dopiero powyżej tej ceny inwestor zarabia. Maksymalna strata nabywcy jest ograniczona do premii (4 zł, gdy opcja wygasa poza pieniądzem i nie zostaje wykonana), a zysk jest teoretycznie nieograniczony."
+      },
+      {
+        "type": "porownawcze",
+        "q": "Porównaj kontrakt forward i kontrakt futures — wskaż po jednej zalecie/wadzie każdego z nich na czterech osiach różnic.",
+        "a": "Ekonomicznie oba zobowiązują obie strony do transakcji po umówionej cenie, ale różnią się na czterech osiach: standaryzacja (futures wystandaryzowany — zaleta dla płynności; forward elastyczny, „szyty na miarę\" — zaleta dla dopasowania), miejsce obrotu (futures na giełdzie, forward OTC poza giełdą), ryzyko kontrahenta (futures eliminuje je przez izbę rozliczeniową CCP — zaleta; forward jest nim obarczony — wada) oraz depozyt i codzienny mark-to-market (tylko futures — zaleta bezpieczeństwa, ale wada w postaci ryzyka płynności i margin call). Forward jest elastyczny, lecz ryzykowny kredytowo; futures bezpieczny kredytowo, lecz sztywny i wymagający depozytu."
+      },
+      {
+        "type": "pulapka",
+        "q": "Jaka jest najczęstsza pułapka egzaminacyjna przy opisie opcji oraz przy swapie IRS i jak ich uniknąć?",
+        "a": "Przy opcji częstym błędem jest stwierdzenie, że „opcja zobowiązuje\" — w rzeczywistości nabywca ma wyłącznie prawo, a obowiązek ma jedynie wystawca; pominięcie tego niszczy całą asymetrię wypłaty (strata nabywcy ograniczona do premii, wystawca ma obowiązek i potencjalnie wielką stratę). Przy IRS pułapką jest twierdzenie, że nominał (notional) jest wymieniany — w IRS kapitał nie zmienia rąk, służy tylko do liczenia odsetek, a wymianie podlega jedynie różnica odsetek (netto). Aby ich uniknąć, wprost rozdziel prawo nabywcy od obowiązku wystawcy oraz podkreśl, że w IRS przepływa tylko netto odsetek; uwaga — w walutowym CIRS kapitał bywa wymieniany, więc nie generalizuj."
+      }
     ]
   }
 };
