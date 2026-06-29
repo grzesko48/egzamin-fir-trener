@@ -1035,7 +1035,7 @@ window.Learn = {
                     <!-- Chapter Boss Card at the end of Chapter -->
                     <div class="boss-chapter-card ${isBossUnlocked ? 'unlocked' : 'locked'}" style="margin-top: 1.2rem; border: 1px solid ${isBossUnlocked ? 'rgba(255,23,68,0.4)' : 'rgba(255,255,255,0.05)'}; background: ${isBossUnlocked ? 'linear-gradient(135deg, rgba(255,23,68,0.04) 0%, transparent 100%)' : 'rgba(0,0,0,0.1)'}; padding: 1.2rem; border-radius: 14px; display: flex; align-items: center; gap: 1.2rem; justify-content: space-between; flex-wrap: wrap;">
                         <div style="display:flex; align-items:center; gap:1.2rem; max-width: 70%;">
-                            <div style="width:68px; height:68px; border-radius:50%; overflow:hidden; border: 2px solid ${isBossUnlocked ? 'var(--danger)' : '#666'}; filter: hue-rotate(${boss.hue}deg) ${isBossUnlocked ? '' : 'grayscale(1)'}; flex-shrink: 0;">
+                            <div style="width:68px; height:68px; border-radius:50%; overflow:hidden; border: 2px solid ${isBossUnlocked ? 'var(--danger)' : '#666'}; filter: sepia(0.5) saturate(${isBossUnlocked ? '2.2' : '1.5'}) hue-rotate(${boss.hue}deg)${isBossUnlocked ? '' : ' brightness(0.5)'}; flex-shrink: 0;">
                                 <img src="assets/avatars/${boss.image}?v=2026" style="width:100%; height:100%; object-fit:cover;" />
                             </div>
                             <div style="text-align: left;">
@@ -2252,7 +2252,7 @@ window.Learn = {
                 </div>
 
                 <div class="boss-avatar-box" style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; border: 4px solid var(--danger); box-shadow: 0 0 25px rgba(255, 23, 68, 0.6); margin: 0 auto 2rem auto;">
-                    <img src="assets/avatars/${boss.image}?v=2026" style="width:100%; height:100%; object-fit:cover; filter: hue-rotate(${boss.hue}deg);" alt="Boss" />
+                    <img src="assets/avatars/${boss.image}?v=2026" style="width:100%; height:100%; object-fit:cover; filter: sepia(0.5) saturate(2.2) hue-rotate(${boss.hue}deg);" alt="Boss" />
                 </div>
                 
                 <!-- Active Challenge -->
