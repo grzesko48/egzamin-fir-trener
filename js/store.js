@@ -45,6 +45,12 @@ const Store = {
             }
         }
         this.updateStreak();
+        // Zabezpieczenie: --secondary nie jest zdefiniowana w :root, a kod jej uzywa
+        // (karta klasy Strateg, pasek XP). Ustaw raz globalnie, by kazde var(--secondary) dzialalo.
+        try {
+            const r = document.documentElement;
+            if (!getComputedStyle(r).getPropertyValue('--secondary').trim()) r.style.setProperty('--secondary', '#a78bfa');
+        } catch (e) {}
     },
 
     save() {
