@@ -264,7 +264,7 @@ window.SUMMARIES = {
       {
         "type": "obliczeniowe",
         "q": "Bon skarbowy ma wartość nominalną N = 1000 PLN, rentowność roczną r = 5% (0,05) i d = 182 dni do wykupu. Oblicz cenę zakupu bonu (instrument dyskontowy) oraz zysk inwestora na dyskoncie.",
-        "a": "Stosujemy wzór na cenę instrumentu dyskontowego: P = N / (1 + r·(d/365)). Podstawiamy: P = 1000 / (1 + 0,05·(182/365)) = 1000 / 1,02493 ≈ 975,68 PLN. Inwestor płaci dziś około 975,68 PLN, a po pół roku otrzymuje pełny nominał 1000 PLN. Zysk na dyskoncie wynosi zatem ok. 1000 − 975,68 = 24,32 PLN."
+        "a": "Stosujemy wzór na cenę instrumentu dyskontowego: P = N / (1 + r·(d/365)). Podstawiamy: P = 1000 / (1 + 0,05·(182/365)) = 1000 / 1,02493 ≈ 975,67 PLN. Inwestor płaci dziś około 975,67 PLN, a po pół roku otrzymuje pełny nominał 1000 PLN. Zysk na dyskoncie wynosi zatem ok. 1000 − 975,67 = 24,33 PLN."
       },
       {
         "type": "porownawcze",

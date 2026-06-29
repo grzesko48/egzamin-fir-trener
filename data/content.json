@@ -548,7 +548,7 @@
     },
     {
      "h": "3. Wzory/zasady i przyklad",
-     "html": "<p><strong>Cena (rentownosc) instrumentu dyskontowego</strong> — np. bonu skarbowego, sprzedawanego ponizej nominalu: $$P = \\frac{N}{1 + r \\cdot \\frac{d}{365}}$$</p><div class=\"legend\">gdzie: $P$ — cena zakupu (PLN); $N$ — wartosc nominalna (PLN); $r$ — rentownosc roczna (ulamek dziesietny); $d$ — liczba dni do wykupu (dni).</div><p><strong>Wartosc obligacji</strong> = suma zdyskontowanych przeplywow (kuponow i nominalu): $$P = \\sum_{t=1}^{n} \\frac{C}{(1+r)^{t}} + \\frac{N}{(1+r)^{n}}$$</p><div class=\"legend\">gdzie: $C$ — kupon okresowy (PLN); $r$ — stopa dyskontowa/wymagana (ulamek); $n$ — liczba okresow; $N$ — nominal (PLN).</div><p><strong>Wynik na opcji kupna (call) w terminie</strong> dla nabywcy: $$Z = \\max(S_T - K,\\ 0) - p$$</p><div class=\"legend\">gdzie: $S_T$ — cena bazowego w terminie (PLN); $K$ — cena wykonania/strike (PLN); $p$ — zaplacona premia (PLN); $Z$ — wynik (PLN).</div><p><strong>Przyklad (bon skarbowy):</strong> Nominal $N = 1000$ PLN, $r = 5\\% = 0{,}05$, $d = 182$ dni. $$P = \\frac{1000}{1 + 0{,}05 \\cdot \\frac{182}{365}} = \\frac{1000}{1{,}02493} \\approx 975{,}68 \\text{ PLN}$$ Inwestor placi dzis ok. 975,68 PLN, a po pol roku otrzymuje 1000 PLN — zarabia ~24,32 PLN na dyskoncie.</p><p>&gt; Uwaga: podatek od zyskow kapitalowych (\"podatek Belki\") wynosi <strong>19%</strong> [zweryfikuj aktualna wartosc].</p>"
+     "html": "<p><strong>Cena (rentownosc) instrumentu dyskontowego</strong> — np. bonu skarbowego, sprzedawanego ponizej nominalu: $$P = \\frac{N}{1 + r \\cdot \\frac{d}{365}}$$</p><div class=\"legend\">gdzie: $P$ — cena zakupu (PLN); $N$ — wartosc nominalna (PLN); $r$ — rentownosc roczna (ulamek dziesietny); $d$ — liczba dni do wykupu (dni).</div><p><strong>Wartosc obligacji</strong> = suma zdyskontowanych przeplywow (kuponow i nominalu): $$P = \\sum_{t=1}^{n} \\frac{C}{(1+r)^{t}} + \\frac{N}{(1+r)^{n}}$$</p><div class=\"legend\">gdzie: $C$ — kupon okresowy (PLN); $r$ — stopa dyskontowa/wymagana (ulamek); $n$ — liczba okresow; $N$ — nominal (PLN).</div><p><strong>Wynik na opcji kupna (call) w terminie</strong> dla nabywcy: $$Z = \\max(S_T - K,\\ 0) - p$$</p><div class=\"legend\">gdzie: $S_T$ — cena bazowego w terminie (PLN); $K$ — cena wykonania/strike (PLN); $p$ — zaplacona premia (PLN); $Z$ — wynik (PLN).</div><p><strong>Przyklad (bon skarbowy):</strong> Nominal $N = 1000$ PLN, $r = 5\\% = 0{,}05$, $d = 182$ dni. $$P = \\frac{1000}{1 + 0{,}05 \\cdot \\frac{182}{365}} = \\frac{1000}{1{,}02493} \\approx 975{,}67 \\text{ PLN}$$ Inwestor placi dzis ok. 975,67 PLN, a po pol roku otrzymuje 1000 PLN — zarabia ~24,33 PLN na dyskoncie.</p><p>&gt; Uwaga: podatek od zyskow kapitalowych (\"podatek Belki\") wynosi <strong>19%</strong> [zweryfikuj aktualna wartosc].</p>"
     },
     {
      "h": "4. Model odpowiedzi egzaminacyjnej",
@@ -4396,7 +4396,7 @@
    "id": "fm_k9_81"
   },
   {
-   "latex": "P = \\frac{1000}{1 + 0{,}05 \\cdot \\frac{182}{365}} = \\frac{1000}{1{,}02493} \\approx 975{,}68 \\text{ PLN}",
+   "latex": "P = \\frac{1000}{1 + 0{,}05 \\cdot \\frac{182}{365}} = \\frac{1000}{1{,}02493} \\approx 975{,}67 \\text{ PLN}",
    "legend": "",
    "chapter": "k9",
    "id": "fm_k9_82"
