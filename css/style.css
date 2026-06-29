@@ -1245,8 +1245,18 @@ body { color: var(--ink); text-rendering: optimizeLegibility; -webkit-font-smoot
     font-family: 'Cinzel', 'Marcellus', serif !important;
 }
 #learn-view-title {
-    text-shadow: 0 2px 5px rgba(0,0,0,0.95), 0 1px 1px rgba(0,0,0,0.9) !important;
+    /* KONIEC granatowego gradientu (niewidoczny na ciemnym) -> lity jasny zloto-pergamin */
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
+    -webkit-text-fill-color: #F2DC93 !important;
+    color: #F2DC93 !important;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.95), 0 0 2px rgba(0,0,0,0.9) !important;
     letter-spacing: 0.5px !important;
+}
+/* karty mapy: tytuly tez lite jasne (nie ciemny gradient na ciemnym) */
+.quest-map-card .text-lg, .quest-map-card .gradient-text {
+    background: none !important; -webkit-text-fill-color: #F2DC93 !important; color: #F2DC93 !important;
 }
 /* zlote wyroznienia kluczowych terminow + luzniejsze akapity (koniec sciany tekstu) */
 .lesson-body b, .lesson-body strong { color: var(--gold-text) !important; font-weight: 700; }
