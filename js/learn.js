@@ -659,134 +659,90 @@ window.Learn = {
             modifiedHtml = modifiedHtml.slice(0, at) + chart + modifiedHtml.slice(at);
         };
 
-        // 1. CAPM / SML Chart
-        if (html.includes('CAPM') && !html.includes('id="chart-capm"')) {
-            const capmChart = `
-            <div id="chart-capm" class="medieval-chart-container" style="margin: 1.5rem 0; padding: 1.2rem; background: rgba(0,0,0,0.4); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 12px; text-align: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.6);">
-                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 1. Linia Rynku Papierów Wartościowych (SML - CAPM)</div>
-                <svg viewBox="0 0 400 200" style="width: 100%; max-width: 380px; height: auto;">
-                    <!-- Grid Lines -->
-                    <line x1="50" y1="150" x2="350" y2="150" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
-                    <line x1="50" y1="30" x2="50" y2="150" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
-                    
-                    <line x1="50" y1="100" x2="350" y2="100" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3,3" />
-                    <line x1="200" y1="30" x2="200" y2="150" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3,3" />
-                    
-                    <!-- Axes labels -->
-                    <text x="350" y="170" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="'Cinzel', serif">Ryzyko (Beta)</text>
-                    <text x="40" y="25" fill="var(--text-muted)" font-size="10" text-anchor="end" font-family="'Cinzel', serif">Oczekiwany zwrot (%)</text>
-                    
-                    <!-- Tick labels -->
-                    <text x="45" y="153" fill="var(--text-muted)" font-size="9" text-anchor="end">0.0</text>
-                    <text x="200" y="163" fill="var(--text-muted)" font-size="9" text-anchor="middle">1.0 (Rynek)</text>
-                    <text x="45" y="103" fill="var(--text-muted)" font-size="9" text-anchor="end">Rf (Wolna od ryzyka)</text>
-                    
-                    <!-- SML Line -->
-                    <line x1="50" y1="100" x2="320" y2="40" stroke="#c5a880" stroke-width="3" stroke-linecap="round" style="filter: drop-shadow(0 0 4px var(--primary-glow));" />
-                    <text x="280" y="32" fill="#c5a880" font-weight="bold" font-size="11" font-family="'Cinzel', serif">Linia SML (CAPM)</text>
-                    
-                    <!-- Market Point -->
-                    <circle cx="200" cy="68" r="5" fill="#ef4444" />
-                    <text x="210" y="65" fill="#ef4444" font-weight="bold" font-size="10">Portfel Rynkowy</text>
+        // Wspolny szablon wykresu — Tufte: tytul-WNIOSEK, jeden akcent, bez chartjunk, ZERO przyciec.
+        // Uklad wspolrzednych: pole rysowania x:72..398, y(gora)44..(dol)232 w viewBox 0 0 480 300.
+        // Tytul osi Y obrocony o 90° (miesci sie w waskim lewym marginesie), tytul X wysrodkowany na dole,
+        // a serie wielokrotne opisuje legenda HTML (chipy) — dzieki temu zaden tekst SVG nie wychodzi poza ramke.
+        const CC = "margin:1.6rem auto; max-width:520px; padding:1.1rem 1rem 0.7rem; background:rgba(8,7,11,0.5); border:1px solid rgba(197,168,128,0.22); border-radius:14px;";
+        const shell = (id, num, concl, xTitle, yTitle, legend, inner) => `
+            <div id="${id}" class="medieval-chart-container" style="${CC}">
+                <div style="font-size:0.7rem; color:var(--text-muted); letter-spacing:0.16em; text-transform:uppercase;">Wykres ${num}</div>
+                <div style="font-size:0.98rem; color:var(--primary,#E8C76A); font-weight:700; line-height:1.35; margin:0.15rem 0 0.6rem; font-family:'Cinzel','Marcellus',serif;">${concl}</div>
+                ${legend && legend.length ? `<div style="display:flex; flex-wrap:wrap; gap:0.35rem 1.1rem; justify-content:center; margin-bottom:0.5rem; font-size:0.74rem; color:#cfc6b4;">${legend.map(l => `<span style="display:inline-flex; align-items:center; gap:0.4rem;"><span style="width:16px; height:0; display:inline-block; border-top:3px ${l.dash ? 'dashed' : 'solid'} ${l.c};"></span>${l.t}</span>`).join('')}</div>` : ''}
+                <svg viewBox="0 0 480 300" style="width:100%; height:auto; font-family:'Outfit',sans-serif;">
+                    <line x1="72" y1="232" x2="398" y2="232" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+                    <line x1="72" y1="44" x2="72" y2="232" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+                    <text x="235" y="286" fill="var(--text-muted)" font-size="13" text-anchor="middle">${xTitle}</text>
+                    <text x="22" y="138" fill="var(--text-muted)" font-size="13" text-anchor="middle" transform="rotate(-90 22 138)">${yTitle}</text>
+                    ${inner}
                 </svg>
             </div>`;
+
+        // 1. CAPM / SML Chart
+        if (html.includes('CAPM') && !html.includes('id="chart-capm"')) {
+            const capmChart = shell('chart-capm', 1,
+                'Im wyższa beta (ryzyko), tym wyższy wymagany zwrot — to mówi linia SML.',
+                'Ryzyko systematyczne (β)', 'Wymagany zwrot (%)', null, `
+                    <line x1="72" y1="172" x2="398" y2="172" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="4,4"/>
+                    <text x="66" y="176" fill="var(--text-muted)" font-size="11" text-anchor="end">Rf</text>
+                    <text x="72" y="250" fill="var(--text-muted)" font-size="11" text-anchor="middle">0</text>
+                    <text x="235" y="250" fill="var(--text-muted)" font-size="11" text-anchor="middle">1,0 (rynek)</text>
+                    <text x="398" y="250" fill="var(--text-muted)" font-size="11" text-anchor="middle">2,0</text>
+                    <line x1="72" y1="172" x2="392" y2="68" stroke="#E8C76A" stroke-width="3" stroke-linecap="round"/>
+                    <text x="392" y="58" fill="#E8C76A" font-size="12.5" font-weight="700" text-anchor="end">Linia SML</text>
+                    <circle cx="235" cy="120" r="5.5" fill="#ef4444"/>
+                    <text x="246" y="116" fill="#ef4444" font-size="11.5" font-weight="700" text-anchor="start">Portfel rynkowy (β=1)</text>
+                `);
             ins('CAPM', capmChart);
         }
 
         // 2. NPV Profile Chart
         if (html.includes('NPV') && !html.includes('id="chart-npv"')) {
-            const npvChart = `
-            <div id="chart-npv" class="medieval-chart-container" style="margin: 1.5rem 0; padding: 1.2rem; background: rgba(0,0,0,0.4); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 12px; text-align: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.6);">
-                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 2. Profil Wartości Bieżącej Netto (NPV vs Stopa Dyskontowa)</div>
-                <svg viewBox="0 0 400 200" style="width: 100%; max-width: 380px; height: auto;">
-                    <!-- Grid Lines -->
-                    <line x1="50" y1="100" x2="350" y2="100" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
-                    <line x1="50" y1="20" x2="50" y2="180" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
-                    
-                    <!-- Axes labels -->
-                    <text x="350" y="120" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="'Cinzel', serif">Stopa dyskontowa (r)</text>
-                    <text x="40" y="25" fill="var(--text-muted)" font-size="10" text-anchor="end" font-family="'Cinzel', serif">NPV (zł)</text>
-                    
-                    <!-- Ticks -->
-                    <text x="45" y="103" fill="var(--text-muted)" font-size="9" text-anchor="end">0</text>
-                    <text x="45" y="40" fill="var(--text-muted)" font-size="9" text-anchor="end">+CF</text>
-                    <text x="45" y="160" fill="var(--text-muted)" font-size="9" text-anchor="end">-Nakład</text>
-                    
-                    <!-- Curve representing NPV Profile -->
-                    <path d="M 50,40 Q 150,70 240,100 T 330,150" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" style="filter: drop-shadow(0 0 4px rgba(56,189,248,0.4));" />
-                    
-                    <!-- IRR Intersection -->
-                    <circle cx="240" cy="100" r="5" fill="#ef4444" />
-                    <text x="245" y="93" fill="#ef4444" font-weight="bold" font-size="10">IRR (NPV = 0)</text>
-                    
-                    <!-- NPV > 0 and NPV < 0 Zones -->
-                    <text x="120" y="75" fill="var(--success)" font-size="9" font-weight="bold">Obszar Opłacalności (NPV > 0)</text>
-                    <text x="270" y="135" fill="var(--danger)" font-size="9" font-weight="bold">NPV < 0</text>
-                </svg>
-            </div>`;
+            const npvChart = shell('chart-npv', 2,
+                'NPV spada, gdy rośnie stopa dyskontowa; w punkcie IRR przecina zero.',
+                'Stopa dyskontowa r (%)', 'NPV (zł)', null, `
+                    <rect x="72" y="44" width="326" height="76" fill="rgba(16,185,129,0.07)"/>
+                    <rect x="72" y="120" width="326" height="112" fill="rgba(239,68,68,0.06)"/>
+                    <line x1="72" y1="120" x2="398" y2="120" stroke="rgba(255,255,255,0.28)" stroke-width="1.2" stroke-dasharray="4,4"/>
+                    <text x="66" y="124" fill="var(--text-muted)" font-size="11" text-anchor="end">0</text>
+                    <text x="66" y="62" fill="var(--text-muted)" font-size="11" text-anchor="end">+CF</text>
+                    <text x="66" y="212" fill="var(--text-muted)" font-size="11" text-anchor="end">–Nakład</text>
+                    <path d="M 72,62 Q 170,96 250,120 T 398,202" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+                    <text x="120" y="86" fill="#10b981" font-size="11" font-weight="700" text-anchor="start">NPV &gt; 0 — opłaca się</text>
+                    <text x="392" y="178" fill="#ef4444" font-size="11" font-weight="700" text-anchor="end">NPV &lt; 0</text>
+                    <circle cx="250" cy="120" r="5.5" fill="#ef4444"/>
+                    <text x="250" y="108" fill="#ef4444" font-size="11.5" font-weight="700" text-anchor="middle">IRR (NPV=0)</text>
+                `);
             ins('NPV', npvChart);
         }
 
         // 3. NBP rates corridor chart
         if ((html.includes('lombard') || html.includes('depozyt') || html.includes('korytarz stóp')) && !html.includes('id="chart-corridor"')) {
-            const corridorChart = `
-            <div id="chart-corridor" class="medieval-chart-container" style="margin: 1.5rem 0; padding: 1.2rem; background: rgba(0,0,0,0.4); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 12px; text-align: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.6);">
-                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 3. Korytarz stóp procentowych NBP</div>
-                <svg viewBox="0 0 400 200" style="width: 100%; max-width: 380px; height: auto;">
-                    <!-- Axis -->
-                    <line x1="50" y1="170" x2="350" y2="170" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
-                    <line x1="50" y1="20" x2="50" y2="170" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
-                    
-                    <!-- Lombard rate (ceiling) -->
-                    <line x1="50" y1="40" x2="350" y2="40" stroke="#f43f5e" stroke-width="2" stroke-dasharray="3,3" />
-                    <text x="340" y="32" fill="#f43f5e" font-size="9" font-weight="bold" text-anchor="end">Stopa Lombardowa (Sufit)</text>
-                    
-                    <!-- Reference rate (center) -->
-                    <line x1="50" y1="90" x2="350" y2="90" stroke="#eab308" stroke-width="2" />
-                    <text x="340" y="82" fill="#eab308" font-size="9" font-weight="bold" text-anchor="end">Stopa Referencyjna (Cena pieniądza)</text>
-                    
-                    <!-- Deposit rate (floor) -->
-                    <line x1="50" y1="140" x2="350" y2="140" stroke="#10b981" stroke-width="2" stroke-dasharray="3,3" />
-                    <text x="340" y="132" fill="#10b981" font-size="9" font-weight="bold" text-anchor="end">Stopa Depozytowa (Podłoga)</text>
-                    
-                    <!-- Market rate (fluctuating) -->
-                    <path d="M 50,110 T 100,85 T 150,95 T 200,60 T 250,90 T 300,105 T 350,92" fill="none" stroke="#38bdf8" stroke-width="2.5" style="filter: drop-shadow(0 0 3px rgba(56,189,248,0.6));" />
-                    <text x="140" y="55" fill="#38bdf8" font-size="9" font-weight="bold">Stawka Rynkowa (WIBOR/Overnight)</text>
-                </svg>
-            </div>`;
+            const corridorChart = shell('chart-corridor', 3,
+                'Stopa rynkowa krąży w korytarzu NBP: między lombardową (sufit) a depozytową (podłoga).',
+                'Czas →', 'Stopa (%)',
+                [{ c: '#f43f5e', dash: true, t: 'Lombardowa (sufit)' }, { c: '#eab308', t: 'Referencyjna' }, { c: '#10b981', dash: true, t: 'Depozytowa (podłoga)' }, { c: '#38bdf8', t: 'Rynkowa (WIBOR)' }], `
+                    <rect x="72" y="72" width="326" height="120" fill="rgba(234,179,8,0.07)"/>
+                    <line x1="72" y1="72" x2="398" y2="72" stroke="#f43f5e" stroke-width="2" stroke-dasharray="5,4"/>
+                    <line x1="72" y1="120" x2="398" y2="120" stroke="#eab308" stroke-width="2.5"/>
+                    <line x1="72" y1="192" x2="398" y2="192" stroke="#10b981" stroke-width="2" stroke-dasharray="5,4"/>
+                    <path d="M 72,150 Q 110,108 150,135 T 240,110 T 320,150 T 398,128" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+                `);
             ins('lombard', corridorChart);
         }
 
         // 4. WACC / Capital Structure Chart
         if (html.includes('WACC') && !html.includes('id="chart-wacc"')) {
-            const waccChart = `
-            <div id="chart-wacc" class="medieval-chart-container" style="margin: 1.5rem 0; padding: 1.2rem; background: rgba(0,0,0,0.4); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 12px; text-align: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.6);">
-                <div style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Wykres 4. Koszt kapitału a dzwignia finansowa</div>
-                <svg viewBox="0 0 400 200" style="width: 100%; max-width: 380px; height: auto;">
-                    <!-- Axis -->
-                    <line x1="50" y1="160" x2="350" y2="160" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
-                    <line x1="50" y1="20" x2="50" y2="160" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
-                    
-                    <text x="350" y="175" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="'Cinzel', serif">Udział długu (D/V)</text>
-                    <text x="40" y="25" fill="var(--text-muted)" font-size="10" text-anchor="end" font-family="'Cinzel', serif">Koszt kapitału (%)</text>
-                    
-                    <!-- Cost of Equity (re) -> going up -->
-                    <path d="M 50,70 Q 200,90 350,130" fill="none" stroke="#f43f5e" stroke-width="2" />
-                    <text x="320" y="145" fill="#f43f5e" font-size="9" font-weight="bold">Re (Koszt kapitału własnego)</text>
-                    
-                    <!-- Cost of Debt (rd) -> constant / slightly up -->
-                    <path d="M 50,120 Q 200,125 350,135" fill="none" stroke="#10b981" stroke-width="2" />
-                    <text x="320" y="125" fill="#10b981" font-size="9" font-weight="bold">Rd (Koszt długu po opodatkowaniu)</text>
-                    
-                    <!-- WACC -> U-shape curve (Trade-off theory) -->
-                    <path d="M 50,70 Q 180,105 350,90" fill="none" stroke="#eab308" stroke-width="3.5" style="filter: drop-shadow(0 0 4px rgba(234,179,8,0.5));" />
-                    <text x="210" y="118" fill="#eab308" font-size="11" font-weight="bold">WACC (Średni koszt)</text>
-                    
-                    <!-- Optimal Point -->
-                    <circle cx="180" cy="103" r="5" fill="#ef4444" />
-                    <text x="180" y="85" fill="#ef4444" font-weight="bold" font-size="9" text-anchor="middle">Optimum Struktury</text>
-                </svg>
-            </div>`;
+            const waccChart = shell('chart-wacc', 4,
+                'WACC ma minimum — istnieje optymalna struktura kapitału (dług vs. kapitał własny).',
+                'Udział długu w kapitale (D/V)', 'Koszt kapitału (%)',
+                [{ c: '#f43f5e', t: 'Re — kapitał własny' }, { c: '#10b981', t: 'Rd — dług (po podatku)' }, { c: '#eab308', t: 'WACC — średni koszt' }], `
+                    <path d="M 72,128 Q 235,112 398,70" fill="none" stroke="#f43f5e" stroke-width="2.5"/>
+                    <path d="M 72,196 Q 250,190 398,168" fill="none" stroke="#10b981" stroke-width="2.5"/>
+                    <path d="M 72,128 C 150,178 210,182 260,178 S 360,150 398,140" fill="none" stroke="#eab308" stroke-width="3.5"/>
+                    <circle cx="245" cy="180" r="5.5" fill="#ef4444"/>
+                    <text x="245" y="168" fill="#ef4444" font-size="11.5" font-weight="700" text-anchor="middle">Optimum</text>
+                `);
             ins('WACC', waccChart);
         }
 
