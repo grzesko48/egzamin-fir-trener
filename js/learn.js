@@ -883,6 +883,54 @@ window.Learn = {
         }
     },
 
+    // --- STRESZCZENIA ROZDZIAŁÓW (pod Ogniskiem; odblokowane po pokonaniu bossa działu) ---
+    openSummaries() {
+        const SUM = window.SUMMARIES || {};
+        const keys = Object.keys(SUM);
+        const items = keys.map(k => {
+            const s = SUM[k];
+            const unlocked = s.alwaysUnlocked || (typeof Store !== 'undefined' && Store.isBossDefeated && Store.isBossDefeated(k));
+            return `<div onclick="${unlocked ? `window.Learn.viewSummary('${k}')` : ''}" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:0.9rem 1.1rem; margin-bottom:0.6rem; border-radius:12px; border:1px solid ${unlocked ? 'rgba(212,175,55,0.35)' : 'rgba(255,255,255,0.08)'}; background:${unlocked ? 'rgba(212,175,55,0.06)' : 'rgba(0,0,0,0.25)'}; cursor:${unlocked ? 'pointer' : 'default'}; opacity:${unlocked ? 1 : 0.55};">
+                <span style="font-weight:700; color:${unlocked ? 'var(--gold-text,#E8C76A)' : 'var(--text-muted)'};">${s.title}</span>
+                <span style="font-size:0.78rem; color:var(--text-muted); white-space:nowrap;">${unlocked ? `${(s.questions || []).length} pytań ▶` : '🔒 Pokonaj bossa'}</span>
+            </div>`;
+        }).join('');
+        this._summaryModal(`<h2 style="font-family:'Cinzel','Marcellus',serif; color:var(--gold-text,#E8C76A); margin:0 0 0.3rem;">📜 Streszczenia rozdziałów</h2>
+            <p class="text-muted" style="font-size:0.85rem; margin:0 0 1.2rem; line-height:1.5;">Pytania egzaminacyjne z wzorcowymi odpowiedziami. Odblokowują się po pokonaniu bossa danego działu (Fundamenty — od startu).</p>
+            ${items || '<p class="text-muted">Brak streszczeń.</p>'}`);
+    },
+    viewSummary(ch) {
+        const s = (window.SUMMARIES || {})[ch];
+        if (!s) return;
+        const chips = { definicyjne: '#38bdf8', obliczeniowe: '#E8C76A', porownawcze: '#a78bfa', pulapka: '#ef4444' };
+        const labels = { definicyjne: 'definicyjne', obliczeniowe: 'obliczeniowe', porownawcze: 'porównawcze', pulapka: 'pułapka' };
+        const qs = (s.questions || []).map(q => {
+            const c = chips[q.type] || '#888';
+            return `<div style="background:rgba(8,7,11,0.55); border:1px solid rgba(212,175,55,0.18); border-radius:12px; padding:1.1rem 1.2rem; margin-bottom:1rem;">
+                <div style="display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; margin-bottom:0.6rem;">
+                    <b style="font-size:1.0rem; line-height:1.45; color:#ECE6D8;">${q.q}</b>
+                    <span style="flex-shrink:0; font-size:0.66rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:${c}; border:1px solid ${c}; border-radius:20px; padding:0.18rem 0.6rem; white-space:nowrap;">${labels[q.type] || q.type}</span>
+                </div>
+                <div style="font-size:0.92rem; line-height:1.65; color:#cfc6b4;"><b style="color:var(--gold-text,#E8C76A);">Odp:</b> ${q.a}</div>
+            </div>`;
+        }).join('');
+        this._summaryModal(`<button onclick="window.Learn.openSummaries()" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.85rem; margin-bottom:0.6rem; padding:0;">‹ Wróć do listy</button>
+            <h2 style="font-family:'Cinzel','Marcellus',serif; color:var(--gold-text,#E8C76A); margin:0 0 1.2rem;">${s.title}</h2>${qs}`);
+    },
+    _summaryModal(inner) {
+        let m = document.getElementById('summary-modal');
+        if (!m) {
+            m = document.createElement('div'); m.id = 'summary-modal';
+            m.style.cssText = "position:fixed; inset:0; z-index:10000; background:rgba(5,5,10,0.86); backdrop-filter:blur(8px); display:flex; align-items:flex-start; justify-content:center; overflow-y:auto; padding:4vh 1rem; font-family:'Outfit',sans-serif;";
+            m.addEventListener('click', e => { if (e.target === m) m.remove(); });
+            document.body.appendChild(m);
+        }
+        m.innerHTML = `<div style="background:rgba(14,12,18,0.98); border:1px solid rgba(212,175,55,0.3); border-radius:18px; max-width:760px; width:100%; padding:1.8rem 2rem; box-shadow:0 20px 60px rgba(0,0,0,0.7); position:relative;">
+            <button onclick="document.getElementById('summary-modal').remove()" style="position:absolute; top:0.8rem; right:1.1rem; background:none; border:none; color:var(--text-muted); font-size:1.7rem; cursor:pointer; line-height:1;">×</button>
+            ${inner}
+        </div>`;
+    },
+
     createHero(className) {
         let eq = { head: 'Sygnet Analityka', weapon: null, chest: null };
         let maxHp = 100;
@@ -949,6 +997,7 @@ window.Learn = {
                 <div style="display:flex; flex-direction: column; gap: 0.6rem; width: 100%;">
                     <button class="btn warning ripple" style="font-weight: bold; font-size: 0.8rem; padding: 0.7rem;" onclick="window.Learn.restAtBonfire()">Odpocznij przy Ognisku</button>
                     <button class="btn primary ripple" style="font-weight: bold; font-size: 0.8rem; padding: 0.7rem;" ${souls >= soulsNeeded ? '' : 'disabled'} onclick="window.Learn.buyLevelUp()">Awansuj poziom (${soulsNeeded} 🔥)</button>
+                    <button class="btn secondary ripple" style="font-weight: bold; font-size: 0.8rem; padding: 0.7rem;" onclick="window.Learn.openSummaries()">📜 Streszczenia rozdziałów</button>
                 </div>
             </div>
         `;
@@ -2491,6 +2540,7 @@ window.Learn = {
 
         // Dynamic items drop
         const ch = this.activeBoss.chapter;
+        if (typeof Store !== 'undefined' && Store.markBossDefeated) Store.markBossDefeated(ch); // odblokowuje streszczenie działu
         const template = BOSS_TEMPLATES[ch];
         const rewardItem = template ? template.rewardItem : null;
         let itemClaimedMsg = '';

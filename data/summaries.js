@@ -20,10 +20,9 @@ window.SUMMARIES = {
     ]
   },
 
-  // Przykład działu odblokowywanego po bossie (Ryzyko rynkowe / VaR).
-  ryzyko_rynkowe: {
+  // Dział odblokowywany po pokonaniu bossa 't1' (Władca Value at Risk).
+  t1: {
     title: 'Ryzyko rynkowe — Value at Risk (VaR)',
-    bossId: 'var',
     questions: [
       { type: 'definicyjne', q: 'Czym jest Value at Risk (VaR)? Podaj definicję, trzy parametry oraz interpretację.',
         a: 'VaR to maksymalna oczekiwana strata wartości portfela w zadanym horyzoncie czasowym, która nie zostanie przekroczona z określonym prawdopodobieństwem (poziomem ufności). Wymaga trzech parametrów: poziomu ufności (np. 95% lub 99%), horyzontu czasowego (np. 1 dzień, 10 dni) oraz waluty pomiaru. Interpretacja: 1-dniowy VaR = 1 mln zł przy 99% oznacza, że w ciągu jednego dnia z prawdopodobieństwem 99% strata nie przekroczy 1 mln zł (średnio 1 dzień na 100 strata będzie większa). VaR mierzy więc kwantyl rozkładu strat, a nie stratę przeciętną.' },

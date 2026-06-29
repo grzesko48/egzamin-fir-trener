@@ -4,6 +4,7 @@ const Store = {
         // streak: count = kolejne dni z rzedu; freezes = "zamrozenia serii" (ochrona przed rage-quit);
         // best = rekord; goalDate = dzien, w ktorym domknieto cel (by nie nagradzac 2x).
         streak: { count: 0, lastDate: null, freezes: 0, best: 0, goalDate: null },
+        bossDefeated: {}, // chapter_id -> true (odblokowuje streszczenie rozdziału pod Ogniskiem)
         flashcards: {}, // fc_id -> { interval: 0, repetition: 0, efactor: 2.5, nextReview: 0 }
         lessons: {}, // lesson_id -> { interval: 0, repetition: 0, efactor: 2.5, nextReview: 0, mastery: 0 }
         gamify: { xp: 0, level: 1, dailyQuests: { date: null, completed: 0 } },
@@ -29,6 +30,7 @@ const Store = {
                 this._data.settings = { ...this._data.settings, ...(parsed.settings || {}) };
                 // streak: deep-merge, by stare zapisy (bez freezes/best/goalDate) dostaly nowe pola
                 this._data.streak = { ...this._data.streak, ...(parsed.streak || {}) };
+                this._data.bossDefeated = { ...this._data.bossDefeated, ...(parsed.bossDefeated || {}) };
             } catch (e) {
                 console.error("Store V2 parsing error", e);
             }
@@ -165,6 +167,10 @@ const Store = {
     getStreak() { return this._data.streak.count; },
     getFreezes() { return (this._data.streak && this._data.streak.freezes) || 0; },
     getBestStreak() { return (this._data.streak && this._data.streak.best) || 0; },
+
+    // --- Pokonani bossowie (bramka streszczeń) ---
+    markBossDefeated(ch) { if (!this._data.bossDefeated) this._data.bossDefeated = {}; this._data.bossDefeated[ch] = true; this.save(); },
+    isBossDefeated(ch) { return !!(this._data.bossDefeated && this._data.bossDefeated[ch]); },
 
     // --- Cel dnia (petla nawyku: wyzwalacz -> akcja -> mikronagroda, [#playbook-nawyk-30-dni]) ---
     getDailyGoal() { return (this._data.settings && this._data.settings.dailyGoal) || 10; },
