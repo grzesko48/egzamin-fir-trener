@@ -150,6 +150,7 @@ window.Learn = {
     activeQuest: null, // lesson object
     queue: [], // SRS due queue
     earnedQuality: [], // track qualities during active lesson
+    checkStats: { total: 0, passed: 0 }, // zadania (check/blurt/capstone) w bieżącej lekcji: ile / ile zaliczonych
     selectedFeynmanOrder: [],
     scrambledFeynmanBlocks: [],
     blurtingChecklist: [],
@@ -1184,6 +1185,7 @@ window.Learn = {
         this.activeQuest = this.queue[0];
         this.currentStepIndex = 0;
         this.earnedQuality = [];
+        this.checkStats = { total: 0, passed: 0 };
         this.lessonState = 'step';
         
         Store._data.vitality = Math.min(100, (Store._data.vitality || 0) + 20);
@@ -1210,6 +1212,7 @@ window.Learn = {
         this.activeQuest = lesson;
         this.currentStepIndex = 0;
         this.earnedQuality = [];
+        this.checkStats = { total: 0, passed: 0 };
         this.lessonState = 'intro';
         this.renderMain();
     },
@@ -2129,6 +2132,13 @@ window.Learn = {
         // Celnosc: poprawna odpowiedz na sprawdzian/blurt (blędne licza sie w showContextualHint/capstone)
         const st = lesson.steps[this.currentStepIndex];
         if (typeof Study !== 'undefined' && st && (st.type === 'check' || st.type === 'blurt') && quality >= 4) Study.recordAnswer(true);
+        // Mastery = % zaliczonych ZADAŃ typu 'check' (obliczeniowe + wybór kafelków/MCQ + prawda/fałsz).
+        // Capstone (ustne, oceniane przez AI) i blurt NIE wliczają się — nauka nie zależy od dostępności Gemini.
+        if (!this.checkStats) this.checkStats = { total: 0, passed: 0 };
+        if (st && st.type === 'check') {
+            this.checkStats.total++;
+            if (quality >= 4) this.checkStats.passed++;
+        }
 
         if (this.currentStepIndex >= lesson.steps.length - 1) {
             this.lessonState = 'outro';
@@ -2211,7 +2221,10 @@ window.Learn = {
             btn.style.fontSize = '1.1rem';
             btn.textContent = 'Powróć z Tarczą (Enter)';
             btn.onclick = () => {
-                Store.updateLesson(lesson.id, Math.round(avgQuality));
+                Store.updateLesson(lesson.id, Math.round(avgQuality)); // harmonogram powtórek (SRS)
+                const cs = this.checkStats || { total: 0, passed: 0 };
+                const runMastery = cs.total > 0 ? Math.round(100 * cs.passed / cs.total) : 100; // % zaliczonych zadań
+                Store.setMastery(lesson.id, runMastery); // ukończenie z kompletem zadań = 100% (max z dotychczasowym)
                 this.lessonState = 'map';
                 this.activeQuest = null;
                 this.renderRPGPanel();

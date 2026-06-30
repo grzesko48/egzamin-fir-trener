@@ -293,6 +293,16 @@ const Store = {
         return state;
     },
 
+    // Ustaw mastery działu wprost (= max z dotychczasowym). Używane gdy mastery liczymy
+    // jako % zaliczonych zadań w lekcji (zamiast chwiejnego akumulatora +20/−15).
+    setMastery(lessonId, value) {
+        const s = this.getLessonState(lessonId);
+        s.mastery = Math.max(s.mastery || 0, Math.round(value));
+        this._data.lessons[lessonId] = s;
+        this.save();
+        return s.mastery;
+    },
+
     // --- Gamification ---
     addXP(amount) {
         if (!this._data.gamify) {
