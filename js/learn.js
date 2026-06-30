@@ -1359,7 +1359,7 @@ window.Learn = {
             controls.appendChild(btn);
 
         } else if (step.type === 'check') {
-            const heading = `<h3 style="margin-bottom: 1.8rem; font-size: 1.4rem; line-height: 1.5; font-weight: 700;">${step.q}</h3>`;
+            const heading = `<h3 style="margin-bottom: 1.8rem; font-size: 1.4rem; line-height: 1.5; font-weight: 700;">${step.q || step.prompt || ''}</h3>`;
             
             if (step.kind === 'mcq') {
                 contentEl.innerHTML = heading;
@@ -2455,7 +2455,7 @@ window.Learn = {
             controls.style.display = 'flex';
         }
 
-        const heading = `<h3 style="margin-bottom: 1.8rem; font-size: 1.3rem; line-height: 1.5; font-weight:700;">${step.q}</h3>`;
+        const heading = `<h3 style="margin-bottom: 1.8rem; font-size: 1.3rem; line-height: 1.5; font-weight:700;">${step.q || step.prompt || ''}</h3>`;
         
         if (step.kind === 'mcq') {
             contentEl.innerHTML = heading;
