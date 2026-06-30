@@ -2386,6 +2386,8 @@ window.Learn = {
             this.data.forEach(l => l.steps.forEach(s => { if (s.type === 'check') this.bossPool.push({ step: s, lessonId: l.id }); }));
         }
 
+        // Zabezpieczenie: usuń pytania bez treści (żadnego „UNDEFINED" na ekranie).
+        this.bossPool = this.bossPool.filter(x => x && x.step && x.step.q != null && String(x.step.q).trim() && String(x.step.q).trim().toLowerCase() !== 'undefined');
         this.bossPool.sort(() => Math.random() - 0.5);
         if (this.bossPool.length > 12) this.bossPool = this.bossPool.slice(0, 12); // walka ~12 pytań
 

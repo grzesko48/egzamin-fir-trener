@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fir-trener-v57-cache';
+const CACHE_NAME = 'fir-trener-v58-cache';
 const urlsToCache = [
   './',
   './index.html',
@@ -63,34 +63,31 @@ self.addEventListener('install', event => {
   );
 });
 
-// Cache-first strategy for offline support
+// Strategia: NETWORK-FIRST dla kodu/danych aplikacji (HTML/JS/JSON i nawigacje) — zawsze świeży kod,
+// koniec z serwowaniem starych wersji z cache. CACHE-FIRST tylko dla obrazków/CDN (statyczne, wersjonowane).
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request).then(
-          function(response) {
-            // Check if we received a valid response
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-            // Clone and cache new requests dynamically
-            var responseToCache = response.clone();
-            caches.open(CACHE_NAME)
-              .then(function(cache) {
-                // Only cache our own domain or CDNs we trust (simplification)
-                if (event.request.url.startsWith('http')) {
-                    cache.put(event.request, responseToCache);
-                }
-              });
-            return response;
-          }
-        );
-      })
-  );
+  const req = event.request;
+  if (req.method !== 'GET') return;
+  let url;
+  try { url = new URL(req.url); } catch (e) { return; }
+  const sameOrigin = url.origin === self.location.origin;
+  const isCode = req.mode === 'navigate' || (sameOrigin && /\.(?:js|json|html)$/i.test(url.pathname));
+
+  if (isCode) {
+    event.respondWith(
+      fetch(req).then(res => {
+        if (res && res.status === 200) { const c = res.clone(); caches.open(CACHE_NAME).then(ca => ca.put(req, c)); }
+        return res;
+      }).catch(() => caches.match(req).then(r => r || caches.match('./index.html')))
+    );
+  } else {
+    event.respondWith(
+      caches.match(req).then(cached => cached || fetch(req).then(res => {
+        if (res && res.status === 200 && url.protocol.startsWith('http')) { const c = res.clone(); caches.open(CACHE_NAME).then(ca => ca.put(req, c)); }
+        return res;
+      }))
+    );
+  }
 });
 
 self.addEventListener('activate', event => {
