@@ -1688,28 +1688,27 @@ window.Learn = {
             }
 
         } else if (step.type === 'blurt') {
-            // AKTYWNY RECALL bez pisania: zaznacz WSZYSTKIE poprawne elementy dla tematu (multi-select z pułapkami).
-            const junk = s => s.length < 2 || /^\[.*\]$/.test(s) || /^(nie|tak|oraz|np\.?|itp\.?|itd\.?|lub|albo)$/i.test(s);
-            const clean = arr => [...new Set((arr || []).map(x => String(x).trim()).filter(x => !junk(x)))];
-            const correct = clean(step.checklist);
-            if (correct.length < 2) {
+            // AKTYWNY RECALL bez pisania: zaznacz CAŁE ZDANIA należące do tego działu (mix z pułapkami z innych działów).
+            const ch = this.activeQuest.chapter;
+            const pool = this.stmtPool();
+            const correct = (pool[ch] || []).slice().sort(() => Math.random() - 0.5).slice(0, 5);
+            if (correct.length < 3) {
                 contentEl.innerHTML = `<h3 style="font-size:1.4rem;font-weight:700;margin-bottom:1rem;">🧠 Aktywny recall</h3>
                     <p class="text-muted" style="font-size:1.05rem;line-height:1.7;border-left:3px solid var(--primary);padding-left:1.2rem;">Przypomnij sobie z pamięci wszystko o: <b>${step.prompt}</b>. Gdy gotowe — dalej.</p>`;
                 const b = document.createElement('button'); b.className = 'btn primary ripple'; b.style.borderRadius = '24px'; b.textContent = 'Przypomniane — dalej (Enter)';
                 b.onclick = () => { Gamify.awardXP(15, 'Recall'); this.nextStep(4); };
                 controls.appendChild(b);
             } else {
-                const pool = this.blurtPool().filter(w => !correct.some(c => c.toLowerCase() === w.toLowerCase()));
-                const nD = Math.min(pool.length, Math.max(3, Math.min(correct.length + 1, 7)));
-                const distract = pool.slice().sort(() => Math.random() - 0.5).slice(0, nD);
+                const others = Object.keys(pool).filter(k => k !== ch).flatMap(k => pool[k]);
+                const distract = [...new Set(others)].sort(() => Math.random() - 0.5).slice(0, Math.min(5, Math.max(3, correct.length)));
                 const tiles = correct.map(t => ({ t, ok: true })).concat(distract.map(t => ({ t, ok: false }))).sort(() => Math.random() - 0.5);
                 const totalCorrect = correct.length;
-                contentEl.innerHTML = `<h3 style="font-size:1.4rem;font-weight:700;margin-bottom:.5rem;">🧠 Aktywny recall — zaznacz poprawne</h3>
-                    <p class="text-muted" style="margin-bottom:1.2rem;font-size:.95rem;">Temat: <b>${step.prompt}</b>. Kliknij WSZYSTKIE elementy, które naprawdę go dotyczą — uważaj na pułapki. (${totalCorrect} poprawnych do znalezienia)</p>
-                    <div id="recall-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.7rem;"></div>`;
+                contentEl.innerHTML = `<h3 style="font-size:1.4rem;font-weight:700;margin-bottom:.5rem;">🧠 Aktywny recall — zaznacz zdania z tego działu</h3>
+                    <p class="text-muted" style="margin-bottom:1.2rem;font-size:.95rem;">Temat: <b>${step.prompt}</b>. Zaznacz WSZYSTKIE zdania, które należą do tego działu — część to pułapki z innych tematów. (${totalCorrect} poprawnych)</p>
+                    <div id="recall-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:.7rem;"></div>`;
                 const grid = contentEl.querySelector('#recall-grid');
                 const sel = new Set();
-                const base = 'padding:.9rem 1.1rem;border-radius:12px;cursor:pointer;font-weight:600;font-size:.95rem;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);transition:all .15s;user-select:none;';
+                const base = 'padding:.9rem 1.1rem;border-radius:12px;cursor:pointer;font-weight:500;font-size:.92rem;line-height:1.45;text-align:left;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);transition:all .15s;user-select:none;';
                 const on = base + 'border-color:var(--primary,#E8C76A);background:rgba(212,175,55,.12);box-shadow:0 0 10px rgba(212,175,55,.25);';
                 tiles.forEach((tile, i) => {
                     const d = document.createElement('div'); d.textContent = tile.t; d.style.cssText = base;
@@ -1897,6 +1896,24 @@ window.Learn = {
 
     // --- Blurting interaction logic ---
     // Pula dystraktorów do recall: kluczowe pojęcia ze WSZYSTKICH kroków blurt (cache).
+    // Pula CAŁYCH ZDAŃ (prawdziwych stwierdzeń) per dział — do recall „zaznacz zdania z tego działu".
+    stmtPool() {
+        if (this._stmtPool) return this._stmtPool;
+        const byCh = {};
+        const isNum = t => /^[\d\s.,:+\-zł%()\/]+$/i.test(t);
+        const add = (ch, text) => { text = String(text || '').trim(); if (!ch || text.length < 25 || isNum(text)) return; (byCh[ch] = byCh[ch] || []).push(text); };
+        (this.data || []).forEach(l => (l.steps || []).forEach(s => {
+            if (s.type !== 'check') return;
+            if (s.kind === 'tf' && s.bool === true && s.q) add(l.chapter, s.q);
+            if (s.kind === 'mcq' && Array.isArray(s.options) && typeof s.correct === 'number') add(l.chapter, s.options[s.correct]);
+        }));
+        const bank = window.BOSS_QUESTIONS || {};
+        Object.keys(bank).forEach(ch => (bank[ch] || []).forEach(q => { if (Array.isArray(q.options) && typeof q.correct === 'number') add(ch, q.options[q.correct]); }));
+        Object.keys(byCh).forEach(ch => { byCh[ch] = [...new Set(byCh[ch])]; });
+        this._stmtPool = byCh;
+        return this._stmtPool;
+    },
+
     blurtPool() {
         if (this._blurtPool) return this._blurtPool;
         const out = new Set();
