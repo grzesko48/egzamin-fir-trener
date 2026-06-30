@@ -31,7 +31,8 @@ const BOSS_TEMPLATES = {
     't9': { name: 'Strażnik Budżetu', hp: 370, image: 'boss_golem.png', hue: 110, desc: 'Pilnuje dyscypliny budżetowej w przedsiębiorstwie. Wymaga precyzyjnych prognoz.', rewardItem: 'Buty Finansisty' },
     't7': { name: 'Likwidator Szkód OFE', hp: 380, image: 'boss_bilans.png', hue: 140, desc: 'Władca ubezpieczeń i funduszy emerytalnych. Oblicz renty dożywotnie, by go pokonać.', rewardItem: 'Pas Siły' },
     't10': { name: 'Spekulant Forex', hp: 410, image: 'boss_golem.png', hue: 220, desc: 'Manipuluje kursami walut. Musisz przewidzieć ruchy par walutowych Forex.', rewardItem: 'Sygnet Analityka' },
-    't12': { name: 'Władca Swapów i Futures', hp: 450, image: 'boss_golem.png', hue: 310, desc: 'Ostateczny boss instrumentów pochodnych. Zabezpiecz pozycje, aby przeżyć.', rewardItem: 'Grymuar Rynkowy' }
+    't12': { name: 'Władca Swapów i Futures', hp: 450, image: 'boss_golem.png', hue: 310, desc: 'Ostateczny boss instrumentów pochodnych. Zabezpiecz pozycje, aby przeżyć.', rewardItem: 'Grymuar Rynkowy' },
+    'praca': { name: 'Komisja Obrony', hp: 420, image: 'boss_golem.png', hue: 210, desc: 'Promotor i recenzent. Bronisz pracy — musisz znać event study, wzory (AR, CAR, CAAR) i wyniki (CAAR −7,78 / −9,10 / −11,03%) na pamięć.', rewardItem: 'Dyplom Licencjata' }
 };
 
 // Web Audio API Synthesizer for offline haptic feedback
@@ -778,7 +779,8 @@ window.Learn = {
         t9:        { n:'Mapa Planów', a:'#eab308', sky:['#15110a','#241c0e','#322814'], glow:'234,179,8', motion:'drift', cols:['234,179,8','250,210,100'], con:false },
         t10:       { n:'Targ Walut', a:'#fbbf24', sky:['#120e06','#221a0c','#2e2410'], glow:'251,191,36', motion:'swirl', cols:['251,191,36','52,211,153','248,113,113','96,165,250'], con:false },
         t11:       { n:'Most Walutowy', a:'#8b5cf6', sky:['#0a0e1a','#161830','#202844'], glow:'139,92,246', motion:'drift', cols:['139,92,246','45,212,191'], con:true },
-        t12:       { n:'Kuźnia Derywatów', a:'#ec4899', sky:['#160814','#2a0d24','#380f30'], glow:'236,72,153', motion:'rise', cols:['236,72,153','255,140,200','167,139,250'], con:true }
+        t12:       { n:'Kuźnia Derywatów', a:'#ec4899', sky:['#160814','#2a0d24','#380f30'], glow:'236,72,153', motion:'rise', cols:['236,72,153','255,140,200','167,139,250'], con:true },
+        praca:     { n:'Sala Obrony', a:'#E8C76A', sky:['#0a0c14','#141826','#1e2438'], glow:'232,199,106', motion:'fall', cols:['232,199,106','120,160,230','203,213,225'], con:true }
     },
 
     updateBiome() {
@@ -1418,17 +1420,18 @@ window.Learn = {
                 const sync = () => { disp.textContent = expr || '0'; };
                 const grid = document.createElement('div');
                 grid.style.cssText = 'display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem';
-                const keys = ['7','8','9','÷','C', '4','5','6','×','⌫', '1','2','3','−','^', '0',',','(',')','='];
+                const keys = ['7','8','9','÷','C', '4','5','6','×','⌫', '1','2','3','−','+', '0',',','(',')','^', '='];
                 keys.forEach(k => {
                     const b = document.createElement('button');
                     b.type = 'button';
                     b.textContent = k;
-                    const eq = (k === '='), op = ('÷×−^()C⌫'.indexOf(k) >= 0);
+                    const eq = (k === '='), op = ('÷×−+^()C⌫'.indexOf(k) >= 0);
                     b.style.cssText = 'padding:.85rem 0;font-size:1.15rem;font-weight:700;cursor:pointer;border-radius:8px;' +
                         "font-family:'Cinzel','Marcellus',serif;color:" + (eq ? '#140f08' : (op ? '#e8a23c' : '#e8d9b5')) + ';' +
                         'border:1px solid ' + (eq ? '#E8C76A' : '#5c4a32') + ';' +
                         'background:' + (eq ? 'linear-gradient(180deg,#ffe9a8,#d6ad3c)' : 'linear-gradient(180deg,#2c2720,#14100b)') + ';' +
                         'box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 2px 3px rgba(0,0,0,.5)';
+                    if (eq) b.style.gridColumn = '1 / -1'; // "=" na całą szerokość (osobny wiersz)
                     b.onmousedown = e => e.preventDefault(); // nie zabieraj fokusu z pola odpowiedzi
                     b.onclick = () => {
                         if (k === 'C') { expr = ''; sync(); return; }

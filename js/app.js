@@ -54,15 +54,18 @@ const App = {
     },
 
     async loadData() {
+        // Wersja z tagu <script ...app.js?v=N> — wymusza świeży fetch danych po każdym deployu
+        // (wcześniej content.json/lessons.json były pobierane bez ?v i przeglądarka serwowała stary cache).
+        const _v = (document.querySelector('script[src*="app.js"]')?.src.match(/v=(\d+)/) || [])[1] || Date.now();
         try {
             // In V2 we load the full data (content.json)
-            const response = await fetch('data/content.json');
+            const response = await fetch('data/content.json?v=' + _v);
             if (!response.ok) throw new Error("HTTP " + response.status);
             this.data = await response.json();
-            
+
             // Load Lessons
             try {
-                const resL = await fetch('data/lessons.json');
+                const resL = await fetch('data/lessons.json?v=' + _v);
                 if (resL.ok) this.lessonsData = await resL.json();
             } catch(e) {
                 this.lessonsData = window.LESSONS || null;
