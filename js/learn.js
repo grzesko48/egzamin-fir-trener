@@ -1716,11 +1716,25 @@ window.Learn = {
             };
             const selfGrade = () => {
                 controls.innerHTML = '';
-                const ok = document.createElement('button'); ok.className = 'btn success ripple'; ok.style.borderRadius = '20px'; ok.textContent = 'Zgadza się z moją';
-                ok.onclick = () => { Gamify.awardXP(40, 'Capstone'); if (this.activeBoss) this.damageBoss(100); if (typeof Study !== 'undefined') Study.recordAnswer(true); this.nextStep(5); };
-                const bad = document.createElement('button'); bad.className = 'btn danger ripple'; bad.style.borderRadius = '20px'; bad.textContent = 'Mam luki';
-                bad.onclick = () => { this.takeDamage(35); if (typeof Study !== 'undefined') { Study.recordAnswer(false); Study.addImprove(chap, 'Pytanie komisji: ' + (this.activeQuest.title || chap)); } this.nextStep(2); };
-                controls.appendChild(ok); controls.appendChild(bad);
+                const mk = (label, cls, cb) => { const b = document.createElement('button'); b.className = 'btn ' + cls + ' ripple'; b.style.borderRadius = '20px'; b.textContent = label; b.onclick = cb; controls.appendChild(b); };
+                mk('Pełna (≥80%) ✓', 'success', () => { Gamify.awardXP(40, 'Capstone'); if (this.activeBoss) this.damageBoss(100); if (typeof Study !== 'undefined') Study.recordAnswer(true); this.nextStep(5); });
+                mk('Częściowa (~50%)', 'warning', () => { Gamify.awardXP(15, 'Capstone — częściowo'); if (this.activeBoss) this.damageBoss(40); if (typeof Study !== 'undefined') { Study.recordAnswer(false); Study.addImprove(chap, 'Capstone do dopracowania: ' + (this.activeQuest.title || chap)); } this.nextStep(2); });
+                mk('Słaba (<50%)', 'danger', () => { this.takeDamage(35); if (typeof Study !== 'undefined') { Study.recordAnswer(false); Study.addImprove(chap, 'Pytanie komisji: ' + (this.activeQuest.title || chap)); } this.nextStep(2); });
+            };
+            // Ocena offline „wzorcem" (gdy AI niedostępny): orientacyjny wynik pokrycia + wzorzec + samoocena.
+            const selfAssess = (ans, note) => {
+                if (note) contentEl.insertAdjacentHTML('beforeend', `<div style="margin-top:1rem;color:var(--warning);font-size:.92rem">${note}</div>`);
+                if (ans && typeof GeminiAI !== 'undefined' && GeminiAI.localGrade) {
+                    const lg = GeminiAI.localGrade(step.model, ans);
+                    const col = lg.score >= 80 ? 'var(--success)' : (lg.score >= 50 ? 'var(--warning)' : 'var(--danger)');
+                    contentEl.insertAdjacentHTML('beforeend', `<div class="fade-in" style="margin-top:1rem;padding:1rem 1.2rem;background:rgba(0,0,0,.32);border-radius:12px;border:1px solid rgba(212,175,55,.22)">
+                        <div style="display:flex;justify-content:space-between;align-items:center"><b style="color:var(--primary,#E8C76A)">📊 Ocena orientacyjna (offline, bez AI)</b><b style="font-size:1.35rem;color:${col}">${lg.score}%</b></div>
+                        <p class="text-muted" style="font-size:.8rem;margin-top:.3rem">Pokrycie kluczowych pojęć z wzorca (${lg.matched}/${lg.total}). To tylko wskazówka — ostateczną ocenę zrób sam, porównując odpowiedź z wzorcem poniżej.</p>
+                        ${lg.missing.length ? `<p style="margin-top:.4rem;font-size:.9rem"><b>Pojęcia, których nie wykryto:</b> ${lg.missing.join(', ')}</p>` : '<p style="margin-top:.4rem;color:var(--success);font-size:.9rem">Pokryłeś kluczowe pojęcia z wzorca. 👍</p>'}
+                    </div>`);
+                }
+                revealModel();
+                selfGrade();
             };
 
             const btn = document.createElement('button');
@@ -1728,14 +1742,14 @@ window.Learn = {
             btn.textContent = aiOn ? 'Wyślij do komisji AI' : 'Pokaż wzorzec';
             btn.onclick = async () => {
                 const ans = input.value.trim();
-                if (!aiOn) { revealModel(); selfGrade(); btn.remove(); return; }
+                if (!aiOn) { btn.remove(); selfAssess(ans, null); return; }
                 if (!ans) { input.focus(); return; }
                 btn.disabled = true; input.disabled = true; btn.textContent = 'Komisja ocenia...';
                 const r = await GeminiAI.gradeOral(step.q, step.model, ans);
                 btn.remove();
                 if (r.error) {
-                    contentEl.insertAdjacentHTML('beforeend', `<div style="margin-top:1rem;color:var(--warning)">Egzaminator AI niedostępny (${r.error}). Oceń się sam wzorcem.</div>`);
-                    revealModel(); selfGrade(); return;
+                    selfAssess(ans, `Egzaminator AI niedostępny (${r.error}). Oceniam orientacyjnie i wzorcem.`);
+                    return;
                 }
                 const g = r.ok, pass = !!g.pass;
                 contentEl.insertAdjacentHTML('beforeend', `<div class="fade-in glass-card" style="margin-top:1.5rem;border-color:${pass ? 'var(--success)' : 'var(--danger)'}">

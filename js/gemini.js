@@ -50,5 +50,28 @@ Zwróć WYŁĄCZNIE poprawny JSON (bez markdown):
       const obj = JSON.parse(t);
       return { ok: obj };
     } catch (e) { return { error: 'Nie udało się odczytać oceny Gemini.', raw: res.text }; }
+  },
+
+  // OFFLINE ocena „wzorcem" — gdy Gemini niedostępny (brak klucza / wyczerpany limit).
+  // Liczy pokrycie kluczowych pojęć z wzorca w odpowiedzi studenta (porównanie rdzeni słów).
+  // To tylko ORIENTACYJNA wskazówka — ostateczną ocenę robi student, porównując z wzorcem.
+  localGrade(model, userAnswer) {
+    const STOP = new Set(('i oraz lub ale w we z ze na do od po za o u to jest są być co czy że gdy bo bez przy dla nad pod jako także też przez się nie tak jak ich jego jej ten ta te tym tej aby albo czyli np itp itd który która które gdzie kiedy ponieważ więc oznacza odpowiedź pytanie student komisja').split(' '));
+    const norm = s => (s || '').toLowerCase().replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/[^a-ząćęłńóśźż0-9 ]/gi, ' ');
+    const stem = w => (w.length > 6 ? w.slice(0, 6) : w);
+    const words = s => norm(s).split(/\s+/).filter(w => w.length >= 5 && !STOP.has(w));
+    // klucze z wzorca: najpierw pogrubione pojęcia, potem znaczące słowa
+    const bolds = (String(model).match(/<(?:b|strong)>(.*?)<\/(?:b|strong)>/gi) || []).map(x => x.replace(/<[^>]+>/g, ''));
+    let keys = [];
+    bolds.forEach(b => words(b).forEach(w => keys.push(w)));
+    if (keys.length < 4) keys = keys.concat(words(model));
+    const seen = new Set(), uniq = [];
+    keys.forEach(w => { const st = stem(w); if (!seen.has(st)) { seen.add(st); uniq.push(w); } });
+    const top = uniq.slice(0, 16);
+    const userStems = new Set(words(userAnswer).map(stem));
+    const matched = top.filter(w => userStems.has(stem(w)));
+    const missing = top.filter(w => !userStems.has(stem(w))).slice(0, 7);
+    const score = top.length ? Math.round(100 * matched.length / top.length) : 0;
+    return { score, matched: matched.length, total: top.length, missing };
   }
 };
