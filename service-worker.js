@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fir-trener-v58-cache';
+const CACHE_NAME = 'fir-trener-v59-cache';
 const urlsToCache = [
   './',
   './index.html',
@@ -94,11 +94,14 @@ self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
     caches.keys().then(cacheNames => Promise.all(
-      cacheNames.map(cacheName => {
-        if (cacheWhitelist.indexOf(cacheName) === -1) {
-          return caches.delete(cacheName);
-        }
-      })
-    )).then(() => self.clients.claim()) // od razu przejmij otwarte karty (szybsza aktualizacja)
+      cacheNames.map(cacheName => (cacheWhitelist.indexOf(cacheName) === -1) ? caches.delete(cacheName) : null)
+    ))
+      .then(() => self.clients.claim()) // przejmij otwarte karty
+      .then(() => self.clients.matchAll({ type: 'window' }))
+      .then(clients => clients.forEach(c => {
+        // Wymuś PRZEŁADOWANIE karty pod nowym SW (network-first) — gwarantuje świeży kod
+        // bez ręcznego podwójnego odświeżania (naprawia „przyklejony" stary cache).
+        try { c.navigate(c.url); } catch (e) {}
+      }))
   );
 });
