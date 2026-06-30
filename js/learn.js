@@ -1047,6 +1047,7 @@ window.Learn = {
 
             const boss = BOSS_TEMPLATES[ch] || { name: 'Strażnik Działu', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Tajemniczy strażnik kognitywny.', rewardItem: 'Kostur Kalkulacji' };
             const isBossUnlocked = avgMastery >= 50;
+            const bossWon = (typeof Store !== 'undefined' && Store.isBossDefeated && Store.isBossDefeated(ch));
 
             let lessonsListHTML = '';
             chapterLessons.forEach(lesson => {
@@ -1092,20 +1093,20 @@ window.Learn = {
                     </div>
 
                     <!-- Chapter Boss Card at the end of Chapter -->
-                    <div class="boss-chapter-card ${isBossUnlocked ? 'unlocked' : 'locked'}" style="margin-top: 1.2rem; border: 1px solid ${isBossUnlocked ? 'rgba(255,23,68,0.4)' : 'rgba(255,255,255,0.05)'}; background: ${isBossUnlocked ? 'linear-gradient(135deg, rgba(255,23,68,0.04) 0%, transparent 100%)' : 'rgba(0,0,0,0.1)'}; padding: 1.2rem; border-radius: 14px; display: flex; align-items: center; gap: 1.2rem; justify-content: space-between; flex-wrap: wrap;">
+                    <div class="boss-chapter-card ${(isBossUnlocked || bossWon) ? 'unlocked' : 'locked'}" style="margin-top: 1.2rem; border: 1px solid ${bossWon ? 'rgba(0,230,118,0.45)' : (isBossUnlocked ? 'rgba(255,23,68,0.4)' : 'rgba(255,255,255,0.05)')}; background: ${bossWon ? 'linear-gradient(135deg, rgba(0,230,118,0.06) 0%, transparent 100%)' : (isBossUnlocked ? 'linear-gradient(135deg, rgba(255,23,68,0.04) 0%, transparent 100%)' : 'rgba(0,0,0,0.1)')}; padding: 1.2rem; border-radius: 14px; display: flex; align-items: center; gap: 1.2rem; justify-content: space-between; flex-wrap: wrap;">
                         <div style="display:flex; align-items:center; gap:1.2rem; max-width: 70%;">
-                            <div style="width:68px; height:68px; border-radius:50%; overflow:hidden; border: 2px solid ${isBossUnlocked ? 'var(--danger)' : '#666'}; filter: ${isBossUnlocked ? 'none' : 'grayscale(0.75) brightness(0.5)'}; flex-shrink: 0;">
+                            <div style="width:68px; height:68px; border-radius:50%; overflow:hidden; border: 2px solid ${bossWon ? 'var(--success)' : (isBossUnlocked ? 'var(--danger)' : '#666')}; filter: ${(isBossUnlocked || bossWon) ? 'none' : 'grayscale(0.75) brightness(0.5)'}; flex-shrink: 0;">
                                 <img src="assets/avatars/boss_${ch}.png?v=45" onerror="this.onerror=null;this.src='assets/avatars/boss_golem.png?v=2026'" style="width:100%; height:100%; object-fit:cover;" />
                             </div>
                             <div style="text-align: left;">
-                                <h4 style="margin: 0; color: ${isBossUnlocked ? 'var(--danger)' : 'var(--text-muted)'}; font-size:1.1rem; font-weight:800; display:flex; align-items:center; gap:0.5rem;">
-                                    ⚔️ BOSS: ${boss.name}
+                                <h4 style="margin: 0; color: ${bossWon ? 'var(--success)' : (isBossUnlocked ? 'var(--danger)' : 'var(--text-muted)')}; font-size:1.1rem; font-weight:800; display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                                    ⚔️ BOSS: ${boss.name} ${bossWon ? '<span style="font-size:0.72rem; background:rgba(0,230,118,0.18); color:var(--success); border:1px solid var(--success); border-radius:20px; padding:0.1rem 0.6rem; letter-spacing:0.05em;">✓ POKONANY</span>' : ''}
                                 </h4>
-                                <p class="text-muted" style="font-size: 0.8rem; line-height:1.4; margin-top: 0.3rem;">${isBossUnlocked ? boss.desc : `Aura Bossa zablokowana. Osiągnij minimum <b>50% opanowania działu</b>, aby wyzwać go na starcie.`}</p>
+                                <p class="text-muted" style="font-size: 0.8rem; line-height:1.4; margin-top: 0.3rem;">${bossWon ? 'Pokonany! Zdobyłeś nagrodę. Możesz zmierzyć się ponownie dla wprawy.' : (isBossUnlocked ? boss.desc : `Aura Bossa zablokowana. Osiągnij minimum <b>50% opanowania działu</b>, aby wyzwać go na starcie.`)}</p>
                             </div>
                         </div>
-                        <button class="btn ${isBossUnlocked ? 'danger' : 'secondary'} ripple" ${isBossUnlocked ? '' : 'disabled'} style="font-weight: bold; padding: 0.7rem 1.4rem; border-radius:24px; font-size: 0.85rem;" onclick="window.Learn.challengeBoss('${ch}')">
-                            ${isBossUnlocked ? 'Rzuć Wyzwanie' : '🔒 Zablokowane'}
+                        <button class="btn ${bossWon ? 'secondary' : (isBossUnlocked ? 'danger' : 'secondary')} ripple" ${(isBossUnlocked || bossWon) ? '' : 'disabled'} style="font-weight: bold; padding: 0.7rem 1.4rem; border-radius:24px; font-size: 0.85rem;${bossWon ? ' border-color:var(--success); color:var(--success);' : ''}" onclick="window.Learn.challengeBoss('${ch}')">
+                            ${bossWon ? '⚔️ Walcz ponownie' : (isBossUnlocked ? 'Rzuć Wyzwanie' : '🔒 Zablokowane')}
                         </button>
                     </div>
                 </div>
@@ -2282,6 +2283,52 @@ window.Learn = {
     // ==========================================================================
     // BOSS FIGHT / ARENA GAMEPLAY
     // ==========================================================================
+    // Reużywalny kalkulator (ten sam co w Starciu Kontrolnym) — wpina wynik do podanego inputu.
+    buildCalc(input) {
+        const calc = document.createElement('div');
+        calc.style.cssText = 'margin:1rem 0 0;padding:1rem;border:1px solid rgba(212,175,55,.25);border-radius:14px;background:rgba(10,8,12,.55);box-shadow:inset 0 0 24px rgba(0,0,0,.45)';
+        const hint = document.createElement('div');
+        hint.textContent = '🧮 Kalkulator — „=" wpisze wynik do pola powyżej (^ = potęga)';
+        hint.style.cssText = 'font-size:.78rem;opacity:.65;margin-bottom:.6rem;letter-spacing:.02em';
+        calc.appendChild(hint);
+        const disp = document.createElement('div');
+        disp.style.cssText = "min-height:2.4rem;display:flex;align-items:center;justify-content:flex-end;padding:.4rem .8rem;margin-bottom:.7rem;font-family:'Outfit',monospace;font-size:1.3rem;color:#E8C76A;background:rgba(0,0,0,.45);border:1px solid rgba(212,175,55,.18);border-radius:8px;overflow-x:auto;white-space:nowrap";
+        disp.textContent = '0';
+        calc.appendChild(disp);
+        let expr = ''; const sync = () => { disp.textContent = expr || '0'; };
+        const grid = document.createElement('div');
+        grid.style.cssText = 'display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem';
+        ['7','8','9','÷','C', '4','5','6','×','⌫', '1','2','3','−','+', '0',',','(',')','^', '='].forEach(k => {
+            const b = document.createElement('button'); b.type = 'button'; b.textContent = k;
+            const eq = (k === '='), op = ('÷×−+^()C⌫'.indexOf(k) >= 0);
+            b.style.cssText = 'padding:.85rem 0;font-size:1.15rem;font-weight:700;cursor:pointer;border-radius:8px;' +
+                "font-family:'Cinzel','Marcellus',serif;color:" + (eq ? '#140f08' : (op ? '#e8a23c' : '#e8d9b5')) + ';' +
+                'border:1px solid ' + (eq ? '#E8C76A' : '#5c4a32') + ';' +
+                'background:' + (eq ? 'linear-gradient(180deg,#ffe9a8,#d6ad3c)' : 'linear-gradient(180deg,#2c2720,#14100b)') + ';' +
+                'box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 2px 3px rgba(0,0,0,.5)';
+            if (eq) b.style.gridColumn = '1 / -1';
+            b.onmousedown = e => e.preventDefault();
+            b.onclick = () => {
+                if (k === 'C') { expr = ''; sync(); return; }
+                if (k === '⌫') { expr = expr.slice(0, -1); sync(); return; }
+                if (k === '=') {
+                    try {
+                        const js = expr.replace(/\^/g, '**').replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-').replace(/,/g, '.');
+                        const safe = js.replace(/[^0-9+\-*/(). ]/g, '');
+                        const r = Function('"use strict";return(' + safe + ')')();
+                        if (typeof r === 'number' && isFinite(r)) { const rd = Math.round(r * 1e6) / 1e6; expr = String(rd); sync(); input.value = rd; input.style.borderColor = 'var(--primary)'; }
+                        else { disp.textContent = 'błąd'; }
+                    } catch (e) { disp.textContent = 'błąd'; }
+                    return;
+                }
+                expr += k; sync();
+            };
+            grid.appendChild(b);
+        });
+        calc.appendChild(grid);
+        return calc;
+    },
+
     challengeBoss(ch) {
         const template = BOSS_TEMPLATES[ch] || { name: 'Strażnik Wiedzy', hp: 300, image: 'boss_bilans.png', hue: 0, desc: 'Generowany strażnik kognitywny.', rewardItem: 'Kostur Kalkulacji' };
         
@@ -2294,49 +2341,36 @@ window.Learn = {
             hue: template.hue
         };
 
-        // Gather questions for the boss fight from lessons in this specific chapter!
+        // Pula pytań bossa: ŚWIEŻE pytania MCQ z banku (inne niż w nauce) + zadania obliczeniowe (losowane).
         this.bossPool = [];
-        const chapterLessons = this.data.filter(l => l.chapter === ch);
-        
-        chapterLessons.forEach(l => {
-            l.steps.forEach(s => {
-                if (s.type === 'check') {
-                    this.bossPool.push({ step: s, lessonId: l.id });
-                }
-            });
-        });
+        const bank = (window.BOSS_QUESTIONS && window.BOSS_QUESTIONS[ch]) || [];
+        bank.forEach(q => this.bossPool.push({
+            step: { type: 'check', kind: 'mcq', q: q.q, options: q.options, correct: q.correct, explain: q.explain },
+            lessonId: 'boss'
+        }));
 
-        // Add computational problems matching the chapter theme if available
+        // Zadania obliczeniowe z bazy problemów — gen() losuje liczby (inne niż na nauce; jest kalkulator)
         if (window.PROBLEMS) {
             window.PROBLEMS.forEach(p => {
-                if (p.chapter === ch) {
-                    this.bossPool.push({
-                        step: {
-                            type: 'check',
-                            kind: 'num',
-                            q: p.question,
-                            answer: p.answer,
-                            tol: p.tol || 0.1,
-                            explain: 'Zadanie z bazy problemów obliczeniowych.'
-                        },
-                        lessonId: 'problem'
-                    });
-                }
-            });
-        }
-
-        // If pool is empty, grab from anywhere so the boss fight doesn't crash
-        if (this.bossPool.length === 0) {
-            this.data.forEach(l => {
-                l.steps.forEach(s => {
-                    if (s.type === 'check') {
-                        this.bossPool.push({ step: s, lessonId: l.id });
-                    }
+                if (p.chapter !== ch) return;
+                const g = (typeof p.gen === 'function') ? p.gen() : p;
+                this.bossPool.push({
+                    step: { type: 'check', kind: 'num', q: g.question || p.question || p.title, answer: (g.answer != null ? g.answer : p.answer), tol: g.tol || p.tol || 0.1, unit: g.unit, explain: g.solution || 'Zadanie obliczeniowe.' },
+                    lessonId: 'problem'
                 });
             });
         }
 
+        // Fallback (działy bez banku): pytania sprawdzające z lekcji tego działu, a w ostateczności skądkolwiek.
+        if (this.bossPool.length === 0) {
+            this.data.filter(l => l.chapter === ch).forEach(l => l.steps.forEach(s => { if (s.type === 'check') this.bossPool.push({ step: s, lessonId: l.id }); }));
+        }
+        if (this.bossPool.length === 0) {
+            this.data.forEach(l => l.steps.forEach(s => { if (s.type === 'check') this.bossPool.push({ step: s, lessonId: l.id }); }));
+        }
+
         this.bossPool.sort(() => Math.random() - 0.5);
+        if (this.bossPool.length > 12) this.bossPool = this.bossPool.slice(0, 12); // walka ~12 pytań
 
         this.lessonState = 'boss_battle';
         this.currentStepIndex = 0;
@@ -2369,7 +2403,7 @@ window.Learn = {
         const step = currentQuestItem.step;
 
         container.innerHTML = `
-            <div class="boss-arena-card fade-in">
+            <div class="boss-arena-card fade-in" style="max-width:960px; width:100%; margin:0 auto; padding:2rem 2.2rem;">
                 <!-- Boss Header -->
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
                     <div style="text-align:left;">
@@ -2384,7 +2418,7 @@ window.Learn = {
                     </div>
                 </div>
 
-                <div class="boss-avatar-box" style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; border: 4px solid var(--danger); box-shadow: 0 0 25px rgba(255, 23, 68, 0.6); margin: 0 auto 2rem auto;">
+                <div class="boss-avatar-box" style="width: 220px; height: 220px; border-radius: 50%; overflow: hidden; border: 5px solid var(--danger); box-shadow: 0 0 50px rgba(255, 23, 68, 0.8); margin: 0.5rem auto 2.2rem auto;">
                     <img src="assets/avatars/boss_${boss.chapter}.png?v=45" onerror="this.onerror=null;this.src='assets/avatars/boss_golem.png?v=2026'" style="width:100%; height:100%; object-fit:cover;" alt="Boss" />
                 </div>
                 
@@ -2468,6 +2502,7 @@ window.Learn = {
             input.style.width = '100%'; input.style.marginTop = '1rem'; input.style.padding = '1rem'; input.style.borderRadius = '12px';
             input.style.fontSize = '1.15rem';
             contentEl.appendChild(input);
+            contentEl.appendChild(this.buildCalc(input));
 
             const checkNum = () => {
                 const val = parseFloat(input.value);

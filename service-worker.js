@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fir-trener-v55-cache';
+const CACHE_NAME = 'fir-trener-v56-cache';
 const urlsToCache = [
   './',
   './index.html',
@@ -32,6 +32,7 @@ const urlsToCache = [
   './data/lessons.js',
   './data/problems.js',
   './data/exam.js',
+  './data/boss_questions.js',
   './assets/avatars/audytor.png',
   './assets/avatars/kinezjolog.png',
   './assets/avatars/strateg.png',
