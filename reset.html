@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Odświeżanie aplikacji…</title>
+<style>
+  html,body{height:100%;margin:0}
+  body{display:flex;align-items:center;justify-content:center;text-align:center;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:#14100b;color:#e8d9b5;padding:2rem}
+  .box{max-width:30rem}
+  h1{font-size:1.4rem;margin:0 0 .6rem;color:#E8C76A}
+  p{opacity:.8;line-height:1.5;margin:.4rem 0}
+  .spin{width:46px;height:46px;margin:1.4rem auto;border:4px solid #5c4a32;
+    border-top-color:#E8C76A;border-radius:50%;animation:r 1s linear infinite}
+  @keyframes r{to{transform:rotate(360deg)}}
+  a{color:#E8C76A}
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="spin"></div>
+    <h1>Czyszczę pamięć aplikacji…</h1>
+    <p id="status">Usuwam stary cache i Service Worker — to potrwa chwilę.</p>
+    <p style="font-size:.85rem;opacity:.6">Jeśli nic się nie dzieje przez 5 sekund,
+       <a href="./?fresh=1">kliknij tutaj</a>.</p>
+  </div>
+<script>
+(async () => {
+  const status = document.getElementById('status');
+  try {
+    if ('serviceWorker' in navigator) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for (const r of regs) { try { await r.unregister(); } catch (e) {} }
+    }
+  } catch (e) {}
+  try {
+    if (window.caches) {
+      const keys = await caches.keys();
+      for (const k of keys) { try { await caches.delete(k); } catch (e) {} }
+    }
+  } catch (e) {}
+  status.textContent = 'Gotowe! Otwieram świeżą wersję aplikacji…';
+  // ?fresh + znacznik czasu => obejście jakiegokolwiek cache HTTP przy przejściu do aplikacji
+  setTimeout(() => location.replace('./?fresh=' + Date.now()), 700);
+})();
+</script>
+</body>
+</html>

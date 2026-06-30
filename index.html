@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css?v=61">
+    <link rel="stylesheet" href="css/style.css?v=62">
 </head>
 <body>
     <!-- Fullscreen animated background -->
@@ -399,40 +399,53 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
     <!-- Data (Fallback) -->
-    <script src="data/content.js?v=61"></script>
-    <script src="data/lessons.js?v=61"></script>
-    <script src="data/problems.js?v=61"></script>
-    <script src="data/exam.js?v=61"></script>
-    <script src="data/summaries.js?v=61"></script>
-    <script src="data/boss_questions.js?v=61"></script>
+    <script src="data/content.js?v=62"></script>
+    <script src="data/lessons.js?v=62"></script>
+    <script src="data/problems.js?v=62"></script>
+    <script src="data/exam.js?v=62"></script>
+    <script src="data/summaries.js?v=62"></script>
+    <script src="data/boss_questions.js?v=62"></script>
 
     <!-- App Scripts -->
-    <script src="js/anim.js?v=61"></script>
-    <script src="js/fsrs.js?v=61"></script>
-    <script src="js/store.js?v=61"></script>
-    <script src="js/gamify.js?v=61"></script>
-    <script src="js/dashboard.js?v=61"></script>
-    <script src="js/learn.js?v=61"></script>
-    <script src="js/problems_ui.js?v=61"></script>
-    <script src="js/reader.js?v=61"></script>
-    <script src="js/flashcards.js?v=61"></script>
-    <script src="js/quiz.js?v=61"></script>
-    <script src="js/commission.js?v=61"></script>
-    <script src="js/analytics.js?v=61"></script>
-    <script src="js/formulas.js?v=61"></script>
-    <script src="js/search.js?v=61"></script>
-    <script src="js/settings.js?v=61"></script>
-    <script src="js/ui_select.js?v=61"></script>
-    <script src="js/match.js?v=61"></script>
-    <script src="js/boss.js?v=61"></script>
-    <script src="js/gemini.js?v=61"></script>
-    <script src="js/study.js?v=61"></script>
-    <script src="js/app.js?v=61"></script>
+    <script src="js/anim.js?v=62"></script>
+    <script src="js/fsrs.js?v=62"></script>
+    <script src="js/store.js?v=62"></script>
+    <script src="js/gamify.js?v=62"></script>
+    <script src="js/dashboard.js?v=62"></script>
+    <script src="js/learn.js?v=62"></script>
+    <script src="js/problems_ui.js?v=62"></script>
+    <script src="js/reader.js?v=62"></script>
+    <script src="js/flashcards.js?v=62"></script>
+    <script src="js/quiz.js?v=62"></script>
+    <script src="js/commission.js?v=62"></script>
+    <script src="js/analytics.js?v=62"></script>
+    <script src="js/formulas.js?v=62"></script>
+    <script src="js/search.js?v=62"></script>
+    <script src="js/settings.js?v=62"></script>
+    <script src="js/ui_select.js?v=62"></script>
+    <script src="js/match.js?v=62"></script>
+    <script src="js/boss.js?v=62"></script>
+    <script src="js/gemini.js?v=62"></script>
+    <script src="js/study.js?v=62"></script>
+    <script src="js/app.js?v=62"></script>
     
     <script>
         if ('serviceWorker' in navigator) {
+            // Auto-przeładowanie, gdy NOWY Service Worker przejmie kontrolę (świeży kod bez ręcznego czyszczenia cache).
+            let _swRefreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (_swRefreshing) return;
+                _swRefreshing = true;
+                location.reload();
+            });
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js').catch(err => console.log('SW Fail:', err));
+                // updateViaCache:'none' => przeglądarka NIGDY nie serwuje service-worker.js ze swojego cache HTTP,
+                // więc każdy deploy jest wykrywany od razu (koniec z „przyklejonym" starym SW na ~10 min).
+                navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' })
+                    .then(reg => {
+                        reg.update(); // natychmiastowy check aktualizacji przy każdym wejściu
+                    })
+                    .catch(err => console.log('SW Fail:', err));
             });
         }
     </script>
