@@ -1687,20 +1687,53 @@ window.Learn = {
             }
 
         } else if (step.type === 'blurt') {
-            contentEl.innerHTML = `
-                <h3 style="margin-bottom: 0.5rem; font-size: 1.4rem; font-weight:700;">✍️ Metoda Blurtingu</h3>
-                <p class="text-muted" style="margin-bottom: 1.2rem; font-size: 0.95rem;">Zrób maksymalnie dokładny zrzut z pamięci w poniższym polu tekstowym dla tematu: <b>${step.prompt}</b>.</p>
-                <textarea id="blurting-textarea" class="glass-input" style="width:100%; height:180px; padding:1.2rem; font-size:1.05rem; resize:none; line-height: 1.6; border-radius:14px; margin-bottom:1.5rem; box-shadow: inset 0 0 15px rgba(0,0,0,0.3);" placeholder="Pisz swoimi słowami definicje, powiązania, mechanizmy..."></textarea>
-                <div class="blurting-checklist" id="blurt-checklist-box" style="display: none;"></div>
-            `;
-
-            const btn = document.createElement('button');
-            btn.className = 'btn primary ripple';
-            btn.style.borderRadius = '24px';
-            btn.textContent = 'Sprawdź Pamięć (Ctrl + Enter)';
-            btn.onclick = () => this.checkBlurtingText();
-            controls.appendChild(btn);
-            setTimeout(() => document.getElementById('blurting-textarea')?.focus(), 100);
+            // AKTYWNY RECALL bez pisania: zaznacz WSZYSTKIE poprawne elementy dla tematu (multi-select z pułapkami).
+            const junk = s => s.length < 2 || /^\[.*\]$/.test(s) || /^(nie|tak|oraz|np\.?|itp\.?|itd\.?|lub|albo)$/i.test(s);
+            const clean = arr => [...new Set((arr || []).map(x => String(x).trim()).filter(x => !junk(x)))];
+            const correct = clean(step.checklist);
+            if (correct.length < 2) {
+                contentEl.innerHTML = `<h3 style="font-size:1.4rem;font-weight:700;margin-bottom:1rem;">🧠 Aktywny recall</h3>
+                    <p class="text-muted" style="font-size:1.05rem;line-height:1.7;border-left:3px solid var(--primary);padding-left:1.2rem;">Przypomnij sobie z pamięci wszystko o: <b>${step.prompt}</b>. Gdy gotowe — dalej.</p>`;
+                const b = document.createElement('button'); b.className = 'btn primary ripple'; b.style.borderRadius = '24px'; b.textContent = 'Przypomniane — dalej (Enter)';
+                b.onclick = () => { Gamify.awardXP(15, 'Recall'); this.nextStep(4); };
+                controls.appendChild(b);
+            } else {
+                const pool = this.blurtPool().filter(w => !correct.some(c => c.toLowerCase() === w.toLowerCase()));
+                const nD = Math.min(pool.length, Math.max(3, Math.min(correct.length + 1, 7)));
+                const distract = pool.slice().sort(() => Math.random() - 0.5).slice(0, nD);
+                const tiles = correct.map(t => ({ t, ok: true })).concat(distract.map(t => ({ t, ok: false }))).sort(() => Math.random() - 0.5);
+                const totalCorrect = correct.length;
+                contentEl.innerHTML = `<h3 style="font-size:1.4rem;font-weight:700;margin-bottom:.5rem;">🧠 Aktywny recall — zaznacz poprawne</h3>
+                    <p class="text-muted" style="margin-bottom:1.2rem;font-size:.95rem;">Temat: <b>${step.prompt}</b>. Kliknij WSZYSTKIE elementy, które naprawdę go dotyczą — uważaj na pułapki. (${totalCorrect} poprawnych do znalezienia)</p>
+                    <div id="recall-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.7rem;"></div>`;
+                const grid = contentEl.querySelector('#recall-grid');
+                const sel = new Set();
+                const base = 'padding:.9rem 1.1rem;border-radius:12px;cursor:pointer;font-weight:600;font-size:.95rem;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);transition:all .15s;user-select:none;';
+                const on = base + 'border-color:var(--primary,#E8C76A);background:rgba(212,175,55,.12);box-shadow:0 0 10px rgba(212,175,55,.25);';
+                tiles.forEach((tile, i) => {
+                    const d = document.createElement('div'); d.textContent = tile.t; d.style.cssText = base;
+                    d.onclick = () => { if (d.dataset.locked) return; if (sel.has(i)) { sel.delete(i); d.style.cssText = base; } else { sel.add(i); d.style.cssText = on; } };
+                    grid.appendChild(d);
+                });
+                const btn = document.createElement('button'); btn.className = 'btn primary ripple'; btn.style.borderRadius = '24px'; btn.textContent = 'Sprawdź wybór';
+                btn.onclick = () => {
+                    let hit = 0, wrong = 0;
+                    tiles.forEach((tile, i) => {
+                        const el = grid.children[i]; el.dataset.locked = '1'; const chosen = sel.has(i);
+                        if (tile.ok && chosen) { hit++; el.style.cssText = base + 'border-color:var(--success);background:rgba(0,230,118,.14);'; el.textContent = '✓ ' + tile.t; }
+                        else if (tile.ok && !chosen) { el.style.cssText = base + 'border-color:var(--success);opacity:.65;'; el.textContent = '◻ ' + tile.t + ' (pominięte)'; }
+                        else if (!tile.ok && chosen) { wrong++; el.style.cssText = base + 'border-color:var(--danger);background:rgba(255,23,68,.14);'; el.textContent = '✗ ' + tile.t + ' (pułapka)'; }
+                        else { el.style.cssText = base + 'opacity:.4;'; }
+                    });
+                    const frac = Math.max(0, hit - wrong) / totalCorrect; const pct = Math.round(100 * frac); const pass = frac >= 0.7;
+                    contentEl.insertAdjacentHTML('beforeend', `<div class="fade-in" style="margin-top:1.2rem;padding:.9rem 1.1rem;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid ${pass ? 'rgba(0,230,118,.3)' : 'rgba(255,23,68,.3)'}"><b style="color:${pass ? 'var(--success)' : 'var(--danger)'}">${pass ? '✓ Dobry recall' : '✗ Powtórz ten temat'} — ${pct}%</b> <span class="text-muted">(trafione ${hit}/${totalCorrect}${wrong ? ', pułapki ' + wrong : ''})</span></div>`);
+                    controls.innerHTML = '';
+                    const next = document.createElement('button'); next.className = 'btn primary ripple'; next.style.borderRadius = '24px'; next.textContent = 'Dalej (Enter)';
+                    next.onclick = () => { if (pass) { Gamify.awardXP(25, 'Aktywny recall'); if (this.activeBoss) this.damageBoss(50); } else { this.takeDamage(20); } this.nextStep(pass ? 5 : 2); };
+                    controls.appendChild(next);
+                };
+                controls.appendChild(btn);
+            }
 
         } else if (step.type === 'capstone') {
             const chap = this.activeQuest.chapter;
@@ -1862,6 +1895,18 @@ window.Learn = {
     },
 
     // --- Blurting interaction logic ---
+    // Pula dystraktorów do recall: kluczowe pojęcia ze WSZYSTKICH kroków blurt (cache).
+    blurtPool() {
+        if (this._blurtPool) return this._blurtPool;
+        const out = new Set();
+        (this.data || []).forEach(l => (l.steps || []).forEach(s => {
+            if (s.type === 'blurt' && Array.isArray(s.checklist)) s.checklist.forEach(w => out.add(String(w).trim()));
+        }));
+        const junk = s => s.length < 2 || /^\[.*\]$/.test(s) || /^(nie|tak|oraz|np\.?|itp\.?|itd\.?|lub|albo)$/i.test(s);
+        this._blurtPool = [...out].filter(w => !junk(w));
+        return this._blurtPool;
+    },
+
     checkBlurtingText() {
         const textarea = document.getElementById('blurting-textarea');
         if (!textarea) return;
@@ -2120,7 +2165,7 @@ window.Learn = {
         else if (type === 'example') { text = 'PRZYKŁAD'; icon = '🔍'; }
         else if (type === 'check') { text = 'STARCIE KONTROLNE'; icon = '⚔️'; }
         else if (type === 'recall') { text = 'AKTYWNY RECALL'; icon = '🧠'; }
-        else if (type === 'blurt') { text = 'PRÓBA DUSZY (BLURTING)'; icon = '✍️'; }
+        else if (type === 'blurt') { text = 'AKTYWNY RECALL — ZAZNACZ'; icon = '🧠'; }
         else if (type === 'capstone') { text = 'WERYFIKACJA OSTATECZNA'; icon = '🎯'; }
         
         return `<div class="lesson-ribbon">${icon} ${text}</div>`;
@@ -2132,10 +2177,10 @@ window.Learn = {
         // Celnosc: poprawna odpowiedz na sprawdzian/blurt (blędne licza sie w showContextualHint/capstone)
         const st = lesson.steps[this.currentStepIndex];
         if (typeof Study !== 'undefined' && st && (st.type === 'check' || st.type === 'blurt') && quality >= 4) Study.recordAnswer(true);
-        // Mastery = % zaliczonych ZADAŃ typu 'check' (obliczeniowe + wybór kafelków/MCQ + prawda/fałsz).
-        // Capstone (ustne, oceniane przez AI) i blurt NIE wliczają się — nauka nie zależy od dostępności Gemini.
+        // Mastery = % zaliczonych ZADAŃ z zaznaczaniem: 'check' (obliczeniowe + MCQ/kafelki + prawda/fałsz)
+        // oraz 'blurt' (aktywny recall = zaznacz poprawne). Capstone (ustne/AI) NIE liczy się — nauka nie zależy od Gemini.
         if (!this.checkStats) this.checkStats = { total: 0, passed: 0 };
-        if (st && st.type === 'check') {
+        if (st && (st.type === 'check' || st.type === 'blurt')) {
             this.checkStats.total++;
             if (quality >= 4) this.checkStats.passed++;
         }
