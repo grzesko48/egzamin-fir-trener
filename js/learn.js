@@ -892,9 +892,10 @@ window.Learn = {
         const items = keys.map(k => {
             const s = SUM[k];
             const unlocked = s.alwaysUnlocked || (typeof Store !== 'undefined' && Store.isBossDefeated && Store.isBossDefeated(k));
+            const qcount = s.groups ? s.groups.reduce((n, g) => n + (g.questions || []).length, 0) : (s.questions || []).length;
             return `<div onclick="${unlocked ? `window.Learn.viewSummary('${k}')` : ''}" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:0.9rem 1.1rem; margin-bottom:0.6rem; border-radius:12px; border:1px solid ${unlocked ? 'rgba(212,175,55,0.35)' : 'rgba(255,255,255,0.08)'}; background:${unlocked ? 'rgba(212,175,55,0.06)' : 'rgba(0,0,0,0.25)'}; cursor:${unlocked ? 'pointer' : 'default'}; opacity:${unlocked ? 1 : 0.55};">
                 <span style="font-weight:700; color:${unlocked ? 'var(--gold-text,#E8C76A)' : 'var(--text-muted)'};">${s.title}</span>
-                <span style="font-size:0.78rem; color:var(--text-muted); white-space:nowrap;">${unlocked ? `${(s.questions || []).length} pytań ▶` : '🔒 Pokonaj bossa'}</span>
+                <span style="font-size:0.78rem; color:var(--text-muted); white-space:nowrap;">${unlocked ? `${qcount} pytań ▶` : '🔒 Pokonaj bossa'}</span>
             </div>`;
         }).join('');
         this._summaryModal(`<h2 style="font-family:'Cinzel','Marcellus',serif; color:var(--gold-text,#E8C76A); margin:0 0 0.3rem;">📜 Streszczenia rozdziałów</h2>
@@ -906,7 +907,7 @@ window.Learn = {
         if (!s) return;
         const chips = { definicyjne: '#38bdf8', obliczeniowe: '#E8C76A', porownawcze: '#a78bfa', pulapka: '#ef4444' };
         const labels = { definicyjne: 'definicyjne', obliczeniowe: 'obliczeniowe', porownawcze: 'porównawcze', pulapka: 'pułapka' };
-        const qs = (s.questions || []).map(q => {
+        const card = (q) => {
             const c = chips[q.type] || '#888';
             return `<div style="background:rgba(8,7,11,0.55); border:1px solid rgba(212,175,55,0.18); border-radius:12px; padding:1.1rem 1.2rem; margin-bottom:1rem;">
                 <div style="display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; margin-bottom:0.6rem;">
@@ -915,9 +916,14 @@ window.Learn = {
                 </div>
                 <div style="font-size:0.92rem; line-height:1.65; color:#cfc6b4;"><b style="color:var(--gold-text,#E8C76A);">Odp:</b> ${q.a}</div>
             </div>`;
-        }).join('');
+        };
+        const head = (h) => `<h3 style="font-family:'Cinzel','Marcellus',serif; color:var(--gold-text,#E8C76A); font-size:1.05rem; margin:1.6rem 0 0.8rem; padding-bottom:0.35rem; border-bottom:1px solid rgba(212,175,55,0.22);">${h}</h3>`;
+        // Wsparcie sekcji (groups) — np. 5 pytań komisji na każdą część pracy. Stare działy: płaska lista.
+        const body = (s.groups && s.groups.length)
+            ? s.groups.map(g => head(g.h) + (g.questions || []).map(card).join('')).join('')
+            : (s.questions || []).map(card).join('');
         this._summaryModal(`<button onclick="window.Learn.openSummaries()" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.85rem; margin-bottom:0.6rem; padding:0;">‹ Wróć do listy</button>
-            <h2 style="font-family:'Cinzel','Marcellus',serif; color:var(--gold-text,#E8C76A); margin:0 0 1.2rem;">${s.title}</h2>${qs}`);
+            <h2 style="font-family:'Cinzel','Marcellus',serif; color:var(--gold-text,#E8C76A); margin:0 0 1.2rem;">${s.title}</h2>${body}`);
     },
     _summaryModal(inner) {
         let m = document.getElementById('summary-modal');
