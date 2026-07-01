@@ -143,14 +143,31 @@ window.LearnSound = {
 };
 
 // Czytanie na głos (Web Speech API) — pomoc w nauce dla materiału i pytań na kartach.
+// Głos/szybkość/ton/głośność konfigurowalne w Ustawieniach (Store._data.settings.tts).
 window.LearnTTS = {
     enabled: 'speechSynthesis' in window,
     voice: null,
     activeBtn: null,
+    getSettings() {
+        // UWAGA: Store to `const` w store.js — NIE wisi na window.Store, tylko w leksykalnym scope skryptow.
+        const d = { voiceURI: '', rate: 1, pitch: 1, volume: 1 };
+        try { return { ...d, ...((typeof Store !== 'undefined' && Store._data && Store._data.settings && Store._data.settings.tts) || {}) }; }
+        catch (e) { return d; }
+    },
+    listVoices() {
+        if (!this.enabled) return [];
+        // głosy pl-* na górze listy, reszta alfabetycznie - uzytkownik szuka polskiego glosu najpierw
+        return speechSynthesis.getVoices().slice().sort((a, b) => {
+            const aPl = /^pl/i.test(a.lang) ? 0 : 1, bPl = /^pl/i.test(b.lang) ? 0 : 1;
+            return aPl !== bPl ? aPl - bPl : a.name.localeCompare(b.name);
+        });
+    },
     pickVoice() {
         if (!this.enabled) return null;
         const voices = speechSynthesis.getVoices();
-        this.voice = voices.find(v => /^pl/i.test(v.lang)) || voices.find(v => v.default) || voices[0] || null;
+        const wanted = this.getSettings().voiceURI;
+        const chosen = wanted && voices.find(v => v.voiceURI === wanted);
+        this.voice = chosen || voices.find(v => /^pl/i.test(v.lang)) || voices.find(v => v.default) || voices[0] || null;
         return this.voice;
     },
     clean(rawHtml) {
@@ -168,11 +185,14 @@ window.LearnTTS = {
         if (wasActiveBtn) return; // ponowne kliknięcie tego samego przycisku = tylko zatrzymaj
         const text = this.clean(rawText);
         if (!text) return;
-        if (!this.voice) this.pickVoice();
+        this.pickVoice(); // zawsze wg aktualnych Ustawień (użytkownik mógł właśnie zmienić głos)
+        const cfg = this.getSettings();
         const u = new SpeechSynthesisUtterance(text);
         if (this.voice) u.voice = this.voice;
         u.lang = (this.voice && this.voice.lang) || 'pl-PL';
-        u.rate = 0.98;
+        u.rate = cfg.rate || 1;
+        u.pitch = cfg.pitch != null ? cfg.pitch : 1;
+        u.volume = cfg.volume != null ? cfg.volume : 1;
         this.activeBtn = btn || null;
         if (btn) btn.classList.add('tts-active');
         u.onend = u.onerror = () => { if (btn) btn.classList.remove('tts-active'); if (this.activeBtn === btn) this.activeBtn = null; };
@@ -184,7 +204,7 @@ window.LearnTTS = {
         this.activeBtn = null;
     }
 };
-if (window.speechSynthesis) speechSynthesis.onvoiceschanged = () => window.LearnTTS.pickVoice();
+if (window.speechSynthesis) speechSynthesis.addEventListener('voiceschanged', () => window.LearnTTS.pickVoice());
 
 window.Learn = {
     data: [],

@@ -1735,6 +1735,26 @@ button:focus-visible,
   0%, 100% { box-shadow: 0 0 8px rgba(232,199,106,.4); }
   50% { box-shadow: 0 0 18px rgba(232,199,106,.85); }
 }
+
+/* Panel ustawień czytania na głos (widok Ustawienia) */
+.tts-settings-body { display: flex; flex-direction: column; gap: 1.1rem; margin-top: 1.2rem; }
+.tts-field { display: flex; flex-direction: column; gap: 0.5rem; }
+.tts-field-label { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); display: flex; justify-content: space-between; }
+.tts-field-val { color: var(--gold-text,var(--primary)); font-weight: 800; }
+.tts-field select.glass-input { padding: 0.7rem 1rem; font-size: 1rem; }
+.tts-range {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 4px;
+  background: rgba(255,255,255,0.08); border: 1px solid var(--border-glass,rgba(255,255,255,0.12)); outline: none; cursor: pointer;
+}
+.tts-range::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%;
+  background: linear-gradient(180deg,#ffe9a8,#d6ad3c); border: 1px solid #E8C76A;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5); cursor: pointer;
+}
+.tts-range::-moz-range-thumb {
+  width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(180deg,#ffe9a8,#d6ad3c);
+  border: 1px solid #E8C76A; box-shadow: 0 2px 6px rgba(0,0,0,0.5); cursor: pointer;
+}
 /* wykresy MIEDZY akapitami: wysrodkowane, czytelne, z oddechem */
 .lesson-body .medieval-chart-container {
   max-width: 580px; margin: 1.8rem auto !important; padding: 1.2rem !important;

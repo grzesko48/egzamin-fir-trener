@@ -11,7 +11,8 @@ const Store = {
         history: [], // For heatmap: [{date: 'YYYY-MM-DD', itemsDone: 1}]
         settings: {
             theme: 'dark',
-            dailyGoal: 10
+            dailyGoal: 10,
+            tts: { voiceURI: '', rate: 1, pitch: 1, volume: 1 } // ustawienia czytania na głos (Web Speech API)
         }
     },
 

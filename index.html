@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css?v=63">
+    <link rel="stylesheet" href="css/style.css?v=64">
 </head>
 <body>
     <!-- Fullscreen animated background -->
@@ -69,7 +69,7 @@
                 <button class="nav-btn" data-view="search" title="Szukaj" style="display:none">
                     <span class="icon">🔍</span><span class="label">Szukaj</span>
                 </button>
-                <button class="nav-btn" data-view="settings" title="Ustawienia" style="display:none">
+                <button class="nav-btn" data-view="settings" title="Ustawienia">
                     <span class="icon">⚙️</span><span class="label">Ustawienia</span>
                 </button>
             </div>
@@ -355,6 +355,32 @@
                     <h1 class="view-title">Ustawienia</h1>
                 </header>
                 <div class="bento-grid">
+                    <div class="glass-card span-2">
+                        <h2>🔊 Czytanie na głos</h2>
+                        <p class="small-text">Ustaw głos, szybkość, ton i głośność czytania kart nauki i pytań.</p>
+                        <div class="tts-settings-body">
+                            <label class="tts-field">
+                                <span class="tts-field-label">Głos</span>
+                                <select id="tts-voice-select" class="glass-input"></select>
+                            </label>
+                            <label class="tts-field">
+                                <span class="tts-field-label">Szybkość <span id="tts-rate-val" class="tts-field-val">1.0×</span></span>
+                                <input type="range" id="tts-rate" class="tts-range" min="0.6" max="1.6" step="0.05" value="1">
+                            </label>
+                            <label class="tts-field">
+                                <span class="tts-field-label">Ton głosu <span id="tts-pitch-val" class="tts-field-val">1.0</span></span>
+                                <input type="range" id="tts-pitch" class="tts-range" min="0.5" max="1.8" step="0.05" value="1">
+                            </label>
+                            <label class="tts-field">
+                                <span class="tts-field-label">Głośność <span id="tts-volume-val" class="tts-field-val">100%</span></span>
+                                <input type="range" id="tts-volume" class="tts-range" min="0" max="1" step="0.05" value="1">
+                            </label>
+                            <div style="display:flex; gap:1rem; align-items:center; margin-top:0.5rem;">
+                                <button id="tts-test-btn" class="btn secondary btn-sm ripple">▶️ Testuj głos</button>
+                                <span id="tts-status" class="small-text"></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="glass-card">
                         <h2>Eksport / Import postępu</h2>
                         <p class="small-text">Zapisz lub wczytaj swój stan nauki (fiszki, streak, plan).</p>
@@ -399,35 +425,35 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
     <!-- Data (Fallback) -->
-    <script src="data/content.js?v=63"></script>
-    <script src="data/lessons.js?v=63"></script>
-    <script src="data/problems.js?v=63"></script>
-    <script src="data/exam.js?v=63"></script>
-    <script src="data/summaries.js?v=63"></script>
-    <script src="data/boss_questions.js?v=63"></script>
+    <script src="data/content.js?v=64"></script>
+    <script src="data/lessons.js?v=64"></script>
+    <script src="data/problems.js?v=64"></script>
+    <script src="data/exam.js?v=64"></script>
+    <script src="data/summaries.js?v=64"></script>
+    <script src="data/boss_questions.js?v=64"></script>
 
     <!-- App Scripts -->
-    <script src="js/anim.js?v=63"></script>
-    <script src="js/fsrs.js?v=63"></script>
-    <script src="js/store.js?v=63"></script>
-    <script src="js/gamify.js?v=63"></script>
-    <script src="js/dashboard.js?v=63"></script>
-    <script src="js/learn.js?v=63"></script>
-    <script src="js/problems_ui.js?v=63"></script>
-    <script src="js/reader.js?v=63"></script>
-    <script src="js/flashcards.js?v=63"></script>
-    <script src="js/quiz.js?v=63"></script>
-    <script src="js/commission.js?v=63"></script>
-    <script src="js/analytics.js?v=63"></script>
-    <script src="js/formulas.js?v=63"></script>
-    <script src="js/search.js?v=63"></script>
-    <script src="js/settings.js?v=63"></script>
-    <script src="js/ui_select.js?v=63"></script>
-    <script src="js/match.js?v=63"></script>
-    <script src="js/boss.js?v=63"></script>
-    <script src="js/gemini.js?v=63"></script>
-    <script src="js/study.js?v=63"></script>
-    <script src="js/app.js?v=63"></script>
+    <script src="js/anim.js?v=64"></script>
+    <script src="js/fsrs.js?v=64"></script>
+    <script src="js/store.js?v=64"></script>
+    <script src="js/gamify.js?v=64"></script>
+    <script src="js/dashboard.js?v=64"></script>
+    <script src="js/learn.js?v=64"></script>
+    <script src="js/problems_ui.js?v=64"></script>
+    <script src="js/reader.js?v=64"></script>
+    <script src="js/flashcards.js?v=64"></script>
+    <script src="js/quiz.js?v=64"></script>
+    <script src="js/commission.js?v=64"></script>
+    <script src="js/analytics.js?v=64"></script>
+    <script src="js/formulas.js?v=64"></script>
+    <script src="js/search.js?v=64"></script>
+    <script src="js/settings.js?v=64"></script>
+    <script src="js/ui_select.js?v=64"></script>
+    <script src="js/match.js?v=64"></script>
+    <script src="js/boss.js?v=64"></script>
+    <script src="js/gemini.js?v=64"></script>
+    <script src="js/study.js?v=64"></script>
+    <script src="js/app.js?v=64"></script>
     
     <script>
         if ('serviceWorker' in navigator) {
