@@ -142,6 +142,50 @@ window.LearnSound = {
     }
 };
 
+// Czytanie na głos (Web Speech API) — pomoc w nauce dla materiału i pytań na kartach.
+window.LearnTTS = {
+    enabled: 'speechSynthesis' in window,
+    voice: null,
+    activeBtn: null,
+    pickVoice() {
+        if (!this.enabled) return null;
+        const voices = speechSynthesis.getVoices();
+        this.voice = voices.find(v => /^pl/i.test(v.lang)) || voices.find(v => v.default) || voices[0] || null;
+        return this.voice;
+    },
+    clean(rawHtml) {
+        const div = document.createElement('div');
+        div.innerHTML = rawHtml || '';
+        let text = div.textContent || div.innerText || '';
+        // wzory LaTeX ($$...$$ / $...$) sa nieczytelne dla syntezatora - zastap krotkim opisem
+        text = text.replace(/\$\$[\s\S]*?\$\$/g, ' wzór matematyczny. ').replace(/\$[^$]+\$/g, ' wzór. ');
+        return text.replace(/\s+/g, ' ').trim();
+    },
+    speak(rawText, btn) {
+        if (!this.enabled) return;
+        const wasActiveBtn = this.activeBtn === btn;
+        this.stop();
+        if (wasActiveBtn) return; // ponowne kliknięcie tego samego przycisku = tylko zatrzymaj
+        const text = this.clean(rawText);
+        if (!text) return;
+        if (!this.voice) this.pickVoice();
+        const u = new SpeechSynthesisUtterance(text);
+        if (this.voice) u.voice = this.voice;
+        u.lang = (this.voice && this.voice.lang) || 'pl-PL';
+        u.rate = 0.98;
+        this.activeBtn = btn || null;
+        if (btn) btn.classList.add('tts-active');
+        u.onend = u.onerror = () => { if (btn) btn.classList.remove('tts-active'); if (this.activeBtn === btn) this.activeBtn = null; };
+        speechSynthesis.speak(u);
+    },
+    stop() {
+        if (this.enabled && speechSynthesis.speaking) speechSynthesis.cancel();
+        if (this.activeBtn) this.activeBtn.classList.remove('tts-active');
+        this.activeBtn = null;
+    }
+};
+if (window.speechSynthesis) speechSynthesis.onvoiceschanged = () => window.LearnTTS.pickVoice();
+
 window.Learn = {
     data: [],
     currentLessonIndex: 0,
@@ -599,6 +643,7 @@ window.Learn = {
 
     // --- Main Study Area Router ---
     renderMain() {
+        if (window.LearnTTS) window.LearnTTS.stop(); // koniec czytania przy zmianie ekranu
         const titleEl = document.getElementById('learn-view-title');
         const rightSidebar = document.getElementById('learn-right-sidebar');
         const filterEl = document.getElementById('learn-filter-container');
@@ -1267,6 +1312,7 @@ window.Learn = {
 
     // --- Active Study step screen ---
     renderStep() {
+        if (window.LearnTTS) window.LearnTTS.stop(); // koniec czytania poprzedniej karty
         const container = document.getElementById('learn-container');
         const controls = document.getElementById('learn-controls');
         const rightSidebar = document.getElementById('learn-right-sidebar');
@@ -1309,6 +1355,7 @@ window.Learn = {
                     <div class="npc-head">
                         <div class="npc-portrait-frame"><img src="assets/avatars/${npcImg}.png" alt="${npcName}" /></div>
                         <div class="npc-name">${npcName}</div>
+                        <button type="button" class="tts-btn" id="lesson-tts-btn" title="Czytaj lekcję na głos" style="margin-left:auto;">🔊</button>
                     </div>
                     <div class="text-lg lesson-body">${this.injectHelpfulGraphics(step.html)}</div>
                 </div>
@@ -1335,6 +1382,9 @@ window.Learn = {
             `;
             if (typeof renderMathInElement === 'function') renderMathInElement(contentEl, { delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}] });
             if (rightSidebar) rightSidebar.innerHTML = '';
+            // Czytaj lekcję na głos
+            const ttsBtn = document.getElementById('lesson-tts-btn');
+            if (ttsBtn) ttsBtn.onclick = () => window.LearnTTS.speak(step.html, ttsBtn);
             // Funkcjonalny kalkulator
             (() => {
                 const kd = document.getElementById('kalk-display');
@@ -1359,8 +1409,8 @@ window.Learn = {
             controls.appendChild(btn);
 
         } else if (step.type === 'check') {
-            const heading = `<h3 style="margin-bottom: 1.8rem; font-size: 1.4rem; line-height: 1.5; font-weight: 700;">${step.q || step.prompt || ''}</h3>`;
-            
+            const heading = `<h3 style="margin-bottom: 1.8rem; font-size: 1.4rem; line-height: 1.5; font-weight: 700; display:flex; align-items:flex-start; gap:0.7rem;"><button type="button" class="tts-btn tts-btn-inline" title="Czytaj pytanie na głos">🔊</button><span>${step.q || step.prompt || ''}</span></h3>`;
+
             if (step.kind === 'mcq') {
                 contentEl.innerHTML = heading;
                 const grid = document.createElement('div');
@@ -1591,6 +1641,9 @@ window.Learn = {
                 setTimeout(() => input.focus(), 100);
             }
 
+            const qTtsBtn = contentEl.querySelector('.tts-btn-inline');
+            if (qTtsBtn) qTtsBtn.onclick = () => window.LearnTTS.speak(step.q || step.prompt || '', qTtsBtn);
+
         } else if (step.type === 'recall') {
             const rawSentences = step.model ? step.model.replace(/<[^>]*>/g, '').split(/[.!?]\s+/).map(s => s.trim()).filter(s => s.length > 5) : [];
             
@@ -1627,11 +1680,13 @@ window.Learn = {
             } else {
                 // Standard Flashcard Active Recall
                 contentEl.innerHTML = `
-                    <h3 style="font-size: 1.45rem; margin-bottom: 1.8rem; line-height: 1.5; font-weight:700;">${step.prompt}</h3>
+                    <h3 style="font-size: 1.45rem; margin-bottom: 1.8rem; line-height: 1.5; font-weight:700; display:flex; align-items:flex-start; gap:0.7rem;"><button type="button" class="tts-btn" id="recall-prompt-tts-btn" title="Czytaj na głos">🔊</button><span>${step.prompt}</span></h3>
                     <p class="text-muted" style="margin-bottom:2rem; font-size: 1.05rem; border-left: 3px solid var(--primary); padding-left: 1.2rem; line-height:1.7;">
                         <i>Zastanów się przez chwilę, sformułuj odpowiedź w pamięci, a następnie odsłoń wzorzec do weryfikacji.</i>
                     </p>
                 `;
+                const promptTtsBtn = document.getElementById('recall-prompt-tts-btn');
+                if (promptTtsBtn) promptTtsBtn.onclick = () => window.LearnTTS.speak(step.prompt, promptTtsBtn);
 
                 const btn = document.createElement('button');
                 btn.className = 'btn primary ripple';
@@ -1640,12 +1695,17 @@ window.Learn = {
                 btn.onclick = () => {
                     contentEl.innerHTML += `
                         <div class="fade-in" style="margin-top:2rem; padding:1.8rem; background: rgba(0,0,0,0.3); border-radius: var(--radius-md); border: 1px solid rgba(0, 229, 255, 0.15); box-shadow: inset 0 0 15px rgba(0,229,255,0.03);">
-                            <div style="font-size: 0.8rem; color: var(--primary); font-weight: 800; margin-bottom: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase;">Wzorzec Odpowiedzi:</div>
+                            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 0.8rem;">
+                                <div style="font-size: 0.8rem; color: var(--primary); font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;">Wzorzec Odpowiedzi:</div>
+                                <button type="button" class="tts-btn" id="recall-model-tts-btn" title="Czytaj na głos">🔊</button>
+                            </div>
                             <div class="text-lg" style="line-height: 1.7; font-size: 1.1rem;">${step.model}</div>
                         </div>
                     `;
+                    const modelTtsBtn = document.getElementById('recall-model-tts-btn');
+                    if (modelTtsBtn) modelTtsBtn.onclick = () => window.LearnTTS.speak(step.model, modelTtsBtn);
                     controls.innerHTML = '';
-                    
+
                     const btnForgot = document.createElement('button');
                     btnForgot.className = 'btn btn-srs btn-forgot ripple';
                     btnForgot.style.borderRadius = '20px';
@@ -2397,6 +2457,7 @@ window.Learn = {
     },
 
     renderBossBattle() {
+        if (window.LearnTTS) window.LearnTTS.stop(); // koniec czytania poprzedniego pytania
         const container = document.getElementById('learn-container');
         const controls = document.getElementById('learn-controls');
         const rightSidebar = document.getElementById('learn-right-sidebar');
@@ -2455,8 +2516,8 @@ window.Learn = {
             controls.style.display = 'flex';
         }
 
-        const heading = `<h3 style="margin-bottom: 1.8rem; font-size: 1.3rem; line-height: 1.5; font-weight:700;">${step.q || step.prompt || ''}</h3>`;
-        
+        const heading = `<h3 style="margin-bottom: 1.8rem; font-size: 1.3rem; line-height: 1.5; font-weight:700; display:flex; align-items:flex-start; gap:0.7rem;"><button type="button" class="tts-btn tts-btn-inline" title="Czytaj pytanie na głos">🔊</button><span>${step.q || step.prompt || ''}</span></h3>`;
+
         if (step.kind === 'mcq') {
             contentEl.innerHTML = heading;
             const grid = document.createElement('div');
@@ -2586,6 +2647,9 @@ window.Learn = {
             controls.appendChild(btn);
             setTimeout(() => input.focus(), 100);
         }
+
+        const bossQTtsBtn = contentEl.querySelector('.tts-btn-inline');
+        if (bossQTtsBtn) bossQTtsBtn.onclick = () => window.LearnTTS.speak(step.q || step.prompt || '', bossQTtsBtn);
 
         if (typeof renderMathInElement === 'function') {
             renderMathInElement(container, { delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}] });
