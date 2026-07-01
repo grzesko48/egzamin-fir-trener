@@ -4,7 +4,17 @@
  */
 
 window.Gamify = {
-    awardXP(amount, reason = "") {
+    awardXP(baseAmount, reason = "") {
+        // Skalowanie nagrody do poziomu: w Dark Souls Mode prawdziwy poziom to avatar.level
+        // (Store._data.avatar) — Store.addXP jest nadpisywane w learn.js na "surowe dusze" bez
+        // auto-level-upu, więc Store.getGamifyState().level jest martwym, niezmiennym polem.
+        // Próg level-upu (buyLevelUp) rośnie jak 100*poziom^1.5 — ten sam mnożnik na nagrodzie
+        // utrzymuje mniej-więcej stałą liczbę odpowiedzi potrzebnych na awans na każdym poziomie.
+        const avatar = (typeof Store !== 'undefined' && Store._data) ? Store._data.avatar : null;
+        const level = (avatar && avatar.level) || 1;
+        const levelMult = Math.pow(level, 1.5);
+        let amount = Math.max(1, Math.round(baseAmount * levelMult));
+
         // Bonus XP z ekwipunku (np. Złoty Kalkulator +15%, Notatnik Rynkowy +20%).
         const xpMult = (typeof Store !== 'undefined' && Store.equipBonus) ? Store.equipBonus().xpMult : 0;
         if (xpMult) amount = Math.round(amount * (1 + xpMult));
